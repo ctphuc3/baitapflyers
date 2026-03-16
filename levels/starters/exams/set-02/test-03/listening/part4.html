@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AS2-T3 Lis 4</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg, #eaf6ff 0%, #f7fbff 100%);
+}
+
+  .wrapper {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow:
+      0 20px 40px rgba(0,0,0,0.12),
+      inset 0 1px 0 rgba(255,255,255,0.6);
+    width: 100%;
+    max-width: 1400px;
+    box-sizing: border-box;
+    margin: 20px auto;
+  }
+
+  h1 {
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .tools {
+    margin: 12px 0 14px;
+    padding: 12px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #f2f9ff, #ffffff);
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.8),
+      0 10px 20px rgba(0,0,0,0.12);
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .color {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    margin: 0 6px;
+    cursor: pointer;
+    border: 3px solid rgba(255,255,255,0.9);
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.6),
+      0 4px 8px rgba(0,0,0,0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .color:hover {
+    transform: translateY(-2px);
+  }
+  .color.active {
+    box-shadow:
+      inset 0 2px 4px rgba(255,255,255,0.6),
+      0 0 0 3px #4da3ff,
+      0 8px 16px rgba(0,0,0,0.35);
+  }
+
+  canvas {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+    cursor: crosshair;
+    display: block;
+    pointer-events: auto;
+    background: transparent;
+  }
+  .global-header {
+    text-align: left;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .test-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1e88e5;
+    letter-spacing: 0.4px;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 0 rgba(255,255,255,0.85);
+  }
+
+  .part-title {
+    margin-bottom: 0;
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+    color: #1a4fa3;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  }
+
+  .instruction {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .audio-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .audio-box audio {
+    width: 340px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  }
+
+  button {
+    margin: 10px 6px 0;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #4da3ff, #1e88e5);
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.28);
+  }
+  button:active {
+    transform: translateY(1px);
+  }
+
+  .sidebar-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .sidebar-actions .action-btn {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 0;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Màu riêng cho từng nút */
+  .sidebar-actions .undo-btn {
+    background: linear-gradient(180deg, #ffb74d, #f57c00);
+  }
+
+  .sidebar-actions .reset-btn {
+    background: linear-gradient(180deg, #ef9a9a, #d32f2f);
+  }
+
+  .sidebar-actions .answer-btn {
+    background: linear-gradient(180deg, #64b5f6, #1e88e5);
+  }
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #f7fbff, #ffffff);
+  border-radius: 28px;
+  padding: 18px;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 0;
+}
+
+.sidebar .tools {
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-group {
+  display: grid;
+  grid-template-columns: repeat(3, 56px);
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.canvas-area {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 0;
+}
+
+.canvas-compare {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.canvas-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#canvasWrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.answer-box {
+  display: none; /* hidden by default */
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.answer-box canvas {
+  display: block;
+}
+
+  .explanation-panel {
+    display: none;
+    margin: 24px auto 0;
+    max-width: 1200px;
+    border-radius: 20px;
+    padding: 20px 24px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+    transition: background 0.3s ease;
+  }
+
+  /* Nền theo từng Answer */
+  .explanation-panel.answer-1 { background: #e3f2fd; } /* xanh nước biển */
+  .explanation-panel.answer-2 { background: #ffebee; } /* đỏ */
+  .explanation-panel.answer-3 { background: #fffde7; } /* vàng */
+  .explanation-panel.answer-4 { background: #e8f5e9; } /* xanh lá */
+  .explanation-panel.answer-5 { background: #efebe9; } /* nâu */
+
+.usage-guide {
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin: 8px 0 14px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  position: relative;
+}
+
+.usage-title {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: #1e88e5;
+}
+
+.usage-list {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.usage-list li {
+  margin-bottom: 4px;
+}
+
+.answer-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.answer-tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(180deg, #cfd8dc, #b0bec5);
+  color: #263238;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+
+.answer-tab.active {
+  background: linear-gradient(180deg, #4da3ff, #1e88e5);
+  color: #fff;
+}
+
+  .explain-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .explain-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #263238;
+    max-width: 900px;
+    background: rgba(255,255,255,0.9);
+    padding: 20px 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    white-space: pre-line;
+  }
+
+.action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.action-btn.audio-finished {
+  animation: pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to   { transform: scale(1.05); }
+}
+
+.understand-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #66bb6a, #43a047);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.understand-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.understand-btn:active {
+  transform: translateY(0);
+  box-shadow:
+    0 4px 10px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+.usage-guide.collapsed .usage-list {
+  display: none;
+}
+
+.usage-guide.collapsed {
+  padding-bottom: 44px;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="global-header">
+  <div class="test-title">Starters practice test</div>
+  <div class="part-title">
+    <span class="badge">Listening, Part 4</span>
+  </div>
+</div>
+
+  <div class="main-layout">
+  <div class="sidebar">
+    <div class="instruction">
+      Listen and colour and write. There is one example.
+    </div>
+    <div class="usage-guide">
+      <div class="usage-title">Cách làm bài</div>
+      <button class="understand-btn" onclick="toggleUsage()">Đã hiểu</button>
+      <ul class="usage-list">
+        <li>Nghe audio cẩn thận.</li>
+        <li>Mỗi lần nghe, tìm đúng hình được nói đến.</li>
+        <li>Chọn màu phù hợp và tô vào hình.</li>
+        <li>Nhấn <strong>Undo</strong> để xóa nét vẽ.</li>
+        <li>Nghe xong audio thì nút <strong>Show answer</strong> mới hiện ra.</li>
+      </ul>
+    </div>
+    <div class="audio-box">
+      <audio id="audioPlayer" controls preload="auto" playsinline controlslist="nodownload">
+        <source src="../assets/listening/part4/test3_part4.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div class="tools">
+      <div class="color-group">
+        <div class="color active" data-color="red" style="background:red"></div>
+        <div class="color" data-color="orange" style="background:orange"></div>
+        <div class="color" data-color="yellow" style="background:gold"></div>
+        <div class="color" data-color="green" style="background:green"></div>
+        <div class="color" data-color="blue" style="background:blue"></div>
+        <div class="color" data-color="purple" style="background:purple"></div>
+        <div class="color" data-color="pink" style="background:pink"></div>
+        <div class="color" data-color="#6E4B2A" style="background:#6E4B2A"></div>
+        <div class="color" data-color="black" style="background:black"></div>
+        <div class="color" data-color="white" style="background:white;border:3px solid #999"></div>
+        <div class="color" data-color="grey" style="background:grey"></div>
+        <div class="color" data-color="cyan" style="background:cyan"></div>
+      </div>
+    </div>
+    <div class="sidebar-actions">
+      <button class="action-btn undo-btn" onclick="undo()">Undo</button>
+      <button class="action-btn reset-btn" onclick="resetCanvas()">Reset</button>
+      <button class="action-btn answer-btn" id="answerBtn" onclick="toggleAnswer()" disabled>
+        Show answer
+    </button>
+    </div>
+  </div>
+  <div class="canvas-area">
+    <div class="canvas-compare">
+      <div class="canvas-box">
+        <div id="canvasWrap" style="position:relative;">
+          <canvas id="imageCanvas" style="position:absolute; left:0; top:0; z-index:1;"></canvas>
+          <canvas id="drawCanvas" style="position:absolute; left:0; top:0; z-index:2;"></canvas>
+        </div>
+      </div>
+
+      <div class="canvas-box answer-box">
+        <canvas id="answerCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="explanation-panel" id="explanationPanel">
+
+  <div class="answer-tabs">
+    <button class="answer-tab active" onclick="showExplain(1)">Answer 1</button>
+    <button class="answer-tab" onclick="showExplain(2)">Answer 2</button>
+    <button class="answer-tab" onclick="showExplain(3)">Answer 3</button>
+    <button class="answer-tab" onclick="showExplain(4)">Answer 4</button>
+    <button class="answer-tab" onclick="showExplain(5)">Answer 5</button>
+  </div>
+
+  <div class="explain-content">
+    <div id="explainText" class="explain-text"></div>
+  </div>
+
+</div>
+
+<script>
+  const imageCanvas = document.getElementById("imageCanvas");
+  const imgCtx = imageCanvas.getContext("2d");
+  const drawCanvas = document.getElementById("drawCanvas");
+  const ctx = drawCanvas.getContext("2d");
+  const answerCanvas = document.getElementById("answerCanvas");
+  const answerCtx = answerCanvas.getContext("2d");
+  const canvasWrap = document.getElementById("canvasWrap");
+  const audioEl = document.getElementById("audioPlayer");
+const answerBtn = document.getElementById("answerBtn");
+const undoBtn = document.querySelector(".undo-btn");
+
+// Chỉ cho bấm Show answer sau khi audio kết thúc
+if (audioEl && answerBtn) {
+  answerBtn.disabled = true;
+
+  audioEl.addEventListener("ended", () => {
+    answerBtn.disabled = false;
+    answerBtn.classList.add("audio-finished");
+    answerUsed = false;
+    answerBtn.textContent = "Show answer";
+  });
+}
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  let history = [];
+
+  function saveState() {
+    history.push(drawCanvas.toDataURL());
+    if (history.length > 30) history.shift();
+  }
+
+  function undo() {
+    if (history.length === 0) return;
+    const imgState = new Image();
+    imgState.src = history.pop();
+    imgState.onload = () => {
+      ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+      ctx.drawImage(imgState, 0, 0);
+    };
+  }
+
+  function getMousePos(drawCanvas, evt) {
+    const rect = drawCanvas.getBoundingClientRect();
+    const scaleX = drawCanvas.width / rect.width;
+    const scaleY = drawCanvas.height / rect.height;
+
+    return {
+      x: (evt.clientX - rect.left) * scaleX,
+      y: (evt.clientY - rect.top) * scaleY
+    };
+  }
+
+  function toggleUsage() {
+    const usage = document.querySelector(".usage-guide");
+    if (!usage) return;
+    usage.classList.toggle("collapsed");
+  }
+
+  const img = new Image();
+  img.src = "../assets/listening/part4/p4.png";
+
+  const answerImg = new Image();
+  answerImg.src = "../assets/listening/part4/p4_answer.png";
+
+  // Đảm bảo ảnh đáp án luôn được vẽ đúng vào answerCanvas khi load xong
+  answerImg.onload = () => {
+    // vẽ lại đáp án khi ảnh load xong
+    if (imageCanvas.width > 0 && imageCanvas.height > 0) {
+      answerCtx.clearRect(0, 0, answerCanvas.width, answerCanvas.height);
+      answerCtx.drawImage(
+        answerImg,
+        0,
+        0,
+        answerCanvas.width,
+        answerCanvas.height
+      );
+    }
+  };
+
+  // ==== LOCALSTORAGE HELPERS ====
+  const STORAGE_KEY = "starters_set02_test03_part4_state";
+
+  function saveToStorage() {
+    const state = {
+      drawData: drawCanvas.toDataURL(),
+      currentColor,
+      textInput: textInput.value,
+      answerVisible,
+      activeExplain: document.querySelector(".answer-tab.active")?.textContent || null
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function loadFromStorage() {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+
+    try {
+      const state = JSON.parse(raw);
+
+      // Restore drawing
+      if (state.drawData) {
+        const imgState = new Image();
+        imgState.src = state.drawData;
+        imgState.onload = () => {
+          ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+          ctx.drawImage(imgState, 0, 0);
+        };
+      }
+
+      // Restore color
+      if (state.currentColor) {
+        currentColor = state.currentColor;
+        document.querySelectorAll(".color").forEach(c => {
+          c.classList.toggle("active", c.dataset.color === currentColor);
+        });
+      }
+
+      // Restore text input
+      if (state.textInput !== undefined) {
+        textInput.value = state.textInput;
+      }
+
+      // Restore answer + explanation
+      if (state.answerVisible) {
+        if (state.activeExplain) {
+          const idx = parseInt(state.activeExplain.replace("Answer ", ""), 10);
+          if (!isNaN(idx)) showExplain(idx);
+        }
+      }
+
+    } catch (e) {
+      console.warn("Cannot restore state:", e);
+    }
+  }
+
+
+function resizeCanvases() {
+  const canvasArea = document.querySelector(".canvas-area");
+
+  // Fixed frame that always fits inside viewport (reduced size 25%)
+  const frameMaxW = Math.min(canvasArea.offsetWidth - 40, 1100);
+  const frameMaxH = Math.min(window.innerHeight - 220, 650);
+
+  const scaleW = frameMaxW / img.width;
+  const scaleH = frameMaxH / img.height;
+  const scale = Math.min(scaleW, scaleH, 1);
+
+  const displayW = Math.round(img.width * scale);
+  const displayH = Math.round(img.height * scale);
+
+  [imageCanvas, drawCanvas, answerCanvas].forEach(c => {
+    c.width = displayW;
+    c.height = displayH;
+    c.style.width = displayW + "px";
+    c.style.height = displayH + "px";
+  });
+
+  canvasWrap.style.width = displayW + "px";
+  canvasWrap.style.height = displayH + "px";
+
+  const answerBox = document.querySelector(".answer-box");
+  answerBox.style.width = displayW + "px";
+
+  answerCanvas.width = displayW;
+  answerCanvas.height = displayH;
+  answerCanvas.style.width = displayW + "px";
+  answerCanvas.style.height = displayH + "px";
+
+  imgCtx.clearRect(0, 0, displayW, displayH);
+  imgCtx.drawImage(img, 0, 0, displayW, displayH);
+
+  answerCtx.clearRect(0, 0, displayW, displayH);
+  answerCtx.drawImage(answerImg, 0, 0, displayW, displayH);
+}
+
+  let painting = false;
+  let currentColor = "red";
+  let mode = "draw"; // draw | text
+
+  const MAX_COLOR_TIMES = 5;
+  let colorCount = 0;
+
+img.onload = () => {
+  resizeCanvases();
+  history = [];
+  saveState();
+};
+window.addEventListener("resize", resizeCanvases);
+
+  document.querySelectorAll(".color").forEach(c => {
+    c.addEventListener("click", () => {
+      currentColor = c.dataset.color;
+      document.querySelectorAll(".color").forEach(x => x.classList.remove("active"));
+      c.classList.add("active");
+      saveToStorage();
+    });
+  });
+
+  drawCanvas.addEventListener("mousedown", () => {
+    if (interactionLocked) return;
+
+    if (colorCount >= MAX_COLOR_TIMES) {
+      return; // stop colouring after 5 times
+    }
+
+    saveState();
+    painting = true;
+    colorCount++;
+  });
+  
+  drawCanvas.addEventListener("mouseup", () => {
+    painting = false;
+    saveToStorage();
+  });
+  drawCanvas.addEventListener("mouseleave", () => painting = false);
+
+  drawCanvas.addEventListener("mousemove", e => {
+    if (!painting || mode !== "draw") return;
+
+    const pos = getMousePos(drawCanvas, e);
+
+    ctx.fillStyle = currentColor;
+    ctx.beginPath();
+    ctx.arc(pos.x, pos.y, 4, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+  });
+
+function resetCanvas() {
+    // 1. Xóa nét vẽ
+    ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    history = [];
+    colorCount = 0;
+
+    // 2. Reset text
+    mode = "draw";
+
+    // 3. Reset màu về mặc định
+    currentColor = "red";
+    document.querySelectorAll(".color").forEach(c => {
+      c.classList.toggle("active", c.dataset.color === "red");
+    });
+
+    // 4. Ẩn đáp án & giải thích
+    answerVisible = false;
+    document.querySelector(".answer-box").style.display = "none";
+    document.getElementById("explanationPanel").style.display = "none";
+
+    // 5. Reset audio + khóa lại Show answer
+    if (audioEl) {
+      audioEl.pause();
+      audioEl.currentTime = 0;
+    }
+    answerBtn.disabled = true;
+    answerBtn.classList.remove("audio-finished");
+
+    // 6. Xóa toàn bộ dữ liệu lưu
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('starters_set02_test03_part4_done');
+
+    // 🔔 THÔNG BÁO FILE CHA: PART 4 ĐÃ RESET
+    window.parent.postMessage({
+      type: 'PART_RESET',
+      part: 4
+    }, '*');
+
+    // 7. Mở khóa tương tác
+    interactionLocked = false;
+    drawCanvas.style.pointerEvents = "auto";
+    textToolBtn.style.pointerEvents = "auto";
+    textInput.disabled = false;
+    undoBtn.disabled = false;
+}
+
+let answerVisible = false;
+let interactionLocked = false; // khóa vẽ & nhập chữ khi show answer
+let answerUsed = false; // Show answer chỉ được dùng 1 lần
+
+function toggleAnswer() {
+  // Đã bấm Show answer rồi thì cấm bấm lại
+  if (answerUsed) return;
+
+  answerUsed = true;
+  answerVisible = true;
+
+  const box = document.querySelector(".answer-box");
+  const explainPanel = document.getElementById("explanationPanel");
+
+  // === SHOW ANSWER (CHỈ 1 LẦN) ===
+  box.style.display = "flex";
+  explainPanel.style.display = "block";
+  // Ép render + load Answer 1 ngay lần đầu để tránh lỗi layout
+  requestAnimationFrame(() => {
+    showExplain(1);
+  });
+
+  answerCanvas.width = imageCanvas.width;
+  answerCanvas.height = imageCanvas.height;
+  answerCanvas.style.width = imageCanvas.style.width;
+  answerCanvas.style.height = imageCanvas.style.height;
+
+  answerCtx.clearRect(0, 0, answerCanvas.width, answerCanvas.height);
+  answerCtx.drawImage(answerImg, 0, 0, answerCanvas.width, answerCanvas.height);
+
+  // Khóa toàn bộ tương tác
+  interactionLocked = true;
+  drawCanvas.style.pointerEvents = "none";
+
+  // Khóa Undo
+  undoBtn.disabled = true;
+
+  // Khóa luôn nút Show answer
+  answerBtn.disabled = true;
+  answerBtn.classList.remove("audio-finished");
+  answerBtn.textContent = "Answer shown";
+  localStorage.setItem('starters_set02_test03_part4_done', 'true');
+  // notify parent listening page (ĐÚNG LOGIC: SHOW_ANSWER)
+  try {
+    window.parent.postMessage(
+      { type: "SHOW_ANSWER", part: 4 },
+      "*"
+    );
+  } catch(e){}
+
+  explainPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+  saveToStorage();
+}
+
+function showExplain(n) {
+  const explainText = document.getElementById("explainText");
+
+  const panel = document.getElementById("explanationPanel");
+  panel.classList.remove("answer-1","answer-2","answer-3","answer-4","answer-5");
+  panel.classList.add("answer-" + n);
+
+  const tabs = document.querySelectorAll(".answer-tab");
+  tabs.forEach(t => t.classList.remove("active"));
+  tabs[n - 1].classList.add("active");
+
+  const explainScripts = {
+    1: "1\nGirl: Which teddy can I colour now?\nWoman: The one on the poster.\nGirl: (laughs) It's catching a ball.\nWoman: Yes. Do that teddy blue.\nGirl: OK. I'm doing that now.",
+
+    2: "2\nWoman: Look at that teddy. It's a clock!\nGirl: Wow! Can I colour that teddy red?\nWoman: OK. That's a good colour.\nGirl: I'd like a teddy with a clock on it.\nWoman: Me too.",
+
+    3: "3\nGirl: There's a very big teddy in this bedroom.\nWoman: Between the bed and the desk?\nGirl: Yes. I want to colour that teddy yellow.\nWoman: OK. That's nice.",
+
+    4: "4\nWoman: Can you see that teddy on the chair?\nGirl: (laughs) Yes, it's wearing glasses.\nWoman: Colour that teddy green.\nGirl: OK. That's a good colour.",
+
+    5: "5\nWoman: Let's colour a teddy brown now.\nGirl: OK. Which one?\nWoman: The teddy on the girl's dress.\nGirl: On the girl's dress? OK.\nWoman: Well done. This is a nice picture now."
+  };
+
+  explainText.textContent = explainScripts[n] || "";
+  saveToStorage();
+}
+
+// Restore state when page loads
+window.addEventListener("load", () => {
+  loadFromStorage();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AS2-T3 Lis 2</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg, #eaf6ff, #f7fbff);
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 32px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+h1 {
+  text-align: center;
+  color: #1e88e5;
+  margin-top: 0;
+}
+
+.instructions {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.audio-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+audio {
+  width: 360px;
+}
+
+.main-image {
+  display: block;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+}
+
+.example, .question {
+  margin-bottom: 28px;
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+}
+
+.example h3 {
+  margin-top: 0;
+  color: #2e7d32;
+}
+
+.question h3 {
+  margin-top: 0;
+}
+
+.answer-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+input[type="text"] {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid #cfd8dc;
+  font-size: 15px;
+  width: 160px;
+}
+
+button {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.show-answer {
+  background: #90caf9;
+  color: #0d47a1;
+  cursor: not-allowed;
+}
+
+.show-answer.enabled {
+  background: #42a5f5;
+  cursor: pointer;
+}
+
+.script-btn {
+  background: #c5cae9;
+  color: #1a237e;
+  cursor: not-allowed;
+}
+
+.result {
+  margin-top: 8px;
+  font-weight: bold;
+  display: none;
+}
+
+.correct {
+  color: #2ecc71;
+}
+
+.wrong {
+  color: #e74c3c;
+}
+
+.script-box {
+  display: none;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f1f7ff;
+  color: #1e3a8a;
+  white-space: pre-line;
+}
+
+.reset-box {
+  text-align: center;
+  margin-top: 36px;
+}
+
+.reset-box button {
+  background: linear-gradient(180deg, #ef9a9a, #d32f2f);
+  color: #fff;
+  font-size: 16px;
+}
+
+.header-bar {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.header-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1e88e5;
+  letter-spacing: 0.4px;
+  margin: 0 0 6px 0;
+}
+
+.header-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+  color: #1a4fa3;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+<div class="header-bar">
+  <div class="header-title">Starters practice test</div>
+  <div class="header-pill">Listening, Part 2</div>
+</div>
+
+<div class="instructions">
+Read the question. Listen and write a name or a number.<br>
+There are two examples.
+</div>
+<div id="progressBar" style="text-align:center; font-weight:700; margin-bottom:16px; color:#1a4fa3;">Answered: 0 / 5</div>
+
+<div class="audio-box">
+  <audio id="mainAudio" controls preload="auto" playsinline controlslist="nodownload">
+    <source src="../assets/listening/part2/test3_part2.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<img src="../assets/listening/part2/p2.png" class="main-image" alt="classroom picture">
+
+<!-- EXAMPLES -->
+<div class="example">
+<h3>Examples</h3>
+
+<p>What is the boy’s name? → <b>Matt</b></p>
+<p>How old is he? → <b>8</b></p>
+</div>
+
+<!-- QUESTIONS -->
+<div id="questions"></div>
+
+<div class="reset-box">
+  <button onclick="resetTest()">Reset bài</button>
+</div>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    q: "1. How many children are in Matt’s class?",
+    answer: ["19"],
+    script: `Boy: Would you like to see my classroom?
+Woman: Yes, please.
+Boy: We’re making a wall of monster pictures.
+Woman: Wow! How many children are in your class?
+Boy: It’s a small class. Nineteen.
+Woman: Nineteen children. That’s good.`
+  },
+  {
+    q: "2. How many pictures are on the wall?",
+    answer: ["14"],
+    script: `Woman: There are lots of monster pictures here.
+Boy: Yes, there are fourteen.
+Woman: Fourteen?
+Boy: Yes. Some children aren’t here today.
+Woman: I see.`
+  },
+  {
+    q: "3. What is the name of Matt’s monster?",
+    answer: ["grace"],
+    script: `Boy: This is my monster picture.
+Woman: What’s your monster’s name?
+Boy: Well, it’s a girl monster. Her name is Grace.
+Woman: That’s a nice name. Is that G-R-A-C-E?
+Boy: Yes, Grace.`
+  },
+  {
+    q: "4. How many eyes has Matt’s monster got?",
+    answer: ["12"],
+    script: `Woman: Your monster’s got a lot of eyes!
+Boy: Yes, she’s got twelve.
+Woman: Twelve eyes? Wow!
+Boy: Yes.`
+  },
+  {
+    q: "5. Who has got a jellyfish monster in his picture?",
+    answer: ["bill"],
+    script: `Woman: Whose is this picture? The one with the jellyfish monster?
+Boy: It’s my friend Bill’s. You spell his name B-I-L-L.
+Woman: Bill? OK, his monster is very scary!
+Boy: Yes, it is. And ugly!
+Woman: What a great classroom.
+Boy: Thanks.`
+  }
+];
+
+const TOTAL_QUESTIONS = DATA.length;
+let answeredSet = new Set();
+let doneSent = false;
+const DONE_KEY = "starters_set02_test03_part2_done";
+
+const STORAGE_KEY = "starters_set02_test03_part2_state";
+const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+const container = document.getElementById("questions");
+const progressBar = document.getElementById('progressBar');
+function updateProgress(){
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  const answeredCount = Object.values(state)
+    .filter(v => v && v.answered && (v.value ?? '').toString().trim() !== '')
+    .length;
+
+  progressBar.textContent = `Answered: ${answeredCount} / ${DATA.length}`;
+
+  // ===== DONE EVENT – NGUỒN SỰ THẬT DUY NHẤT =====
+  if (answeredCount === TOTAL_QUESTIONS && !localStorage.getItem(DONE_KEY)) {
+    localStorage.setItem(DONE_KEY, 'true');
+    window.parent.postMessage({
+      type: 'LISTENING_PART_DONE',
+      part: 2
+    }, '*');
+  }
+}
+updateProgress();
+
+// Only resend DONE if state is truly complete
+const stateOnLoad = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+const answeredOnLoad = Object.values(stateOnLoad)
+  .filter(v => v && v.answered && (v.value ?? '').toString().trim() !== '')
+  .length;
+
+if (answeredOnLoad === TOTAL_QUESTIONS && localStorage.getItem(DONE_KEY)) {
+  window.parent.postMessage({
+    type: 'LISTENING_PART_DONE',
+    part: 2
+  }, '*');
+}
+
+DATA.forEach((item, i) => {
+  const div = document.createElement("div");
+  div.className = "question";
+
+  div.innerHTML = `
+    <h3>${item.q}</h3>
+    <div class="answer-row">
+      <input type="text">
+      <button class="show-answer">Show answer</button>
+      <button class="script-btn">Show script</button>
+    </div>
+    <div class="result"></div>
+    <div class="script-box"></div>
+  `;
+
+  const input = div.querySelector("input");
+  const answerBtn = div.querySelector(".show-answer");
+  answerBtn.disabled = true;
+  answerBtn.classList.remove("enabled");
+  answerBtn.style.cursor = "not-allowed";
+  const scriptBtn = div.querySelector(".script-btn");
+  scriptBtn.disabled = true;
+  scriptBtn.style.cursor = "not-allowed";
+  const result = div.querySelector(".result");
+  const scriptBox = div.querySelector(".script-box");
+
+  input.addEventListener("input", () => {
+    if (input.value.trim() !== "") {
+      answerBtn.disabled = false;
+      answerBtn.classList.add("enabled");
+      answerBtn.style.cursor = "pointer";
+    } else {
+      answerBtn.disabled = true;
+      answerBtn.classList.remove("enabled");
+      answerBtn.style.cursor = "not-allowed";
+    }
+  });
+
+  answerBtn.onclick = () => {
+    if (input.value.trim() === "") return;
+    const user = input.value.trim().toLowerCase();
+    input.disabled = true;
+    answerBtn.disabled = true;
+    answerBtn.classList.remove("enabled");
+
+    if (item.answer.includes(user)) {
+      result.textContent = "✓ Correct";
+      result.className = "result correct";
+    } else {
+      result.textContent = "✗ Correct answer: " + item.answer[0];
+      result.className = "result wrong";
+    }
+    result.style.display = "block";
+
+    scriptBtn.disabled = false;
+    scriptBtn.style.cursor = "pointer";
+
+    saved[i] = { value: user, answered: true, scriptShown: false };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    answeredSet.add(i);
+    updateProgress(); // DONE sẽ được check ở đây
+  };
+
+  scriptBtn.onclick = () => {
+    if (!saved[i] || !saved[i].answered) return;
+    scriptBox.textContent = item.script;
+    scriptBox.style.display = "block";
+    scriptBtn.disabled = true;
+    if (saved[i]) {
+      saved[i].scriptShown = true;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    }
+  };
+
+  if (saved[i] && saved[i].value) {
+    const user = saved[i].value;
+    input.value = user;
+    input.disabled = true;
+    answerBtn.disabled = true;
+    answerBtn.classList.remove("enabled");
+
+    if (item.answer.includes(user)) {
+      result.textContent = "✓ Correct";
+      result.className = "result correct";
+    } else {
+      result.textContent = "✗ Correct answer: " + item.answer[0];
+      result.className = "result wrong";
+    }
+    result.style.display = "block";
+
+    if (saved[i].answered) {
+      answeredSet.add(i);
+      scriptBtn.disabled = false;
+      scriptBtn.style.cursor = "pointer";
+    }
+    if (saved[i].scriptShown) {
+      scriptBox.textContent = item.script;
+      scriptBox.style.display = 'block';
+      scriptBtn.disabled = true;
+    }
+  }
+
+  container.appendChild(div);
+});
+
+function resetTest() {
+  if (!confirm("Reset toàn bộ bài?")) return;
+
+  // clear storage
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(DONE_KEY);
+
+  // notify parent immediately
+  window.parent.postMessage({
+    type: 'PART_RESET',
+    part: 2
+  }, '*');
+
+  // reset internal state
+  answeredSet.clear();
+  for (let key in saved) {
+    delete saved[key];
+  }
+
+  // reset UI without reloading
+  document.querySelectorAll('.question').forEach(q => {
+    const input = q.querySelector('input');
+    const answerBtn = q.querySelector('.show-answer');
+    const scriptBtn = q.querySelector('.script-btn');
+    const result = q.querySelector('.result');
+    const scriptBox = q.querySelector('.script-box');
+
+    input.value = '';
+    input.disabled = false;
+
+    answerBtn.disabled = true;
+    answerBtn.classList.remove('enabled');
+    answerBtn.style.cursor = 'not-allowed';
+
+    scriptBtn.disabled = true;
+    scriptBtn.style.cursor = 'not-allowed';
+
+    result.style.display = 'none';
+    scriptBox.style.display = 'none';
+  });
+
+  progressBar.textContent = `Answered: 0 / ${TOTAL_QUESTIONS}`;
+}
+</script>
+
+</body>
+</html>

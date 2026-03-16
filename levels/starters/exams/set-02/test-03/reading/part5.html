@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>A2T3 - Rea&Wri 5</title>
+    <style>
+        body {
+            font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            line-height: 1.9;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #e9f3ff 0%, #fdfefe 50%, #ffffff 100%);
+        }
+
+
+        h2 {
+            margin-bottom: 6px;
+            color: #2a6df4;
+            letter-spacing: 0.3px;
+        }
+
+
+        h3 {
+            color: #5f6f8a;
+        }
+
+
+        h3 {
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+
+        .image-block {
+            margin: 32px 0;
+            padding: 24px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+        }
+
+
+        .image-block img {
+            width: 100%;
+            max-width: 550px;
+            display: block;
+            margin: 16px auto 24px;
+            border-radius: 18px;
+            border: none;
+            box-shadow:
+                0 18px 40px rgba(0,0,0,0.18),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+
+        .question-box {
+            margin-top: 18px;
+            padding: 20px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+
+
+        .question-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            flex-wrap: wrap;
+        }
+
+
+        .answer-input {
+            width: 150px;
+            padding: 8px 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 2px solid rgba(42,109,244,0.6);
+            background: rgba(255,255,255,0.85);
+        }
+
+
+        .check-btn {
+            padding: 8px 18px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2a6df4, #5b8cff);
+            color: #fff;
+            box-shadow: 0 10px 22px rgba(42,109,244,0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+
+        .check-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 6px 14px rgba(42,109,244,0.3);
+        }
+
+
+        .result {
+            margin-top: 8px;
+            font-weight: bold;
+            display: none;
+        }
+
+
+        .correct {
+            color: #2ecc71;
+        }
+
+
+        .wrong {
+            color: #e74c3c;
+        }
+
+
+        .translation {
+            margin-top: 8px;
+            font-style: italic;
+            display: none;
+            color: #555;
+        }
+
+
+        .wrapper {
+            max-width: 900px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
+            border-radius: 24px;
+            padding: 36px;
+            box-shadow:
+                0 25px 50px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+
+        .header-bar {
+          margin-bottom: 16px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+
+        .header-title {
+          font-size: 36px;
+          font-weight: 800;
+          color: #1e88e5;
+          letter-spacing: 0.4px;
+          margin: 0 0 6px 0;
+        }
+
+
+        .header-pill {
+          display: inline-block;
+          padding: 6px 14px;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+          color: #1a4fa3;
+          font-size: 14px;
+          font-weight: 700;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+
+
+        .instruction-line {
+          margin-top: 12px;
+          margin-bottom: 28px;
+          font-size: 17px;
+          font-weight: 600;
+          color: #374151;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+
+<div class="header-bar">
+  <div class="header-title">Starters practice test</div>
+  <div class="header-pill">Reading & Writing, Part 5</div>
+</div>
+
+
+<div class="instruction-line">
+  Look at the pictures and read the questions. Write one-word answer.
+</div>
+
+
+<!-- IMAGE 1 -->
+<div class="image-block">
+    <img src="../assets/reading/part5/p5_t1.png" alt="family at the beach">
+
+
+    <h3>Part 1</h3>
+
+
+    <!-- Q1 -->
+    <div class="question-box" data-answers="kitchen">
+        <div class="question-line">
+            <b>Question 1:</b> Where are the people?
+            <span>in the</span>
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>kitchen</b></div>
+        <div class="result wrong">✗ Correct answer: <b>kitchen</b></div>
+        <div class="translation">Dịch: Mọi người đang ở đâu?</div>
+    </div>
+
+
+    <!-- Q2 -->
+    <div class="question-box" data-answers="four,4">
+        <div class="question-line">
+            <b>Question 2:</b> How many drinks are there on the table?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>four / 4</b></div>
+        <div class="result wrong">✗ Correct answer: <b>four / 4</b></div>
+        <div class="translation">Dịch: Có bao nhiêu đồ uống trên bàn?</div>
+    </div>
+
+
+    <!-- Q3 -->
+    <div class="question-box" data-answers="purple">
+        <div class="question-line">
+            <b>Question 3:</b> What colour are the flowers?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>purple</b></div>
+        <div class="result wrong">✗ Correct answer: <b>purple</b></div>
+        <div class="translation">Dịch: Những bông hoa màu gì?</div>
+    </div>
+</div>
+
+
+<!-- IMAGE 2 -->
+<div class="image-block">
+    <img src="../assets/reading/part5/p5_t2.png" alt="dog on the sand">
+
+
+    <h3>Part 2</h3>
+
+
+    <!-- Q4 -->
+    <div class="question-box" data-answers="birthday cake,cake">
+        <div class="question-line">
+            <b>Question 4:</b> What is the girl holding?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>birthday cake</b></div>
+        <div class="result wrong">✗ Correct answer: <b>birthday cake</b></div>
+        <div class="translation">Dịch: Cô bé đang cầm gì?</div>
+    </div>
+
+
+    <!-- Q5 -->
+    <div class="question-box" data-answers="boy,brother,son,the boy,the brother,the son">
+        <div class="question-line">
+            <b>Question 5:</b> Who is singing?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>the boy / brother / son</b></div>
+        <div class="result wrong">✗ Correct answer: <b>the boy / brother / son</b></div>
+        <div class="translation">Dịch: Ai đang hát?</div>
+    </div>
+</div>
+
+
+<!-- IMAGE 3 -->
+<div class="image-block">
+    <img src="../assets/reading/part5/p5_t3.png" alt="ice cream man">
+
+
+    <h3>Part 3</h3>
+
+
+    <!-- Q6 -->
+    <div class="question-box" data-answers="mum,mother,the mother">
+        <div class="question-line">
+            <b>Question 6:</b> Who is Dad smiling at?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>mum / mother</b></div>
+        <div class="result wrong">✗ Correct answer: <b>mum / mother</b></div>
+        <div class="translation">Dịch: Bố đang mỉm cười với ai?</div>
+    </div>
+
+
+    <!-- Q7 -->
+    <div class="question-box" data-answers="bag,handbag,a bag,a handbag">
+        <div class="question-line">
+            <b>Question 7:</b> What has Mum got?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>a bag / handbag</b></div>
+        <div class="result wrong">✗ Correct answer: <b>a bag / handbag</b></div>
+        <div class="translation">Dịch: Mẹ đang có gì?</div>
+    </div>
+</div>
+
+
+<div style="text-align:center; margin-top:32px;">
+  <button id="resetTest" style="padding:12px 28px; font-size:16px; border-radius:16px; border:none; cursor:pointer; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; box-shadow:0 10px 24px rgba(0,0,0,0.25);">Reset bài</button>
+</div>
+
+
+<script nonce="Mzg0ODY1NzE4NiwyNjkyMDI5NTk=">
+const STORAGE_KEY = 'starters_reading_part5';
+
+
+function saveState(index, value) {
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  state[index] = value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+
+function loadState() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+
+
+function clearState() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+
+const saved = loadState();
+
+
+const boxes = document.querySelectorAll('.question-box');
+
+
+boxes.forEach((box, index) => {
+  const input = box.querySelector('.answer-input');
+  const btn = box.querySelector('.check-btn');
+  const correct = box.querySelector('.correct');
+  const wrong = box.querySelector('.wrong');
+  const translation = box.querySelector('.translation');
+  const answers = box.dataset.answers.split(',').map(a => a.trim());
+
+
+  // disable button initially
+  btn.disabled = true;
+  btn.style.opacity = 0.5;
+  btn.style.cursor = 'not-allowed';
+
+
+  input.addEventListener('input', () => {
+    if (input.value.trim() !== '') {
+      btn.disabled = false;
+      btn.style.opacity = 1;
+      btn.style.cursor = 'pointer';
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = 0.5;
+      btn.style.cursor = 'not-allowed';
+    }
+  });
+
+
+  // restore
+  if (saved[index]) {
+    input.value = saved[index];
+    btn.disabled = false;
+    btn.click();
+  }
+
+
+  btn.onclick = () => {
+    const user = input.value.trim().toLowerCase();
+
+
+    input.disabled = true;
+    btn.disabled = true;
+    btn.style.opacity = 0.6;
+
+
+    if (answers.includes(user)) {
+      correct.style.display = 'block';
+    } else {
+      wrong.style.display = 'block';
+    }
+
+
+    translation.style.display = 'block';
+    saveState(index, user);
+  };
+});
+
+
+// RESET BUTTON
+const resetBtn = document.getElementById('resetTest');
+if (resetBtn) {
+  resetBtn.onclick = () => {
+    if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài?')) return;
+    clearState();
+    location.reload();
+  };
+}
+</script>
+
+
+</div>
+</body>
+</html>
+

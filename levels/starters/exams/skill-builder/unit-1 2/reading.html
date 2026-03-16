@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Skillbuilder – Reading & Listening Unit 1</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+body{
+  margin:0;
+  font-family:"Segoe UI", Arial, sans-serif;
+  background:linear-gradient(180deg,#eaf6ff,#f7fbff);
+  overflow-x:hidden;
+}
+
+.wrapper{
+  width:100%;
+  max-width:100%;
+  min-height:100vh;
+  margin:0;
+  padding:20px 20px;
+  background:#fff;
+  border-radius:0;
+  box-shadow:none;
+  display:flex;
+  flex-direction:column;
+}
+
+h1{
+  text-align:center;
+  color:#3b82f6;
+  margin:0;
+  font-size:32px;
+}
+
+.main-layout{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:6px;
+  flex:1;
+  min-height:0;
+}
+
+.part-panel{
+  background:#f5f9ff;
+  border-radius:18px;
+  padding:10px 14px;
+}
+
+.part-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.part-list li{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  border-radius:12px;
+  background:#eef4ff;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.part-list li:hover{
+  background:#e3edff;
+}
+
+.part-list a{
+  font-weight:600;
+  color:#1e3a8a;
+  text-decoration:none;
+}
+
+.status{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#555; /* dark gray when not done */
+}
+
+.status.done{
+  background:#22c55e; /* bright green when done */
+}
+
+.content-panel{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+iframe{
+  flex:1;
+  width:100%;
+  max-width:100%;
+  min-height:640px;
+  border:none;
+  border-radius:18px;
+  display:block;
+}
+
+.submit-bar{
+  margin-top:20px;
+  text-align:center;
+}
+
+button{
+  padding:14px 32px;
+  border:none;
+  border-radius:999px;
+  background:#3b82f6;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+
+<h1>Starters - Skillbuilder – Reading & Writing Unit 1</h1>
+
+
+<div class="main-layout">
+
+  <div class="part-panel">
+    <ul class="part-list">
+      <li onclick="loadPart(1)">
+        <span>Part 1</span>
+        <span id="r1" class="status"></span>
+      </li>
+      <li onclick="loadPart(2)">
+        <span>Part 2</span>
+        <span id="r2" class="status"></span>
+      </li>
+      <li onclick="loadPart(3)">
+        <span>Part 3</span>
+        <span id="r3" class="status"></span>
+      </li>
+      <li onclick="loadPart(4)">
+        <span>Part 4</span>
+        <span id="r4" class="status"></span>
+      </li>
+      <li onclick="loadPart(5)">
+        <span>Part 5</span>
+        <span id="r5" class="status"></span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content-panel">
+    <iframe
+      id="partFrame"
+      style="width:100%;height:720px;border:none;border-radius:18px;">
+    </iframe>
+
+    <div class="submit-bar">
+      <button id="submitReading" disabled>Submit Reading</button>
+    </div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+function loadPart(part){
+  const frame = document.getElementById('partFrame');
+  frame.src = `./reading/part${part}.html`;
+}
+// ===== STORAGE KEYS =====
+const READING_KEYS = {
+  1: 'skillbuilder_unit1_reading_part1_done',
+  2: 'skillbuilder_unit1_reading_part2_done',
+  3: 'skillbuilder_unit1_reading_part3_done',
+  4: 'skillbuilder_unit1_reading_part4_done',
+  5: 'skillbuilder_unit1_reading_part5_done'
+};
+
+let completed = 0;
+let doneParts = new Set();
+
+function setDone(part){
+  const el = document.getElementById('r'+part);
+  if (!el.classList.contains('done')) {
+    el.classList.add('done');
+    doneParts.add(part);
+    completed = doneParts.size;
+  }
+}
+function unsetDone(part){
+  const el = document.getElementById('r'+part);
+  el.classList.remove('done');
+  doneParts.delete(part);
+  completed = doneParts.size;
+}
+
+// ===== CHECK LOCALSTORAGE ON LOAD =====
+[1,2,3,4,5].forEach(p=>{
+  const key = READING_KEYS[p];
+  if(localStorage.getItem(key) === 'done'){
+    setDone(p);
+  } else {
+    unsetDone(p);
+  }
+});
+document.getElementById('submitReading').disabled = (completed !== 5);
+
+// ===== LISTEN MESSAGE FROM PARTS =====
+window.addEventListener("message", (e)=>{
+  if(!e.data || !e.data.type) return;
+
+  const { type, part } = e.data;
+  if(!READING_KEYS[part]) return;
+
+  // ===== PART DONE =====
+  if(type === "READING_PART_DONE"){
+    localStorage.setItem(READING_KEYS[part], 'done');
+    setDone(part);
+    document.getElementById('submitReading').disabled = (completed !== 5);
+  }
+
+  // ===== PART RESET =====
+  if(type === "READING_PART_RESET"){
+    // CHỈ reset khi người dùng bấm Reset thật
+    if(e.data.manual === true){
+      localStorage.removeItem(READING_KEYS[part]);
+      unsetDone(part);
+      document.getElementById('submitReading').disabled = true;
+    }
+  }
+});
+
+// ===== LISTEN STORAGE CHANGE (FOR NEW TAB / RELOAD CASE) =====
+window.addEventListener('storage', (e) => {
+  const part = Object.keys(READING_KEYS).find(
+    k => READING_KEYS[k] === e.key
+  );
+
+  if (!part) return;
+
+  if (e.newValue === 'done') {
+    setDone(Number(part));
+  } else {
+    unsetDone(Number(part));
+  }
+
+  document.getElementById('submitReading').disabled = (completed !== 5);
+});
+</script>
+
+</body>
+</html>

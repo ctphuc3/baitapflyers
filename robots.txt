@@ -1,0 +1,8 @@
+# Robots configuration for baitapflyers.com
+# Allow all search engine crawlers to access the site
+
+User-agent: *
+Allow: /
+
+# Sitemap for search engines
+Sitemap: https://baitapflyers.com/sitemap.xml

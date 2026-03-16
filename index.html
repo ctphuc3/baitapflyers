@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Bài tập FLYERS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Browser UI color (Safari / mobile browsers) -->
+<meta name="theme-color" content="#e6f4ff">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root {
+  --space: 14px;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #eaf6ff;
+  -webkit-overflow-scrolling: touch;
+}
+</style>
+<!-- Responsive for iPhone/mobile -->
+<style>
+@media (max-width: 768px) {
+
+  .top-bar {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .search-panel {
+    width: 100%;
+    height: 48px;
+    border-radius: 24px;
+  }
+
+  .search-input {
+    font-size: 14px;
+  }
+
+  .main-layout {
+    flex-direction: column;
+    margin: 0 10px 10px;
+  }
+
+  .side-menu {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+  }
+
+  .menu-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .calendar-panel {
+    display: none;
+  }
+
+  .content-area {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .card {
+    height: auto;
+    min-height: 110px;
+    font-size: 14px;
+  }
+
+  #show-ui-btn {
+    bottom: 14px;
+    right: 14px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+canvas {
+  display: block;
+}
+
+/* ===== UI OVERLAY ===== */
+.ui-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-y: auto;       /* SCROLL DỌC */
+  overflow-x: hidden;
+}
+
+/* Top bar */
+.top-bar {
+  height: auto;
+  margin: 12px;
+  padding: 12px;
+
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space);
+  align-items: center;
+
+  pointer-events: auto;
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.left-column {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.logo-panel {
+  height: 48px;
+  width: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  backdrop-filter: none;
+}
+
+/* === Glass Pill Search Panel === */
+.search-panel {
+  height: 56px;
+  width: calc(100% - 64px);
+  border-radius: 28px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.38),
+    rgba(255,255,255,0.18)
+  );
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.45),
+    0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* .search-panel input {
+  width: 420px;
+  background: rgba(255,255,255,0.65);
+} */
+
+/* === Glass Input === */
+.search-input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+
+  background: transparent;
+  color: #2b2b2b;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.search-input::placeholder {
+  color: rgba(0,0,0,0.45);
+}
+
+.search-icon {
+  font-size: 16px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* .logo-box {
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+} */
+
+/* .search-box {
+  display: flex;
+  justify-content: flex-start;
+} */
+
+/* .search-box input {
+  width: 420px;
+  padding: 10px 16px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.65);
+} */
+
+.logo-text {
+  margin-right: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+
+  font-family:
+    "SF Pro Rounded",
+    "Arial Rounded MT Bold",
+    "Segoe UI Rounded",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+
+  color: rgba(255,255,255,0.82);
+
+  /* Bubble / 3D highlight */
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.85),
+    0 3px 6px rgba(255,255,255,0.35),
+    0 10px 22px rgba(0,0,0,0.18);
+
+  /* subtle glass feel */
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  transition:
+    transform 0.18s cubic-bezier(0.22, 0.61, 0.36, 1),
+    text-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.logo-text:hover {
+  transform: translateY(-1px);
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.9),
+    0 4px 8px rgba(255,255,255,0.35),
+    0 14px 28px rgba(0,0,0,0.18);
+}
+
+.logo-text:active {
+  transform: translateY(1px) scale(0.97);
+  text-shadow:
+    inset 0 2px 4px rgba(0,0,0,0.25),
+    0 1px 0 rgba(255,255,255,0.6);
+  filter: saturate(1.05);
+}
+
+/* Layout */
+.main-layout {
+  display: flex;
+  min-height: calc(100vh - 88px); /* cho phép cao hơn viewport */
+  margin: 0 var(--space) var(--space);
+  gap: var(--space);
+}
+
+/* ===== ZEN MODE (HIDE UI – FULL BLOCK) ===== */
+.ui-hidden .top-bar,
+.ui-hidden .main-layout {
+  opacity: 0;
+  filter: blur(14px);
+  transform: scale(0.97);
+}
+
+/* ===== ZEN MODE: LOCK ALL UI INTERACTIONS ===== */
+.ui-hidden,
+.ui-hidden * {
+  pointer-events: none !important;
+}
+
+/* CHỈ CHO PHÉP NÚT RETURN / SHOW UI HOẠT ĐỘNG */
+.ui-hidden #show-ui-btn {
+  pointer-events: auto !important;
+}
+
+.top-bar,
+.main-layout {
+  transition:
+    opacity 0.7s ease,
+    filter 0.7s ease,
+    transform 0.7s ease;
+}
+
+/* ===== SHOW UI BUTTON ===== */
+#show-ui-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 18px;
+  border-radius: 22px;
+  border: none;
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(120,120,120,0.85);
+
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.22);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease,
+    opacity 0.7s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+#show-ui-btn:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.22),
+    inset 0 1px 1px rgba(255,255,255,0.45);
+}
+
+#show-ui-btn:active {
+  transform: translateY(1px) scale(0.96);
+  box-shadow:
+    inset 0 4px 10px rgba(0,0,0,0.25),
+    inset 0 -1px 2px rgba(255,255,255,0.35);
+  filter: saturate(1.05);
+}
+
+.ui-hidden #show-ui-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* Scroll smooth for .ui-root (optional but recommended) */
+.ui-root {
+  scroll-behavior: smooth;
+}
+
+/* Side menu */
+.side-menu {
+  width: 240px;
+  padding: var(--space);
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  backdrop-filter: blur(18px);
+  background: rgba(255,255,255,0.20);
+  pointer-events: auto;
+}
+
+.calendar-panel {
+  margin-bottom: 12px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.45),
+    0 10px 26px rgba(0,0,0,0.18);
+  transition:
+    transform 0.28s cubic-bezier(0.25,0.8,0.25,1),
+    opacity 0.28s ease;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.calendar-toggle {
+  background: rgba(255,255,255,0.25);
+  border: none;
+  border-radius: 12px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.calendar-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.calendar-solar {
+  font-weight: 600;
+}
+
+.calendar-lunar {
+  opacity: 0.75;
+  font-size: 12px;
+}
+
+.calendar-time {
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* ===== CALENDAR SHOW BUTTON ===== */
+.menu-item {
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.25);
+}
+
+.menu-item.active {
+  background: rgba(255,255,255,0.45);
+}
+
+/* Content area */
+.content-area {
+  flex: 1;
+  padding: var(--space);
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  align-content: start;
+
+  pointer-events: auto;
+  border-radius: 24px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+}
+
+/* ===== RECENT MODE: SAME GRID AS UNIT ===== */
+.content-area.recent-mode {
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.card {
+  height: 140px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.35);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-direction: column;
+  padding: 16px;
+  text-align: center;
+}
+
+
+.card .subtext {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.65;
+}
+
+/* ===== WATER PRESS 3D EFFECT ===== */
+.menu-item,
+.card,
+.search-panel {
+  position: relative;
+  transition:
+    transform 0.28s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.28s ease,
+    filter 0.28s ease;
+  transform-style: preserve-3d;
+}
+
+/* Hover – nổi nhẹ như mặt nước */
+.menu-item:hover,
+.card:hover,
+.search-panel:hover {
+  transform: translateY(-0.5px) scale(1.008);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.18),
+    inset 0 1px 1px rgba(255, 255, 255, 0.55);
+}
+
+/* Active – ấn xuống như chạm giọt nước */
+.menu-item:active,
+.card:active,
+.search-panel:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow:
+    inset 0 4px 10px rgba(0, 0, 0, 0.25),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.35);
+  filter: saturate(1.05);
+}
+
+/* Hiệu ứng gợn nước nhẹ khi click */
+.menu-item::after,
+.card::after,
+.search-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,0.45),
+      rgba(255,255,255,0.0) 60%
+    );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.menu-item:active::after,
+.card:active::after,
+.search-panel:active::after {
+  opacity: 0.65;
+}
+
+/* ===== SEARCH DROPDOWN ===== */
+.search-suggestions {
+  position: absolute;
+  top: 76px;
+  right: 24px;
+  width: calc(100% - 320px);
+  max-height: 260px;
+  overflow-y: auto;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+  display: none;
+  z-index: 50;
+}
+
+.search-suggestion-item {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.search-suggestion-item:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+/* ===== LIQUID GLASS THANK YOU TEXT ===== */
+.thank-you {
+  position: fixed;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  font-size: 42px;
+  font-weight: 700;
+  font-family:
+    "SF Pro Rounded",
+    "Inter",
+    "Nunito",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.95),
+    rgba(200,240,255,0.85),
+    rgba(255,255,255,0.95)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 4px 20px rgba(255,255,255,0.35),
+    0 10px 40px rgba(0,0,0,0.25);
+
+  animation: none;
+  will-change: transform, filter;
+}
+
+.ui-hidden .thank-you {
+  opacity: 1;
+  animation:
+    thankYouLoop 38s linear infinite,
+    thankYouFloat 9s ease-in-out infinite;
+}
+
+@keyframes thankYouLoop {
+  0% {
+    left: 100%;
+    filter: blur(0px);
+  }
+  5% {
+    filter: blur(0.3px);
+  }
+  50% {
+    filter: blur(0.6px);
+  }
+  95% {
+    filter: blur(0.3px);
+  }
+  100% {
+    left: -100%;
+    filter: blur(0px);
+  }
+}
+@keyframes thankYouFloat {
+  0% {
+    transform: translateY(-50%) translateY(0px);
+    filter: blur(0.4px);
+  }
+  50% {
+    transform: translateY(-50%) translateY(-14px);
+    filter: blur(0.7px);
+  }
+  100% {
+    transform: translateY(-50%) translateY(0px);
+    filter: blur(0.4px);
+  }
+}
+</style>
+</head>
+<body>
+<div class="ui-root">
+<div class="thank-you">Thank you!</div>
+  <!-- Top search bar -->
+  <div class="top-bar">
+    <div class="left-column">
+      <div class="logo-panel">
+        <div class="logo-text" id="toggle-ui" style="cursor:pointer">BAITAPFLYERS</div>
+      </div>
+    </div>
+
+    <div class="search-panel">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" placeholder="Search exercises..." />
+    </div>
+    <div class="search-suggestions" id="search-suggestions"></div>
+  </div>
+
+  <div class="main-layout">
+    <!-- Left menu -->
+    <div class="side-menu">
+      <div class="calendar-panel" id="calendar-panel">
+        <div class="calendar-header">
+          <span id="calendar-title">Today</span>
+        </div>
+        <div class="calendar-body">
+          <div class="calendar-solar" id="solar-date"></div>
+          <div class="calendar-lunar" id="lunar-date"></div>
+          <div class="calendar-time" id="clock-time"></div>
+        </div>
+      </div>
+      <div class="menu-item active" id="menu-recent">Recent</div>
+      <div class="menu-item" id="menu-starters">Starters</div>
+      <div class="menu-item" id="menu-movers">Movers</div>
+      <div class="menu-item" id="menu-flyers">Flyers</div>
+      <div class="menu-item">IELTS</div>
+    </div>
+
+    <!-- Center content -->
+    <div class="content-area" id="content-area">
+      <div class="card">Exercise 1</div>
+      <div class="card">Exercise 2</div>
+      <div class="card">Exercise 3</div>
+      <div class="card">Exercise 4</div>
+    </div>
+  </div>
+  <button id="show-ui-btn">Return</button>
+</div>
+
+<script type="module">
+import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+
+let scene, camera, renderer, mesh;
+let bgScene, bgCamera, bgTarget;
+let mouse = new THREE.Vector2(-10.0, -10.0); // đặt ngoài màn hình
+
+// ===== TOUCH WATER EFFECT CONTROL =====
+let lastTouchTime = 0;
+const TOUCH_COOLDOWN = 1000; // ms
+
+init();
+animate();
+
+function init() {
+  scene = new THREE.Scene();
+
+  // --- Background scene for refraction ---
+  bgScene = new THREE.Scene();
+  bgCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+  const bgGeo = new THREE.PlaneGeometry(2, 2);
+  const bgMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 }
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      precision highp float;
+      varying vec2 vUv;
+      uniform float uTime;
+
+      void main() {
+        vec3 sky = mix(
+          vec3(0.88, 0.94, 0.98),   // almost white sky blue
+          vec3(0.75, 0.88, 0.96),   // very light horizon blue
+          smoothstep(0.0, 1.0, vUv.y)
+        );
+        gl_FragColor = vec4(sky, 1.0);
+      }
+    `
+  });
+  bgScene.add(new THREE.Mesh(bgGeo, bgMat));
+  bgTarget = new THREE.WebGLRenderTarget(
+    window.innerWidth,
+    window.innerHeight
+  );
+
+  camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  renderer.domElement.id = "water-canvas";
+  document.body.appendChild(renderer.domElement);
+
+  const geometry = new THREE.PlaneGeometry(2, 2);
+
+  const material = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uMouse: { value: mouse },
+      uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+      uBackground: { value: bgTarget.texture },
+      uWind: { value: new THREE.Vector2(0.6, 0.2) },
+      uThemeColor: { value: new THREE.Vector3(0.84, 0.93, 0.96) },
+      uThemeTarget: { value: new THREE.Vector3(0.84, 0.93, 0.96) }
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+precision highp float;
+varying vec2 vUv;
+uniform float uTime;
+uniform vec2 uMouse;
+uniform vec2 uWind;
+uniform sampler2D uBackground;
+uniform vec3 uThemeColor;
+
+/* ===== wave height field ===== */
+float heightField(vec2 p) {
+  float h = 0.0;
+  h += sin(dot(p, uWind) * 14.0 + uTime * 1.8) * 0.08;
+  h += sin(p.x * 22.0 - uTime * 1.3) * 0.05;
+  h += sin((p.x + p.y) * 12.0 + uTime * 0.9) * 0.04;
+
+  return h;
+}
+
+/* ===== compute fake normal from height ===== */
+vec3 getNormal(vec2 p) {
+  float eps = 0.002;
+  float h  = heightField(p);
+  float hx = heightField(p + vec2(eps, 0.0));
+  float hy = heightField(p + vec2(0.0, eps));
+  return normalize(vec3(h - hx, h - hy, eps));
+}
+
+void main() {
+  vec2 uv = vUv;
+
+  float h = heightField(uv);
+  vec3 normal = getNormal(uv);
+
+  /* ===== refraction ===== */
+  vec2 refractUV = uv + normal.xy * 0.08;
+  vec3 refracted = texture2D(uBackground, refractUV).rgb;
+
+  /* ===== reflection (mirror horizon) ===== */
+  vec2 reflectUV = vec2(refractUV.x, 1.0 - refractUV.y);
+  vec3 reflected = texture2D(uBackground, reflectUV).rgb;
+
+  /* ===== lighting ===== */
+  vec3 lightDir = normalize(vec3(-0.3, 0.8, 1.0));
+  float diffuse = clamp(dot(normal, lightDir), 0.0, 1.0);
+
+  float fresnel = pow(1.0 - dot(normal, vec3(0.0, 0.0, 1.0)), 3.0);
+
+  /* ===== combine ===== */
+  vec3 waterTint = uThemeColor;
+  vec3 color = mix(refracted, reflected, fresnel * 0.55);
+  color = mix(color, waterTint, 0.12);     // tint cực nhẹ
+  color *= 0.68 + diffuse * 0.42;          // mềm hơn, dịu
+  color += fresnel * 0.08;                 // giảm viền trắng
+
+  /* ===== horizon darkening ===== */
+  float horizon = smoothstep(0.2, 0.75, uv.y);
+  color *= mix(0.90, 1.0, horizon);
+
+  gl_FragColor = vec4(color, 1.0);
+}
+`
+  });
+
+  mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  window.addEventListener("resize", onResize);
+}
+
+function onResize() {
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  bgTarget.setSize(window.innerWidth, window.innerHeight);
+  camera.updateProjectionMatrix();
+}
+
+function animate(t) {
+  bgScene.children[0].material.uniforms.uTime.value = t * 0.0003;
+
+  renderer.setRenderTarget(bgTarget);
+  renderer.render(bgScene, bgCamera);
+  renderer.setRenderTarget(null);
+
+  mesh.material.uniforms.uTime.value = t * 0.0005;
+  // Làm sóng tan dần khi không chạm
+  mouse.lerp(new THREE.Vector2(-10.0, -10.0), 0.05);
+  // mesh.material.uniforms.uThemeColor.value.lerp(
+  //   mesh.material.uniforms.uThemeTarget.value,
+  //   0.04
+  // );
+  renderer.render(scene, camera);
+
+  requestAnimationFrame(animate);
+}
+
+// ===== UI LOGIC: STARERS =====
+const contentArea = document.getElementById("content-area");
+const searchInput = document.querySelector(".search-input");
+const suggestionBox = document.getElementById("search-suggestions");
+let SEARCH_INDEX = [];
+
+// ===== A) BUILD SEARCH INDEX TOÀN CỤC =====
+function buildSearchIndex() {
+  SEARCH_INDEX = [];
+
+  // ===== STARERS – AUTHENTIC EXAMS =====
+  for (let exam = 1; exam <= 4; exam++) {
+    for (let test = 1; test <= 3; test++) {
+      ["Listening", "Reading & Writing", "Speaking"].forEach(skill => {
+        const url = getSkillLink(skill, exam, test);
+
+        SEARCH_INDEX.push({
+          title: skill,
+          meta: `Authentic Exam ${exam} Test ${test} Starters`,
+          level: "Starters",
+          url,
+          render: () => {
+            const c = document.createElement("div");
+            c.className = "card";
+            c.style.cursor = "pointer";
+
+            const t = document.createElement("div");
+            t.textContent = skill;
+
+            const s = document.createElement("div");
+            s.className = "subtext";
+            s.textContent = `(Authentic Exam ${exam} · Test ${test} · Starters)`;
+
+            c.appendChild(t);
+            c.appendChild(s);
+
+            c.onclick = () => window.open(url, "_blank");
+            return c;
+          }
+        });
+      });
+    }
+
+    // Card cấp Exam (không có link)
+    SEARCH_INDEX.push({
+      title: `Authentic Exam ${exam}`,
+      meta: `Authentic Exam ${exam} Starters`,
+      level: "Starters",
+      url: "",
+      render: () => {
+        const c = document.createElement("div");
+        c.className = "card";
+        c.textContent = `Authentic Exam ${exam}`;
+        c.onclick = () => showExamTests(exam);
+        return c;
+      }
+    });
+  }
+
+  // ===== STARTERS – SKILLS BUILDER =====
+  for (let unit = 1; unit <= 5; unit++) {
+    ["Listening", "Reading & Writing"].forEach(skill => {
+      let skillSlug = skill === "Listening" ? "listening" : "reading";
+      const url = `levels/starters/exams/skill-builder/unit-${unit}/${skillSlug}.html`;
+
+      SEARCH_INDEX.push({
+        title: skill,
+        meta: `Skills builder Unit ${unit} Starters`,
+        level: "Starters",
+        url,
+        render: () => {
+          const c = document.createElement("div");
+          c.className = "card";
+          c.style.cursor = "pointer";
+
+          const t = document.createElement("div");
+          t.textContent = skill;
+
+          const s = document.createElement("div");
+          s.className = "subtext";
+          s.textContent = `(Skills builder · Unit ${unit})`;
+
+          c.appendChild(t);
+          c.appendChild(s);
+
+          c.onclick = () => window.open(url, "_blank");
+          return c;
+        }
+      });
+    });
+  }
+}
+const startersMenu = document.getElementById("menu-starters");
+
+// ===== LOCALSTORAGE RECENT LESSONS =====
+const STORAGE_KEY = "recentLessons";
+const MAX_RECENT = 8;
+
+function saveRecentLesson(item) {
+  const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const filtered = data.filter(d => d.url !== item.url);
+  filtered.unshift(item);
+  const limited = filtered.slice(0, MAX_RECENT);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(limited));
+}
+
+function loadRecentLessons() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+}
+
+// ===== A) TIỆN ÍCH SEARCH: normalizeText, fuzzyScore =====
+function normalizeText(str) {
+  return str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function fuzzyScore(query, text) {
+  const q = normalizeText(query);
+  const t = normalizeText(text);
+
+  if (!q || !t) return 0;
+  if (t.includes(q)) return 100;
+
+  let score = 0;
+  const qWords = q.split(" ");
+  qWords.forEach(w => {
+    if (t.includes(w)) score += 20;
+  });
+
+  // ký tự gần đúng
+  let qi = 0;
+  for (let i = 0; i < t.length && qi < q.length; i++) {
+    if (t[i] === q[qi]) qi++;
+  }
+  score += qi * 2;
+
+  return score;
+}
+
+// ===== A) KHAI BÁO LINK CHO 3 KỸ NĂNG =====
+// (Đã xoá object skillLinks cũ)
+
+function getSkillLink(skill, examNumber, testNumber) {
+  const base = "https://baitapflyers.com/levels/starters/exams";
+  const skillSlug = skill.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-");
+
+  return `${base}/exam-${examNumber}/test-${testNumber}/${skillSlug}.html`;
+}
+
+function clearContent() {
+  contentArea.innerHTML = "";
+}
+
+// ===== HIỂN THỊ CURRENT LESSONS =====
+function showCurrentLessons() {
+  clearContent();
+  contentArea.classList.add("recent-mode");
+
+  const lessons = loadRecentLessons();
+
+  if (lessons.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "card";
+    empty.textContent = "No recent lessons";
+    contentArea.appendChild(empty);
+    return;
+  }
+
+  lessons.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.cursor = "pointer";
+
+    const title = document.createElement("div");
+    title.textContent = item.label;
+
+    const sub = document.createElement("div");
+    sub.className = "subtext";
+    sub.textContent = item.meta;
+
+    card.appendChild(title);
+    card.appendChild(sub);
+
+    card.onclick = () => window.open(item.url, "_blank");
+    contentArea.appendChild(card);
+  });
+}
+
+function showStartersRoot() {
+  clearContent();
+  ["Lessons", "Exam"].forEach(label => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = label;
+    card.onclick = () => {
+      if (label === "Lessons") showStartersLessons();
+      if (label === "Exam") showStartersExams();
+    };
+    contentArea.appendChild(card);
+  });
+}
+
+function showStartersLessons() {
+  clearContent();
+  for (let i = 1; i <= 15; i++) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = `Unit ${i}`;
+    contentArea.appendChild(card);
+  }
+}
+
+function showStartersExams() {
+  clearContent();
+  for (let i = 1; i <= 4; i++) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = `Authentic Exam ${i}`;
+    card.onclick = () => showExamTests(i);
+    contentArea.appendChild(card);
+    // (KHÔNG push SEARCH_INDEX ở đây nữa)
+  }
+  // ===== SKILLBUILDER CARD =====
+  const skillCard = document.createElement("div");
+  skillCard.className = "card";
+
+  const skillTitle = document.createElement("div");
+  skillTitle.textContent = "Skills builder";
+
+  const skillSub = document.createElement("div");
+  skillSub.className = "subtext";
+  skillSub.textContent = "Starters";
+
+  skillCard.appendChild(skillTitle);
+  skillCard.appendChild(skillSub);
+
+  skillCard.onclick = () => showSkillbuilderUnits();
+
+  contentArea.appendChild(skillCard);
+}
+
+function showExamTests(examNumber) {
+  clearContent();
+  for (let i = 1; i <= 3; i++) {
+    const testNumber = i;
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const title = document.createElement("div");
+    title.textContent = `Test ${i}`;
+
+    const sub = document.createElement("div");
+    sub.className = "subtext";
+    sub.textContent = `Authentic Starters ${examNumber}`;
+
+    card.appendChild(title);
+    card.appendChild(sub);
+
+    card.onclick = () => showTestSections(examNumber, testNumber);
+
+    contentArea.appendChild(card);
+    // (KHÔNG push SEARCH_INDEX ở đây nữa)
+  }
+}
+
+function showSkillbuilderUnits() {
+  clearContent();
+
+  for (let i = 1; i <= 5; i++) {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const title = document.createElement("div");
+    title.textContent = `Unit ${i}`;
+
+    const sub = document.createElement("div");
+    sub.className = "subtext";
+    sub.textContent = "(Skills builder)";
+
+    card.appendChild(title);
+    card.appendChild(sub);
+
+    card.style.cursor = "pointer";
+    card.onclick = () => showSkillbuilderSections(i);
+
+    contentArea.appendChild(card);
+  }
+}
+
+function showSkillbuilderSections(unitNumber) {
+  clearContent();
+
+  ["Listening", "Reading & Writing"].forEach(skill => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const title = document.createElement("div");
+    title.textContent = skill;
+
+    const sub = document.createElement("div");
+    sub.className = "subtext";
+    sub.textContent = `(Skills builder · Unit ${unitNumber})`;
+
+    card.appendChild(title);
+    card.appendChild(sub);
+
+    card.style.cursor = "pointer";
+
+    let skillSlug = "";
+
+    if (skill === "Listening") {
+      skillSlug = "listening";
+    } else if (skill === "Reading & Writing") {
+      skillSlug = "reading";
+    }
+
+    const url = `levels/starters/exams/skill-builder/unit-${unitNumber}/${skillSlug}.html`;
+
+    card.onclick = () => {
+      saveRecentLesson({
+        label: skill,
+        meta: `Skills builder · Unit ${unitNumber}`,
+        url: url
+      });
+
+      window.open(url, "_blank");
+    };
+
+    contentArea.appendChild(card);
+  });
+}
+
+// ===== B) SỬA HÀM showTestSections() ĐỂ GẮN LINK =====
+function showTestSections(examNumber, testNumber) {
+  clearContent();
+
+  ["Listening", "Reading & Writing", "Speaking"].forEach(label => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.cursor = "pointer";
+
+    const title = document.createElement("div");
+    title.textContent = label;
+
+    const sub = document.createElement("div");
+    sub.className = "subtext";
+    sub.textContent = `(Authentic Exam ${examNumber} · Test ${testNumber})`;
+
+    card.appendChild(title);
+    card.appendChild(sub);
+
+    const url = getSkillLink(label, examNumber, testNumber);
+
+    card.onclick = () => {
+      saveRecentLesson({
+        label: label,
+        meta: `Authentic Exam ${examNumber} · Test ${testNumber}`,
+        url: url
+      });
+      window.open(url, "_blank");
+    };
+
+    // (KHÔNG push SEARCH_INDEX ở đây nữa)
+    contentArea.appendChild(card);
+  });
+}
+
+// ===== C) HÀM HIỂN THỊ KẾT QUẢ SEARCH =====
+function showSearchResultsInContent(keyword) {
+  // ===== SEARCH ALIAS EXPANSION (sb → skills builder, rw → reading writing, ls → listening) =====
+  let expanded = keyword.toLowerCase();
+
+  expanded = expanded
+    .replace(/\bsb\b/g, "skills builder")
+    .replace(/\brw\b/g, "reading writing")
+    .replace(/\bls\b/g, "listening")
+    .replace(/\bu(\d+)\b/g, "unit $1");
+
+  keyword = expanded;
+  clearContent();
+
+  const results = SEARCH_INDEX
+    .map(item => ({
+      item,
+      score: fuzzyScore(keyword, item.title + " " + item.meta)
+    }))
+    .filter(r => r.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 6); // show top 6 closest results
+
+  if (results.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "card";
+    empty.textContent = "No matching results";
+    contentArea.appendChild(empty);
+    return;
+  }
+
+  results.forEach(r => {
+    const card = r.item.render
+      ? r.item.render()
+      : (() => {
+          const c = document.createElement("div");
+          c.className = "card";
+          c.textContent = `${r.item.title}`;
+          c.onclick = () => window.open(r.item.url, "_blank");
+          return c;
+        })();
+
+    contentArea.appendChild(card);
+  });
+}
+
+
+function setThemeColor(rgb) {
+  if (!mesh || !mesh.material) return;
+  mesh.material.uniforms.uThemeColor.value.set(rgb[0], rgb[1], rgb[2]);
+  mesh.material.uniforms.uThemeTarget.value.set(rgb[0], rgb[1], rgb[2]);
+}
+
+startersMenu.addEventListener("click", () => {
+  contentArea.classList.remove("recent-mode");
+  document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+  startersMenu.classList.add("active");
+  setThemeColor([0.88, 0.58, 0.30]); // cam đậm rõ, nổi bật
+  showStartersRoot();
+});
+// ===== GẮN MENU CURRENT LESSONS =====
+const recentMenu = document.getElementById("menu-recent");
+
+recentMenu.addEventListener("click", () => {
+  document.querySelectorAll(".menu-item").forEach(i =>
+    i.classList.remove("active")
+  );
+  recentMenu.classList.add("active");
+  showCurrentLessons();
+});
+
+const moversMenu = document.getElementById("menu-movers");
+const flyersMenu = document.getElementById("menu-flyers");
+
+moversMenu.addEventListener("click", () => {
+  contentArea.classList.remove("recent-mode");
+  document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+  moversMenu.classList.add("active");
+  setThemeColor([0.58, 0.48, 0.82]); // tím đậm, phân cấp mạnh
+  clearContent();
+});
+
+flyersMenu.addEventListener("click", () => {
+  contentArea.classList.remove("recent-mode");
+  document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+  flyersMenu.classList.add("active");
+  setThemeColor([0.38, 0.72, 0.55]); // xanh lá đậm, rất rõ
+  clearContent();
+});
+
+// ===== Khi load web lần đầu, build index và tự động hiển thị Current Lessons =====
+buildSearchIndex();
+showCurrentLessons();
+
+// ===== C) GẮN SỰ KIỆN CHO Ô SEARCH =====
+searchInput.addEventListener("input", e => {
+  const value = e.target.value;
+
+  if (!value || value.length < 2) {
+    showCurrentLessons();
+    return;
+  }
+
+  showSearchResultsInContent(value);
+});
+document.addEventListener("click", e => {
+  if (!e.target.closest(".search-panel")) {
+    suggestionBox.style.display = "none";
+  }
+});
+const toggleUi = document.getElementById("toggle-ui");
+const showUiBtn = document.getElementById("show-ui-btn");
+const uiRoot = document.querySelector(".ui-root");
+
+toggleUi.addEventListener("click", () => {
+  uiRoot.classList.add("ui-hidden");
+});
+
+showUiBtn.addEventListener("click", () => {
+  uiRoot.classList.remove("ui-hidden");
+});
+
+/* ===== GLASS CALENDAR LOGIC ===== */
+const solarEl = document.getElementById("solar-date");
+const lunarEl = document.getElementById("lunar-date");
+const timeEl = document.getElementById("clock-time");
+const calendarToggle = document.getElementById("calendar-toggle");
+const calendarPanel = document.getElementById("calendar-panel");
+
+function updateCalendar() {
+  const now = new Date();
+
+  solarEl.textContent = now.toLocaleDateString("en-GB", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+
+  timeEl.textContent = now.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+
+  try {
+    const lunar = new Intl.DateTimeFormat("en-GB-u-ca-chinese", {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric"
+    }).format(now);
+    lunarEl.textContent = `Lunar date: ${lunar}`;
+  } catch {
+    lunarEl.textContent = "Lunar date: —";
+  }
+}
+
+setInterval(updateCalendar, 1000);
+updateCalendar();
+
+const calendarShowBtn = document.getElementById("calendar-show-btn");
+
+if (calendarToggle && calendarPanel && calendarShowBtn) {
+  calendarToggle.addEventListener("click", () => {
+    calendarPanel.classList.add("hidden");
+    calendarShowBtn.classList.remove("hidden");
+  });
+
+  calendarShowBtn.addEventListener("click", () => {
+    calendarPanel.classList.remove("hidden");
+    calendarShowBtn.classList.add("hidden");
+  });
+}
+
+// ===== TOUCH WATER EFFECT ONLY WHEN UI IS HIDDEN =====
+const waterCanvas = document.getElementById("water-canvas");
+
+waterCanvas.addEventListener("pointerdown", e => {
+  if (!uiRoot.classList.contains("ui-hidden")) return;
+
+  const now = performance.now();
+  if (now - lastTouchTime < TOUCH_COOLDOWN) return;
+  lastTouchTime = now;
+
+  const rect = waterCanvas.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width;
+  const y = 1.0 - (e.clientY - rect.top) / rect.height;
+
+  mouse.set(x, y);
+});
+</script>
+
+</body>
+</html>

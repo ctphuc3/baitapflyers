@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skills builder - Unit 1 - Reading & Writing part 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0px;
+            background: linear-gradient(to bottom right, #eaf4ff, #fefefe);
+        }
+
+
+        h2 {
+            margin-bottom: 6px;
+        }
+
+
+        h3 {
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: transparent;
+            border-radius: 22px;
+            padding: 10px 0 20px 0;
+        }
+
+
+        .main-image {
+            width: 100%;
+            max-width: 520px;
+            border-radius: 16px;
+            border: none;
+            margin: 24px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+
+        .question-box {
+            margin-top: 12px;
+            padding: 22px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .question-line {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+
+
+        .sentence {
+            font-size: 18px;
+            flex: 1;
+        }
+
+
+         .answer-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 16px;
+            border: 2px solid rgba(42, 109, 244, 0.35);
+            background: linear-gradient(145deg, #ffffff, #e9f0ff);
+            color: #2a3b5f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            cursor: pointer;
+            user-select: none;
+            font-weight: bold;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 18px rgba(42,109,244,0.25);
+        }
+
+
+        .answer-box:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(42,109,244,0.35);
+        }
+
+
+        .choices {
+            display: none;
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+
+        .choice {
+            padding: 10px 26px;
+            border-radius: 14px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+        }
+
+
+        .choice:hover {
+            transform: translateY(-2px) scale(1.06);
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25);
+        }
+
+
+        .choice.yes {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+
+        .choice.no {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+
+        .choice:active {
+            transform: scale(0.96);
+        }
+
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+
+        .correct {
+            color: #2ecc71;
+        }
+
+
+        .wrong {
+            color: #e74c3c;
+        }
+
+
+        .translation {
+            margin-top: 8px;
+            font-style: italic;
+            display: none;
+            color: #555;
+        }
+        .header-bar {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: 20px;
+            align-self: start;
+        }
+
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .examples-box {
+            background: rgba(255,255,255,0.9);
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+
+        .example-line {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 17px;
+        }
+
+        .example-yes {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        .example-no {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+
+.header-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e88e5;
+  letter-spacing: 0.4px;
+  margin: 0 0 6px 0;
+}
+
+
+.header-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+  color: #1a4fa3;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+
+.instruction-line {
+  margin-top: 12px;
+  margin-bottom: 24px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #374151;
+}
+    </style>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+
+<div class="header-bar">
+  <div class="header-pill">Reading & Writing, Part 2</div>
+</div>
+
+
+<div class="instruction-line">
+  Look and read. Write <span style="color:#2e7d32;font-weight:bold">yes</span> or
+  <span style="color:#c0392b;font-weight:bold">no</span>.
+</div>
+
+
+<!-- SINGLE IMAGE & EXAMPLES -->
+<div class="layout">
+
+<div class="left-panel">
+
+<img src="../assets/reading/part2/p2.png" alt="classroom" class="main-image">
+
+<div class="examples-box">
+<strong>Examples</strong>
+
+<div class="example-line">
+<span>There are two books on the desk.</span>
+<span class="example-yes">yes</span>
+</div>
+
+<div class="example-line">
+<span>The boy is wearing a hat.</span>
+<span class="example-no">no</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="right-panel">
+
+
+
+
+<div class="question-box" data-answer="yes">
+    <div class="question-line">
+        <div class="sentence">There is a tiger in the armchair.</div>
+        <div class="answer-box">answer</div>
+    </div>
+
+
+    <div class="choices">
+        <div class="choice yes">YES</div>
+        <div class="choice no">NO</div>
+    </div>
+
+
+    <div class="result correct">✓ Correct!</div>
+    <div class="result wrong">✗ Incorrect!</div>
+    <div class="translation">Nghĩa: Có một con hổ ở trên chiếc ghế bành.</div>
+    <div class="result correct">Correct answer: <span class="yes">YES</span></div>
+</div>
+
+
+<div class="question-box" data-answer="yes">
+    <div class="question-line">
+        <div class="sentence">There are some pictures on the wall.</div>
+        <div class="answer-box">answer</div>
+    </div>
+
+
+    <div class="choices">
+        <div class="choice yes">YES</div>
+        <div class="choice no">NO</div>
+    </div>
+
+
+    <div class="result correct">✓ Correct!</div>
+    <div class="result wrong">✗ Incorrect!</div>
+    <div class="translation">Nghĩa: Có một vài bức tranh ở trên tường.</div>
+    <div class="result correct">Correct answer: <span class="yes">YES</span></div>
+</div>
+
+
+<div class="question-box" data-answer="yes">
+    <div class="question-line">
+        <div class="sentence">The boy has got short brown hair.</div>
+        <div class="answer-box">answer</div>
+    </div>
+
+
+    <div class="choices">
+        <div class="choice yes">YES</div>
+        <div class="choice no">NO</div>
+    </div>
+
+
+    <div class="result correct">✓ Correct!</div>
+    <div class="result wrong">✗ Incorrect!</div>
+    <div class="translation">Nghĩa: Cậu bé có mái tóc nâu ngắn.</div>
+    <div class="result correct">Correct answer: <span class="yes">YES</span></div>
+</div>
+
+
+<div class="question-box" data-answer="yes">
+    <div class="question-line">
+        <div class="sentence">The bird is singing.</div>
+        <div class="answer-box">answer</div>
+    </div>
+
+
+    <div class="choices">
+        <div class="choice yes">YES</div>
+        <div class="choice no">NO</div>
+    </div>
+
+
+    <div class="result correct">✓ Correct!</div>
+    <div class="result wrong">✗ Incorrect!</div>
+    <div class="translation">Nghĩa: Con chim đang hót.</div>
+    <div class="result correct">Correct answer: <span class="yes">YES</span></div>
+</div>
+
+
+<div class="question-box" data-answer="no">
+    <div class="question-line">
+        <div class="sentence">The dog is sleeping under the desk.</div>
+        <div class="answer-box">answer</div>
+    </div>
+
+
+    <div class="choices">
+        <div class="choice yes">YES</div>
+        <div class="choice no">NO</div>
+    </div>
+
+
+    <div class="result correct">✓ Correct!</div>
+    <div class="result wrong">✗ Incorrect!</div>
+    <div class="translation">Nghĩa: Con chó đang ngủ dưới gầm bàn.</div>
+    <div class="result correct">Correct answer: <span class="no">NO</span></div>
+</div>
+
+
+    </div>
+    </div>
+<div style="text-align:center; margin-top:32px;">
+  <button id="resetTest" style="padding:12px 26px; font-size:16px; border-radius:14px; border:none; cursor:pointer; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; box-shadow:0 10px 24px rgba(0,0,0,0.25);">Reset bài tập</button>
+</div>
+<script nonce="NjM3MTQ4OTYxLDM5ODc4ODIwOTQ=">
+const STORAGE_KEY = 'skillbuilder_unit1_reading_part2_state';
+
+const PART_NUMBER = 2;
+const TOTAL_QUESTIONS = document.querySelectorAll('.question-box').length;
+
+function notifyParentDone(){
+  window.parent.postMessage({
+    type: "READING_PART_DONE",
+    part: PART_NUMBER
+  }, "*");
+}
+
+function notifyParentReset(){
+  window.parent.postMessage({
+    type: "READING_PART_RESET",
+    part: PART_NUMBER,
+    manual: true
+  }, "*");
+}
+
+
+function saveState(index, data) {
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  state[index] = data;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+  if (Object.keys(state).length === TOTAL_QUESTIONS) {
+    localStorage.setItem('skillbuilder_unit1_reading_part2_done','done');
+    notifyParentDone();
+  }
+}
+
+
+function loadState() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+
+
+function clearState() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+
+const savedState = loadState();
+
+
+document.querySelectorAll('.question-box').forEach((box, index) => {
+  let locked = false;
+
+
+  const answerBox = box.querySelector('.answer-box');
+  const choices = box.querySelector('.choices');
+  const yesBtn = box.querySelector('.yes');
+  const noBtn = box.querySelector('.no');
+  const correct = box.querySelector('.correct');
+  const wrong = box.querySelector('.wrong');
+  const translation = box.querySelector('.translation');
+  const correctAnswerBox = box.querySelectorAll('.result.correct')[1];
+  const correctAnswer = box.dataset.answer;
+
+
+  // Restore saved state
+  if (savedState[index]) {
+    const { selected } = savedState[index];
+    answerBox.innerHTML = selected === 'yes' ? '✓' : '✗';
+    answerBox.style.cursor = 'not-allowed';
+    answerBox.style.background = '#f0f0f0';
+    answerBox.style.borderColor = selected === 'yes' ? '#2ecc71' : '#e74c3c';
+    answerBox.style.color = selected === 'yes' ? '#2ecc71' : '#e74c3c';
+
+
+    translation.style.display = 'block';
+    correctAnswerBox.style.display = 'block';
+
+
+    if (selected === correctAnswer) {
+      correct.style.display = 'block';
+    } else {
+      wrong.style.display = 'block';
+    }
+
+
+    locked = true;
+  }
+
+
+  answerBox.onclick = (e) => {
+    if (locked) return;
+    e.stopPropagation();
+
+    // close other open choice panels
+    document.querySelectorAll('.choices').forEach(c => {
+      if (c !== choices) c.style.display = 'none';
+    });
+
+    // toggle this panel
+    if (choices.style.display === 'flex') {
+      choices.style.display = 'none';
+    } else {
+      choices.style.display = 'flex';
+    }
+  };
+
+
+  function choose(value) {
+    if (locked) return;
+
+
+    answerBox.innerHTML = value === 'yes' ? '✓' : '✗';
+    answerBox.style.cursor = 'not-allowed';
+    answerBox.style.background = '#f0f0f0';
+    answerBox.style.borderColor = value === 'yes' ? '#2ecc71' : '#e74c3c';
+    answerBox.style.color = value === 'yes' ? '#2ecc71' : '#e74c3c';
+
+
+    translation.style.display = 'block';
+    correctAnswerBox.style.display = 'block';
+
+
+    if (value === correctAnswer) {
+      correct.style.display = 'block';
+    } else {
+      wrong.style.display = 'block';
+    }
+
+
+    saveState(index, { selected: value });
+
+
+    choices.style.display = 'none';
+    locked = true;
+  }
+
+
+  yesBtn.onclick = (e) => {
+    e.stopPropagation();
+    choose('yes');
+  };
+
+  noBtn.onclick = (e) => {
+    e.stopPropagation();
+    choose('no');
+  };
+});
+
+document.addEventListener('click', () => {
+  document.querySelectorAll('.choices').forEach(c => {
+    c.style.display = 'none';
+  });
+});
+
+
+// Reset button
+document.getElementById('resetTest').onclick = () => {
+  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài tập?')) return;
+  clearState();
+  localStorage.removeItem('skillbuilder_unit1_reading_part2_done');
+  notifyParentReset();
+  location.reload();
+};
+</script>
+
+
+</div>
+</body>
+</html>

@@ -998,7 +998,7 @@ function fuzzyScore(query, text) {
 // (Đã xoá object skillLinks cũ)
 
 function getSkillLink(skill, examNumber, testNumber) {
-  const base = "https://baitapflyers.com/levels/starters/exams";
+  const base = "/levels/starters/exams";
   const skillSlug = skill.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-");
 
   return `${base}/exam-${examNumber}/test-${testNumber}/${skillSlug}.html`;
@@ -1171,7 +1171,7 @@ function showSkillbuilderSections(unitNumber) {
       skillSlug = "reading";
     }
 
-    const url = `levels/starters/exams/skill-builder/unit-${unitNumber}/${skillSlug}.html`;
+    const url = `/levels/starters/exams/skill-builder/unit-${unitNumber}/${skillSlug}.html`;
 
     card.onclick = () => {
       saveRecentLesson({

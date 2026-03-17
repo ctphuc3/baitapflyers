@@ -81,10 +81,11 @@ function getMousePos(canvas,evt){
 }
 
 const img = new Image();
-img.src = "../assets/listening/part1/p1.png";
+const BASE = "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/";
+img.src = BASE + "assets/listening/part1/p1.png";
 
 const answerImg = new Image();
-answerImg.src = "../assets/listening/part1/p1_answer.png";
+answerImg.src = BASE + "assets/listening/part1/p1_answer.png";
 
 function saveToStorage(){
   const state = {

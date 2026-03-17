@@ -42,7 +42,7 @@
 
     <div class="audio-box">
       <audio id="audioPlayer" controls preload="auto" playsinline controlslist="nodownload">
-        <source src="../assets/listening/part4/skillbuilder-unit1-4.mp3" type="audio/mpeg">
+        <source src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part4/skillbuilder-unit1-4.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -219,11 +219,13 @@ if (audioEl && answerBtn) {
     usage.classList.toggle("collapsed");
   }
 
+  const BASE = "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/";
+
   const img = new Image();
-  img.src = "../assets/listening/part4/p4.png";
+  img.src = BASE + "assets/listening/part4/p4.png";
 
   const answerImg = new Image();
-  answerImg.src = "../assets/listening/part4/p4_answer.png";
+  answerImg.src = BASE + "assets/listening/part4/p4_answer.png";
   // Khi ảnh đáp án load xong thì luôn resize và vẽ lại canvas
   // Không phụ thuộc vào việc ảnh nền đã load trước hay chưa
   answerImg.onload = () => {

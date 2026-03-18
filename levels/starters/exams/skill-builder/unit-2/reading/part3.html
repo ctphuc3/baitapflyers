@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skills builder - Unit 2 - Reading & Writing part 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.8;
+            padding: 10px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+
+        h2 {
+            margin-bottom: 6px;
+        }
+
+
+        h3 {
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+
+        .question-box {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            padding: 26px 24px 28px 24px;
+            border-radius: 18px;
+            margin-top: 20px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+        }
+
+
+        .image-frame{
+            background: #ffffff;
+            padding: 16px;
+            border-radius: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 14px;
+        }
+
+        .image-frame img{
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            border: none;
+            display: block;
+        }
+
+
+        .letter-boxes {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+
+        .letter-input {
+            width: 40px;
+            height: 44px;
+            text-align: center;
+            font-size: 20px;
+            border: none;
+            border-bottom: 3px solid #333;
+            outline: none;
+        }
+
+
+        .letter-input:disabled {
+            background: #f0f0f0;
+        }
+
+
+        .check-btn {
+            margin-top: 14px;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #3498db;
+            color: #fff;
+            font-weight: bold;
+        }
+
+
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+
+
+        .correct {
+            color: #2e7d32;
+        }
+
+
+        .wrong {
+            color: #c0392b;
+        }
+
+
+        .correct-letters {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+
+        .correct-letter {
+            width: 40px;
+            height: 44px;
+            text-align: center;
+            font-size: 20px;
+            border-bottom: 3px solid;
+            font-weight: bold;
+        }
+
+
+        .correct-letter.correct {
+            color: #2e7d32;
+            border-color: #2e7d32;
+        }
+
+
+.correct-letter.wrong {
+    color: #c0392b;
+    border-color: #c0392b;
+}
+
+.example-label{
+  font-weight:700;
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.questions-label{
+  font-weight:700;
+  font-size:18px;
+  margin:20px 0 6px 0;
+}
+
+.example-box{
+  width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.question-number{
+  position:absolute;
+  top:8px;
+  left:10px;
+  font-weight:bold;
+  font-size:16px;
+  color:#374151;
+}
+
+
+    body {
+      background: linear-gradient(135deg, #eaf2ff, #fdfefe);
+    }
+
+    /* ===== HEADER BAR STYLES (same as Part 2) ===== */
+    .header-bar {
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .header-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e88e5;
+      letter-spacing: 0.4px;
+      margin: 0 0 10px 0;
+    }
+
+    .header-pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+      color: #1a4fa3;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+    }
+
+    .instruction-line {
+      margin-top: 12px;
+      margin-bottom: 24px;
+      font-size: 17px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+
+    .question-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
+    .question-box img {
+      margin-bottom: 10px;
+    }
+
+
+    .letter-boxes {
+      justify-content: center;
+    }
+
+
+    .correct-letters {
+      justify-content: center;
+    }
+
+
+    .check-btn {
+      margin-top: 12px;
+    }
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="header-bar">
+  <div class="header-pill">Reading & Writing, Part 3</div>
+</div>
+
+
+<div class="instruction-line">
+  Look at the pictures. Look at the letters. Write the words.
+</div>
+
+
+<div class="example-label">Example</div>
+
+<div class="question-box example-box" data-answer="bird" style="position:relative;">
+    <div class="image-frame">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/reading/part3/p3_t1.png" alt="bird">
+    </div>
+    <div class="letter-boxes">
+        <input class="letter-input" value="b" disabled maxlength="1" autocomplete="off">
+        <input class="letter-input" value="i" disabled maxlength="1" autocomplete="off">
+        <input class="letter-input" value="r" disabled maxlength="1" autocomplete="off">
+        <input class="letter-input" value="d" disabled maxlength="1" autocomplete="off">
+    </div>
+    <div class="correct-letters" style="display:none"></div>
+    <div class="result correct" style="display:block;">✓ Correct! The word is <b>bird</b>.</div>
+    <div class="result wrong" style="display:none;">✗ The correct word is <b>bird</b>.</div>
+</div>
+
+<div class="questions-label">Questions</div>
+<div class="questions-grid">
+
+
+
+
+<!-- QUESTION 1 -->
+<div class="question-box" data-answer="sheep" style="position:relative;">
+<div class="question-number">1</div>
+    <div class="image-frame">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/reading/part3/p3_t2.png" alt="sheep">
+    </div>
+    <div class="letter-boxes">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+    </div>
+
+    <div class="correct-letters" style="display:none"></div>
+
+    <button class="check-btn">Check</button>
+    <div class="result correct">✓ Correct! The word is <b>sheep</b>.</div>
+    <div class="result wrong">✗ The correct word is <b>sheep</b>.</div>
+</div>
+
+
+<!-- QUESTION 2 -->
+<div class="question-box" data-answer="zebra" style="position:relative;">
+<div class="question-number">2</div>
+    <div class="image-frame">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/reading/part3/p3_t3.png" alt="zebra">
+    </div>
+    <div class="letter-boxes">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+    </div>
+
+    <div class="correct-letters" style="display:none"></div>
+
+    <button class="check-btn">Check</button>
+    <div class="result correct">✓ Correct! The word is <b>zebra</b>.</div>
+    <div class="result wrong">✗ The correct word is <b>zebra</b>.</div>
+</div>
+
+
+<!-- QUESTION 3 -->
+<div class="question-box" data-answer="tiger" style="position:relative;">
+<div class="question-number">3</div>
+    <div class="image-frame">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/reading/part3/p3_t4.png" alt="tiger">
+    </div>
+    <div class="letter-boxes">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+    </div>
+
+    <div class="correct-letters" style="display:none"></div>
+
+    <button class="check-btn">Check</button>
+    <div class="result correct">✓ Correct! The word is <b>tiger</b>.</div>
+    <div class="result wrong">✗ The correct word is <b>tiger</b>.</div>
+</div>
+
+
+<!-- QUESTION 4 -->
+<div class="question-box" data-answer="chicken" style="position:relative;">
+<div class="question-number">4</div>
+    <div class="image-frame">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/reading/part3/p3_t5.png" alt="chicken">
+    </div>
+    <div class="letter-boxes">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+    </div>
+
+
+    <div class="correct-letters" style="display:none"></div>
+
+
+    <button class="check-btn">Check</button>
+    <div class="result correct">✓ Correct! The word is <b>chicken</b>.</div>
+    <div class="result wrong">✗ The correct word is <b>chicken</b>.</div>
+</div>
+
+
+<!-- QUESTION 5 -->
+<div class="question-box" data-answer="goat" style="position:relative;">
+<div class="question-number">5</div>
+    <div class="image-frame">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/reading/part3/p3_t6.png" alt="goat">
+    </div>
+    <div class="letter-boxes">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+        <input class="letter-input" maxlength="1" autocomplete="off">
+    </div>
+
+    <div class="correct-letters" style="display:none"></div>
+
+    <button class="check-btn">Check</button>
+    <div class="result correct">✓ Correct! The word is <b>goat</b>.</div>
+    <div class="result wrong">✗ The correct word is <b>goat</b>.</div>
+</div>
+
+
+</div>
+
+
+<div style="text-align:center; margin-top:32px;">
+  <button id="resetTest" style="padding:12px 28px; font-size:16px; border-radius:16px; border:none; cursor:pointer; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; box-shadow:0 10px 24px rgba(0,0,0,0.25);">Reset bài tập</button>
+</div>
+
+
+<script nonce="Mjc0MjAwNTAxLDI0ODg1MDY3NDc=">
+
+const STORAGE_KEY = 'skillbuilder_unit2_reading_part3_state';
+const PART_NUMBER = 3;
+const TOTAL_QUESTIONS = document.querySelectorAll('.question-box:not(.example-box)').length;
+
+function notifyParentDone() {
+  window.parent.postMessage({
+    type: "READING_PART_DONE",
+    part: PART_NUMBER
+  }, "*");
+}
+
+function notifyParentReset() {
+  window.parent.postMessage({
+    type: "READING_PART_RESET",
+    part: PART_NUMBER,
+    manual: true
+  }, "*");
+}
+
+
+function saveState(index, value) {
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  state[index] = value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+  if (Object.keys(state).length === TOTAL_QUESTIONS) {
+    localStorage.setItem('skillbuilder_unit2_reading_part3_done','done');
+    notifyParentDone();
+  }
+}
+
+
+function loadState() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+
+
+function clearState() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+
+const saved = loadState();
+
+
+document.querySelectorAll('.question-box:not(.example-box)').forEach((box, qIndex) => {
+  const inputs = box.querySelectorAll('.letter-input');
+  const correctRow = box.querySelector('.correct-letters');
+  const btn = box.querySelector('.check-btn');
+  const correctMsg = box.querySelector('.correct');
+  const wrongMsg = box.querySelector('.wrong');
+  const answer = box.dataset.answer;
+
+  if (!btn) return;
+
+  if (saved[qIndex] && btn) {
+    const value = saved[qIndex];
+    value.split('').forEach((ch, i) => {
+      if (inputs[i]) inputs[i].value = ch;
+    });
+    btn.click();
+  }
+
+
+  btn.addEventListener('click', () => {
+    let userAnswer = '';
+    inputs.forEach(i => userAnswer += i.value.toLowerCase());
+
+
+    if (userAnswer === answer) {
+      correctMsg.style.display = 'block';
+      wrongMsg.style.display = 'none';
+    } else {
+      wrongMsg.style.display = 'block';
+      correctMsg.style.display = 'none';
+
+
+      correctRow.innerHTML = '';
+      answer.split('').forEach((char, index) => {
+        const span = document.createElement('div');
+        span.className = 'correct-letter';
+        span.textContent = char;
+
+
+        if (inputs[index] && inputs[index].value.toLowerCase() === char) {
+          span.classList.add('correct');
+        } else {
+          span.classList.add('wrong');
+        }
+        correctRow.appendChild(span);
+      });
+      correctRow.style.display = 'flex';
+    }
+
+
+    saveState(qIndex, userAnswer);
+
+
+    inputs.forEach(i => i.disabled = true);
+    btn.disabled = true;
+    btn.style.opacity = 0.6;
+    btn.style.cursor = 'not-allowed';
+  });
+
+
+  inputs.forEach((input, index) => {
+
+    // ensure only 1 character and auto move to next box
+    input.addEventListener('input', (e) => {
+
+      let value = input.value.replace(/[^a-zA-Z]/g, '').toLowerCase();
+
+      if (value.length > 1) value = value.charAt(0);
+
+      input.value = value;
+
+      if (value !== '' && inputs[index + 1]) {
+        inputs[index + 1].focus();
+      }
+
+    });
+
+
+    // handle backspace moving to previous box
+    input.addEventListener('keydown', (e) => {
+
+      if (e.key === 'Backspace' && input.value === '' && inputs[index - 1]) {
+        inputs[index - 1].focus();
+      }
+
+    });
+
+
+    // paste full word support
+    input.addEventListener('paste', (e) => {
+
+      e.preventDefault();
+
+      const text = (e.clipboardData || window.clipboardData)
+        .getData('text')
+        .replace(/[^a-zA-Z]/g,'')
+        .toLowerCase();
+
+      if (!text) return;
+
+      let current = index;
+
+      text.split('').forEach(letter => {
+        if (inputs[current]) {
+          inputs[current].value = letter;
+          current++;
+        }
+      });
+
+      if (inputs[current]) inputs[current].focus();
+
+    });
+
+  });
+});
+
+
+// reset
+document.getElementById('resetTest').onclick = () => {
+  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài tập?')) return;
+  clearState();
+  notifyParentReset();
+  location.reload();
+};
+</script>
+
+
+
+
+
+
+</body>
+</html>

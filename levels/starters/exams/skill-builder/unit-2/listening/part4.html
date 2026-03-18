@@ -2,24 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Skill Builder Unit 1 Listening 4</title>
+<title>Skills Builder Unit 2 Listening 4</title>
 
 <link rel="stylesheet" href="../../../../css/starters-listening/part4.css">
 
 <style>
 :root{
 
---answer1-bg: rgba(239,235,233,0.50);
---answer2-bg: rgba(255,243,224,0.50);
---answer3-bg: rgba(252,228,236,0.50);
---answer4-bg: rgba(227,242,253,0.50);
---answer5-bg: rgba(245,245,245,0.50);
+--answer1-bg: rgba(156,39,176,0.15);
+--answer2-bg: rgba(76,175,80,0.15);
+--answer3-bg: rgba(33,150,243,0.15);
+--answer4-bg: rgba(233,30,99,0.15);
+--answer5-bg: rgba(255,235,59,0.20);
 
---answer1-pill: linear-gradient(180deg,#d7c9c4,#b8a7a0);
---answer2-pill: linear-gradient(180deg,#ffe0b2,#ffcc80);
---answer3-pill: linear-gradient(180deg,#f8bbd0,#f48fb1);
---answer4-pill: linear-gradient(180deg,#90caf9,#64b5f6);
---answer5-pill: linear-gradient(180deg,#e0e0e0,#cfcfcf);
+--answer1-pill: linear-gradient(180deg,#ce93d8,#ab47bc);
+--answer2-pill: linear-gradient(180deg,#a5d6a7,#66bb6a);
+--answer3-pill: linear-gradient(180deg,#90caf9,#42a5f5);
+--answer4-pill: linear-gradient(180deg,#f48fb1,#ec407a);
+--answer5-pill: linear-gradient(180deg,#fff59d,#fdd835);
 
 }
 </style>
@@ -42,7 +42,7 @@
 
     <div class="audio-box">
       <audio id="audioPlayer" controls preload="auto" playsinline controlslist="nodownload">
-        <source src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part4/skillbuilder-unit1-4.mp3" type="audio/mpeg">
+        <source src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part4/skillbuilder-unit2-4.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -219,7 +219,7 @@ if (audioEl && answerBtn) {
     usage.classList.toggle("collapsed");
   }
 
-  const BASE = "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/";
+  const BASE = "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/";
 
   const img = new Image();
   img.src = BASE + "assets/listening/part4/p4.png";
@@ -455,7 +455,7 @@ function resetCanvas() {
 
     // 6. Xóa toàn bộ dữ liệu lưu
     localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem('skillbuilder_unit1_listening_part4_done');
+    localStorage.removeItem('skillbuilder_unit2_listening_part4_done');
 
     // 🔔 THÔNG BÁO FILE CHA: PART 4 ĐÃ RESET
     window.parent.postMessage({
@@ -538,7 +538,7 @@ function toggleAnswer() {
   answerBtn.classList.remove("audio-finished");
   // change icon to unlocked lock after clicking
   answerBtn.textContent = "🔓";
-  localStorage.setItem('skillbuilder_unit1_listening_part4_done', 'true');
+  localStorage.setItem('skillbuilder_unit2_listening_part4_done', 'true');
   // notify parent listening page (ĐÚNG LOGIC: SHOW_ANSWER)
   try {
     window.parent.postMessage(
@@ -563,21 +563,17 @@ function showExplain(n) {
   tabs[n - 1].classList.add("active");
 
   const explainScripts = {
-    1: "Woman: OK. Now, can you see the hat on the chair?\nGirl: Sorry? The hat on the chair?\nWoman: Yes. Have you got a brown pencil?\nGirl: Yes, I have.\nWoman: Colour it with that pencil, please.",
-
-    2: "Woman: There’s a hat in front of the boxes.\nGirl: I can see it.\nWoman: Colour that hat now, please.\nGirl: What colour for the hat in front of the boxes?\nWoman: Would you like to colour it orange?",
-
-    3: "Girl: What now?\nWoman: Hmm … colour the hat in the woman’s hand.\nGirl: The hat in the woman’s hand … OK!\nWoman: You can choose the colour.\nGirl: Pink! I love that colour!\nWoman: Me, too!",
-
-    4: "Woman: Can you see the hat behind the dresses?\nGirl: Yes, I can.\nWoman: Good. Make that hat blue.\nGirl: OK! I’m colouring that hat… the one behind the dresses, now.\nWoman: Great!",
-
-    5: "Girl: Which hat can I colour now?\nWoman: The one next to the handbag. Colour that one.\nGirl: Can I make it grey?\nWoman: Yes. Thank you!"
+    1: "Man: Now, colour the flowers under the tree – can you see them?\nBoy: The flowers under the tree … yes!\nMan: Yes. Have you got a purple pencil?\nBoy: Yes, I have.\nMan: Great! Colour them with that pencil, then.",
+    2: "Man: There are some flowers on the car.\nBoy: Yes, I can see them.\nMan: Great. Colour those flowers now.\nBoy: What colour for the flowers on the car?\nMan: Would you like to colour them green?\nBoy: OK!",
+    3: "Man: Now, find the flowers between the tree and the wall.\nBoy: Pardon? The flowers between the tree and the wall?\nMan: Yes. You can choose the colour.\nBoy: Cool! I choose blue! It’s my favourite colour!\nMan: I like it, too.",
+    4: "Man: Can you see the flowers in front of the man?\nBoy: Yes, I can.\nMan: Good. Make those flowers pink.\nBoy: OK. I’m colouring the flowers… in front of the man, now.\nMan: Well done!",
+    5: "Boy: Which flowers can I colour now?\nMan: Do you see the ones behind the cat? Colour those!\nBoy: Can I make them yellow?\nMan: OK. What a nice garden!"
   };
 
   let script = explainScripts[n] || "";
 
   // Bold speaker names
-  script = script.replace(/(Woman:|Girl:)/g, '<strong>$1</strong>');
+  script = script.replace(/(Man:|Boy:)/g, '<strong>$1</strong>');
 
   // Convert line breaks to <br>
   script = script.replace(/\n/g, '<br>');

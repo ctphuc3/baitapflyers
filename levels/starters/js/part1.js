@@ -80,12 +80,8 @@ function getMousePos(canvas,evt){
   };
 }
 
-const img = new Image();
-const BASE = "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/";
-img.src = BASE + "assets/listening/part1/p1.png";
-
-const answerImg = new Image();
-answerImg.src = BASE + "assets/listening/part1/p1_answer.png";
+const img = document.getElementById("questionImage");
+const answerImg = document.getElementById("answerImage");
 
 function saveToStorage(){
   const state = {
@@ -278,7 +274,11 @@ window.addEventListener("load",()=>{
   updateArrowCounter();
 });
 
-img.onload = resizeCanvases;
+if (img.complete) {
+  resizeCanvases();
+} else {
+  img.onload = resizeCanvases;
+}
 
 let explainData = {};
 const explainNode = document.getElementById("explainData");

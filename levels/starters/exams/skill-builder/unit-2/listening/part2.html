@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Skills Builder Unit 2 Listening 2</title>
+
+<link rel="stylesheet" href="../../../../css/starters-listening/part2.css">
+</head>
+
+<body>
+
+<div class="wrapper">
+<div class="header-bar">
+  <div class="header-pill">Listening, Part 2</div>
+</div>
+
+<div class="instruction-line">
+Read the question. Listen and write a name or a number. There are two examples.
+</div>
+<div id="progressBar" style="display:none;"></div>
+
+<div class="content-layout">
+
+  <div class="left-panel">
+    <div class="audio-box">
+      <div class="audio-panel">
+        <div class="audio-label">🎧 Listen</div>
+        <audio id="mainAudio" controls preload="auto" playsinline controlslist="nodownload">
+          <source src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part2/skillbuilder-unit2-2.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part2/p2.png" class="main-image" alt="classroom picture">
+  </div>
+
+  <div class="right-panel">
+
+<!-- EXAMPLES -->
+<div class="example">
+<h3>Examples</h3>
+<p>What's the boy's name? → <b>Bill</b></p>
+<p>How old is he? → <b>8</b></p>
+</div>
+
+<!-- QUESTIONS -->
+<div id="questions"></div>
+
+</div>
+</div>
+
+<div class="reset-box">
+  <button onclick="resetTest()">Reset bài</button>
+</div>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    q: "1. What’s Bill’s family name?",
+    answer: ["white"],
+    script: `Man: Great. What’s your family name?
+Boy: White.
+Man: White? Like the colour?
+Boy: Yes. W-H-I-T-E.
+Man: Right.`
+  },
+  {
+    q: "2. Where does Bill live?<br>in ______ Street",
+    answer: ["garden"],
+    script: `Man: Where do you live, Bill?
+Boy: In Garden Street. Next to the school.
+Man: Garden Street?
+Boy: Yes. G-A-R-D-E-N.
+Man: OK.`
+  },
+  {
+    q: "3. What number is Bill’s house?",
+    answer: ["7","seven"],
+    script: `Man: What number is your house?
+Boy: Number seven.
+Man: Seven ... oh, is it beside the sweet shop?
+Boy: Yes, it is.`
+  },
+  {
+    q: "4. What is his friend’s name?",
+    answer: ["mark"],
+    script: `Man: Is that your friend? The boy in the blue shorts?
+Boy: Yes. His name is Mark.
+Man: Mark? Is that M-A-R-K?
+Boy: Yes. He wants to learn baseball, too.`
+  },
+  {
+    q: "5. How old is Bill’s friend?",
+    answer: ["9","nine"],
+    script: `Man: How old is Mark?
+Boy: He’s nine.
+Man: Nine. OK. Ask him to come here, please.
+Boy: OK, Mr Page.`
+  }
+];
+
+const TOTAL_QUESTIONS = DATA.length;
+let answeredSet = new Set();
+let doneSent = false;
+const DONE_KEY = "skillbuilder_unit2_listening_part2_done";
+
+const STORAGE_KEY = "skillbuilder_unit2_listening_part2_state";
+const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+const container = document.getElementById("questions");
+const progressBar = document.getElementById('progressBar');
+function updateProgress(){
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  const answeredCount = Object.values(state)
+    .filter(v => v && v.answered && (v.value ?? '').toString().trim() !== '')
+    .length;
+
+  progressBar.textContent = `Answered: ${answeredCount} / ${DATA.length}`;
+
+  // ===== DONE EVENT – NGUỒN SỰ THẬT DUY NHẤT =====
+  if (answeredCount === TOTAL_QUESTIONS && !localStorage.getItem(DONE_KEY)) {
+    localStorage.setItem(DONE_KEY, 'true');
+    window.parent.postMessage({
+      type: 'LISTENING_PART_DONE',
+      part: 2
+    }, '*');
+  }
+}
+updateProgress();
+
+// Only resend DONE if state is truly complete
+const stateOnLoad = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+const answeredOnLoad = Object.values(stateOnLoad)
+  .filter(v => v && v.answered && (v.value ?? '').toString().trim() !== '')
+  .length;
+
+if (answeredOnLoad === TOTAL_QUESTIONS && localStorage.getItem(DONE_KEY)) {
+  window.parent.postMessage({
+    type: 'LISTENING_PART_DONE',
+    part: 2
+  }, '*');
+}
+
+DATA.forEach((item, i) => {
+  const div = document.createElement("div");
+  div.className = "question";
+
+  let questionHtml = item.q;
+  let inline = false;
+
+  if (questionHtml.includes("______")) {
+    inline = true;
+    questionHtml = questionHtml.replace("______", "<input type='text' class='inline-input'>");
+  }
+
+  div.innerHTML = `
+    <h3>${questionHtml}</h3>
+    <div class="answer-row">
+      ${inline ? "" : "<input type='text'>"}
+      <button class="show-answer">🔑</button>
+      <button class="script-btn">🎧</button>
+    </div>
+    <div class="result"></div>
+    <div class="script-box"></div>
+  `;
+
+  const input = div.querySelector("input");
+  const answerBtn = div.querySelector(".show-answer");
+  answerBtn.disabled = true;
+  answerBtn.classList.remove("enabled");
+  answerBtn.style.cursor = "not-allowed";
+  const scriptBtn = div.querySelector(".script-btn");
+  scriptBtn.disabled = true;
+  scriptBtn.style.cursor = "not-allowed";
+  const result = div.querySelector(".result");
+  const scriptBox = div.querySelector(".script-box");
+
+  input.addEventListener("input", () => {
+    if (input.value.trim() !== "") {
+      answerBtn.disabled = false;
+      answerBtn.classList.add("enabled");
+      answerBtn.style.cursor = "pointer";
+    } else {
+      answerBtn.disabled = true;
+      answerBtn.classList.remove("enabled");
+      answerBtn.style.cursor = "not-allowed";
+    }
+  });
+
+  answerBtn.onclick = () => {
+    if (input.value.trim() === "") return;
+    const user = input.value.trim().toLowerCase();
+    input.disabled = true;
+    answerBtn.disabled = true;
+    answerBtn.classList.remove("enabled");
+
+    if (item.answer.includes(user)) {
+      result.textContent = "✓ Correct";
+      result.className = "result correct";
+    } else {
+      result.textContent = "✗ Correct answer: " + item.answer[0];
+      result.className = "result wrong";
+    }
+    result.style.display = "block";
+
+    scriptBtn.disabled = false;
+    scriptBtn.style.cursor = "pointer";
+
+    saved[i] = { value: user, answered: true, scriptShown: false };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    answeredSet.add(i);
+    updateProgress(); // DONE sẽ được check ở đây
+  };
+
+  scriptBtn.onclick = () => {
+    if (!saved[i] || !saved[i].answered) return;
+    scriptBox.innerHTML = item.script
+      .replaceAll("\\n", "<br>")
+      .replaceAll("Man:", "<strong>Man:</strong>")
+      .replaceAll("Woman:", "<strong>Woman:</strong>")
+      .replaceAll("Girl:", "<strong>Girl:</strong>")
+      .replaceAll("Boy:", "<strong>Boy:</strong>");
+    scriptBox.style.display = "block";
+    scriptBtn.disabled = true;
+    if (saved[i]) {
+      saved[i].scriptShown = true;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    }
+  };
+
+  if (saved[i] && saved[i].value) {
+    const user = saved[i].value;
+    input.value = user;
+    input.disabled = true;
+    answerBtn.disabled = true;
+    answerBtn.classList.remove("enabled");
+
+    if (item.answer.includes(user)) {
+      result.textContent = "✓ Correct";
+      result.className = "result correct";
+    } else {
+      result.textContent = "✗ Correct answer: " + item.answer[0];
+      result.className = "result wrong";
+    }
+    result.style.display = "block";
+
+    if (saved[i].answered) {
+      answeredSet.add(i);
+      scriptBtn.disabled = false;
+      scriptBtn.style.cursor = "pointer";
+    }
+    if (saved[i].scriptShown) {
+      scriptBox.innerHTML = item.script
+        .replaceAll("\\n", "<br>")
+        .replaceAll("Man:", "<strong>Man:</strong>")
+        .replaceAll("Woman:", "<strong>Woman:</strong>")
+        .replaceAll("Girl:", "<strong>Girl:</strong>")
+        .replaceAll("Boy:", "<strong>Boy:</strong>");
+      scriptBox.style.display = 'block';
+      scriptBtn.disabled = true;
+    }
+  }
+
+  container.appendChild(div);
+});
+
+function resetTest() {
+  if (!confirm("Reset toàn bộ bài?")) return;
+
+  // clear storage
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(DONE_KEY);
+
+  // notify parent immediately
+  window.parent.postMessage({
+    type: 'PART_RESET',
+    part: 2
+  }, '*');
+
+  // reset internal state
+  answeredSet.clear();
+  for (let key in saved) {
+    delete saved[key];
+  }
+
+  // reset UI without reloading
+  document.querySelectorAll('.question').forEach(q => {
+    const input = q.querySelector('input');
+    const answerBtn = q.querySelector('.show-answer');
+    const scriptBtn = q.querySelector('.script-btn');
+    const result = q.querySelector('.result');
+    const scriptBox = q.querySelector('.script-box');
+
+    input.value = '';
+    input.disabled = false;
+
+    answerBtn.disabled = true;
+    answerBtn.classList.remove('enabled');
+    answerBtn.style.cursor = 'not-allowed';
+
+    scriptBtn.disabled = true;
+    scriptBtn.style.cursor = 'not-allowed';
+
+    result.style.display = 'none';
+    scriptBox.style.display = 'none';
+  });
+
+  progressBar.textContent = `Answered: 0 / ${TOTAL_QUESTIONS}`;
+}
+</script>
+
+</body>
+</html>

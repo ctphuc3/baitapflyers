@@ -1,0 +1,42 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part4/skillbuilder-unit2-4.mp3",
+
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part4/p4.png",
+
+  "answerImage": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part4/p4_answer.png",
+
+  "colors": {
+    "1": {
+      "bg": "rgba(156,39,176,0.15)",
+      "pill": "linear-gradient(180deg,#ce93d8,#ab47bc)"
+    },
+    "2": {
+      "bg": "rgba(76,175,80,0.15)",
+      "pill": "linear-gradient(180deg,#a5d6a7,#66bb6a)"
+    },
+    "3": {
+      "bg": "rgba(33,150,243,0.15)",
+      "pill": "linear-gradient(180deg,#90caf9,#42a5f5)"
+    },
+    "4": {
+      "bg": "rgba(233,30,99,0.15)",
+      "pill": "linear-gradient(180deg,#f48fb1,#ec407a)"
+    },
+    "5": {
+      "bg": "rgba(255,235,59,0.20)",
+      "pill": "linear-gradient(180deg,#fff59d,#fdd835)"
+    }
+  },
+
+  "explanations": [
+    "Man: Now, colour the flowers under the tree – can you see them?\nBoy: The flowers under the tree … yes!\nMan: Yes. Have you got a purple pencil?\nBoy: Yes, I have.\nMan: Great! Colour them with that pencil, then.",
+
+    "Man: There are some flowers on the car.\nBoy: Yes, I can see them.\nMan: Great. Colour those flowers now.\nBoy: What colour for the flowers on the car?\nMan: Would you like to colour them green?\nBoy: OK!",
+
+    "Man: Now, find the flowers between the tree and the wall.\nBoy: Pardon? The flowers between the tree and the wall?\nMan: Yes. You can choose the colour.\nBoy: Cool! I choose blue! It’s my favourite colour!\nMan: I like it, too.",
+
+    "Man: Can you see the flowers in front of the man?\nBoy: Yes, I can.\nMan: Good. Make those flowers pink.\nBoy: OK. I’m colouring the flowers… in front of the man, now.\nMan: Well done!",
+
+    "Boy: Which flowers can I colour now?\nMan: Do you see the ones behind the cat? Colour those!\nBoy: Can I make them yellow?\nMan: OK. What a nice garden!"
+  ]
+}

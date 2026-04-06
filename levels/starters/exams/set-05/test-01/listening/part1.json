@@ -1,0 +1,12 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part1/skillbuilder-unit1-1.mp3",
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part1/p1.png",
+  "answerImage": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part1/p1_answer.png",
+  "explain": {
+    "1": "Woman: OK. Now, can you see the hat on the chair?\nGirl: Sorry? The hat on the chair?\nWoman: Yes. Have you got a brown pencil?\nGirl: Yes, I have.\nWoman: Colour it with that pencil, please.",
+    "2": "Boy: And there's Nick. He's got a camera in his hands.\nWoman: Is he taking a photo?\nBoy: Yes. Nick loves taking photos.\nWoman: That's nice.",
+    "3": "Woman: That's a beautiful guitar!\nBoy: Yes, that's Lucy's guitar.\nWoman: Is Lucy the girl in the green T-shirt?\nBoy: Yes, that's right.",
+    "4": "Woman: One person is fishing. What's his name?\nBoy: The boy in the boat?\nWoman: Yes.\nBoy: That's Hugo. Fishing is Hugo's favourite hobby.",
+    "5": "Woman: And what's that girl's name? The girl with the dog.\nBoy: That's my friend Jill. And that's her dog.\nWoman: It's very small. Is it very young?\nBoy: Yes, it is. But Jill loves it."
+  }
+}

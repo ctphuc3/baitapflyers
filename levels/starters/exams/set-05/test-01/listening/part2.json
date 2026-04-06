@@ -1,0 +1,41 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part2/skillbuilder-unit1-2.mp3",
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part2/p2.png",
+  "examples": [
+    {
+      "question": "What is the girl's name?",
+      "answer": "Anna"
+    },
+    {
+      "question": "How old is she?",
+      "answer": "7"
+    }
+  ],
+  "questions": [
+    {
+      "question": "1. What's Anna's family name?",
+      "answer": ["grey"],
+      "script": "Woman: What's your family name, please?\nGirl: It's Grey. G-R-E-Y.\nWoman: Grey? That's my friend's name, too.\nGirl: Is it?\nWoman: Yes."
+    },
+    {
+      "question": "2. Where does Anna live?<br>in ______ Street",
+      "answer": ["apple"],
+      "script": "Woman: Where do you live, Anna?\nGirl: In Apple Street.\nWoman: Apple Street?\nGirl: Yes. A-P-P-L-E. It's next to the park.\nWoman: Oh yes."
+    },
+    {
+      "question": "3. What number is Anna's house?",
+      "answer": ["12","twelve"],
+      "script": "Woman: What number's your house?\nGirl: It's twelve.\nWoman: Twelve? Is it the house with the two orange trees in the garden?\nGirl: Yes, it is. It's got a green door, too."
+    },
+    {
+      "question": "4. What's the name of Anna's brother?",
+      "answer": ["nick"],
+      "script": "Woman: Have you got a brother or a sister?\nGirl: Yes, I do. I've got a brother.\nWoman: That's nice. What's your brother's name?\nGirl: Nick.\nWoman: Nick? Is that N-I-C-K?\nGirl: Yes, that's right."
+    },
+    {
+      "question": "5. How old is Anna's brother?",
+      "answer": ["4","four"],
+      "script": "Woman: How old is your brother, Anna?\nGirl: He's four.\nWoman: Four? He's very young!\nGirl: Yes, he is. He can ride a bike, but he can't read or write.\nWoman: That's OK. He can learn."
+    }
+  ]
+}

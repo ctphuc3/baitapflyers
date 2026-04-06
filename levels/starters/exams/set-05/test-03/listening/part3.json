@@ -1,0 +1,121 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/skillbuilder-unit3-3.mp3",
+
+  "example": {
+    "question": "What’s Dan’s favourite hobby?",
+    "answer": "B",
+    "script": "Man: What’s Dan’s favourite hobby?\nBoy: He likes flying a kite.\nMan: Does he ride his bike?\nBoy: No, he doesn’t.\nMan: Does he skateboard?\nBoy: No. He loves his kite.",
+    "options": [
+      {
+        "choice": "A",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_e_a.png"
+      },
+      {
+        "choice": "B",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_e_b.png"
+      },
+      {
+        "choice": "C",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_e_c.png"
+      }
+    ]
+  },
+
+  "questions": [
+    {
+      "question": "What’s Hugo playing?",
+      "answer": "A",
+      "script": "Boy: Hello, Mrs White. Is Hugo here?\nWoman: Hi, Mark. Come in. Hugo is in the garden.\nBoy: Oh? Is he riding his bike or playing tennis?\nWoman: No, he’s playing football.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q1_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q1_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q1_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which picture is May looking at?",
+      "answer": "A",
+      "script": "Girl: What a nice photo! It’s you and your sister!\nBoy: Which one? Are we playing basketball?\nGirl: No, but you’re in the garden.\nBoy: Oh, yes. We’re playing tennis in that photo. We love tennis.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q2_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q2_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q2_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What's Pat doing?",
+      "answer": "B",
+      "script": "Man: Lucy, I can’t find the cat! Can you see her?\nGirl: She’s here, Dad. In the living room!\nMan: Oh. Is she sleeping?\nGirl: No, she’s playing with her favourite toy.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q3_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q3_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q3_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Where’s Mum?",
+      "answer": "B",
+      "script": "Girl: Mum, where are you?\nWoman: I’m here, Kim! I’m having lunch in the garden.\nGirl: Oh, there you are! Can I have some bread, too, please?\nWoman: Yes, here you are.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q4_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q4_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q4_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Where are Tom’s shoes?",
+      "answer": "C",
+      "script": "Woman: Tom, where are your brown shoes? They’re not in your bedroom.\nBoy: In the hall, Mum!\nWoman: Oh dear! They’re very dirty. Please clean them in the bathroom.\nBoy: OK, Mum.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q5_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q5_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part3/p3_q5_c.png"
+        }
+      ]
+    }
+  ]
+}

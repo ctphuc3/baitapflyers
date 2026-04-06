@@ -1,0 +1,41 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part2/skillbuilder-unit2-2.mp3",
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part2/p2.png",
+  "examples": [
+    {
+      "question": "What is the girl’s name?",
+      "answer": "Grace"
+    },
+    {
+      "question": "How old is she?",
+      "answer": "9"
+    }
+  ],
+  "questions": [
+    {
+      "question": "1. What is Grace’s family name?",
+      "answer": ["sand"],
+      "script": "Man: What is your family name, please?\nGirl: Sand.\nMan: Is that S-A-N-D?\nGirl: Yes, Sand. Like on a beach.\nMan: That’s a nice name."
+    },
+    {
+      "question": "2. Where does Grace live?<br>in ______ Street",
+      "answer": ["bath"],
+      "script": "Man: Where do you live, Grace?\nGirl: In Bath Street. B-A-T-H.\nMan: Bath Street?\nGirl: Yes. Mum says it’s a clean street.\nMan: That’s funny!"
+    },
+    {
+      "question": "3. What number is Grace’s house?",
+      "answer": ["1", "one"],
+      "script": "Man: And what number is your house?\nGirl: Number one.\nMan: One.\nGirl: Yes. We’ve got a red door."
+    },
+    {
+      "question": "4. What is the name of Grace’s lizard?",
+      "answer": ["night"],
+      "script": "Girl: I’ve got a lizard. I’d like a book about them, please.\nMan: What’s your lizard’s name?\nGirl: His name is Night.\nMan: N-I-G-H-T?\nGirl: Yes, he’s black. So, his name is Night.\nMan: Great."
+    },
+    {
+      "question": "5. How many books about lizards are there?",
+      "answer": ["5", "five"],
+      "script": "Girl: How many books about lizards are there?\nMan: Hmm … we’ve got five.\nGirl: Five!\nMan: Yes. There, on that bookcase.\nGirl: Thanks."
+    }
+  ]
+}

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skills builder - Unit 2 - Reading & Writing part 1</title>
+    <style>
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          line-height: 1.8;
+          margin: 0;
+          padding: 0px;
+          background: linear-gradient(135deg,#dff1ff,#f4f9ff 40%,#ffffff);
+        }
+
+        .wrapper {
+          max-width: 900px;
+          margin: 0 auto;
+          background: transparent;
+          backdrop-filter: none;
+          border-radius: 0;
+          padding: 10px 0 20px 0;
+          box-shadow: none;
+        }
+
+        h2 {
+            margin-bottom: 6px;
+        }
+
+        h3 {
+          margin-top: 32px;
+          margin-bottom: 16px;
+          font-weight: 700;
+          font-size: 22px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .question-box {
+          position: relative;
+          display: grid;
+          grid-template-columns: 160px 1fr;
+          align-items: center;
+          gap: 24px;
+          margin-top: 22px;
+          padding: 22px 24px;
+          border-radius: 18px;
+          background: rgba(255,255,255,0.92);
+          box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+          transition: transform .2s ease, box-shadow .2s ease;
+          height:100%;
+          min-height:150px;
+        }
+
+        .question-box:hover{
+          transform: translateY(-3px);
+          box-shadow: 0 18px 36px rgba(0,0,0,0.12);
+        }
+
+        .question-box img {
+          width: 150px;
+          border-radius: 12px;
+          border: none;
+          box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+        }
+
+        .sentence {
+          font-size:18px;
+          font-weight:500;
+          white-space:nowrap;
+        }
+
+        .answer-box {
+          width:48px;
+          height:48px;
+          border-radius:12px;
+          border:2px solid #2a6df4;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:22px;
+          cursor:pointer;
+          user-select:none;
+          transition:all .2s ease;
+          background:#ffffff;
+          margin-left:auto;
+        }
+
+        .answer-box:hover{
+          background:#f0f5ff;
+          transform:scale(1.05);
+        }
+
+        .choices {
+            display: none;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .choice {
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          cursor: pointer;
+          border: none;
+          background: #f3f7ff;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+
+        .tick {
+            background: #2ecc71;
+            color: #fff;
+        }
+
+        .cross {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .result {
+            margin-top:6px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .correct {
+            color: #2ecc71;
+        }
+
+        .wrong {
+            color: #e74c3c;
+        }
+
+        .translation {
+            margin-top:6px;
+            font-style: italic;
+            display: none;
+            color: #555;
+        }
+
+        .header-bar {
+          margin-bottom: 16px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+
+        .header-pill {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+        color: #1a4fa3;
+        font-size: 14px;
+        font-weight: 700;
+        box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+
+        .instruction-line {
+          margin-top: 10px;
+          margin-bottom: 26px;
+          font-size: 17px;
+          font-weight: 600;
+          color: #374151;
+        }
+
+        .example .answer-box {
+          background:#f0f0f0;
+          cursor:not-allowed;
+        }
+
+        .example .choices{
+          display:none !important;
+        }
+    /* Layout for examples (2 items horizontally) */
+    .examples-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      column-gap:40px;
+      row-gap:22px;
+      margin-top:20px;
+      margin-bottom:50px;
+      align-items:stretch;
+    }
+
+    .examples-grid .question-box{
+      margin-top:0;
+    }
+
+    /* Cambridge book column layout */
+    .paper-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      column-gap:40px;
+      row-gap:70px;
+      margin-top:22px;
+      align-items:stretch;
+    }
+
+    .paper-grid .question-box{
+      margin-top:0;
+      margin-bottom:20px;
+    }
+
+    /* Column layout like Cambridge book */
+    .paper-grid > .question-box:nth-of-type(1){grid-column:1;grid-row:1;} /* Example 1 */
+    .paper-grid > .question-box:nth-of-type(2){grid-column:1;grid-row:2;} /* Example 2 */
+    .paper-grid > .question-box:nth-of-type(3){grid-column:1;grid-row:3;} /* Question 1 */
+
+    .paper-grid > .question-box:nth-of-type(4){grid-column:2;grid-row:1;} /* Question 2 */
+    .paper-grid > .question-box:nth-of-type(5){grid-column:2;grid-row:2;} /* Question 3 */
+    .paper-grid > .question-box:nth-of-type(6){grid-column:2;grid-row:3;} /* Question 4 */
+    .paper-grid > .question-box:nth-of-type(7){grid-column:2;grid-row:4;} /* Question 5 */
+
+    </style>
+</head>
+
+<body>
+<div class="wrapper">
+
+<div class="header-bar">
+  <div class="header-pill">Reading & Writing, Part 1</div>
+</div>
+<div class="instruction-line">
+  Look and read. Put a tick (✓) or a cross (✗) in the box.
+</div>
+
+<!-- EXAMPLES -->
+<h3 style="margin-top:10px">Examples</h3>
+<div class="examples-grid">
+
+<div class="question-box example" data-answer="cross">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/reading/part1/p1_q1.png">
+    <div>
+        <div style="display:flex;align-items:center;width:100%;">
+          <div class="sentence">This is a book.</div>
+          <div class="answer-box">✓</div>
+        </div>
+        <div class="choices">
+            <div class="choice tick">✓</div>
+            <div class="choice cross">✗</div>
+        </div>
+        <div class="result correct">✓ Correct!</div>
+        <div class="result wrong">✗ Incorrect!</div>
+        <div class="translation">Nghĩa: Đây là một quyển sách.</div>
+        <div class="result correct">Correct answer: ✓</div>
+    </div>
+</div>
+
+<div class="question-box example" data-answer="tick">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/reading/part1/p1_q2.png">
+    <div>
+        <div style="display:flex;align-items:center;width:100%;">
+          <div class="sentence">These are pens.</div>
+          <div class="answer-box">✗</div>
+        </div>
+        <div class="choices">
+            <div class="choice tick">✓</div>
+            <div class="choice cross">✗</div>
+        </div>
+        <div class="result correct">✓ Correct!</div>
+        <div class="result wrong">✗ Incorrect!</div>
+        <div class="translation">Nghĩa: Đây là những cây bút.</div>
+        <div class="result correct">Correct answer: ✗</div>
+    </div>
+</div>
+</div>
+
+<!-- Question 1 inside paper-grid -->
+
+<!-- QUESTIONS -->
+<h3 style="margin-top:24px">Questions</h3>
+<div class="paper-grid">
+
+<div class="question-box" data-answer="cross">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/reading/part1/p1_q3.png">
+    <div>
+        <div style="display:flex;align-items:center;width:100%;">
+          <div class="sentence">This is a phone.</div>
+          <div class="answer-box">□</div>
+        </div>
+        <div class="choices">
+            <div class="choice tick">✓</div>
+            <div class="choice cross">✗</div>
+        </div>
+        <div class="result correct">✓ Correct!</div>
+        <div class="result wrong">✗ Incorrect!</div>
+        <div class="translation">Nghĩa: Đây là một cái điện thoại.</div>
+        <div class="result correct">Correct answer: ✗</div>
+    </div>
+</div>
+
+
+<div class="question-box" data-answer="tick">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/reading/part1/p1_q4.png">
+    <div>
+        <div style="display:flex;align-items:center;width:100%;">
+          <div class="sentence">These are sweets.</div>
+          <div class="answer-box">□</div>
+        </div>
+        <div class="choices">
+            <div class="choice tick">✓</div>
+            <div class="choice cross">✗</div>
+        </div>
+        <div class="result correct">✓ Correct!</div>
+        <div class="result wrong">✗ Incorrect!</div>
+        <div class="translation">Nghĩa: Đây là những viên kẹo.</div>
+        <div class="result correct">Correct answer: ✓</div>
+    </div>
+</div>
+
+<div class="question-box" data-answer="cross">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/reading/part1/p1_q5.png">
+    <div>
+        <div style="display:flex;align-items:center;width:100%;">
+          <div class="sentence">This is a cat.</div>
+          <div class="answer-box">□</div>
+        </div>
+        <div class="choices">
+            <div class="choice tick">✓</div>
+            <div class="choice cross">✗</div>
+        </div>
+        <div class="result correct">✓ Correct!</div>
+        <div class="result wrong">✗ Incorrect!</div>
+        <div class="translation">Nghĩa: Đây là một con mèo.</div>
+        <div class="result correct">Correct answer: ✗</div>
+    </div>
+</div>
+
+<div class="question-box" data-answer="tick">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/reading/part1/p1_q6.png">
+    <div>
+        <div style="display:flex;align-items:center;width:100%;">
+          <div class="sentence">This is a carrot.</div>
+          <div class="answer-box">□</div>
+        </div>
+        <div class="choices">
+            <div class="choice tick">✓</div>
+            <div class="choice cross">✗</div>
+        </div>
+        <div class="result correct">✓ Correct!</div>
+        <div class="result wrong">✗ Incorrect!</div>
+        <div class="translation">Nghĩa: Đây là một củ cà rốt.</div>
+        <div class="result correct">Correct answer: ✓</div>
+    </div>
+</div>
+
+<div class="question-box" data-answer="cross">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/reading/part1/p1_q7.png">
+    <div>
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div class="sentence">These are dogs.</div>
+          <div class="answer-box">□</div>
+        </div>
+        <div class="choices">
+            <div class="choice tick">✓</div>
+            <div class="choice cross">✗</div>
+        </div>
+        <div class="result correct">✓ Correct!</div>
+        <div class="result wrong">✗ Incorrect!</div>
+        <div class="translation">Nghĩa: Đây là những con chó.</div>
+        <div class="result correct">Correct answer: ✗</div>
+    </div>
+</div>
+
+    </div>
+</div>
+<div style="text-align:center; margin-top:30px;">
+  <button id="resetTest" style="padding:12px 24px; font-size:16px; border-radius:10px; border:none; cursor:pointer; background:#e74c3c; color:#fff;">Reset bài test</button>
+</div>
+
+<script>
+const STORAGE_KEY = 'skillbuilder_unit3_reading_part1_state';
+
+function saveState(index, data) {
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  state[index] = data;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadState() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+
+function clearState() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+
+const savedState = loadState();
+
+const TOTAL_QUESTIONS = document.querySelectorAll('.question-box:not(.example)').length;
+
+function checkPartDone() {
+  const state = loadState();
+  if (Object.keys(state).length === TOTAL_QUESTIONS) {
+    localStorage.setItem('skillbuilder_unit3_reading_part1_done','done');
+
+    window.parent.postMessage(
+      { type: "READING_PART_DONE", part: 1 },
+      "*"
+    );
+  }
+}
+
+document.querySelectorAll('.question-box:not(.example)').forEach((box, index) => {
+  let locked = false;
+  const answerBox = box.querySelector('.answer-box');
+  const choices = box.querySelector('.choices');
+  const correct = box.querySelector('.result.correct');
+  const wrong = box.querySelector('.result.wrong');
+  const translation = box.querySelector('.translation');
+  const correctAnswer = box.querySelectorAll('.result.correct')[1];
+  const realAnswer = box.dataset.answer;
+
+  // Restore saved state
+  if (savedState[index]) {
+    const { selected } = savedState[index];
+    answerBox.innerHTML = selected === 'tick' ? '✓' : '✗';
+    translation.style.display = 'block';
+    correctAnswer.style.display = 'block';
+    if (selected === realAnswer) {
+      correct.style.display = 'block';
+    } else {
+      wrong.style.display = 'block';
+    }
+    locked = true;
+    answerBox.style.cursor = 'not-allowed';
+    answerBox.style.background = '#f0f0f0';
+    checkPartDone();
+  }
+
+  answerBox.onclick = () => {
+    if (!locked) choices.style.display = 'flex';
+  };
+
+  box.querySelectorAll('.choice').forEach(choice => {
+    choice.onclick = () => {
+      if (locked) return;
+      const selected = choice.classList.contains('tick') ? 'tick' : 'cross';
+      answerBox.innerHTML = selected === 'tick' ? '✓' : '✗';
+
+      translation.style.display = 'block';
+      correctAnswer.style.display = 'block';
+
+      if (selected === realAnswer) {
+        correct.style.display = 'block';
+      } else {
+        wrong.style.display = 'block';
+      }
+
+      saveState(index, { selected });
+      checkPartDone();
+
+      choices.style.display = 'none';
+      locked = true;
+      answerBox.style.cursor = 'not-allowed';
+      answerBox.style.background = '#f0f0f0';
+    };
+  });
+});
+
+// Reset button
+document.getElementById('resetTest').onclick = () => {
+  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài test?')) return;
+
+  clearState();
+  localStorage.removeItem('skillbuilder_unit3_reading_part1_done');
+
+  location.reload();
+};
+</script>
+
+</div>
+</body>
+
+
+</html>

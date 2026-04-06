@@ -1,0 +1,41 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part2/skillbuilder-unit4-2.mp3",
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part2/p2.png",
+  "examples": [
+    {
+      "question": "What is the girl's name?",
+      "answer": "Kim"
+    },
+    {
+      "question": "How old is she?",
+      "answer": "11"
+    }
+  ],
+  "questions": [
+    {
+      "question": "1. What is Kim’s family name?",
+      "answer": ["cross"],
+      "script": "Man: What is your family name, Kim?\nGirl: Cross.\nMan: Can you spell that?\nGirl: C-R-O-S-S.\nMan: Thank you."
+    },
+    {
+      "question": "2. What is her brother’s name?",
+      "answer": ["pat"],
+      "script": "Man: What is your brother’s name?\nGirl: Pat.\nMan: P-A-T?\nGirl: Yes."
+    },
+    {
+      "question": "3. How old is her brother?",
+      "answer": ["6", "six"],
+      "script": "Man: How old is your brother?\nGirl: He is six.\nMan: Six?\nGirl: Yes."
+    },
+    {
+      "question": "4. Where does Kim live?<br>in ______ Street",
+      "answer": ["hall"],
+      "script": "Man: Where do you live?\nGirl: In Hall Street.\nMan: Can you spell Hall?\nGirl: H-A-L-L."
+    },
+    {
+      "question": "5. What number is Kim’s house?",
+      "answer": ["3", "three"],
+      "script": "Man: What number is your house?\nGirl: Number three.\nMan: Three. Thank you."
+    }
+  ]
+}

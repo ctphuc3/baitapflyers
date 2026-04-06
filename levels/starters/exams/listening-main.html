@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Starters – Listening</title>
+<style>
+*{
+  box-sizing:border-box;
+}
+body{
+  margin:0;
+  font-family:"Segoe UI", Arial, sans-serif;
+  background:linear-gradient(180deg,#eaf6ff,#f7fbff);
+}
+
+.wrapper{
+  width:100%;
+  max-width:100%;
+  min-height:100vh;
+  margin:0;
+  padding:16px 20px;
+  background:#fff;
+  border-radius:0;
+  box-shadow:none;
+  display:flex;
+  flex-direction:column;
+}
+
+h1{
+  text-align:center;
+  color:#3b82f6;
+  margin:0;
+  font-size:32px;
+}
+
+.main-layout{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  margin-top:16px;
+  flex:1;
+  min-height:0;
+}
+
+.part-panel{
+  background:#f5f9ff;
+  border-radius:18px;
+  padding:10px 14px;
+}
+
+
+.part-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.part-list li{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  padding:6px 16px;
+  border-radius:12px;
+  background:#eef4ff;
+  cursor:pointer;
+  font-size:14px;
+  transition: all 0.25s ease;
+  border:2px solid transparent;
+}
+
+.part-list li:hover{
+  background:#e3edff;
+  transform: translateY(-1px);
+}
+
+.part-list li.active{
+  background:#3b82f6;
+  color:#fff;
+  border-color:#2563eb;
+  transform: translateY(-2px);
+  box-shadow:0 6px 14px rgba(59,130,246,0.35);
+}
+
+.part-list li.active span{
+  color:#fff;
+}
+
+.part-list a{
+  font-weight:600;
+  color:#1e3a8a;
+  text-decoration:none;
+}
+
+
+
+.content-panel{
+  display:flex;
+  flex-direction:column;
+  min-height:0;
+}
+
+iframe{
+  flex:1;
+  width:100%;
+  max-width:100%;
+  min-height:720px;
+  border:none;
+  border-radius:18px;
+  box-shadow:0 14px 28px rgba(0,0,0,.10);
+}
+
+.submit-bar{
+  margin-top:20px;
+  text-align:center;
+}
+
+button{
+  padding:14px 32px;
+  border:none;
+  border-radius:999px;
+  background:#3b82f6;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+button:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <h1 id="title">Starters – Listening</h1>
+
+  <div class="main-layout">
+    <!-- LEFT: PART PANEL -->
+    <div class="part-panel">
+      <ul class="part-list">
+        <li onclick="loadPart(1)">
+          <span>Part 1</span>
+        </li>
+        <li onclick="loadPart(2)">
+          <span>Part 2</span>
+        </li>
+        <li onclick="loadPart(3)">
+          <span>Part 3</span>
+        </li>
+        <li onclick="loadPart(4)">
+          <span>Part 4</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- RIGHT: CONTENT -->
+    <div class="content-panel">
+      <iframe id="partFrame" sandbox="allow-scripts allow-same-origin" style="width:100%;height:720px;border:none;border-radius:18px;"></iframe>
+
+      <div class="submit-bar">
+        <button id="submitListening" disabled>Submit Listening</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function getContext(){
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    type: params.get("type"), // skill-builder | exam
+    unit: params.get("unit"),
+    skill: params.get("skill"),
+    set: params.get("set"),
+    test: params.get("test")
+  };
+}
+
+function getParams(){
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    set: params.get('set'),
+    test: params.get('test')
+  };
+}
+
+let params = getParams();
+let __INITIAL_LOAD_DONE__ = false;
+
+function loadPart(part){
+  // always refresh params (in case page loaded dynamically)
+  params = getParams();
+
+  console.log("Loading part with params:", params);
+
+  const frame = document.getElementById('partFrame');
+  const ctx = getContext();
+
+  let path = "";
+
+  // ===== SKILL BUILDER =====
+  if(ctx.type === "skill-builder"){
+    // skill-builder uses SAME part UI as exam, only different JSON (set=05)
+    path = `./listening/part${part}.html?type=skill-builder&set=${params.set}&test=${params.test}&part=${part}`;
+  }
+
+  // ===== EXAM =====
+  else{
+    path = `./listening/part${part}.html?set=${encodeURIComponent(params.set)}&test=${encodeURIComponent(params.test)}&part=${part}`;
+  }
+
+  const current = frame.getAttribute("src") || "";
+
+  if (current === path) {
+    console.log("Skip reload: same src");
+    return;
+  }
+
+  frame.dataset.currentPart = part;
+  frame.setAttribute("src", path);
+
+  highlightActivePart(part);
+}
+
+function getPartKey(part){
+  const ctx = getContext();
+
+  // ===== SKILL BUILDER =====
+  if(ctx.type === "skill-builder"){
+    return `unit${ctx.unit}_listening_part${part}`;
+  }
+
+  // ===== EXAM =====
+  return `set${params.set}_test${params.test}_listening_part${part}`;
+}
+
+let completed = 0;
+
+function recalcCompleted(){
+  completed = 0;
+}
+
+function resetPartUI(){
+  completed = 0;
+  [1,2,3,4].forEach(p=>{
+    const el = document.getElementById('p'+p);
+    if(el) el.classList.remove('done');
+  });
+}
+
+function initProgress(){
+  resetPartUI();
+
+  [1,2,3,4].forEach(p=>{
+    const key = getPartKey(p);
+    // disabled done state
+  });
+
+  // disabled submit lock
+}
+
+window.addEventListener('message', e => {
+  if (!e.data || !e.data.type) return;
+
+  if (e.data.type === 'LISTENING_PART_DONE') {
+    const part = e.data.part;
+    if(!part) return;
+
+    // removed localStorage and setDone calls
+    // disabled submit lock
+  }
+
+  if (e.data.type === 'PART_RESET') {
+    const part = e.data.part;
+    if(!part) return;
+
+    // removed localStorage removeItem and classList remove
+    recalcCompleted();
+  }
+
+  // disabled submit lock
+});
+
+window.addEventListener('storage', e => {
+  // disabled sync
+});
+
+function setDone(part){
+  // disabled
+}
+
+function unsetDone(part){
+  // disabled
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    params = getParams();
+    console.log("Initial params:", params);
+  initProgress();
+  const titleEl = document.getElementById('title');
+
+  const ctx = getContext();
+
+  // ===== AUTO FALLBACK FOR SKILL BUILDER =====
+  if ((!params.set || !params.test) && ctx.type === "skill-builder") {
+    params.set = "05";
+    params.test = String(ctx.unit).padStart(2, "0");
+  }
+
+  if (!params.set || !params.test) {
+    console.warn("Missing params, fallback applied");
+    titleEl.textContent = "Please open with ?set=05&test=01";
+    return;
+  }
+
+  if(ctx.type === "skill-builder"){
+    titleEl.textContent = `Starters – Unit ${ctx.unit} · Listening`;
+  }
+  else{
+    titleEl.textContent =
+      `Starters – Set ${params.set} · Test ${params.test} · Listening`;
+  }
+     // ✅ CHỈ LOAD 1 LẦN DUY NHẤT
+    if(!__INITIAL_LOAD_DONE__){
+      __INITIAL_LOAD_DONE__ = true;
+      loadPart(1);
+    }
+});
+
+function highlightActivePart(part){
+  document.querySelectorAll('.part-list li').forEach(li=>{
+    li.classList.remove('active');
+  });
+  const active = document.querySelector(`.part-list li:nth-child(${part})`);
+  if(active) active.classList.add('active');
+}
+
+/* wrapper removed because highlight is now handled inside loadPart */
+</script>
+</body>
+</html>

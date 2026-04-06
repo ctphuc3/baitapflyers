@@ -1,0 +1,42 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part4/skillbuilder-unit4-4.mp3",
+
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part4/p4.png",
+
+  "answerImage": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part4/p4_answer.png",
+
+  "colors": {
+    "1": {
+      "bg": "rgba(33,150,243,0.15)",
+      "pill": "linear-gradient(180deg,#ce93d8,#ab47bc)"
+    },
+    "2": {
+      "bg": "rgba(121,85,72,0.15)",
+      "pill": "linear-gradient(180deg,#a5d6a7,#66bb6a)"
+    },
+    "3": {
+      "bg": "rgba(255,235,59,0.20)",
+      "pill": "linear-gradient(180deg,#90caf9,#42a5f5)"
+    },
+    "4": {
+      "bg": "rgba(158,158,158,0.20)",
+      "pill": "linear-gradient(180deg,#f48fb1,#ec407a)"
+    },
+    "5": {
+      "bg": "rgba(76,175,80,0.15)",
+      "pill": "linear-gradient(180deg,#fff59d,#fdd835)"
+    }
+  },
+
+  "explanations": [
+    "Woman: Now find the shoe behind the dog.\nBoy: Behind the dog? Oh, yes! I can see it.\nWoman: Good. Have you got a blue pencil?\nBoy: Yes, I have.\nWoman: Great! Colour it with that pencil, then.",
+
+    "Woman: Can you see the shoe on the mat?\nBoy: Yes! What colour for the shoe on the mat?\nWoman: You can choose the colour.\nBoy: OK. Brown!\nWoman: I like it!",
+
+    "Woman: Now colour the shoe next to the robot.\nBoy: The shoe next to the robot… OK!\nWoman: Would you like to colour it yellow?\nBoy: Yes! It’s my favourite colour.\nWoman: Wow, it’s my favourite, too!",
+
+    "Boy: Which shoe can I colour now?\nWoman: The one in front of the boy.\nBoy: The one in front of the boy … OK. What colour?\nWoman: Hmm … make it grey.\nBoy: Cool.",
+
+    "Woman: There’s a shoe under the cupboard. Can you see it?\nBoy: Yes, I can. Can I make that green, please?\nWoman: That’s a nice colour—yes!\nBoy: OK."
+  ]
+}

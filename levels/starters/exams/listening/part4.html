@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Skill Builder Unit 1 Listening 4</title>
+
+<link rel="stylesheet" href="../../css/starters-listening/part4.css">
+
+<style>
+:root{
+
+--answer1-bg: rgba(239,235,233,0.50);
+--answer2-bg: rgba(255,243,224,0.50);
+--answer3-bg: rgba(252,228,236,0.50);
+--answer4-bg: rgba(227,242,253,0.50);
+--answer5-bg: rgba(245,245,245,0.50);
+
+--answer1-pill: linear-gradient(180deg,#d7c9c4,#b8a7a0);
+--answer2-pill: linear-gradient(180deg,#ffe0b2,#ffcc80);
+--answer3-pill: linear-gradient(180deg,#f8bbd0,#f48fb1);
+--answer4-pill: linear-gradient(180deg,#90caf9,#64b5f6);
+--answer5-pill: linear-gradient(180deg,#e0e0e0,#cfcfcf);
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="global-header">
+  <div class="part-title">
+    <span class="badge">Listening, Part 4</span>
+  </div>
+</div>
+  <div class="instruction">
+    Listen and colour and write. There is one example.
+  </div>
+
+  <div class="controls-row">
+
+    <div class="audio-box">
+      <audio id="audioPlayer" controls preload="auto" playsinline controlslist="nodownload">
+        <source id="audioSource" src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <div class="top-actions">
+    <div class="help-wrap">
+      <div class="help-btn">?</div>
+      <div class="help-tooltip">
+        <strong>Cách làm bài</strong><br>
+        • Nghe audio cẩn thận.<br>
+        • Mỗi lần nghe, tìm đúng hình được nói đến.<br>
+        • Chọn màu phù hợp và tô vào hình.<br>
+        • Nhấn Undo để xóa nét vẽ.<br>
+        • Sau khi nghe xong audio thì nhấn vào icon ổ khóa để xem đáp án.
+      </div>
+    </div>
+
+    <button class="action-btn undo-btn" onclick="undo()" title="Undo">↩</button>
+    <button class="action-btn reset-btn" onclick="resetCanvas()" title="Reset">↻</button>
+    <button class="action-btn answer-btn" id="answerBtn" onclick="toggleAnswer()" disabled title="Show answer">🔒</button>
+    <button class="action-btn palette-btn" id="paletteBtn" title="Colours">🎨</button>
+    </div>
+
+  </div>
+
+
+  <div class="main-layout">
+
+<div class="explanation-panel" id="explanationPanel">
+
+  <div class="answer-tabs">
+    <button class="answer-tab active" onclick="showExplain(1)">Answer 1</button>
+    <button class="answer-tab" onclick="showExplain(2)">Answer 2</button>
+    <button class="answer-tab" onclick="showExplain(3)">Answer 3</button>
+    <button class="answer-tab" onclick="showExplain(4)">Answer 4</button>
+    <button class="answer-tab" onclick="showExplain(5)">Answer 5</button>
+  </div>
+
+  <div class="explain-content">
+    <div id="explainText" class="explain-text"></div>
+  </div>
+
+</div>
+
+  <div class="sidebar">
+    <div class="tools palette-panel" id="palettePanel">
+      <div class="color-group">
+        <div class="color active" data-color="red" style="background:red"></div>
+        <div class="color" data-color="orange" style="background:orange"></div>
+        <div class="color" data-color="yellow" style="background:gold"></div>
+        <div class="color" data-color="green" style="background:green"></div>
+        <div class="color" data-color="blue" style="background:blue"></div>
+        <div class="color" data-color="purple" style="background:purple"></div>
+        <div class="color" data-color="pink" style="background:pink"></div>
+        <div class="color" data-color="#6E4B2A" style="background:#6E4B2A"></div>
+        <div class="color" data-color="black" style="background:black"></div>
+        <div class="color" data-color="white" style="background:white;border:3px solid #999"></div>
+        <div class="color" data-color="grey" style="background:grey"></div>
+        <div class="color" data-color="cyan" style="background:cyan"></div>
+      </div>
+    </div>
+  </div>
+  <div class="canvas-area">
+    <div class="canvas-compare">
+      <div class="canvas-box">
+        <div id="canvasWrap" style="position:relative;">
+          <canvas id="imageCanvas" style="position:absolute; left:0; top:0; z-index:1;"></canvas>
+          <canvas id="drawCanvas" style="position:absolute; left:0; top:0; z-index:2;"></canvas>
+        </div>
+      </div>
+
+      <div class="canvas-box answer-box">
+        <canvas id="answerCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="../../js/listening/part4.js"></script>
+
+</body>
+</html>

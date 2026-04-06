@@ -1,0 +1,42 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part4/skillbuilder-unit1-4.mp3",
+
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part4/p4.png",
+
+  "answerImage": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part4/p4_answer.png",
+
+  "colors": {
+    "1": {
+      "bg": "rgba(239,235,233,0.50)",
+      "pill": "linear-gradient(180deg,#d7c9c4,#b8a7a0)"
+    },
+    "2": {
+      "bg": "rgba(255,243,224,0.50)",
+      "pill": "linear-gradient(180deg,#ffe0b2,#ffcc80)"
+    },
+    "3": {
+      "bg": "rgba(252,228,236,0.50)",
+      "pill": "linear-gradient(180deg,#f8bbd0,#f48fb1)"
+    },
+    "4": {
+      "bg": "rgba(227,242,253,0.50)",
+      "pill": "linear-gradient(180deg,#90caf9,#64b5f6)"
+    },
+    "5": {
+      "bg": "rgba(245,245,245,0.50)",
+      "pill": "linear-gradient(180deg,#e0e0e0,#cfcfcf)"
+    }
+  },
+
+  "explanations": [
+    "Woman: OK. Now, can you see the hat on the chair?\nGirl: Sorry? The hat on the chair?\nWoman: Yes. Have you got a brown pencil?\nGirl: Yes, I have.\nWoman: Colour it with that pencil, please.",
+
+    "Woman: There’s a hat in front of the boxes.\nGirl: I can see it.\nWoman: Colour that hat now, please.\nGirl: What colour for the hat in front of the boxes?\nWoman: Would you like to colour it orange?",
+
+    "Girl: What now?\nWoman: Hmm … colour the hat in the woman’s hand.\nGirl: The hat in the woman’s hand … OK!\nWoman: You can choose the colour.\nGirl: Pink! I love that colour!\nWoman: Me, too!",
+
+    "Woman: Can you see the hat behind the dresses?\nGirl: Yes, I can.\nWoman: Good. Make that hat blue.\nGirl: OK! I’m colouring that hat… the one behind the dresses, now.\nWoman: Great!",
+
+    "Girl: Which hat can I colour now?\nWoman: The one next to the handbag. Colour that one.\nGirl: Can I make it grey?\nWoman: Yes. Thank you!"
+  ]
+}

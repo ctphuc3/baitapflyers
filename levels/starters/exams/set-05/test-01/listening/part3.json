@@ -1,0 +1,121 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/skillbuilder-unit1-3.mp3",
+
+  "example": {
+    "question": "Where's Mum?",
+    "answer": "B",
+    "script": "Man: Where’s Mum, Alex? Is she in the bathroom?\nBoy: No, she isn’t. She’s in the kitchen.\nMan: Oh, is she having breakfast?\nBoy: No, she’s reading a new book.",
+    "options": [
+      {
+        "choice": "A",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_e_a.png"
+      },
+      {
+        "choice": "B",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_e_b.png"
+      },
+      {
+        "choice": "C",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_e_c.png"
+      }
+    ]
+  },
+
+  "questions": [
+    {
+      "question": "What’s Tom’s dog doing?",
+      "answer": "B",
+      "script": "Boy: Hi, Mum. How is Mat now? Is he eating?\nWoman: Your dog is OK, Tom. He’s in the garden.\nBoy: Is he sleeping on his mat?\nWoman: No, he’s playing with your ball. He loves it.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q1_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q1_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q1_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which handbag is Sue’s?",
+      "answer": "C",
+      "script": "Man: Is that your handbag, Sue?\nWoman: No, my handbag is yellow.\nMan: Is it the one next to the brown shoes?\nWoman: No, it’s the one behind the watch and the glasses.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q2_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q2_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q2_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What’s Grace’s favourite animal?",
+      "answer": "B",
+      "script": "Girl: Is there a hippo at the zoo, Dad?\nMan: No, there isn’t. But there are some tigers and giraffes.\nGirl: Great! Giraffes are my favourite animal! I love them!\nMan: Me, too.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q3_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q3_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q3_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which picture are Bill and Sue looking at?",
+      "answer": "C",
+      "script": "Girl: This is a funny picture, Bill. Who’s in it?\nBoy: My grandpa and my baby brother.\nGirl: Whose is the dog?\nBoy: My cousin’s. He eats a lot, so his name is Food.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q4_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q4_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q4_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What’s Bill wearing?",
+      "answer": "B",
+      "script": "Woman: Are you wearing your blue shirt for the party, Bill?\nBoy: No, it’s dirty. I’m wearing my red T-shirt.\nWoman: Oh, that looks nice with your green trousers!\nBoy: Yes, but I’m wearing jeans now, Grandma.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q5_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q5_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/starters/exams/skills-builder/unit1/assets/listening/part3/p3_q5_c.png"
+        }
+      ]
+    }
+  ]
+}

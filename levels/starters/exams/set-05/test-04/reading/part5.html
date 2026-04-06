@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skills builder - Unit 2 - Reading & Writing part 5</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0px;
+            background: linear-gradient(135deg, #e9f3ff 0%, #fdfefe 50%, #ffffff 100%);
+        }
+
+
+        h2 {
+            margin-bottom: 6px;
+            color: #2a6df4;
+            letter-spacing: 0.3px;
+        }
+
+
+        h3 {
+            color: #5f6f8a;
+        }
+
+
+        h3 {
+            margin-top: 0;
+            font-weight: normal;
+        }
+
+
+        .image-block {
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+
+
+        .image-block img {
+            width: 100%;
+            max-width: 550px;
+            display: block;
+            margin: 16px auto 24px;
+            border-radius: 18px;
+            border: none;
+        }
+
+
+        .question-box {
+            margin-top: 2px;
+            padding: 10px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.95);
+        }
+
+
+        .question-line {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 18px;
+            flex-wrap: wrap;
+            line-height: 1.4;
+        }
+
+
+        .answer-input {
+            width: 150px;
+            padding: 8px 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 2px solid rgba(42,109,244,0.6);
+            background: rgba(255,255,255,0.85);
+        }
+
+
+        .check-btn {
+            padding: 8px 18px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2a6df4, #5b8cff);
+            color: #fff;
+            box-shadow: 0 10px 22px rgba(42,109,244,0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+
+        .check-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 6px 14px rgba(42,109,244,0.3);
+        }
+
+
+        .result {
+            margin-top: 8px;
+            font-weight: bold;
+            display: none;
+        }
+
+
+        .correct {
+            color: #2ecc71;
+        }
+
+
+        .wrong {
+            color: #e74c3c;
+        }
+
+
+        .translation {
+            margin-top: 8px;
+            font-style: italic;
+            display: none;
+            color: #555;
+        }
+
+
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 10px 0 20px 0;
+        }
+
+
+        .header-bar {
+          margin-bottom: 16px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+
+        .header-title {
+          font-size: 36px;
+          font-weight: 800;
+          color: #1e88e5;
+          letter-spacing: 0.4px;
+          margin: 0 0 6px 0;
+        }
+
+
+        .header-pill {
+          display: inline-block;
+          padding: 6px 14px;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+          color: #1a4fa3;
+          font-size: 14px;
+          font-weight: 700;
+          box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+
+
+        .instruction-line {
+          margin-top: 10px;
+          margin-bottom: 26px;
+          font-size: 17px;
+          font-weight: 600;
+          color: #374151;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+
+<div class="header-bar">
+  <div class="header-pill">Reading & Writing, Part 5</div>
+</div>
+
+
+<div class="instruction-line">
+  Look at the pictures and read the questions. Write one-word answer.
+</div>
+
+
+<!-- IMAGE 1 -->
+<div class="image-block">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/reading/part5/p5_t1.png" alt="family at the beach">
+
+
+
+
+    <!-- Examples label -->
+    <div class="question-box example">
+      <div class="question-line">
+        <b>Examples</b>
+      </div>
+    </div>
+
+
+    <!-- Q1 example -->
+    <div class="question-box example">
+        <div class="question-line">
+            Where is Mum?
+            <span>in the</span>
+            <span style="font-weight:600; border-bottom:2px dotted #999; padding:2px 8px;">kitchen</span>
+        </div>
+    </div>
+
+
+    <!-- Q2 example -->
+    <div class="question-box example">
+        <div class="question-line">
+            What is she cooking?
+            <span style="font-weight:600; border-bottom:2px dotted #999; padding:2px 8px;">chicken</span>
+        </div>
+    </div>
+
+
+    <!-- Questions label -->
+    <div class="question-box example">
+      <div class="question-line">
+        <b>Questions</b>
+      </div>
+    </div>
+
+
+    <!-- Q3 -->
+    <div class="question-box" data-answers="3,three">
+        <div class="question-line">
+            <b>1</b> How many cats are there?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>3 / three</b></div>
+        <div class="result wrong">✗ Correct answer: <b>3 / three</b></div>
+        <div class="translation">Dịch: Có bao nhiêu con mèo?</div>
+    </div>
+</div>
+
+
+<!-- IMAGE 2 -->
+<div class="image-block">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/reading/part5/p5_t2.png" alt="dog on the sand">
+
+
+
+
+    <!-- Q4 -->
+    <div class="question-box" data-answers="garden,yard,backyard">
+        <div class="question-line">
+            <b>2</b> Where is Mum now?
+            <span>in the</span>
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>garden / yard / backyard</b></div>
+        <div class="result wrong">✗ Correct answer: <b>garden / yard / backyard</b></div>
+        <div class="translation">Dịch: Mẹ bây giờ đang ở đâu?</div>
+    </div>
+
+
+    <!-- Q5 -->
+    <div class="question-box" data-answers="drinking">
+        <div class="question-line">
+            <b>3</b> What is she doing?
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>drinking</b></div>
+        <div class="result wrong">✗ Correct answer: <b>drinking</b></div>
+        <div class="translation">Dịch: Cô ấy đang làm gì?</div>
+    </div>
+</div>
+
+
+<!-- IMAGE 3 -->
+<div class="image-block">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/reading/part5/p5_t3.png" alt="ice cream man">
+
+
+
+
+    <!-- Q6 -->
+    <div class="question-box" data-answers="eating">
+        <div class="question-line">
+            <b>4</b> What are the cats doing?
+            <span>the chicken</span>
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>eating</b></div>
+        <div class="result wrong">✗ Correct answer: <b>eating</b></div>
+        <div class="translation">Dịch: Những con mèo đang làm gì?</div>
+    </div>
+
+
+    <!-- Q7 -->
+    <div class="question-box" data-answers="floor">
+        <div class="question-line">
+            <b>5</b> Where are the flowers?
+            <span>on the</span>
+            <input class="answer-input">
+            <button class="check-btn">Check</button>
+        </div>
+        <div class="result correct">✓ Correct! Answer: <b>floor</b></div>
+        <div class="result wrong">✗ Correct answer: <b>floor</b></div>
+        <div class="translation">Dịch: Những bông hoa ở đâu?</div>
+    </div>
+</div>
+
+
+<div style="text-align:center; margin-top:32px;">
+  <button id="resetTest" style="padding:12px 28px; font-size:16px; border-radius:16px; border:none; cursor:pointer; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; box-shadow:0 10px 24px rgba(0,0,0,0.25);">Reset bài</button>
+</div>
+
+
+<script nonce="Mzg0ODY1NzE4NiwyNjkyMDI5NTk=">
+const STORAGE_KEY = 'skillbuilder_unit4_reading_part5_state';
+const PART_NUMBER = 5;
+const TOTAL_QUESTIONS = document.querySelectorAll('.question-box:not(.example)').length;
+
+function notifyParentDone() {
+  window.parent.postMessage({
+    type: "READING_PART_DONE",
+    part: PART_NUMBER
+  }, "*");
+}
+
+function notifyParentReset() {
+  window.parent.postMessage({
+    type: "READING_PART_RESET",
+    part: PART_NUMBER,
+    manual: true
+  }, "*");
+}
+
+function saveState(index, value) {
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  state[index] = value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+  if (Object.keys(state).length === TOTAL_QUESTIONS) {
+    notifyParentDone();
+  }
+}
+
+
+function loadState() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+
+
+function clearState() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+
+const saved = loadState();
+
+
+const boxes = document.querySelectorAll('.question-box:not(.example)');
+
+
+boxes.forEach((box, index) => {
+  const input = box.querySelector('.answer-input');
+  const btn = box.querySelector('.check-btn');
+  const correct = box.querySelector('.correct');
+  const wrong = box.querySelector('.wrong');
+  const translation = box.querySelector('.translation');
+  const answers = box.dataset.answers.split(',').map(a => a.trim());
+
+
+  // disable button initially
+  btn.disabled = true;
+  btn.style.opacity = 0.5;
+  btn.style.cursor = 'not-allowed';
+
+
+  input.addEventListener('input', () => {
+    if (input.value.trim() !== '') {
+      btn.disabled = false;
+      btn.style.opacity = 1;
+      btn.style.cursor = 'pointer';
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = 0.5;
+      btn.style.cursor = 'not-allowed';
+    }
+  });
+
+
+  // restore
+  if (saved[index]) {
+    input.value = saved[index];
+    btn.disabled = false;
+    btn.click();
+  }
+
+
+  btn.onclick = () => {
+    const user = input.value.trim().toLowerCase();
+
+
+    input.disabled = true;
+    btn.disabled = true;
+    btn.style.opacity = 0.6;
+
+
+    if (answers.includes(user)) {
+      correct.style.display = 'block';
+    } else {
+      wrong.style.display = 'block';
+    }
+
+
+    translation.style.display = 'block';
+    saveState(index, user);
+  };
+});
+
+
+// RESET BUTTON
+const resetBtn = document.getElementById('resetTest');
+if (resetBtn) {
+  resetBtn.onclick = () => {
+    if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài?')) return;
+    clearState();
+    notifyParentReset();
+    location.reload();
+  };
+}
+</script>
+
+
+</div>
+</body>
+</html>

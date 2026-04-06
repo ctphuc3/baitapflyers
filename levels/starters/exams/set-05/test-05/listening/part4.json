@@ -1,0 +1,42 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part4/skillbuilder-unit5-4.mp3",
+
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part4/p4.png",
+
+  "answerImage": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part4/p4_answer.png",
+
+  "colors": {
+    "1": {
+      "bg": "rgba(156,39,176,0.15)",
+      "pill": "linear-gradient(180deg,#ce93d8,#ab47bc)"
+    },
+    "2": {
+      "bg": "rgba(76,175,80,0.15)",
+      "pill": "linear-gradient(180deg,#a5d6a7,#66bb6a)"
+    },
+    "3": {
+      "bg": "rgba(33,150,243,0.15)",
+      "pill": "linear-gradient(180deg,#90caf9,#42a5f5)"
+    },
+    "4": {
+      "bg": "rgba(233,30,99,0.15)",
+      "pill": "linear-gradient(180deg,#f48fb1,#ec407a)"
+    },
+    "5": {
+      "bg": "rgba(255,235,59,0.20)",
+      "pill": "linear-gradient(180deg,#fff59d,#fdd835)"
+    }
+  },
+
+  "explanations": [
+    "Woman: Now, can you see the shell under the boy’s desk?\nGirl: Pardon? The shell under the boy’s desk?\nWoman: Yes, that’s the one. Would you like to colour it orange?\nGirl: Yes!",
+
+    "Woman: There’s a boy drawing a picture of a shell.\nGirl: Yes, I can see him.\nWoman: Good. Colour the shell in his picture, please.\nChild: OK. What colour?\nWoman: Make it red, please.",
+
+    "Woman: Now find the shell between the books.\nGirl: The shell between the books … oh, I see it!\nWoman: You can choose the colour for this shell!\nGirl: Hmm … blue! I love it.\nWoman: Me too!",
+
+    "Woman: Can you see the shell next to the girl’s bag?\nGirl: Let me look … yes, I see it!\nWoman: Well done! Make that one purple.\nGirl: OK, the shell next to the girl’s bag … I’m colouring it now.\nWoman: That’s beautiful.",
+
+    "Girl: I’d like to colour one yellow, please.\nWoman: OK.\nGirl: Thanks! Which one can I colour?\nWoman: The small one in front of the window.\nGirl: Great! I’m doing it now.\nWoman: What a nice picture!"
+  ]
+}

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skills builder - Unit 2 - Reading & Writing part 4</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0px;
+            background: linear-gradient(135deg, #e9f3ff 0%, #fdfefe 50%, #ffffff 100%);
+        }
+
+
+        h2 {
+            margin-bottom: 6px;
+            color: #2a6df4;
+            letter-spacing: 0.3px;
+        }
+
+
+        h3 {
+            margin-top: 0;
+            font-weight: normal;
+            color: #5f6f8a;
+        }
+
+
+        .main-image {
+            width: 100%;
+            max-width: 650px;
+            display: block;
+            margin: 24px auto 14px;
+            border-radius: 18px;
+            border: none;
+            box-shadow:
+                0 18px 40px rgba(0,0,0,0.18),
+                inset 0 1px 0 rgba(255,255,255,0.5);
+        }
+
+
+        /* ✅ khung giải thích đặt NGAY DƯỚI ẢNH */
+        .explanation-box {
+            margin: 14px auto 26px;
+            max-width: 650px;
+            padding: 16px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-left: 4px solid #2a6df4;
+            border-radius: 14px;
+            font-size: 16px;
+            display: none;
+        }
+
+
+        .explanation-box b {
+            color: #2e7d32;
+        }
+
+
+        .text-box {
+            margin-top: 16px;
+            font-size: 18px;
+            text-align: justify;
+        }
+
+
+        .blank {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            vertical-align: middle;
+        }
+
+
+        .blank input {
+            width: 130px;
+            padding: 6px 8px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 2px solid rgba(42, 109, 244, 0.6);
+            background: rgba(255,255,255,0.8);
+        }
+
+
+        .check-btn {
+            padding: 8px 18px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2a6df4, #5b8cff);
+            color: #fff;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+
+        .check-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 6px 14px rgba(42,109,244,0.3);
+        }
+
+
+        .correct-answer {
+            margin-left: 8px;
+            font-weight: bold;
+            display: none;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .correct-answer.correct {
+            background: #2ecc71;
+            color: #fff;
+        }
+
+        .correct-answer.wrong {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+
+        .correct {
+            border: 2px solid #2ecc71;
+        }
+
+        .wrong {
+            border: 2px solid #e74c3c;
+        }
+
+
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 10px 0 20px 0;
+        }
+
+
+        .header-bar {
+          margin-bottom: 16px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+
+        .header-title {
+          font-size: 36px;
+          font-weight: 800;
+          color: #1e88e5;
+          letter-spacing: 0.4px;
+          margin: 0 0 6px 0;
+        }
+
+
+        .header-pill {
+          display: inline-block;
+          padding: 6px 14px;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #cce7ff, #e6f3ff);
+          color: #1a4fa3;
+          font-size: 14px;
+          font-weight: 700;
+          box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+
+
+        .instruction-line {
+          margin-top: 12px;
+          margin-bottom: 24px;
+          font-size: 17px;
+          font-weight: 600;
+          color: #374151;
+        }
+    </style>
+</head>
+
+
+<body>
+<div class="wrapper">
+
+
+<div class="header-bar">
+  <div class="header-pill">Reading & Writing, Part 4</div>
+</div>
+
+
+<div class="instruction-line">
+  Read this. Choose a word from the box. Write the correct word next to number 1–5. There is one example.
+</div>
+
+
+<img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/reading/part4/p4_up.png" class="main-image" alt="kitchen scene">
+
+
+<!-- ✅ KHUNG GIẢI THÍCH ĐỘNG -->
+<div class="explanation-box" id="explainBox"></div>
+
+
+<div class="text-box">
+    Dogs don’t live in a zoo, like tigers or <b>elephants</b>.
+
+    They live in our homes, and they are our
+    <span class="blank" data-answer="friends"
+          data-explain="(1) friends: Chó là <b>những người bạn</b> của chúng ta.">
+        (1)
+        <input>
+        <button class="check-btn">Check</button>
+        <span class="correct-answer">friends</span>
+    </span>
+    !
+
+    Dogs can learn words. We can tell them to sit, stand and catch a
+    <span class="blank" data-answer="ball"
+          data-explain="(2) ball: Chó có thể bắt <b>quả bóng</b>.">
+        (2)
+        <input>
+        <button class="check-btn">Check</button>
+        <span class="correct-answer">ball</span>
+    </span>
+    that we throw.
+
+    Dogs can swim too, and some of them like swimming in the
+    <span class="blank" data-answer="sea"
+          data-explain="(3) sea: Một số con chó thích bơi ở <b>biển</b>.">
+        (3)
+        <input>
+        <button class="check-btn">Check</button>
+        <span class="correct-answer">sea</span>
+    </span>
+    .
+
+    Many dogs get very
+    <span class="blank" data-answer="dirty"
+          data-explain="(4) dirty: Chó trở nên rất <b>bẩn</b>.">
+        (4)
+        <input>
+        <button class="check-btn">Check</button>
+        <span class="correct-answer">dirty</span>
+    </span>
+    in the park, but we give them a
+    <span class="blank" data-answer="bath"
+          data-explain="(5) bath: Chúng ta cho chúng một <b>lần tắm</b> để làm sạch.">
+        (5)
+        <input>
+        <button class="check-btn">Check</button>
+        <span class="correct-answer">bath</span>
+    </span>
+    to make them clean again.
+
+    Dogs are funny!
+</div>
+<img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/reading/part4/p4_down.png" 
+     class="main-image" 
+     alt="kitchen scene bottom">
+
+<div style="text-align:center; margin-top:30px;">
+  <button id="resetLesson" style="padding:12px 28px; font-size:16px; border-radius:16px; border:none; cursor:pointer; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; box-shadow:0 10px 24px rgba(0,0,0,0.25);">Reset bài học</button>
+</div>
+<script nonce="MjAzNTI2NTIxNCwyNDMwNTc3MDM3">
+const STORAGE_KEY = 'skillbuilder_unit5_reading_part4_state';
+const PART_NUMBER = 4;
+const TOTAL_QUESTIONS = document.querySelectorAll('.blank').length;
+
+function notifyParentDone() {
+  window.parent.postMessage({
+    type: "READING_PART_DONE",
+    part: PART_NUMBER
+  }, "*");
+}
+
+function notifyParentReset() {
+  window.parent.postMessage({
+    type: "READING_PART_RESET",
+    part: PART_NUMBER,
+    manual: true
+  }, "*");
+}
+
+
+function saveState(index, value) {
+  const state = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  state[index] = value;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+
+  if (Object.keys(state).length === TOTAL_QUESTIONS) {
+    notifyParentDone();
+  }
+}
+
+
+function loadState() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+}
+
+
+function clearState() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+
+const explainBox = document.getElementById('explainBox');
+const saved = loadState();
+
+
+document.querySelectorAll('.blank').forEach((blank, index) => {
+  const input = blank.querySelector('input');
+  const btn = blank.querySelector('.check-btn');
+  const answerSpan = blank.querySelector('.correct-answer');
+  const correctAnswer = blank.dataset.answer;
+  const explainText = blank.dataset.explain;
+
+
+  // Disable button initially
+  btn.disabled = true;
+  btn.style.opacity = 0.5;
+  btn.style.cursor = 'not-allowed';
+
+
+  // Enable button only when input has value
+  input.addEventListener('input', () => {
+    if (input.value.trim() !== '') {
+      btn.disabled = false;
+      btn.style.opacity = 1;
+      btn.style.cursor = 'pointer';
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = 0.5;
+      btn.style.cursor = 'not-allowed';
+    }
+  });
+
+
+  // Restore saved state
+  if (saved[index]) {
+    input.value = saved[index];
+    btn.disabled = false;
+    btn.click();
+  }
+
+
+  btn.onclick = () => {
+    const user = input.value.trim().toLowerCase();
+
+
+    input.disabled = true;
+    btn.disabled = true;
+    btn.style.opacity = 0.6;
+    btn.style.cursor = 'not-allowed';
+    answerSpan.style.display = 'inline';
+
+
+    if (user === correctAnswer) {
+      input.classList.add('correct');
+      answerSpan.classList.add('correct');
+      input.style.color = '#000';
+      answerSpan.textContent = '✓ ' + correctAnswer;
+    } else {
+      input.classList.add('wrong');
+      answerSpan.classList.add('wrong');
+      input.style.color = '#000';
+      answerSpan.textContent = '✗ ' + correctAnswer;
+    }
+
+
+    // Highlight key Vietnamese meaning (text inside <b>)
+    let highlighted = explainText.replace(/<b>(.*?)<\/b>/g, '<span style="color:#2ecc71; font-weight:700;">$1</span>');
+    explainBox.innerHTML = highlighted;
+    explainBox.style.display = 'block';
+
+
+    saveState(index, user);
+  };
+});
+
+
+// Reset button
+document.getElementById('resetLesson').onclick = () => {
+  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài học?')) return;
+  clearState();
+  notifyParentReset();
+  location.reload();
+};
+</script>
+
+
+</div>
+</body>
+</html>

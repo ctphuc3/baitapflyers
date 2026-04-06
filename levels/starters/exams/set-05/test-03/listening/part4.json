@@ -1,0 +1,42 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part4/skillbuilder-unit3-4.mp3",
+
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part4/p4.png",
+
+  "answerImage": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part4/p4_answer.png",
+
+  "colors": {
+    "1": {
+      "bg": "rgba(255,235,59,0.20)",
+      "pill": "linear-gradient(180deg,#fff59d,#fdd835)"
+    },
+    "2": {
+      "bg": "rgba(0,0,0,0.15)",
+      "pill": "linear-gradient(180deg,#616161,#212121)"
+    },
+    "3": {
+      "bg": "rgba(255,152,0,0.20)",
+      "pill": "linear-gradient(180deg,#ffcc80,#fb8c00)"
+    },
+    "4": {
+      "bg": "rgba(76,175,80,0.20)",
+      "pill": "linear-gradient(180deg,#a5d6a7,#43a047)"
+    },
+    "5": {
+      "bg": "rgba(244,67,54,0.20)",
+      "pill": "linear-gradient(180deg,#ef9a9a,#e53935)"
+    }
+  },
+
+  "explanations": [
+    "Man: Now, colour the bird in the apple tree.\nGirl: Where? In the apple tree?\nMan: That’s right. Colour that bird yellow.\nGirl: I love that colour!\nMan: So do I.",
+
+    "Man: Can you see the bird behind the boy with the kite?\nGirl: The bird behind the boy with the kite … oh, yes. I can see it!\nMan: Good! Make that one black, please.\nGirl: OK.",
+
+    "Man: Now colour the bird under the plane.\nGirl: Sorry? The bird under the plane? Oh, there it is!\nMan: Have you got an orange pencil?\nGirl: Yes!\nMan: Great. Colour it with that pencil, please.",
+
+    "Man: There’s a bird next to the camera.\nGirl: I can see it!\nMan: Good. Make that bird green.\nGirl: OK. I’m colouring the bird … next to the camera … now.\nMan: Well done!",
+
+    "Girl: What now?\nMan: Would you like to colour the bird between the children?\nGirl: Yes. What colour?\nMan: You can choose the colour.\nGirl: I can make it red!\nMan: Great."
+  ]
+}

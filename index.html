@@ -646,16 +646,6 @@ canvas {
   <div class="main-layout">
     <!-- Left menu -->
     <div class="side-menu">
-      <div class="calendar-panel" id="calendar-panel">
-        <div class="calendar-header">
-          <span id="calendar-title">Today</span>
-        </div>
-        <div class="calendar-body">
-          <div class="calendar-solar" id="solar-date"></div>
-          <div class="calendar-lunar" id="lunar-date"></div>
-          <div class="calendar-time" id="clock-time"></div>
-        </div>
-      </div>
       <div class="menu-item active" id="menu-recent">Recent</div>
       <div class="menu-item" id="menu-starters">Starters</div>
       <div class="menu-item" id="menu-movers">Movers</div>
@@ -886,7 +876,9 @@ function buildSearchIndex() {
             c.appendChild(t);
             c.appendChild(s);
 
-            c.onclick = () => window.open(url, "_blank");
+              c.onclick = () => {
+                window.open(url, "_blank");
+              };
             return c;
           }
         });
@@ -935,7 +927,9 @@ function buildSearchIndex() {
           c.appendChild(t);
           c.appendChild(s);
 
-          c.onclick = () => window.open(url, "_blank");
+          c.onclick = () => {
+            window.open(url, "_blank");
+          };
           return c;
         }
       });
@@ -950,7 +944,9 @@ const MAX_RECENT = 8;
 
 function saveRecentLesson(item) {
   const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  const filtered = data.filter(d => d.url !== item.url);
+  const filtered = data.filter(
+    d => !(d.label === item.label && d.meta === item.meta)
+  );
   filtered.unshift(item);
   const limited = filtered.slice(0, MAX_RECENT);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(limited));
@@ -998,10 +994,17 @@ function fuzzyScore(query, text) {
 // (Đã xoá object skillLinks cũ)
 
 function getSkillLink(skill, examNumber, testNumber) {
-  const base = "/levels/starters/exams";
-  const skillSlug = skill.toLowerCase().replace(/ & /g, "-").replace(/\s+/g, "-");
+  const base = "levels/starters/exams/listening-main.html";
 
-  return `${base}/exam-${examNumber}/test-${testNumber}/${skillSlug}.html`;
+  const skillSlug = skill.toLowerCase().includes("listening") ? "listening" :
+                    skill.toLowerCase().includes("reading") ? "reading" :
+                    "speaking";
+
+  // map exam → set (01 → 04)
+  const set = String(examNumber).padStart(2, "0");
+  const test = String(testNumber).padStart(2, "0");
+
+  return `${base}?type=exam&set=${set}&test=${test}&skill=${skillSlug}`;
 }
 
 function clearContent() {
@@ -1014,8 +1017,17 @@ function showCurrentLessons() {
   contentArea.classList.add("recent-mode");
 
   const lessons = loadRecentLessons();
+  // Remove duplicates by label+meta
+  const uniqueMap = new Map();
+  lessons.forEach(l => {
+    const key = l.label + "|" + l.meta;
+    if (!uniqueMap.has(key)) {
+      uniqueMap.set(key, l);
+    }
+  });
+  const uniqueLessons = Array.from(uniqueMap.values());
 
-  if (lessons.length === 0) {
+  if (uniqueLessons.length === 0) {
     const empty = document.createElement("div");
     empty.className = "card";
     empty.textContent = "No recent lessons";
@@ -1023,7 +1035,7 @@ function showCurrentLessons() {
     return;
   }
 
-  lessons.forEach(item => {
+  uniqueLessons.forEach(item => {
     const card = document.createElement("div");
     card.className = "card";
     card.style.cursor = "pointer";
@@ -1038,7 +1050,9 @@ function showCurrentLessons() {
     card.appendChild(title);
     card.appendChild(sub);
 
-    card.onclick = () => window.open(item.url, "_blank");
+    card.onclick = () => {
+      window.open(item.url, "_blank");
+    };
     contentArea.appendChild(card);
   });
 }
@@ -1171,7 +1185,7 @@ function showSkillbuilderSections(unitNumber) {
       skillSlug = "reading";
     }
 
-    const url = `/levels/starters/exams/skill-builder/unit-${unitNumber}/${skillSlug}.html`;
+    const url = `levels/starters/exams/listening-main.html?type=skill-builder&unit=${unitNumber}&set=05&test=${String(unitNumber).padStart(2,"0")}&skill=${skillSlug}`;
 
     card.onclick = () => {
       saveRecentLesson({
@@ -1179,7 +1193,6 @@ function showSkillbuilderSections(unitNumber) {
         meta: `Skills builder · Unit ${unitNumber}`,
         url: url
       });
-
       window.open(url, "_blank");
     };
 
@@ -1260,7 +1273,9 @@ function showSearchResultsInContent(keyword) {
           const c = document.createElement("div");
           c.className = "card";
           c.textContent = `${r.item.title}`;
-          c.onclick = () => window.open(r.item.url, "_blank");
+          c.onclick = () => {
+            window.open(r.item.url, "_blank");
+          };
           return c;
         })();
 
@@ -1344,57 +1359,7 @@ showUiBtn.addEventListener("click", () => {
   uiRoot.classList.remove("ui-hidden");
 });
 
-/* ===== GLASS CALENDAR LOGIC ===== */
-const solarEl = document.getElementById("solar-date");
-const lunarEl = document.getElementById("lunar-date");
-const timeEl = document.getElementById("clock-time");
-const calendarToggle = document.getElementById("calendar-toggle");
-const calendarPanel = document.getElementById("calendar-panel");
 
-function updateCalendar() {
-  const now = new Date();
-
-  solarEl.textContent = now.toLocaleDateString("en-GB", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  });
-
-  timeEl.textContent = now.toLocaleTimeString("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit"
-  });
-
-  try {
-    const lunar = new Intl.DateTimeFormat("en-GB-u-ca-chinese", {
-      day: "numeric",
-      month: "numeric",
-      year: "numeric"
-    }).format(now);
-    lunarEl.textContent = `Lunar date: ${lunar}`;
-  } catch {
-    lunarEl.textContent = "Lunar date: —";
-  }
-}
-
-setInterval(updateCalendar, 1000);
-updateCalendar();
-
-const calendarShowBtn = document.getElementById("calendar-show-btn");
-
-if (calendarToggle && calendarPanel && calendarShowBtn) {
-  calendarToggle.addEventListener("click", () => {
-    calendarPanel.classList.add("hidden");
-    calendarShowBtn.classList.remove("hidden");
-  });
-
-  calendarShowBtn.addEventListener("click", () => {
-    calendarPanel.classList.remove("hidden");
-    calendarShowBtn.classList.add("hidden");
-  });
-}
 
 // ===== TOUCH WATER EFFECT ONLY WHEN UI IS HIDDEN =====
 const waterCanvas = document.getElementById("water-canvas");

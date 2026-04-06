@@ -1,0 +1,13 @@
+
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part1/skillbuilder-unit2-1.mp3",
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part1/p1.png",
+  "answerImage": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit3/assets/listening/part1/p1_answer.png",
+  "explain": {
+    "1": "Woman: Who’s the boy playing the guitar?\nBoy: In the armchair?\nWoman: Yes.\nBoy: His name’s Ben. Playing the guitar is Ben’s favourite hobby.",
+    "2": "Boy: Look at Grace!\nWoman: The girl in the red jeans?\nBoy: Yes! She’s wearing red jeans and a blue T-shirt.\nWoman: Grace looks very nice!",
+    "3": "Woman: What’s that girl’s name? Beside the bookcase?\nBoy: Eating ice cream? That’s Jill.\nWoman: She’s enjoying it!\nBoy: Yes. Jill loves ice cream.",
+    "4": "Woman: What a beautiful little orange cat!\nBoy: Yes, my friend Nick is playing with it.\nWoman: Is that Nick? The boy giving the cat a toy mouse?\nBoy: Yes, and the cat likes the toy mouse.",
+    "5": "Woman: And what about the girl taking a photo?\nBoy: Her name’s May. See, she’s got a pink camera!\nWoman: A pink camera! Wow!\nBoy: Yes. It’s May’s favourite colour."
+  }
+}

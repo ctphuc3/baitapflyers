@@ -1,0 +1,121 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/skillbuilder-unit5-3.mp3",
+
+  "example": {
+    "question": "What’s for dinner?",
+    "answer": "A",
+    "script": "Woman: What’s for dinner?\nBoy: We’re having fish and chips.\nWoman: Not burgers?\nBoy: No, not burgers.\nWoman: OK, fish and chips then.",
+    "options": [
+      {
+        "choice": "A",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_e_a.png"
+      },
+      {
+        "choice": "B",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_e_b.png"
+      },
+      {
+        "choice": "C",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_e_c.png"
+      }
+    ]
+  },
+
+  "questions": [
+    {
+      "question": "What are Matt and Alice playing?",
+      "answer": "C",
+      "script": "Woman: Matt! Alice! Where are you? Let’s go to the park!\nBoy: We’re in the garden, Mum!\nWoman: Oh, are you playing badminton?\nBoy: No, table tennis. But we want to go with you. We’re coming!",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q1_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q1_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q1_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which picture is Mum looking at?",
+      "answer": "A",
+      "script": "Woman: Who are the people in this photo, Alex?\nBoy: That’s Hugo’s father on the motorbike.\nWoman: And who is that man?\nBoy: Hugo’s grandfather! He drives a lorry!",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q2_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q2_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q2_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which clock is Lucy’s?",
+      "answer": "C",
+      "script": "Girl: Dad, look! I have a new clock. It’s for my bedroom.\nMan: What a nice clock! But, it’s not blue?\nGirl: No, orange is my new favourite colour!\nMan: Oh! I like the yellow flower on it.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q3_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q3_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q3_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which toy is Dan’s?",
+      "answer": "B",
+      "script": "Woman: Dan, is this yours?\nBoy: Yes, Mrs Page. It’s new!\nWoman: No toys in school, Dan. You know that. What is it? A robot or a monster?\nBoy: Sorry, Mrs Page, it’s an alien. Let me put it in my school bag!",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q4_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q4_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q4_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which dress is Sue’s?",
+      "answer": "A",
+      "script": "Woman: Hello, Sue. Wow, you look nice! Is that your new dress?\nGirl: Yes, and look—it’s not pink!\nWoman: Well, blue is really nice, too.\nGirl: Thanks, Grandma. Mum says I can have a purple one for my birthday.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q5_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q5_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part3/p3_q5_c.png"
+        }
+      ]
+    }
+  ]
+}

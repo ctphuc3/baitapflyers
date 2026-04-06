@@ -1,0 +1,121 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/skillbuilder-unit2-3.mp3",
+
+  "example": {
+    "question": "What’s Dan’s favourite hobby?",
+    "answer": "B",
+    "script": "Man: What’s Dan’s favourite hobby?\nBoy: He likes flying a kite.\nMan: Does he ride his bike?\nBoy: No, he doesn’t.\nMan: Does he skateboard?\nBoy: No. He loves his kite.",
+    "options": [
+      {
+        "choice": "A",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_e_a.png"
+      },
+      {
+        "choice": "B",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_e_b.png"
+      },
+      {
+        "choice": "C",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_e_c.png"
+      }
+    ]
+  },
+
+  "questions": [
+    {
+      "question": "Which picture is Matt looking at?",
+      "answer": "C",
+      "script": "Woman: This picture’s nice, Matt. Who’s in it?\nBoy: My sister and my Dad.\nWoman: Where’s your Mum and your brother?\nBoy: Oh, not in this picture.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q1_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q1_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q1_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What's May doing?",
+      "answer": "A",
+      "script": "Woman: May, where are you? I can’t see you.\nGirl: I’m here, Mum, in the garden!\nWoman: Are you playing tennis?\nGirl: No, I’m painting a picture for you.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q2_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q2_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q2_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What is Pat's favorite food?",
+      "answer": "B",
+      "script": "Boy: Can I have a burger, please?\nMan: Sorry, there are no burgers. Would you like some chips?\nBoy: Yes, they’re my favourite! Can I have some chicken, too, please?\nMan: Yes, here you are!",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q3_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q3_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q3_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which doll is Jiil's?",
+      "answer": "A",
+      "script": "Boy: Is that your doll, Jill?\nGirl: No, my doll has purple hair.\nBoy: Is it wearing a blue dress?\nGirl: No. My sister’s doll has a blue dress. Mine has a red one.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q4_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q4_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q4_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What's Alice playing?",
+      "answer": "B",
+      "script": "Man: Where’s Alice?\nWoman: She is in the garden.\nMan: What’s she doing? Is she playing football?\nWoman: No. She’s playing hockey.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q5_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q5_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part3/p3_q5_c.png"
+        }
+      ]
+    }
+  ]
+}

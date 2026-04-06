@@ -1,0 +1,121 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/skillbuilder-unit4-3.mp3",
+
+  "example": {
+    "question": "What’s Dan’s favourite hobby?",
+    "answer": "B",
+    "script": "Man: What’s Dan’s favourite hobby?\nBoy: He likes flying a kite.\nMan: Does he ride his bike?\nBoy: No, he doesn’t.\nMan: Does he skateboard?\nBoy: No. He loves his kite.",
+    "options": [
+      {
+        "choice": "A",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_e_a.png"
+      },
+      {
+        "choice": "B",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_e_b.png"
+      },
+      {
+        "choice": "C",
+        "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_e_c.png"
+      }
+    ]
+  },
+
+  "questions": [
+    {
+      "question": "What cake are Mum and Jill making?",
+      "answer": "A",
+      "script": "Girl: Mum, Let's make a cake with fruit!\nWoman: OK. What fruit have we got?\nGirl: There are two apples and a big mango!\nWoman: Yes, but we've got lots of pears. We can make a pear cake!",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q1_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q1_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q1_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Where are the family?",
+      "answer": "C",
+      "script": "Boy: Hi, Sue! Can we go to the playground?\nGirl: Hi, Tom. Sorry, no. I'm with my family now.\nBoy: Oh, where? Are you at the zoo?\nGirl: No, we're at the beach.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q2_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q2_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q2_c.png"
+        }
+      ]
+    },
+    {
+      "question": "Which boy is Bill?",
+      "answer": "C",
+      "script": "Man: Where's your new school photo, Bill?\nBoy: Here it is, Dad! I'm wearing my grey shirt!\nMan: That's nice. Where are your friends?\nBoy: Look, there. That's Pat in the blue shirt, and Bill is wearing a white one.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q3_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q3_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q3_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What picture has Mark got?",
+      "answer": "B",
+      "script": "Man: Hi, Mark. Are you having fun at the zoo?\nBoy: Hi, Dad! Yes! I've got a new picture, too!\nMan: Oh, is it a snake? Or a frog?\nBoy: No, Dad. It's a big grey elephant!!",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q4_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q4_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q4_c.png"
+        }
+      ]
+    },
+    {
+      "question": "What’s Tom doing?",
+      "answer": "A",
+      "script": "Man: Is Tom at school today?\nWoman: No. The school is closed today.\nMan: Then, is he in his bedroom? Listening to music?\nWoman: No. He's in the living room. He's reading a book.",
+      "options": [
+        {
+          "choice": "A",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q5_a.png"
+        },
+        {
+          "choice": "B",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q5_b.png"
+        },
+        {
+          "choice": "C",
+          "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit4/assets/listening/part3/p3_q5_c.png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part2/skillbuilder-unit5-2.mp3",
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit5/assets/listening/part2/p2.png",
+  "examples": [
+    {
+      "question": "What is the name of Anna’s new friend?",
+      "answer": "Eva"
+    },
+    {
+      "question": "What class is Eva in?",
+      "answer": "7"
+    }
+  ],
+  "questions": [
+    {
+      "question": "1. What class is Anna in?<br>in class ______",
+      "answer": ["8", "eight"],
+      "script": "Man: What class are you in then?\nGirl: I’m in class 8.\nMan: Oh, yes. I’m sorry, Anna. You’re in class 8, I know that!\nGirl: Daddy, you’re funny!"
+    },
+    {
+      "question": "2. Where does Eva live?<br>in ______ Street",
+      "answer": ["bus"],
+      "script": "Man: Where does Eva live?\nGirl: She lives in Bus Street!\nMan: She lives in a bus?\nGirl: Oh, Daddy! In Bus Street. B-U-S!\nMan: OK ... that’s a nice street."
+    },
+    {
+      "question": "3. How many cats does Eva have?",
+      "answer": ["3", "three"],
+      "script": "Girl: Eva has got three cats. Can I have a cat, please?\nMan: Sorry? You’d like three cats?\nGirl: No, Dad. Eva has got three cats.\nMan: That’s a lot of cats!"
+    },
+    {
+      "question": "4. What’s the name of Eva’s dog?",
+      "answer": ["bounce"],
+      "script": "Girl: Her family has got a dog, too!\nMan: Oh? What’s the name of her dog?\nGirl: Bounce.\nMan: Sorry? Is that B-O-U-N-C-E? Bounce?\nGirl: Yes. Their dog loves to jump."
+    },
+    {
+      "question": "5. What is Eva’s family name?",
+      "answer": ["young"],
+      "script": "Man: What’s Eva’s family name?\nGirl: Young.\nMan: Yes, I know she’s young, but what’s her family name?\nGirl: Dad, you’re not listening. Her family name is Young! Y-O-U-N-G.\nMan: Oh, sorry!"
+    }
+  ]
+}

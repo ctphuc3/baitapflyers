@@ -1,0 +1,41 @@
+{
+  "audio": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part2/skillbuilder-unit2-2.mp3",
+  "image": "https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/starters/exams/skills-builder/unit2/assets/listening/part2/p2.png",
+  "examples": [
+    {
+      "question": "What's the boy's name?",
+      "answer": "Bill"
+    },
+    {
+      "question": "How old is he?",
+      "answer": "8"
+    }
+  ],
+  "questions": [
+    {
+      "question": "1. What’s Bill’s family name?",
+      "answer": ["white"],
+      "script": "Man: Great. What’s your family name?\nBoy: White.\nMan: White? Like the colour?\nBoy: Yes. W-H-I-T-E.\nMan: Right."
+    },
+    {
+      "question": "2. Where does Bill live?<br>in ______ Street",
+      "answer": ["garden"],
+      "script": "Man: Where do you live, Bill?\nBoy: In Garden Street. Next to the school.\nMan: Garden Street?\nBoy: Yes. G-A-R-D-E-N.\nMan: OK."
+    },
+    {
+      "question": "3. What number is Bill’s house?",
+      "answer": ["7", "seven"],
+      "script": "Man: What number is your house?\nBoy: Number seven.\nMan: Seven ... oh, is it beside the sweet shop?\nBoy: Yes, it is."
+    },
+    {
+      "question": "4. What is his friend’s name?",
+      "answer": ["mark"],
+      "script": "Man: Is that your friend? The boy in the blue shorts?\nBoy: Yes. His name is Mark.\nMan: Mark? Is that M-A-R-K?\nBoy: Yes. He wants to learn baseball, too."
+    },
+    {
+      "question": "5. How old is Bill’s friend?",
+      "answer": ["9", "nine"],
+      "script": "Man: How old is Mark?\nBoy: He’s nine.\nMan: Nine. OK. Ask him to come here, please.\nBoy: OK, Mr Page."
+    }
+  ]
+}

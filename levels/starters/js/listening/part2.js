@@ -36,6 +36,8 @@ if(!set || !test){
 finalSet = set;
 finalTest = test;
 
+const STORAGE_KEY = `listening_part2_set-${finalSet}_test-${finalTest}`;
+
 /* fallback nếu mở trực tiếp */
 if(!finalSet || !finalTest){
   finalSet = finalSet || "05";
@@ -61,13 +63,43 @@ function buildInputHTML(text){
   return text.replace(/_+/g, "<input type='text' class='inline-input'>");
 }
 
+function saveProgress() {
+  const allQuestions = document.querySelectorAll(".question");
+
+  const answers = [];
+
+  allQuestions.forEach(q => {
+    const inputs = q.querySelectorAll("input");
+    const values = Array.from(inputs).map(i => i.value.trim());
+    answers.push(values);
+  });
+
+  const data = {
+    answers: answers,
+    completed: true
+  };
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function loadProgress() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return null;
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
 /* =========================
    RENDER QUESTIONS
 ========================= */
 function renderQuestions(){
   container.innerHTML = "";
 
-  DATA.forEach((item) => {
+  DATA.forEach((item, index) => {
 
     const answers = normalizeAnswers(item.answer);
 
@@ -138,10 +170,42 @@ function renderQuestions(){
       const allAnswered = document.querySelectorAll(".question input:disabled").length === document.querySelectorAll(".question input").length;
 
       // message sending removed
+      saveProgress();
     };
 
     container.appendChild(div);
   });
+
+  // 🔥 RESTORE DATA
+const saved = loadProgress();
+
+if (saved && saved.answers) {
+  const allQuestions = document.querySelectorAll(".question");
+
+  allQuestions.forEach((q, i) => {
+    const inputs = q.querySelectorAll("input");
+    const savedValues = saved.answers[i];
+
+    if (!savedValues) return;
+
+    inputs.forEach((input, idx) => {
+      if (savedValues[idx]) {
+        input.value = savedValues[idx];
+        input.disabled = true;
+      }
+    });
+
+    const result = q.querySelector(".result");
+    const answerBtn = q.querySelector(".show-answer");
+    const scriptBtn = q.querySelector(".script-btn");
+
+    result.style.display = "block";
+    result.textContent = "✓ Restored";
+
+    answerBtn.disabled = true;
+    scriptBtn.disabled = false;
+  });
+}
 }
 
 /* =========================
@@ -194,6 +258,7 @@ fetch(jsonPath)
    RESET FUNCTION
 ========================= */
 function resetTest(){
+  localStorage.removeItem(STORAGE_KEY);
   // clear container
   const container = document.getElementById("questions");
   if(container){

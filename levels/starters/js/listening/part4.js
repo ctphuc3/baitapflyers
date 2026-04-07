@@ -205,12 +205,26 @@ function loadFromStorage() {
 
     // Restore drawing
     if (state.drawData) {
-      const imgState = new Image();
-      imgState.src = state.drawData;
-      imgState.onload = () => {
-        ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-        ctx.drawImage(imgState, 0, 0);
+      // Delay restore until canvas & base image are fully ready
+      const restoreDrawing = () => {
+        const imgState = new Image();
+        imgState.src = state.drawData;
+        imgState.onload = () => {
+          ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+          ctx.drawImage(imgState, 0, 0, drawCanvas.width, drawCanvas.height);
+        };
       };
+
+      // If image already loaded → restore immediately
+      if (img.complete && drawCanvas.width > 0) {
+        restoreDrawing();
+      } else {
+        // Otherwise wait for image load
+        img.onload = () => {
+          resizeCanvases();
+          restoreDrawing();
+        };
+      }
     }
 
     // Restore color
@@ -522,5 +536,14 @@ function showExplain(n) {
 // Restore state when page loads
 window.addEventListener("load", async () => {
   await loadPartData();
-  loadFromStorage();
+
+  // Ensure image fully loads before restoring drawing
+  if (img.complete) {
+    loadFromStorage();
+  } else {
+    img.onload = () => {
+      resizeCanvases();
+      loadFromStorage();
+    };
+  }
 });

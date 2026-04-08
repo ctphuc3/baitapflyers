@@ -107,8 +107,11 @@ if(!finalSet || !finalTest){
   if(setMatch) finalSet = setMatch[1];
   if(testMatch) finalTest = testMatch[1];
 }
+// fallback default nếu vẫn thiếu
+if(!finalSet) finalSet = "05";
+if(!finalTest) finalTest = "01";
 
-const STORAGE_KEY = `set${finalSet}_test${finalTest}_part1_state`;
+const STORAGE_KEY = `listening_part1_set-${finalSet}_test-${finalTest}`;
 
 if(finalSet && finalTest){
   console.log("Loading JSON with:", finalSet, finalTest);

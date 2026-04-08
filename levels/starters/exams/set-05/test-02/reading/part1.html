@@ -466,7 +466,6 @@ document.querySelectorAll('.question-box:not(.example)').forEach((box, index) =>
 
 // Reset button
 document.getElementById('resetTest').onclick = () => {
-  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài test?')) return;
 
   clearState();
   localStorage.removeItem('skillbuilder_unit2_reading_part1_done');

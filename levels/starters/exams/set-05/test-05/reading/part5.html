@@ -425,7 +425,7 @@ boxes.forEach((box, index) => {
 const resetBtn = document.getElementById('resetTest');
 if (resetBtn) {
   resetBtn.onclick = () => {
-    if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài?')) return;
+
     clearState();
     notifyParentReset();
     location.reload();

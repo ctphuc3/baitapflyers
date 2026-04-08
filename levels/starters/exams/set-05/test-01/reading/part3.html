@@ -565,7 +565,6 @@ document.querySelectorAll('.question-box:not(.example-box)').forEach((box, qInde
 
 // reset
 document.getElementById('resetTest').onclick = () => {
-  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài tập?')) return;
   clearState();
   notifyParentReset();
   location.reload();

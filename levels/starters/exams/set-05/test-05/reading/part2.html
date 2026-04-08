@@ -547,7 +547,6 @@ document.addEventListener('click', () => {
 
 // Reset button
 document.getElementById('resetTest').onclick = () => {
-  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài tập?')) return;
   clearState();
   localStorage.removeItem('skillbuilder_unit2_reading_part2_done');
   notifyParentReset();

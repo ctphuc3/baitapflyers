@@ -374,7 +374,6 @@ document.querySelectorAll('.blank').forEach((blank, index) => {
 
 // Reset button
 document.getElementById('resetLesson').onclick = () => {
-  if (!confirm('Bạn có chắc muốn làm lại toàn bộ bài học?')) return;
   clearState();
   notifyParentReset();
   location.reload();

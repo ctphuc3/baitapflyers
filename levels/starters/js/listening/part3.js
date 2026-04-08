@@ -198,7 +198,6 @@ questions.forEach((q, qIndex) => {
 // updateProgress();  <-- removed as per instructions
 
 function doResetTest() {
-  if (!confirm("Reset toàn bộ bài?")) return;
 
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(DONE_KEY);

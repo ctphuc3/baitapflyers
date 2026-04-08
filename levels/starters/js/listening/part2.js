@@ -36,13 +36,12 @@ if(!set || !test){
 finalSet = set;
 finalTest = test;
 
-const STORAGE_KEY = `listening_part2_set-${finalSet}_test-${finalTest}`;
-
 /* fallback nếu mở trực tiếp */
 if(!finalSet || !finalTest){
   finalSet = finalSet || "05";
   finalTest = finalTest || "01";
 }
+const STORAGE_KEY = `listening_part2_set-${finalSet}_test-${finalTest}`;
 
 /* =========================
    DOM

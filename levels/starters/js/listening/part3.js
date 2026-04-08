@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML += renderQuestion(q, false, i+1);
       });
 
-      initPart3();
+      initPart3(finalSet, finalTest);
     })
     .catch(err => {
       console.error(err);
@@ -73,9 +73,9 @@ function renderQuestion(q, isExample=false, index=null){
   </div>
   `;
 }
-function initPart3(){
-const STORAGE_KEY = "skillbuilder_unit1_listening_part3_state";
-const DONE_KEY = "skillbuilder_unit1_listening_part3_done";
+function initPart3(finalSet, finalTest){
+const STORAGE_KEY = `listening_part3_${finalSet}_${finalTest}`;
+const DONE_KEY = `listening_part3_done_${finalSet}_${finalTest}`;
 
 const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
 
@@ -93,15 +93,10 @@ function updateProgress(){
   }
 }
 
-// Expose resetTest globally via custom event
+// Expose resetTest globally
 window.resetTest = function(){
-  const event = new Event('resetPart3');
-  document.dispatchEvent(event);
-// Listen for global reset event (only once)
-document.addEventListener('resetPart3', () => {
-  resetTest();
-});
-}
+  doResetTest();
+};
 
 const example = document.querySelector(".question.example");
 
@@ -202,7 +197,7 @@ questions.forEach((q, qIndex) => {
 // check on load
 // updateProgress();  <-- removed as per instructions
 
-function resetTest() {
+function doResetTest() {
   if (!confirm("Reset toàn bộ bài?")) return;
 
   localStorage.removeItem(STORAGE_KEY);

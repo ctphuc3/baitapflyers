@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 2 - Around Town</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #cfefff, #eaf8ff);
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Title */
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #2c6fa3;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #4a90c2;
+}
+
+/* Section */
+.section {
+  margin-top: 25px;
+}
+
+.section h2 {
+  color: #2c6fa3;
+}
+
+/* Matching layout */
+  .match-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+select {
+  padding: 5px;
+  border-radius: 8px;
+}
+
+/* Images */
+  .img-box {
+    height: 110px;
+    border-radius: 14px;
+    background: #dfefff;
+    border: 2px dashed #9cc9e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: #2c6fa3;
+  }
+
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .label-letter {
+    font-weight: bold;
+    margin-right: 6px;
+  }
+
+/* Input */
+input {
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Button */
+.btn {
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #4aa3df;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #2c6fa3;
+}
+
+/* Result */
+.correct {
+  color: green;
+}
+
+.wrong {
+  color: red;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="title">Unit 2: Around Town</div>
+    <div class="subtitle">Lesson 1: Places to Go</div>
+
+    <!-- MATCH -->
+    <div class="section">
+      <h2>A. Match</h2>
+
+      <div class="match-grid">
+
+        <!-- LEFT: questions -->
+        <div class="left">
+          <div class="item">1. movie theater 
+            <select id="q1"></select>
+          </div>
+
+          <div class="item">2. post office 
+            <select id="q2"></select>
+          </div>
+
+          <div class="item">3. library 
+            <select id="q3"></select>
+          </div>
+
+          <div class="item">4. supermarket 
+            <select id="q4"></select>
+          </div>
+
+          <div class="item">5. department store 
+            <select id="q5"></select>
+          </div>
+
+          <div class="item">6. park 
+            <select id="q6"></select>
+          </div>
+        </div>
+
+        <!-- RIGHT: image grid -->
+        <div class="img-grid">
+          <div class="img-box"><span class="label-letter">a.</span></div>
+          <div class="img-box"><span class="label-letter">b.</span></div>
+          <div class="img-box"><span class="label-letter">c.</span></div>
+          <div class="img-box"><span class="label-letter">d.</span></div>
+          <div class="img-box"><span class="label-letter">e.</span></div>
+          <div class="img-box"><span class="label-letter">f.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- UNSCRAMBLE -->
+    <div class="section">
+      <h2>B. Unscramble</h2>
+
+      <div>1. edrtnpmaet rtsoe → <input id="u1"></div><br>
+      <div>2. biarlry → <input id="u2"></div><br>
+      <div>3. ovemi tahtere → <input id="u3"></div><br>
+      <div>4. sotp efofic → <input id="u4"></div><br>
+      <div>5. tesaeurrpnk → <input id="u5"></div><br>
+      <div>6. kpar → <input id="u6"></div>
+    </div>
+
+    <!-- CIRCLE -->
+    <div class="section">
+      <h2>C. Circle</h2>
+
+      <div>1. Where’s the post office?</div>
+      <div>
+        <label><input type="radio" name="c1"> It’s across from the library.</label><br>
+        <label><input type="radio" name="c1"> It’s across from the park.</label>
+      </div><br>
+
+      <div>2. Where’s the park?</div>
+      <div>
+        <label><input type="radio" name="c2"> It’s across from the department store.</label><br>
+        <label><input type="radio" name="c2"> It’s across from the supermarket.</label>
+      </div><br>
+
+      <div>3. Where’s the department store?</div>
+      <div>
+        <label><input type="radio" name="c3"> It’s across from the movie theater.</label><br>
+        <label><input type="radio" name="c3"> It’s across from the post office.</label>
+      </div>
+    </div>
+
+    <!-- WRITE -->
+    <div class="section">
+      <h2>D. Write</h2>
+
+      <div>1. Where’s the department store?</div>
+      <input placeholder="It's ______ the ______ and the ______"><br><br>
+
+      <div>2.</div>
+      <input placeholder="Write your answer here..."><br><br>
+
+      <div>3.</div>
+      <input placeholder="Write your answer here...">
+    </div>
+
+    <!-- READ AND MATCH -->
+    <div class="section">
+      <h2>E. Read and match</h2>
+
+      <div class="item">
+        1. The department store is across from the supermarket.
+        <select id="e1"></select>
+      </div>
+
+      <div class="item">
+        2. The library is between the park and the post office.
+        <select id="e2"></select>
+      </div>
+
+      <div class="item">
+        3. The park is across from the movie theater.
+        <select id="e3"></select>
+      </div>
+
+      <div class="right" style="margin-top:15px;">
+        <div class="img-box">A</div>
+        <div class="img-box">B</div>
+        <div class="img-box">C</div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="checkAnswers()">Check Answers</button>
+
+    <div id="result"></div>
+
+  </div>
+</div>
+
+<script>
+
+// auto fill select options
+document.querySelectorAll("select").forEach(sel=>{
+  if(sel.options.length <=1){
+    ["","a","b","c","d","e","f"].forEach(v=>{
+      let opt = document.createElement("option");
+      opt.value = v;
+      opt.text = v;
+      sel.appendChild(opt);
+    });
+  }
+});
+
+function checkAnswers(){
+  let score = 0;
+
+  const answers = {
+    q1:"f",
+    q2:"b",
+    q3:"e",
+    q4:"a",
+    q5:"d",
+    q6:"c",
+
+    u1:"department store",
+    u2:"library",
+    u3:"movie theater",
+    u4:"post office",
+    u5:"supermarket",
+    u6:"park"
+  };
+
+  let total = 12;
+
+  for(let key in answers){
+    let input = document.getElementById(key);
+    if(!input) continue;
+
+    if(input.value.toLowerCase().trim() === answers[key]){
+      score++;
+      input.style.border = "2px solid green";
+    } else {
+      input.style.border = "2px solid red";
+    }
+  }
+
+  document.getElementById("result").innerHTML =
+    `<h3>Score: ${score}/${total}</h3>`;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+/* ===== GLOBAL THEME (KHÔNG ĐỤNG FILE CŨ) ===== */
+
+/* ===== VARIABLES ===== */
+:root {
+  --bg-main: linear-gradient(135deg, #e6eef7, #cfd9e6);
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --card-radius: 20px;
+  --card-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  --text-main: #222;
+  --text-sub: #666;
+  --blur: blur(10px);
+}
+
+/* ===== GLOBAL RESET ===== */
+body {
+  background: var(--bg-main);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* ===== CARD SYSTEM (DÙNG CHUNG TOÀN BỘ) ===== */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--card-shadow);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 140px;
+  padding: 20px;
+
+  transition: all 0.25s ease;
+}
+
+/* ===== HOVER EFFECT ===== */
+.card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* ===== TEXT ===== */
+.card div:first-child {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.subtext {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-sub);
+}
+
+/* ===== GRID LAYOUT (DÙNG CHO MỌI BÀI) ===== */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* ===== BUTTON STYLE (CHO SAU NÀY) ===== */
+.btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+/* ===== TITLE ===== */
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px;
+}
+
+/* ===== INPUT (CHO FILL / WRITE) ===== */
+input, textarea {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 8px 10px;
+  font-size: 16px;
+}
+
+/* ===== HIGHLIGHT ===== */
+.correct {
+  color: green;
+  font-weight: bold;
+}
+
+.wrong {
+  color: red;
+  font-weight: bold;
+}

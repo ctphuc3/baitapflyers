@@ -467,7 +467,7 @@ function resetCanvas() {
     // 6. Xóa toàn bộ dữ liệu lưu
     // Only clear when user explicitly resets (keep correct key)
     localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem('skillbuilder_unit1_listening_part4_done');
+    localStorage.removeItem(STORAGE_KEY + '_done');
 
     // 7. Mở khóa tương tác
     interactionLocked = false;
@@ -544,7 +544,7 @@ function toggleAnswer() {
   answerBtn.classList.remove("audio-finished");
   // change icon to unlocked lock after clicking
   answerBtn.textContent = "🔓";
-  localStorage.setItem('skillbuilder_unit1_listening_part4_done', 'true');
+  localStorage.setItem(STORAGE_KEY + '_done', 'true');
 
   explainPanel.scrollIntoView({ behavior: "smooth", block: "start" });
   saveToStorage();

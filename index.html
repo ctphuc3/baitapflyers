@@ -1057,182 +1057,140 @@ function showCurrentLessons() {
   });
 }
 
+/* ===== OPTIMIZED STARTERS (KEEP LABELS) ===== */
+
+const STARTERS_DATA = {
+  "Lessons": Array.from({ length: 15 }, (_, i) => `Unit ${i + 1}`),
+  "Exam": {
+    "Authentic Exam": [1, 2, 3, 4],
+    "Skills builder": [1, 2, 3, 4, 5]
+  }
+};
+
+function renderCardsAdvanced(items, renderer) {
+  clearContent();
+  items.forEach(item => {
+    const card = renderer(item);
+    contentArea.appendChild(card);
+  });
+}
+
+function createCard(title, sub = "", onClick = null) {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.cursor = "pointer";
+
+  const t = document.createElement("div");
+  t.textContent = title;
+
+  card.appendChild(t);
+
+  if (sub) {
+    const s = document.createElement("div");
+    s.className = "subtext";
+    s.textContent = sub;
+    card.appendChild(s);
+  }
+
+  if (onClick) card.onclick = onClick;
+
+  return card;
+}
+
 function showStartersRoot() {
-  clearContent();
-  ["Lessons", "Exam"].forEach(label => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.textContent = label;
-    card.onclick = () => {
-      if (label === "Lessons") showStartersLessons();
-      if (label === "Exam") showStartersExams();
-    };
-    contentArea.appendChild(card);
-  });
-}
+  renderCardsAdvanced(Object.keys(STARTERS_DATA), section =>
+    createCard(section, "", () => {
 
-function showStartersLessons() {
-  clearContent();
-  for (let i = 1; i <= 15; i++) {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.textContent = `Unit ${i}`;
-    contentArea.appendChild(card);
-  }
-}
+      // ===== LESSONS =====
+      if (section === "Lessons") {
+        renderCardsAdvanced(STARTERS_DATA.Lessons, unit =>
+          createCard(unit)
+        );
+      }
 
-function showStartersExams() {
-  clearContent();
-  for (let i = 1; i <= 4; i++) {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.textContent = `Authentic Exam ${i}`;
-    card.onclick = () => showExamTests(i);
-    contentArea.appendChild(card);
-    // (KHÔNG push SEARCH_INDEX ở đây nữa)
-  }
-  // ===== SKILLBUILDER CARD =====
-  const skillCard = document.createElement("div");
-  skillCard.className = "card";
+      // ===== EXAM =====
+      if (section === "Exam") {
+        renderCardsAdvanced(Object.keys(STARTERS_DATA.Exam), type =>
+          createCard(type, "", () => {
 
-  const skillTitle = document.createElement("div");
-  skillTitle.textContent = "Skills builder";
+            // AUTHENTIC
+            if (type === "Authentic Exam") {
+              renderCardsAdvanced(STARTERS_DATA.Exam[type], exam =>
+                createCard(`Authentic Exam ${exam}`, "", () => {
 
-  const skillSub = document.createElement("div");
-  skillSub.className = "subtext";
-  skillSub.textContent = "Starters";
+                  renderCardsAdvanced([1,2,3], test =>
+                    createCard(`Test ${test}`, `Authentic Starters ${exam}`, () => {
 
-  skillCard.appendChild(skillTitle);
-  skillCard.appendChild(skillSub);
+                      renderCardsAdvanced(
+                        ["Listening", "Reading & Writing", "Speaking"],
+                        skill => {
+                          const url = getSkillLink(skill, exam, test);
 
-  skillCard.onclick = () => showSkillbuilderUnits();
+                          return createCard(
+                            skill,
+                            `(Authentic Exam ${exam} · Test ${test})`,
+                            () => {
+                              saveRecentLesson({
+                                label: skill,
+                                meta: `Authentic Exam ${exam} · Test ${test}`,
+                                url
+                              });
+                              window.open(url, "_blank");
+                            }
+                          );
+                        }
+                      );
 
-  contentArea.appendChild(skillCard);
-}
+                    })
+                  );
 
-function showExamTests(examNumber) {
-  clearContent();
-  for (let i = 1; i <= 3; i++) {
-    const testNumber = i;
-    const card = document.createElement("div");
-    card.className = "card";
+                })
+              );
+            }
 
-    const title = document.createElement("div");
-    title.textContent = `Test ${i}`;
+            // SKILLS BUILDER
+            if (type === "Skills builder") {
+              renderCardsAdvanced(STARTERS_DATA.Exam[type], unit =>
+                createCard(`Unit ${unit}`, "(Skills builder)", () => {
 
-    const sub = document.createElement("div");
-    sub.className = "subtext";
-    sub.textContent = `Authentic Starters ${examNumber}`;
+                  renderCardsAdvanced(
+                    ["Listening", "Reading & Writing"],
+                    skill => {
 
-    card.appendChild(title);
-    card.appendChild(sub);
+                      const slug = skill === "Listening" ? "listening" : "reading";
 
-    card.onclick = () => showTestSections(examNumber, testNumber);
+                      const baseFile = slug === "listening"
+                        ? "listening-main.html"
+                        : "reading-main.html";
 
-    contentArea.appendChild(card);
-    // (KHÔNG push SEARCH_INDEX ở đây nữa)
-  }
-}
+                      const url =
+                        `levels/starters/exams/${baseFile}?type=skill-builder&unit=${unit}&set=05&test=${String(unit).padStart(2,"0")}&skill=${slug}`;
 
-function showSkillbuilderUnits() {
-  clearContent();
+                      return createCard(
+                        skill,
+                        `(Skills builder · Unit ${unit})`,
+                        () => {
+                          saveRecentLesson({
+                            label: skill,
+                            meta: `Skills builder · Unit ${unit}`,
+                            url
+                          });
+                          window.open(url, "_blank");
+                        }
+                      );
+                    }
+                  );
 
-  for (let i = 1; i <= 5; i++) {
-    const card = document.createElement("div");
-    card.className = "card";
+                })
+              );
+            }
 
-    const title = document.createElement("div");
-    title.textContent = `Unit ${i}`;
+          })
+        );
+      }
 
-    const sub = document.createElement("div");
-    sub.className = "subtext";
-    sub.textContent = "(Skills builder)";
-
-    card.appendChild(title);
-    card.appendChild(sub);
-
-    card.style.cursor = "pointer";
-    card.onclick = () => showSkillbuilderSections(i);
-
-    contentArea.appendChild(card);
-  }
-}
-
-function showSkillbuilderSections(unitNumber) {
-  clearContent();
-
-  ["Listening", "Reading & Writing"].forEach(skill => {
-    const card = document.createElement("div");
-    card.className = "card";
-
-    const title = document.createElement("div");
-    title.textContent = skill;
-
-    const sub = document.createElement("div");
-    sub.className = "subtext";
-    sub.textContent = `(Skills builder · Unit ${unitNumber})`;
-
-    card.appendChild(title);
-    card.appendChild(sub);
-
-    card.style.cursor = "pointer";
-
-    let skillSlug = "";
-
-    if (skill === "Listening") {
-      skillSlug = "listening";
-    } else if (skill === "Reading & Writing") {
-      skillSlug = "reading";
-    }
-
-    const url = `levels/starters/exams/listening-main.html?type=skill-builder&unit=${unitNumber}&set=05&test=${String(unitNumber).padStart(2,"0")}&skill=${skillSlug}`;
-
-    card.onclick = () => {
-      saveRecentLesson({
-        label: skill,
-        meta: `Skills builder · Unit ${unitNumber}`,
-        url: url
-      });
-      window.open(url, "_blank");
-    };
-
-    contentArea.appendChild(card);
-  });
-}
-
-// ===== B) SỬA HÀM showTestSections() ĐỂ GẮN LINK =====
-function showTestSections(examNumber, testNumber) {
-  clearContent();
-
-  ["Listening", "Reading & Writing", "Speaking"].forEach(label => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style.cursor = "pointer";
-
-    const title = document.createElement("div");
-    title.textContent = label;
-
-    const sub = document.createElement("div");
-    sub.className = "subtext";
-    sub.textContent = `(Authentic Exam ${examNumber} · Test ${testNumber})`;
-
-    card.appendChild(title);
-    card.appendChild(sub);
-
-    const url = getSkillLink(label, examNumber, testNumber);
-
-    card.onclick = () => {
-      saveRecentLesson({
-        label: label,
-        meta: `Authentic Exam ${examNumber} · Test ${testNumber}`,
-        url: url
-      });
-      window.open(url, "_blank");
-    };
-
-    // (KHÔNG push SEARCH_INDEX ở đây nữa)
-    contentArea.appendChild(card);
-  });
+    })
+  );
 }
 
 // ===== C) HÀM HIỂN THỊ KẾT QUẢ SEARCH =====
@@ -1309,14 +1267,99 @@ recentMenu.addEventListener("click", () => {
 });
 
 const moversMenu = document.getElementById("menu-movers");
-const flyersMenu = document.getElementById("menu-flyers");
 
+// ===== DATA STRUCTURE =====
+const MOVERS_DATA = {
+  Foundation: {
+    "Everybody Up 3": {
+      "Unit 1": [],
+      "Unit 2": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"]
+    },
+    "Everybody Up 4": []
+  },
+  Exam: {}
+};
+
+// ===== GENERIC RENDER FUNCTION =====
+function renderCards(items, onClick) {
+  clearContent();
+
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.textContent = item;
+
+    card.onclick = () => onClick(item);
+
+    contentArea.appendChild(card);
+  });
+}
+
+// ===== MOVERS ROOT =====
 moversMenu.addEventListener("click", () => {
   contentArea.classList.remove("recent-mode");
   document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
   moversMenu.classList.add("active");
-  setThemeColor([0.58, 0.48, 0.82]); // tím đậm, phân cấp mạnh
-  clearContent();
+  setThemeColor([0.58, 0.48, 0.82]);
+
+  renderCards(Object.keys(MOVERS_DATA), level => {
+
+    if (level === "Exam") {
+      console.log("Movers Exam");
+      return;
+    }
+
+  renderCards(Object.keys(MOVERS_DATA[level]), course => {
+
+    const units = MOVERS_DATA[level][course];
+
+    renderCards(Object.keys(units), unit => {
+
+      const lessons = units[unit];
+
+      // If no lessons → keep old behavior
+      if (!lessons || lessons.length === 0) {
+        console.log("Movers:", level, course, unit);
+        return;
+      }
+
+      // If has lessons → render lessons WITH LINK (no deeper UI)
+      clearContent();
+
+      lessons.forEach((lesson, index) => {
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const title = document.createElement("div");
+        title.textContent = lesson;
+
+        const sub = document.createElement("div");
+        sub.className = "subtext";
+        sub.textContent = `(${course} - ${unit})`;
+
+        card.appendChild(title);
+        card.appendChild(sub);
+
+        // 🔥 CREATE LINK (auto based on structure)
+        const lessonNumber = index + 1;
+        const unitNumber = unit.replace("Unit ", "");
+
+        const url = `levels/movers/eu3/unit-${unitNumber}/lesson-${lessonNumber}.html`;
+
+        card.onclick = () => {
+          window.open(url, "_blank");
+        };
+
+        contentArea.appendChild(card);
+
+      });
+
+    });
+
+  });
+
+  });
 });
 
 flyersMenu.addEventListener("click", () => {

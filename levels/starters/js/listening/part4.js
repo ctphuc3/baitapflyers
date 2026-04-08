@@ -183,11 +183,13 @@ answerImg.onload = () => {
 };
 
 // ==== LOCALSTORAGE HELPERS ====
-const STORAGE_KEY = "skillbuilder_unit2_listening_part4_state";
+// Use dynamic key based on URL so each test/unit is saved separately
+const STORAGE_KEY = "part4_state_" + window.location.pathname + window.location.search;
 
 function saveToStorage() {
   const state = {
-    drawData: drawCanvas.toDataURL(),
+    drawData: drawCanvas.width > 0 && drawCanvas.height > 0 ? drawCanvas.toDataURL() : null,
+    imageSrc: img.src,
     currentColor,
     textInput: textInput.value,
     answerVisible,
@@ -203,8 +205,8 @@ function loadFromStorage() {
   try {
     const state = JSON.parse(raw);
 
-    // Restore drawing
-    if (state.drawData) {
+    // Restore drawing ONLY if same image (avoid mismatch between different tests)
+    if (state.drawData && state.imageSrc === img.src) {
       // Delay restore until canvas & base image are fully ready
       const restoreDrawing = () => {
         const imgState = new Image();
@@ -215,15 +217,25 @@ function loadFromStorage() {
         };
       };
 
-      // If image already loaded → restore immediately
-      if (img.complete && drawCanvas.width > 0) {
+      // ALWAYS restore AFTER resize (avoid canvas being cleared)
+      const doRestore = () => {
+        resizeCanvases();
         restoreDrawing();
+      };
+
+      // Ensure BOTH image + canvas size are ready before restoring
+      const waitForCanvasReady = () => {
+        if (drawCanvas.width > 0 && drawCanvas.height > 0) {
+          doRestore();
+        } else {
+          requestAnimationFrame(waitForCanvasReady);
+        }
+      };
+
+      if (img.complete) {
+        waitForCanvasReady();
       } else {
-        // Otherwise wait for image load
-        img.onload = () => {
-          resizeCanvases();
-          restoreDrawing();
-        };
+        img.addEventListener("load", waitForCanvasReady, { once: true });
       }
     }
 
@@ -256,10 +268,19 @@ function loadFromStorage() {
 
 function resizeCanvases() {
   // Preserve current drawing before resizing (otherwise canvas resize clears it)
+  // IMPORTANT: do NOT capture empty canvas (prevents overwriting saved data)
   let savedDrawing = null;
-  if (drawCanvas && drawCanvas.width && drawCanvas.height) {
+  if (
+    drawCanvas &&
+    drawCanvas.width > 0 &&
+    drawCanvas.height > 0
+  ) {
     try {
-      savedDrawing = drawCanvas.toDataURL();
+      const data = drawCanvas.toDataURL();
+      // Only keep if not blank (basic check)
+      if (data.length > 1000) {
+        savedDrawing = data;
+      }
     } catch(e) {}
   }
   const canvasArea = document.querySelector(".canvas-area");
@@ -297,8 +318,8 @@ function resizeCanvases() {
   imgCtx.clearRect(0, 0, displayW, displayH);
   imgCtx.drawImage(img, 0, 0, displayW, displayH);
 
-  // Restore drawing after resize
-  if (savedDrawing) {
+  // Restore drawing after resize ONLY if no saved state exists
+  if (!localStorage.getItem(STORAGE_KEY) && savedDrawing) {
     const restoreImg = new Image();
     restoreImg.src = savedDrawing;
     restoreImg.onload = () => {
@@ -334,6 +355,24 @@ function resizeCanvases() {
       0, 0, displayW, displayH
     );
   }
+
+  // Ensure drawing is restored from localStorage after resize (prevents losing color on reload)
+  const rawState = localStorage.getItem(STORAGE_KEY);
+  if (rawState) {
+    try {
+      const state = JSON.parse(rawState);
+      if (state.drawData) {
+        const restoreImg = new Image();
+        restoreImg.src = state.drawData;
+        restoreImg.onload = () => {
+          ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+          ctx.drawImage(restoreImg, 0, 0, drawCanvas.width, drawCanvas.height);
+        };
+      }
+    } catch (e) {
+      console.warn("Resize restore failed:", e);
+    }
+  }
 }
 
 let painting = false;
@@ -346,7 +385,8 @@ let colorCount = 0;
 img.onload = () => {
   resizeCanvases();
   history = [];
-  saveState();
+
+  // DO NOT save empty state on load (this was overwriting stored drawing)
 
   // Nếu ảnh đáp án đã load trước đó thì vẽ lại
   if (answerImg.complete) {
@@ -375,6 +415,13 @@ drawCanvas.addEventListener("mousedown", () => {
 drawCanvas.addEventListener("mouseup", () => {
   painting = false;
   saveToStorage();
+});
+
+// Extra safety: save continuously while drawing (prevents data loss on reload)
+drawCanvas.addEventListener("mousemove", () => {
+  if (painting) {
+    saveToStorage();
+  }
 });
 drawCanvas.addEventListener("mouseleave", () => painting = false);
 
@@ -418,6 +465,7 @@ function resetCanvas() {
     answerBtn.classList.remove("audio-finished");
 
     // 6. Xóa toàn bộ dữ liệu lưu
+    // Only clear when user explicitly resets (keep correct key)
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem('skillbuilder_unit1_listening_part4_done');
 
@@ -537,13 +585,24 @@ function showExplain(n) {
 window.addEventListener("load", async () => {
   await loadPartData();
 
-  // Ensure image fully loads before restoring drawing
-  if (img.complete) {
-    loadFromStorage();
-  } else {
-    img.onload = () => {
-      resizeCanvases();
+  // Always ensure resize happens BEFORE restore
+  const doLoad = () => {
+    resizeCanvases();
+
+    // Delay restore slightly to ensure canvas is fully stable
+    setTimeout(() => {
       loadFromStorage();
-    };
+    }, 50);
+  };
+
+  if (img.complete) {
+    doLoad();
+  } else {
+    img.addEventListener("load", doLoad, { once: true });
   }
+});
+
+// Ensure state is saved before page reload / close
+window.addEventListener("beforeunload", () => {
+  saveToStorage();
 });

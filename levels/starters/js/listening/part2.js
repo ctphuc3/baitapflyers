@@ -199,8 +199,9 @@ if (saved && saved.answers) {
     const answerBtn = q.querySelector(".show-answer");
     const scriptBtn = q.querySelector(".script-btn");
 
-    result.style.display = "block";
-    result.textContent = "✓ Restored";
+    // Do not show restored message, just keep UI clean
+    result.style.display = "none";
+    result.textContent = "";
 
     answerBtn.disabled = true;
     scriptBtn.disabled = false;

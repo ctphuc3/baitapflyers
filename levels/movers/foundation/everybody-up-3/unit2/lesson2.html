@@ -122,6 +122,21 @@ button:hover {
   font-size: 18px;
   margin: 10px 0;
 }
+
+.correct {
+  background: #d4f8d4;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.wrong {
+  background: #ffd6d6;
+  border-radius: 8px;
+  padding: 4px;
+}
+.char-wrong {
+  background: #ffb3b3;
+}
 </style>
 </head>
 
@@ -140,10 +155,10 @@ button:hover {
   <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-a.png">
 </div>
 <div class="options">
-<label><input type="radio" name="a1"> buy groceries</label>
-<label><input type="radio" name="a1"> kick a ball</label>
-<label><input type="radio" name="a1"> borrow books</label>
-<label><input type="radio" name="a1"> mail a letter</label>
+<label><input type="radio" name="a1" value="buy groceries"> buy groceries</label>
+<label><input type="radio" name="a1" value="kick a ball"> kick a ball</label>
+<label><input type="radio" name="a1" value="borrow books"> borrow books</label>
+<label><input type="radio" name="a1" value="mail a letter"> mail a letter</label>
 </div>
 </div>
 
@@ -152,10 +167,10 @@ button:hover {
   <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-b.png">
 </div>
 <div class="options">
-<label><input type="radio" name="a2"> kick a ball</label>
-<label><input type="radio" name="a2"> shop</label>
-<label><input type="radio" name="a2"> borrow books</label>
-<label><input type="radio" name="a2"> watch a movie</label>
+<label><input type="radio" name="a2" value="kick a ball"> kick a ball</label>
+<label><input type="radio" name="a2" value="shop"> shop</label>
+<label><input type="radio" name="a2" value="borrow books"> borrow books</label>
+<label><input type="radio" name="a2" value="watch a movie"> watch a movie</label>
 </div>
 </div>
 
@@ -164,10 +179,10 @@ button:hover {
   <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c.png">
 </div>
 <div class="options">
-<label><input type="radio" name="a3"> watch a movie</label>
-<label><input type="radio" name="a3"> kick a ball</label>
-<label><input type="radio" name="a3"> shop</label>
-<label><input type="radio" name="a3"> buy groceries</label>
+<label><input type="radio" name="a3" value="watch a movie"> watch a movie</label>
+<label><input type="radio" name="a3" value="kick a ball"> kick a ball</label>
+<label><input type="radio" name="a3" value="shop"> shop</label>
+<label><input type="radio" name="a3" value="buy groceries"> buy groceries</label>
 </div>
 </div>
 
@@ -176,36 +191,38 @@ button:hover {
   <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-d.png">
 </div>
 <div class="options">
-<label><input type="radio" name="a4"> mail letters</label>
-<label><input type="radio" name="a4"> buy groceries</label>
-<label><input type="radio" name="a4"> watch a movie</label>
-<label><input type="radio" name="a4"> shop</label>
+<label><input type="radio" name="a4" value="mail letters"> mail letters</label>
+<label><input type="radio" name="a4" value="buy groceries"> buy groceries</label>
+<label><input type="radio" name="a4" value="watch a movie"> watch a movie</label>
+<label><input type="radio" name="a4" value="shop"> shop</label>
 </div>
 </div>
 
 </div>
+<button onclick="checkA()">Check Answers</button>
 
 <!-- B -->
 <div class="section">
 <h2>B. Look and Circle</h2>
 
 <div class="q">1. What’s she doing at the supermarket?</div>
-<label><input type="radio" name="b1"> She’s buying groceries.</label>
-<label><input type="radio" name="b1"> He’s watching a movie.</label>
+<label><input type="radio" name="b1" value="buy"> She’s buying groceries.</label>
+<label><input type="radio" name="b1" value="watch"> He’s watching a movie.</label>
 
 <div class="q">2. What’s he doing at the library?</div>
-<label><input type="radio" name="b2"> He’s borrowing books.</label>
-<label><input type="radio" name="b2"> She’s kicking a ball.</label>
+<label><input type="radio" name="b2" value="borrow"> He’s borrowing books.</label>
+<label><input type="radio" name="b2" value="kick"> She’s kicking a ball.</label>
 
 <div class="q">3. What’s she doing at the park?</div>
-<label><input type="radio" name="b3"> She’s kicking a ball.</label>
-<label><input type="radio" name="b3"> He’s shopping.</label>
+<label><input type="radio" name="b3" value="kick"> She’s kicking a ball.</label>
+<label><input type="radio" name="b3" value="shop"> He’s shopping.</label>
 
 <div class="q">4. What’s he doing at the post office?</div>
-<label><input type="radio" name="b4"> He’s mailing a letter.</label>
-<label><input type="radio" name="b4"> He’s watching a movie.</label>
+<label><input type="radio" name="b4" value="mail"> He’s mailing a letter.</label>
+<label><input type="radio" name="b4" value="watch"> He’s watching a movie.</label>
 
 </div>
+<button onclick="checkB()">Check Answers</button>
 
 <!-- C -->
 <div class="section">
@@ -228,8 +245,8 @@ button:hover {
     <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-2.png">
   </div>
   <div style="flex:1">
-    <input class="line" placeholder="What are they doing...?">
-    <input class="line" placeholder="They’re...">
+    <input id="c2q" class="line" placeholder="What are they doing...?">
+    <input id="c2a" class="line" placeholder="They’re...">
   </div>
 </div>
 
@@ -239,8 +256,8 @@ button:hover {
     <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-3.png">
   </div>
   <div style="flex:1">
-    <input class="line" placeholder="Write the question...">
-    <input class="line" placeholder="Write the answer...">
+    <input id="c3q" class="line" placeholder="Write the question...">
+    <input id="c3a" class="line" placeholder="Write the answer...">
   </div>
 </div>
 
@@ -250,8 +267,8 @@ button:hover {
     <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-4.png">
   </div>
   <div style="flex:1">
-    <input class="line" placeholder="Write the question...">
-    <input class="line" placeholder="Write the answer...">
+    <input id="c4q" class="line" placeholder="Write the question...">
+    <input id="c4a" class="line" placeholder="Write the answer...">
   </div>
 </div>
 
@@ -261,8 +278,8 @@ button:hover {
     <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-5.png">
   </div>
   <div style="flex:1">
-    <input class="line" placeholder="Write the question...">
-    <input class="line" placeholder="Write the answer...">
+    <input id="c5q" class="line" placeholder="Write the question...">
+    <input id="c5a" class="line" placeholder="Write the answer...">
   </div>
 </div>
 
@@ -272,17 +289,117 @@ button:hover {
     <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-6.png">
   </div>
   <div style="flex:1">
-    <input class="line" placeholder="Write the question...">
-    <input class="line" placeholder="Write the answer...">
+    <input id="c6q" class="line" placeholder="Write the question...">
+    <input id="c6a" class="line" placeholder="Write the answer...">
   </div>
 </div>
 
 </div>
-
-<button onclick="alert('Check logic coming next')">Check Answers</button>
+<button onclick="checkC()">Check Answers</button>
 
 </div>
 </div>
 
 </body>
+<script>
+function checkA() {
+  const answers = {
+    a1: "buy groceries",
+    a2: "borrow books",
+    a3: "kick a ball",
+    a4: "mail letters"
+  };
+
+  Object.keys(answers).forEach(q => {
+    const options = document.querySelectorAll(`input[name="${q}"]`);
+    options.forEach(opt => {
+      const label = opt.parentElement;
+      label.classList.remove("correct", "wrong");
+
+      if (opt.value === answers[q]) {
+        label.classList.add("correct");
+      }
+
+      if (opt.checked && opt.value !== answers[q]) {
+        label.classList.add("wrong");
+      }
+    });
+  });
+}
+
+function checkB() {
+  const answers = {
+    b1: "buy",
+    b2: "borrow",
+    b3: "kick",
+    b4: "mail"
+  };
+
+  Object.keys(answers).forEach(q => {
+    const options = document.querySelectorAll(`input[name="${q}"]`);
+    options.forEach(opt => {
+      const label = opt.parentElement;
+      label.classList.remove("correct", "wrong");
+
+      if (opt.value === answers[q]) {
+        label.classList.add("correct");
+      }
+
+      if (opt.checked && opt.value !== answers[q]) {
+        label.classList.add("wrong");
+      }
+    });
+  });
+}
+
+function highlightDiff(inputEl, correctText) {
+  const userWords = inputEl.value.trim().split(/\s+/);
+  const correctWords = correctText.trim().split(/\s+/);
+
+  let result = "";
+  const maxLen = Math.max(userWords.length, correctWords.length);
+
+  for (let i = 0; i < maxLen; i++) {
+    const uWord = userWords[i] || "";
+    const cWord = correctWords[i] || "";
+
+    if (uWord === cWord) {
+      result += uWord + " "; // đúng → giữ nguyên
+    } else {
+      if (uWord) {
+        result += `<span class="char-wrong">${uWord}</span> `;
+      } else {
+        result += `<span class="char-wrong">${cWord}</span> `;
+      }
+    }
+  }
+
+  const div = document.createElement("div");
+  div.innerHTML = result.trim();
+  div.className = "line-text";
+  inputEl.replaceWith(div);
+}
+
+function checkC() {
+  const answers = {
+    c2q: "What are they doing at the movie theater?",
+    c2a: "They’re watching a movie.",
+    c3q: "What are they doing at the park?",
+    c3a: "They’re kicking a ball.",
+    c4q: "What are they doing at the department store?",
+    c4a: "They’re shopping.",
+    c5q: "What are they doing at the library?",
+    c5a: "They’re borrowing books.",
+    c6q: "What are they doing at the post office?",
+    c6a: "They’re mailing a letter."
+  };
+
+  Object.keys(answers).forEach(id => {
+    const input = document.getElementById(id);
+    if (input) {
+      highlightDiff(input, answers[id]);
+    }
+  });
+}
+</script>
 </html>

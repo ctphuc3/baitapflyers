@@ -48,57 +48,86 @@ body {
 
 .section h2 {
   color: #2c6fa3;
+  margin-bottom: 15px;
 }
 
 /* Matching layout */
-  .match-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 30px;
-    align-items: start;
-  }
+.match-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 40px;
+  align-items: start;
+}
 
-.left, .right {
+.left {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
 }
 
 .item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 12px;
 }
 
 select {
-  padding: 5px;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 2px solid #9cc9e8;
+  background: white;
+  cursor: pointer;
 }
 
 /* Images */
-  .img-box {
-    height: 110px;
-    border-radius: 14px;
-    background: #dfefff;
-    border: 2px dashed #9cc9e8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 22px;
-    font-weight: bold;
-    color: #2c6fa3;
-  }
+.img-box {
+  height: 130px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.4);
+  border: 2px dashed #9cc9e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c6fa3;
+  transition: 0.2s;
+  position: relative;
+  overflow: hidden;
+}
 
-  .img-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
+.img-box:hover {
+  transform: scale(1.03);
+  background: rgba(255,255,255,0.7);
+}
 
-  .label-letter {
-    font-weight: bold;
-    margin-right: 6px;
-  }
+.img-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.label-letter {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  background: rgba(255,255,255,0.8);
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 18px;
+  background: white;
+}
 
 /* Input */
 input {
@@ -130,6 +159,209 @@ input {
 
 .wrong {
   color: red;
+}
+
+.circle-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.circle-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: center;
+  gap: 25px;
+  background: rgba(255,255,255,0.6);
+  padding: 20px;
+  border-radius: 20px;
+  min-height: 130px;
+}
+
+/* Removed .circle-item.reverse block */
+
+/* .circle-item.reverse {
+  grid-template-columns: 1fr 140px;
+} */
+
+.circle-img {
+  width: 140px;
+  height: 100px;
+  border-radius: 16px;
+  background: #dfefff;
+  border: 2px dashed #9cc9e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #2c6fa3;
+}
+
+.q {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.circle-item label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+/* Added styles for WRITE section */
+.write-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.write-item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  align-items: center;
+  background: rgba(255,255,255,0.6);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.write-img {
+  width: 140px;
+  height: 100px;
+  border-radius: 16px;
+  background: #dfefff;
+  border: 2px dashed #9cc9e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #2c6fa3;
+}
+
+.write-content .line {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #9cc9e8;
+  font-size: 16px;
+}
+
+/* Added gap-fill styles */
+.answer-line {
+  font-size: 16px;
+}
+
+.gap {
+  border: none;
+  border-bottom: 2px solid #9cc9e8;
+  outline: none;
+  text-align: center;
+  margin: 0 5px;
+  font-size: 16px;
+  background: transparent;
+}
+
+.gap.small {
+  width: 60px;
+}
+
+.gap.medium {
+  width: 120px;
+}
+
+.question-line {
+  font-size: 18px;
+  padding: 8px 0;
+  border-bottom: 2px solid #9cc9e8;
+  margin-bottom: 10px;
+}
+
+/* Added styles for READ AND MATCH section */
+.read-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.read-item {
+  text-align: left;
+}
+
+.read-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.dots {
+  text-align: center;
+  font-size: 24px;
+  line-height: 20px;
+  color: #2c6fa3;
+}
+
+.read-images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Drag & Drop styles */
+.draggable {
+  padding: 10px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 10px;
+  cursor: grab;
+}
+
+.draggable.dragging {
+  opacity: 0.5;
+}
+
+.drop-area {
+  min-height: 40px;
+  border: 2px dashed #9cc9e8;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background: rgba(255,255,255,0.6);
+}
+
+.drop-area.over {
+  background: rgba(255,255,255,0.9);
+  border: 2px solid #4aa3df;
+}
+
+.filled {
+  border: 2px solid #4aa3df;
+  background: rgba(255,255,255,0.9);
+}
+
+/* Added styles for drop-area below images */
+.img-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.drop-area {
+  position: static;
+  transform: none;
+  width: 100%;
+}
+
+/* Added image styles for circle-img, write-img, and img-box images */
+.circle-img img,
+.write-img img,
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+  background: white;
 }
 </style>
 
@@ -178,12 +410,30 @@ input {
 
         <!-- RIGHT: image grid -->
         <div class="img-grid">
-          <div class="img-box"><span class="label-letter">a.</span></div>
-          <div class="img-box"><span class="label-letter">b.</span></div>
-          <div class="img-box"><span class="label-letter">c.</span></div>
-          <div class="img-box"><span class="label-letter">d.</span></div>
-          <div class="img-box"><span class="label-letter">e.</span></div>
-          <div class="img-box"><span class="label-letter">f.</span></div>
+          <div class="img-box">
+            <span class="label-letter">a.</span>
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-1.png" alt="a">
+          </div>
+          <div class="img-box">
+            <span class="label-letter">b.</span>
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-2.png" alt="b">
+          </div>
+          <div class="img-box">
+            <span class="label-letter">c.</span>
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-3.png" alt="c">
+          </div>
+          <div class="img-box">
+            <span class="label-letter">d.</span>
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-4.png" alt="d">
+          </div>
+          <div class="img-box">
+            <span class="label-letter">e.</span>
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-5.png" alt="e">
+          </div>
+          <div class="img-box">
+            <span class="label-letter">f.</span>
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-6.png" alt="f">
+          </div>
         </div>
 
       </div>
@@ -205,22 +455,44 @@ input {
     <div class="section">
       <h2>C. Circle</h2>
 
-      <div>1. Where’s the post office?</div>
-      <div>
-        <label><input type="radio" name="c1"> It’s across from the library.</label><br>
-        <label><input type="radio" name="c1"> It’s across from the park.</label>
-      </div><br>
+      <div class="circle-grid">
 
-      <div>2. Where’s the park?</div>
-      <div>
-        <label><input type="radio" name="c2"> It’s across from the department store.</label><br>
-        <label><input type="radio" name="c2"> It’s across from the supermarket.</label>
-      </div><br>
+        <!-- Q1 -->
+        <div class="circle-item">
+          <div class="circle-img">
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-c-1.png" alt="c1">
+          </div>
+          <div>
+            <div class="q">1. Where’s the post office?</div>
+            <label><input type="radio" name="c1"> It’s across from the library.</label><br>
+            <label><input type="radio" name="c1"> It’s across from the park.</label>
+          </div>
+        </div>
 
-      <div>3. Where’s the department store?</div>
-      <div>
-        <label><input type="radio" name="c3"> It’s across from the movie theater.</label><br>
-        <label><input type="radio" name="c3"> It’s across from the post office.</label>
+        <!-- Q2 -->
+        <div class="circle-item">
+          <div class="circle-img">
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-c-2.png" alt="c2">
+          </div>
+          <div>
+            <div class="q">2. Where’s the park?</div>
+            <label><input type="radio" name="c2"> It’s across from the department store.</label><br>
+            <label><input type="radio" name="c2"> It’s across from the supermarket.</label>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="circle-item">
+          <div class="circle-img">
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-c-3.png" alt="c3">
+          </div>
+          <div>
+            <div class="q">3. Where’s the department store?</div>
+            <label><input type="radio" name="c3"> It’s across from the movie theater.</label><br>
+            <label><input type="radio" name="c3"> It’s across from the post office.</label>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -228,40 +500,97 @@ input {
     <div class="section">
       <h2>D. Write</h2>
 
-      <div>1. Where’s the department store?</div>
-      <input placeholder="It's ______ the ______ and the ______"><br><br>
+      <div class="write-grid">
 
-      <div>2.</div>
-      <input placeholder="Write your answer here..."><br><br>
+        <!-- Q1 -->
+        <div class="write-item">
+          <div class="write-img">
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-d-1.png" alt="d1">
+          </div>
+          <div class="write-content">
+            <div class="q">1.</div>
+            <div class="question-line">Where’s the department store?</div>
+            <div class="answer-line">
+              It’s 
+              <input class="gap small" placeholder="___">
+              the 
+              <input class="gap medium" placeholder="______">
+              and the 
+              <input class="gap medium" placeholder="______">.
+            </div>
+          </div>
+        </div>
 
-      <div>3.</div>
-      <input placeholder="Write your answer here...">
+        <!-- Q2 -->
+        <div class="write-item">
+          <div class="write-img">
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-d-2.png" alt="d2">
+          </div>
+          <div class="write-content">
+            <div class="q">2.</div>
+            <input class="line" placeholder="Write the question here... (e.g. Where’s the ...?)">
+            <input class="line" placeholder="Write the answer here... (e.g. It’s ...)">
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="write-item">
+          <div class="write-img">
+            <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-d-3.png" alt="d3">
+          </div>
+          <div class="write-content">
+            <div class="q">3.</div>
+            <input class="line" placeholder="Write the question here... (e.g. Where’s the ...?)">
+            <input class="line" placeholder="Write the answer here... (e.g. It’s ...)">
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <!-- READ AND MATCH -->
     <div class="section">
       <h2>E. Read and match</h2>
 
-      <div class="item">
-        1. The department store is across from the supermarket.
-        <select id="e1"></select>
+      <div class="read-grid">
+
+        <!-- Texts -->
+        <div class="read-item draggable" draggable="true" data-id="1">
+          <div class="read-text">1. The department store is across from the supermarket.</div>
+        </div>
+
+        <div class="read-item draggable" draggable="true" data-id="2">
+          <div class="read-text">2. The library is between the park and the post office.</div>
+        </div>
+
+        <div class="read-item draggable" draggable="true" data-id="3">
+          <div class="read-text">3. The park is across from the movie theater.</div>
+        </div>
+
       </div>
 
-      <div class="item">
-        2. The library is between the park and the post office.
-        <select id="e2"></select>
-      </div>
+      <!-- Images row -->
+      <div class="read-images">
+  <div class="img-wrapper">
+    <div class="img-box">
+      <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-e-1.png" alt="A">
+    </div>
+    <div class="drop-area" data-match="3"></div>
+  </div>
+  <div class="img-wrapper">
+    <div class="img-box">
+      <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-e-2.png" alt="B">
+    </div>
+    <div class="drop-area" data-match="1"></div>
+  </div>
+  <div class="img-wrapper">
+    <div class="img-box">
+      <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l1-e-3.png" alt="C">
+    </div>
+    <div class="drop-area" data-match="2"></div>
+  </div>
+</div>
 
-      <div class="item">
-        3. The park is across from the movie theater.
-        <select id="e3"></select>
-      </div>
-
-      <div class="right" style="margin-top:15px;">
-        <div class="img-box">A</div>
-        <div class="img-box">B</div>
-        <div class="img-box">C</div>
-      </div>
     </div>
 
     <button class="btn" onclick="checkAnswers()">Check Answers</button>
@@ -289,12 +618,12 @@ function checkAnswers(){
   let score = 0;
 
   const answers = {
-    q1:"f",
-    q2:"b",
-    q3:"e",
-    q4:"a",
-    q5:"d",
-    q6:"c",
+    q1:"b",
+    q2:"d",
+    q3:"f",
+    q4:"c",
+    q5:"e",
+    q6:"a",
 
     u1:"department store",
     u2:"library",
@@ -304,23 +633,154 @@ function checkAnswers(){
     u6:"park"
   };
 
-  let total = 12;
+  let total = 15; // A (6) + B (6) + C (3)
 
   for(let key in answers){
     let input = document.getElementById(key);
     if(!input) continue;
 
-    if(input.value.toLowerCase().trim() === answers[key]){
-      score++;
-      input.style.border = "2px solid green";
+    if(input.tagName === 'SELECT'){
+      if(input.value === answers[key]){
+        score++;
+        input.style.border = "2px solid green";
+      } else {
+        input.style.border = "2px solid red";
+      }
     } else {
-      input.style.border = "2px solid red";
+      if(input.value.toLowerCase().trim() === answers[key]){
+        score++;
+        input.style.border = "2px solid green";
+      } else {
+        input.style.border = "2px solid red";
+      }
     }
   }
+
+  // Check CIRCLE (radio answers)
+  const circleAnswers = {
+    c1: 0, // first option is correct
+    c2: 1, // second option is correct
+    c3: 0  // first option is correct
+  };
+
+  for(let key in circleAnswers){
+    let radios = document.getElementsByName(key);
+    if(!radios.length) continue;
+
+    radios.forEach((radio, index) => {
+      if(radio.checked){
+        if(index === circleAnswers[key]){
+          score++;
+          radio.parentElement.style.color = "green";
+        } else {
+          radio.parentElement.style.color = "red";
+        }
+      }
+    });
+  }
+
+  // Check WRITE (Section D)
+  const writeAnswers = {
+    // Q1 already guided → skip
+    d2: [
+      "it's between the post office and the library",
+      "it's between the library and the post office"
+    ],
+    d3: [
+      "it's between the supermarket and the movie theater",
+      "it's between the movie theater and the supermarket"
+    ]
+  };
+
+  // get inputs (Q2 and Q3)
+  const writeInputs = document.querySelectorAll('.write-item');
+
+  // Q2
+  let q2Inputs = writeInputs[1].querySelectorAll('input');
+  let q2Answer = q2Inputs[1].value.toLowerCase().replace(/\./g,'').trim();
+
+  if(writeAnswers.d2.includes(q2Answer)){
+    score++;
+    q2Inputs[1].style.border = "2px solid green";
+  } else {
+    q2Inputs[1].style.border = "2px solid red";
+  }
+
+  // Q3
+  let q3Inputs = writeInputs[2].querySelectorAll('input');
+  let q3Answer = q3Inputs[1].value.toLowerCase().replace(/\./g,'').trim();
+
+  if(writeAnswers.d3.includes(q3Answer)){
+    score++;
+    q3Inputs[1].style.border = "2px solid green";
+  } else {
+    q3Inputs[1].style.border = "2px solid red";
+  }
+
+  // update total
+   total += 2;
+
+  // Check READ & MATCH (Section E)
+  document.querySelectorAll('.drop-area').forEach(zone => {
+    const expected = zone.getAttribute('data-match');
+    const text = zone.innerText.trim();
+
+    if(!text) return;
+
+    if(text.startsWith(expected + '.')){
+      score++;
+      zone.style.border = "2px solid green";
+    } else {
+      zone.style.border = "2px solid red";
+    }
+  });
+
+  // update total for E
+   total += 3;
 
   document.getElementById("result").innerHTML =
     `<h3>Score: ${score}/${total}</h3>`;
 }
+
+// Drag & Drop functionality
+let dragged = null;
+
+document.querySelectorAll('.draggable').forEach(el => {
+  el.addEventListener('dragstart', () => {
+    dragged = el;
+    el.classList.add('dragging');
+  });
+
+  el.addEventListener('dragend', () => {
+    el.classList.remove('dragging');
+  });
+});
+
+document.querySelectorAll('.drop-area').forEach(zone => {
+  zone.addEventListener('dragover', e => {
+    e.preventDefault();
+    zone.classList.add('over');
+  });
+
+  zone.addEventListener('dragleave', () => {
+    zone.classList.remove('over');
+  });
+
+  zone.addEventListener('drop', () => {
+    zone.classList.remove('over');
+    if (!dragged) return;
+
+    // prevent overwrite
+    if (zone.innerText.trim() !== '') return;
+
+    const cleanText = dragged.querySelector('.read-text').innerText;
+    zone.innerText = cleanText;
+    zone.classList.add('filled');
+
+    dragged.style.opacity = 0.3;
+    dragged = null;
+  });
+});
 
 </script>
 

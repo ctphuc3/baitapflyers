@@ -1343,9 +1343,8 @@ moversMenu.addEventListener("click", () => {
 
         // 🔥 CREATE LINK (auto based on structure)
         const lessonNumber = index + 1;
-        const unitNumber = unit.replace("Unit ", "");
-
-        const url = `levels/movers/eu3/unit-${unitNumber}/lesson-${lessonNumber}.html`;
+        // Compose correct folder path: "Unit 2" → "unit2"
+        const url = `levels/movers/foundation/everybody-up-3/${unit.toLowerCase().replace(' ', '')}/lesson${lessonNumber}.html`;
 
         card.onclick = () => {
           window.open(url, "_blank");

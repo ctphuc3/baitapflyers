@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lesson 2 - Things to Do</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #cfefff, #eaf8ff);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+h1 {
+  font-size: 32px;
+  color: #2c6fa3;
+}
+
+.section {
+  margin-top: 25px;
+}
+
+.section h2 {
+  color: #2c6fa3;
+  margin-bottom: 15px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+  align-items: center;
+  background: rgba(255,255,255,0.6);
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.img-box {
+  width: 140px;
+  height: 100px;
+  border-radius: 16px;
+  border: 2px dashed #9cc9e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2c6fa3;
+  overflow: hidden;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: white;
+}
+
+.options label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #9cc9e8;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #4aa3df;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2c6fa3;
+}
+
+.line {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #9cc9e8;
+  margin: 10px 0;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.line:focus {
+  outline: none;
+  border-bottom: 2px solid #4aa3df;
+}
+
+.line-text {
+  border-bottom: 2px solid #9cc9e8;
+  margin: 10px 0;
+  padding: 5px;
+  font-size: 16px;
+}
+
+.q {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 0;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<div class="card">
+
+<h1>Lesson 2: Things to Do</h1>
+
+<!-- A -->
+<div class="section">
+<h2>A. Circle</h2>
+
+<div class="item">
+<div class="img-box">
+  <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-a.png">
+</div>
+<div class="options">
+<label><input type="radio" name="a1"> buy groceries</label>
+<label><input type="radio" name="a1"> kick a ball</label>
+<label><input type="radio" name="a1"> borrow books</label>
+<label><input type="radio" name="a1"> mail a letter</label>
+</div>
+</div>
+
+<div class="item">
+<div class="img-box">
+  <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-b.png">
+</div>
+<div class="options">
+<label><input type="radio" name="a2"> kick a ball</label>
+<label><input type="radio" name="a2"> shop</label>
+<label><input type="radio" name="a2"> borrow books</label>
+<label><input type="radio" name="a2"> watch a movie</label>
+</div>
+</div>
+
+<div class="item">
+<div class="img-box">
+  <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c.png">
+</div>
+<div class="options">
+<label><input type="radio" name="a3"> watch a movie</label>
+<label><input type="radio" name="a3"> kick a ball</label>
+<label><input type="radio" name="a3"> shop</label>
+<label><input type="radio" name="a3"> buy groceries</label>
+</div>
+</div>
+
+<div class="item">
+<div class="img-box">
+  <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-d.png">
+</div>
+<div class="options">
+<label><input type="radio" name="a4"> mail letters</label>
+<label><input type="radio" name="a4"> buy groceries</label>
+<label><input type="radio" name="a4"> watch a movie</label>
+<label><input type="radio" name="a4"> shop</label>
+</div>
+</div>
+
+</div>
+
+<!-- B -->
+<div class="section">
+<h2>B. Look and Circle</h2>
+
+<div class="q">1. What’s she doing at the supermarket?</div>
+<label><input type="radio" name="b1"> She’s buying groceries.</label>
+<label><input type="radio" name="b1"> He’s watching a movie.</label>
+
+<div class="q">2. What’s he doing at the library?</div>
+<label><input type="radio" name="b2"> He’s borrowing books.</label>
+<label><input type="radio" name="b2"> She’s kicking a ball.</label>
+
+<div class="q">3. What’s she doing at the park?</div>
+<label><input type="radio" name="b3"> She’s kicking a ball.</label>
+<label><input type="radio" name="b3"> He’s shopping.</label>
+
+<div class="q">4. What’s he doing at the post office?</div>
+<label><input type="radio" name="b4"> He’s mailing a letter.</label>
+<label><input type="radio" name="b4"> He’s watching a movie.</label>
+
+</div>
+
+<!-- C -->
+<div class="section">
+<h2>C. Write</h2>
+
+<!-- Q1 (guided) -->
+<div class="item">
+  <div class="img-box">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-1.png">
+  </div>
+  <div style="flex:1">
+    <div class="line-text">What are they doing at the supermarket?</div>
+    <div class="line-text">They’re buying groceries.</div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="item">
+  <div class="img-box">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-2.png">
+  </div>
+  <div style="flex:1">
+    <input class="line" placeholder="What are they doing...?">
+    <input class="line" placeholder="They’re...">
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="item">
+  <div class="img-box">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-3.png">
+  </div>
+  <div style="flex:1">
+    <input class="line" placeholder="Write the question...">
+    <input class="line" placeholder="Write the answer...">
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="item">
+  <div class="img-box">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-4.png">
+  </div>
+  <div style="flex:1">
+    <input class="line" placeholder="Write the question...">
+    <input class="line" placeholder="Write the answer...">
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="item">
+  <div class="img-box">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-5.png">
+  </div>
+  <div style="flex:1">
+    <input class="line" placeholder="Write the question...">
+    <input class="line" placeholder="Write the answer...">
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="item">
+  <div class="img-box">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l2-c-6.png">
+  </div>
+  <div style="flex:1">
+    <input class="line" placeholder="Write the question...">
+    <input class="line" placeholder="Write the answer...">
+  </div>
+</div>
+
+</div>
+
+<button onclick="alert('Check logic coming next')">Check Answers</button>
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 4 - Activities</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(to bottom right, #dff6ff, #ffffff);
+  padding: 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+h2 { margin-bottom: 10px; }
+
+input {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #4da6ff;
+  color: white;
+}
+
+.correct { background: #c8f7c5; }
+.wrong { background: #f7c5c5; }
+
+.answer-box {
+  margin-top: 10px;
+  padding: 10px;
+  background: #eef;
+  border-radius: 10px;
+  display: none;
+}
+
+/* WORD SEARCH */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 35px);
+  gap: 6px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.cell {
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  line-height: 35px;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cell.selected {
+  background: #4da6ff;
+  color: white;
+  transform: scale(1.1);
+}
+
+/* WRITE */
+.write-line {
+  margin-bottom: 15px;
+}
+
+/* MATCH */
+.match-zone {
+  border: 2px dashed #bbb;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  min-height: 40px;
+}
+
+.drag-item {
+  background: white;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 10px;
+  cursor: grab;
+  display: inline-block;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- A -->
+<div class="card">
+  <h2>A. Find and circle</h2>
+  <div style="display:flex; gap:30px; align-items:flex-start; flex-wrap:wrap;">
+    <div style="background:#fff; padding:15px; border-radius:15px; box-shadow:0 4px 10px rgba(0,0,0,0.1); min-width:120px; text-align:center;">
+      <p><b>Words</b></p>
+      <p>color</p>
+      <p>fold</p>
+      <p>cut</p>
+      <p>glue</p>
+    </div>
+
+    <div>
+      <p style="margin-bottom:10px;">Click letters to find words:</p>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <button onclick="checkWords()">Check</button>
+  <div id="ansA" class="answer-box"></div>
+</div>
+
+<!-- B -->
+<div class="card">
+<h2>B. Write</h2>
+
+<div style="display:flex; flex-direction:column; gap:20px;">
+
+  <!-- Row 1 -->
+  <div style="display:flex; align-items:center; gap:20px;">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-b-1.png" style="width:80px; border-radius:10px;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span>1. First,</span>
+      <input id="b1" style="width:120px;">
+      <span>the paper.</span>
+    </div>
+  </div>
+
+  <!-- Row 2 -->
+  <div style="display:flex; align-items:center; gap:20px;">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-b-2.png" style="width:80px; border-radius:10px;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span>2.</span>
+      <input id="b2" style="width:400px;">
+    </div>
+  </div>
+
+  <!-- Row 3 -->
+  <div style="display:flex; align-items:center; gap:20px;">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-b-3.png" style="width:80px; border-radius:10px;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span>3.</span>
+      <input id="b3" style="width:400px;">
+    </div>
+  </div>
+
+  <!-- Row 4 -->
+  <div style="display:flex; align-items:center; gap:20px;">
+    <img src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-b-4.png" style="width:80px; border-radius:10px;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span>4.</span>
+      <input id="b4" style="width:400px;">
+    </div>
+  </div>
+
+</div>
+
+<button onclick="checkB()">Check</button>
+<div id="ansB" class="answer-box"></div>
+</div>
+
+<!-- C -->
+<div class="card">
+<h2>C. Unscramble</h2>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:40px;">
+
+  <!-- Column 1 -->
+  <div>
+    <div style="margin-bottom:20px;">
+      <span>1.</span>
+      <input id="c1" style="width:100%; border:none; border-bottom:2px solid #999; border-radius:0;">
+      <p style="color:#555; margin-top:5px;">flowers / first / the / color , .</p>
+    </div>
+
+    <div>
+      <span>3.</span>
+      <input id="c3" style="width:100%; border:none; border-bottom:2px solid #999; border-radius:0;">
+      <p style="color:#555; margin-top:5px;">fold / then / flowers / the , .</p>
+    </div>
+  </div>
+
+  <!-- Column 2 -->
+  <div>
+    <div style="margin-bottom:20px;">
+      <span>2.</span>
+      <input id="c2" style="width:100%; border:none; border-bottom:2px solid #999; border-radius:0;">
+      <p style="color:#555; margin-top:5px;">next / the / cut / flowers , .</p>
+    </div>
+
+    <div>
+      <span>4.</span>
+      <input id="c4" style="width:100%; border:none; border-bottom:2px solid #999; border-radius:0;">
+      <p style="color:#555; margin-top:5px;">the / glue / flowers / finally , .</p>
+    </div>
+  </div>
+
+</div>
+
+<button onclick="checkC()">Check</button>
+<div id="ansC" class="answer-box"></div>
+</div>
+
+<!-- D -->
+<div class="card">
+<h2>D. Read and number</h2>
+
+<div style="display:flex; gap:30px; flex-wrap:wrap; margin-bottom:10px;">
+  <div>1. First, fold the paper.</div>
+  <div>2. Next, cut the paper.</div>
+  <div>3. Then, glue the paper.</div>
+  <div>4. Finally, draw and color the book.</div>
+</div>
+
+<p>Enter correct order:</p>
+
+<!-- Image placeholders -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:20px 0;">
+  <div style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <img id="dimg1" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-c-1.png" alt="Insert image 1" style="width:80%; height:auto; object-fit:contain; border:2px dashed #bbb; border-radius:10px; background:#fff;">
+    <input id="d1" placeholder="Number" style="width:60px; margin-top:8px; text-align:center;">
+  </div>
+  <div style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <img id="dimg2" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-c-2.png" alt="Insert image 2" style="width:80%; height:auto; object-fit:contain; border:2px dashed #bbb; border-radius:10px; background:#fff;">
+    <input id="d2" placeholder="Number" style="width:60px; margin-top:8px; text-align:center;">
+  </div>
+  <div style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <img id="dimg3" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-c-3.png" alt="Insert image 3" style="width:80%; height:auto; object-fit:contain; border:2px dashed #bbb; border-radius:10px; background:#fff;">
+    <input id="d3" placeholder="Number" style="width:60px; margin-top:8px; text-align:center;">
+  </div>
+  <div style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+    <img id="dimg4" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u2-l4-c-4.png" alt="Insert image 4" style="width:80%; height:auto; object-fit:contain; border:2px dashed #bbb; border-radius:10px; background:#fff;">
+    <input id="d4" placeholder="Number" style="width:60px; margin-top:8px; text-align:center;">
+  </div>
+</div>
+
+<button onclick="checkD()">Check</button>
+<div id="ansD" class="answer-box"></div>
+</div>
+
+</div>
+
+<script>
+// WORD GRID
+const letters = "zicascbfelscutaltmiarbjnqoluvgsgcreexzuielycolormweudoygsrtfbeasceoaeoewpxenkyxlgtnmreewzdwresmpalde";
+const grid = document.getElementById('grid');
+
+letters.split('').forEach(l => {
+  const div = document.createElement('div');
+  div.className = 'cell';
+  div.innerText = l;
+  div.onclick = () => div.classList.toggle('selected');
+  grid.appendChild(div);
+});
+
+function checkWords(){
+  const box = document.getElementById('ansA');
+  box.style.display='block';
+  box.innerHTML = 'Expected words: <b>color, fold, cut, glue</b><br>✔ Check if you found all 4!';
+}
+
+// B
+function checkB(){
+  const answers = ["cut","fold","color","glue"];
+  let inputs = [b1,b2,b3,b4];
+
+  inputs.forEach((el,i)=>{
+    if(el.value.toLowerCase().includes(answers[i])) el.className='correct';
+    else el.className='wrong';
+  });
+
+  ansB.style.display='block';
+  ansB.innerHTML = `
+1. cut the paper<br>
+2. Fold the paper.<br>
+3. Color the paper.<br>
+4. Glue the paper.
+`;
+}
+
+// C
+function normalize(s){
+  return s.trim();
+}
+
+function checkC(){
+  const answers = [
+    "First, color the flowers.",
+    "Next, cut the flowers.",
+    "Then, fold the flowers.",
+    "Finally, glue the flowers."
+  ];
+
+  [c1,c2,c3,c4].forEach((el,i)=>{
+    if(normalize(el.value)===normalize(answers[i])) el.className='correct';
+    else el.className='wrong';
+  });
+
+  ansC.style.display='block';
+  ansC.innerHTML = answers.join('<br>');
+}
+
+// D
+function checkD(){
+  const correct = ['1','4','2','3'];
+  const inputs = [d1,d2,d3,d4];
+
+  inputs.forEach((el,i)=>{
+    if(el.value===correct[i]) el.className='correct';
+    else el.className='wrong';
+  });
+
+  ansD.style.display='block';
+  ansD.innerHTML = 'Correct order: 1 → 4 → 2 → 3';
+}
+</script>
+
+</body>
+</html>

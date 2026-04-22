@@ -844,6 +844,7 @@ function animate(t) {
 const contentArea = document.getElementById("content-area");
 const searchInput = document.querySelector(".search-input");
 const suggestionBox = document.getElementById("search-suggestions");
+const flyersMenu = document.getElementById("menu-flyers");
 let SEARCH_INDEX = [];
 
 // ===== A) BUILD SEARCH INDEX TOÀN CỤC =====
@@ -935,6 +936,41 @@ function buildSearchIndex() {
       });
     });
   }
+
+  // ===== MOVERS – FOUNDATION (Everybody Up 3 - Unit 2 - Lessons) =====
+  ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"].forEach((lesson, index) => {
+    const lessonNumber = index + 1;
+    const url = `levels/movers/foundation/everybody-up-3/unit2/lesson${lessonNumber}.html`;
+
+    SEARCH_INDEX.push({
+      title: `${lesson} Everybody Up 3`,
+      meta: `Everybody Up 3 Unit 2 Movers`,
+      level: "Movers",
+      keywords: "everybody up 3 eu3 unit 2 lesson movers",
+      url,
+      render: () => {
+        const c = document.createElement("div");
+        c.className = "card";
+        c.style.cursor = "pointer";
+
+        const t = document.createElement("div");
+        t.textContent = `${lesson} - Everybody Up 3`;
+
+        const s = document.createElement("div");
+        s.className = "subtext";
+        s.textContent = `(Everybody Up 3 · Unit 2 · Movers)`;
+
+        c.appendChild(t);
+        c.appendChild(s);
+
+        c.onclick = () => {
+          window.open(url, "_blank");
+        };
+
+        return c;
+      }
+    });
+  });
 }
 const startersMenu = document.getElementById("menu-starters");
 
@@ -972,20 +1008,30 @@ function fuzzyScore(query, text) {
   const t = normalizeText(text);
 
   if (!q || !t) return 0;
-  if (t.includes(q)) return 100;
+
+  // split words
+  const qWords = q.split(" ");
+  const tWords = t.split(" ");
 
   let score = 0;
-  const qWords = q.split(" ");
-  qWords.forEach(w => {
-    if (t.includes(w)) score += 20;
+
+  // 1. exact substring match (strong)
+  if (t.includes(q)) score += 200;
+
+  // 2. word-by-word match (Google-like loose match)
+  qWords.forEach(qw => {
+    tWords.forEach(tw => {
+      if (tw.startsWith(qw)) score += 40;     // strong prefix
+      else if (tw.includes(qw)) score += 25;  // partial match
+    });
   });
 
-  // ký tự gần đúng
+  // 3. fuzzy character match (typo tolerance)
   let qi = 0;
   for (let i = 0; i < t.length && qi < q.length; i++) {
     if (t[i] === q[qi]) qi++;
   }
-  score += qi * 2;
+  score += qi * 1.5;
 
   return score;
 }
@@ -1210,16 +1256,19 @@ function showSearchResultsInContent(keyword) {
   const results = SEARCH_INDEX
     .map(item => ({
       item,
-      score: fuzzyScore(keyword, item.title + " " + item.meta)
+      score: fuzzyScore(
+        keyword,
+        item.title + " " + item.meta + " " + item.level + " " + (item.keywords || "")
+      )
     }))
-    .filter(r => r.score > 0)
+    .filter(r => r.score > 20)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 6); // show top 6 closest results
+    .slice(0, 20); // show top 20 closest results
 
   if (results.length === 0) {
     const empty = document.createElement("div");
     empty.className = "card";
-    empty.textContent = "No matching results";
+    empty.textContent = "No results found (try simpler keywords)";
     contentArea.appendChild(empty);
     return;
   }
@@ -1273,7 +1322,8 @@ const MOVERS_DATA = {
   Foundation: {
     "Everybody Up 3": {
       "Unit 1": [],
-      "Unit 2": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"]
+      "Unit 2": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"],
+      "Unit 3": ["Lesson 1", "Lesson 2"]
     },
     "Everybody Up 4": []
   },
@@ -1377,11 +1427,12 @@ showCurrentLessons();
 searchInput.addEventListener("input", e => {
   const value = e.target.value;
 
-  if (!value || value.length < 2) {
+  if (!value) {
     showCurrentLessons();
     return;
   }
 
+  console.log("SEARCH:", value);
   showSearchResultsInContent(value);
 });
 document.addEventListener("click", e => {

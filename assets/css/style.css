@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #cfefff, #eaf8ff);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #2c6fa3;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #4a90c2;
+}
+
+.section {
+  margin-top: 25px;
+}
+
+/* 🔥 GRID 2 x 3 */
+.write-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.write-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.6);
+  padding: 15px;
+  border-radius: 20px;
+}
+
+.write-img {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.write-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+input {
+  margin-top: 10px;
+  padding: 6px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  margin-top: 20px;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #4aa3df;
+  color: white;
+  cursor: pointer;
+}
+
+.correct { border: 2px solid green; }
+.wrong { border: 2px solid red; }
+
+img {
+  max-width: 100%;
+}
+
+.match-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.match-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 18px;
+}
+
+.match-left div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 350px;
+}
+
+.match-left input {
+  margin-left: 10px;
+  width: 40px;
+}
+
+.match-right {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 40px;
+  row-gap: 30px;
+  align-items: center;
+}
+
+.match-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.match-item img {
+  width: 220px;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}

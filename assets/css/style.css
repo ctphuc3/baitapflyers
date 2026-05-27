@@ -821,6 +821,17 @@ img {
   font-size: 22px;
 }
 
+.lesson4-page .country-match-table .sentence-line {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) max-content;
+  column-gap: 8px;
+  align-items: end;
+}
+
+.lesson4-page .country-match-table .sentence-fill.short-fill {
+  min-width: 88px;
+}
+
 .lesson4-page .country-match-table .match-write-line {
   display: grid;
   grid-template-columns: 32px 1fr;

@@ -1,0 +1,200 @@
+Dưới đây là toàn bộ code hiện tại của `lesson2.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 - Things on the Table</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page">
+    <div class="title">Lesson 2 - Things on the Table</div>
+
+    <div class="section section-a">
+      <div class="subtitle">A. Write.</div>
+
+      <table class="alphabet-table" width="100%" border="1" cellpadding="6" cellspacing="0">
+        <tr>
+          <th>a</th><th>b</th><th>c</th><th>d</th><th>e</th><th>f</th><th>g</th><th>h</th><th>i</th><th>j</th><th>k</th><th>l</th><th>m</th>
+        </tr>
+        <tr>
+          <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
+        </tr>
+        <tr>
+          <th>n</th><th>o</th><th>p</th><th>q</th><th>r</th><th>s</th><th>t</th><th>u</th><th>v</th><th>w</th><th>x</th><th>y</th><th>z</th>
+        </tr>
+        <tr>
+          <td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td>
+        </tr>
+      </table>
+
+      <table class="exercise-table code-table" width="100%" cellpadding="10" cellspacing="0">
+        <tr>
+          <td>1.</td>
+          <td><input class="line-input" data-type="text" data-answer="fork"><div>6 &nbsp; 15 &nbsp; 18 &nbsp; 11</div></td>
+          <td>2.</td>
+          <td><input class="line-input" data-type="text" data-answer="knife"><div>11 &nbsp; 14 &nbsp; 9 &nbsp; 6 &nbsp; 5</div></td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td><input class="line-input" data-type="text" data-answer="plate"><div>16 &nbsp; 12 &nbsp; 1 &nbsp; 20 &nbsp; 5</div></td>
+          <td>4.</td>
+          <td><input class="line-input" data-type="text" data-answer="bowl"><div>2 &nbsp; 15 &nbsp; 23 &nbsp; 12</div></td>
+        </tr>
+        <tr>
+          <td>5.</td>
+          <td><input class="line-input" data-type="text" data-answer="spoon"><div>19 &nbsp; 16 &nbsp; 15 &nbsp; 15 &nbsp; 14</div></td>
+          <td>6.</td>
+          <td><input class="line-input" data-type="text" data-answer="cup"><div>3 &nbsp; 21 &nbsp; 16</div></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section section-b">
+      <div class="subtitle">B. Write and circle.</div>
+
+      <table class="exercise-table picture-table" width="100%" cellpadding="10" cellspacing="0">
+        <tr>
+          <td>1.</td>
+          <td><img width="120" height="120" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-b-1.png" alt="Boy with spoon"></td>
+          <td>This spoon is</td>
+          <td>
+            <div data-type="mcq" data-answer="mine">
+              <label><input type="radio" name="b1" value="mine"> mine.</label>
+              <label><input type="radio" name="b1" value="yours"> yours.</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td><img width="120" height="120" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-b-2.png" alt="Girl with fork"></td>
+          <td>This <input class="line-input" data-type="text" data-answer="fork"> is</td>
+          <td>
+            <div data-type="mcq" data-answer="his">
+              <label><input type="radio" name="b2" value="his"> his.</label>
+              <label><input type="radio" name="b2" value="yours"> yours.</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td><img width="120" height="120" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-b-3.png" alt="Girls with plate"></td>
+          <td>This <input class="line-input" data-type="text" data-answer="plate"></td>
+          <td>
+            <div data-type="mcq" data-answer="hers">
+              <label><input type="radio" name="b3" value="mine"> mine.</label>
+              <label><input type="radio" name="b3" value="hers"> hers.</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>4.</td>
+          <td><img width="120" height="120" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-b-4.png" alt="Boys with spoon"></td>
+          <td><input class="line-input" data-type="text" data-answer="This spoon is"></td>
+          <td>
+            <div data-type="mcq" data-answer="his">
+              <label><input type="radio" name="b4" value="his"> his.</label>
+              <label><input type="radio" name="b4" value="hers"> hers.</label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section section-c">
+      <div class="subtitle">C. Unscramble and choose. Then write.</div>
+
+      <table class="exercise-table unscramble-table" width="100%" cellpadding="10" cellspacing="0">
+        <tr>
+          <td>1.</td>
+          <td><input class="line-input" data-type="text" data-answer="Whose plate is that?"><div>ehsow &nbsp; etlap &nbsp; si &nbsp; tath &nbsp; ?</div></td>
+          <td><img width="110" height="110" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-c-1.png" alt="Children with plate"></td>
+          <td>
+            <div data-type="mcq" data-answer="hers">
+              <label><input type="radio" name="c1" value="hers"> hers.</label>
+              <label><input type="radio" name="c1" value="mine"> mine.</label>
+              <label><input type="radio" name="c1" value="yours"> yours.</label>
+              <label><input type="radio" name="c1" value="his"> his.</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td><input class="line-input" data-type="text" data-answer="Whose fork is that?"><div>woehs &nbsp; korf &nbsp; si &nbsp; atfth &nbsp; ?</div></td>
+          <td><img width="110" height="110" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-c-2.png" alt="Girl with plate"></td>
+          <td>
+            <div data-type="mcq" data-answer="mine">
+              <label><input type="radio" name="c2" value="hers"> hers.</label>
+              <label><input type="radio" name="c2" value="mine"> mine.</label>
+              <label><input type="radio" name="c2" value="yours"> yours.</label>
+              <label><input type="radio" name="c2" value="his"> his.</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td><input class="line-input" data-type="text" data-answer="Whose knife is that?"><div>hwsoe &nbsp; inkef &nbsp; si &nbsp; htat &nbsp; ?</div></td>
+          <td><img width="110" height="110" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-c-3.png" alt="Boy asking"></td>
+          <td>
+            <div data-type="mcq" data-answer="yours">
+              <label><input type="radio" name="c3" value="hers"> hers.</label>
+              <label><input type="radio" name="c3" value="mine"> mine.</label>
+              <label><input type="radio" name="c3" value="yours"> yours.</label>
+              <label><input type="radio" name="c3" value="his"> his.</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>4.</td>
+          <td><input class="line-input" data-type="text" data-answer="Whose bowl is that?"><div>ewosh &nbsp; lbwo &nbsp; si &nbsp; ttha &nbsp; ?</div></td>
+          <td><img width="110" height="110" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-c-4.png" alt="Children with bowl"></td>
+          <td>
+            <div data-type="mcq" data-answer="his">
+              <label><input type="radio" name="c4" value="hers"> hers.</label>
+              <label><input type="radio" name="c4" value="mine"> mine.</label>
+              <label><input type="radio" name="c4" value="yours"> yours.</label>
+              <label><input type="radio" name="c4" value="his"> his.</label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section section-d">
+      <div class="subtitle">D. Write.</div>
+
+      <div class="scene-image">
+        <img width="900" height="260" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u4-l2-d.png" alt="Classroom scene">
+      </div>
+
+      <table class="exercise-table writing-table" width="100%" cellpadding="10" cellspacing="0">
+        <tr>
+          <td>1.</td>
+          <td><input class="line-input" data-type="text" data-answer="cap"><br><input class="line-input" data-type="text" data-answer="It's hers."></td>
+          <td>2.</td>
+          <td><input class="line-input" data-type="text" data-answer="ruler"><br><input class="line-input" data-type="text" data-answer="It's his."></td>
+        </tr>
+        <tr>
+          <td>3.</td>
+          <td><input class="line-input" data-type="text" data-answer="coat"><br><input class="line-input" data-type="text" data-answer="It's hers."></td>
+          <td>4.</td>
+          <td><input class="line-input" data-type="text" data-answer="book"><br><input class="line-input" data-type="text" data-answer="It's his."></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section actions">
+      <button class="btn" type="button" onclick="checkAll()">Check answers</button>
+      <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button>
+    </div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+</body>
+</html>
+```

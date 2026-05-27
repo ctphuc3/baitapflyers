@@ -139,3 +139,752 @@ img {
   border-radius: 16px;
   object-fit: cover;
 }
+
+/* Everybody Up workbook pages */
+.container:has(.workbook-page) {
+  max-width: 1480px;
+}
+
+.workbook-page {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  color: #111;
+  padding: 28px 34px;
+  overflow-x: auto;
+}
+
+.workbook-page .title {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 8px 22px;
+  border-radius: 0 0 8px 0;
+  background: #565656;
+  color: #fff;
+  font-size: 29px;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.workbook-spread {
+  display: grid;
+  grid-template-columns: minmax(560px, 1fr) minmax(560px, 1fr);
+  gap: 46px;
+  align-items: start;
+}
+
+.workbook-left,
+.workbook-right {
+  min-width: 0;
+}
+
+.workbook-page .section {
+  margin-top: 18px;
+}
+
+.workbook-page .section:first-child {
+  margin-top: 0;
+}
+
+.workbook-page .subtitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  color: #111;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.workbook-page .subtitle {
+  letter-spacing: 0;
+}
+
+.workbook-page .section-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 9px;
+  background: #5a5a5a;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.alphabet-table {
+  margin-bottom: 22px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: #fff;
+}
+
+.alphabet-table th,
+.alphabet-table td {
+  padding: 2px 4px;
+  border: 1px solid #d7d7d7;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.12;
+}
+
+.alphabet-table th {
+  font-weight: 800;
+}
+
+.exercise-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 20px;
+}
+
+.exercise-table td {
+  vertical-align: middle;
+}
+
+.code-table td:nth-child(1),
+.code-table td:nth-child(3),
+.picture-table td:first-child,
+.unscramble-table td:first-child,
+.writing-table td:nth-child(1),
+.writing-table td:nth-child(3) {
+  width: 36px;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.code-table td:nth-child(2),
+.code-table td:nth-child(4) {
+  width: 44%;
+}
+
+.code-table .line-input {
+  width: 72%;
+  min-width: 180px;
+}
+
+.code-table div,
+.unscramble-table td div:not([data-type]),
+.workbook-page label {
+  font-size: 19px;
+  line-height: 1.35;
+}
+
+.workbook-page input.line-input {
+  width: 210px;
+  height: 26px;
+  margin: 0;
+  padding: 0 4px;
+  border: 0;
+  border-bottom: 2px solid #8e8e8e;
+  border-radius: 0;
+  background: transparent;
+  font-size: 21px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.workbook-page input[type="radio"] {
+  margin: 0 6px 0 0;
+}
+
+.picture-table {
+  border-spacing: 0 12px;
+}
+
+.picture-table td:nth-child(2) {
+  width: 145px;
+  text-align: center;
+}
+
+.picture-table td:nth-child(3) {
+  width: 48%;
+  font-size: 22px;
+}
+
+.picture-table td:nth-child(4) {
+  width: 190px;
+}
+
+.picture-table img,
+.unscramble-table img {
+  display: block;
+  object-fit: contain;
+  background: #f3f3f3;
+}
+
+.picture-table [data-type="mcq"] {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.workbook-page .picture-table .line-input {
+  width: 135px;
+}
+
+.unscramble-table {
+  border-spacing: 0 10px;
+}
+
+.unscramble-table td:nth-child(2) {
+  width: 52%;
+}
+
+.unscramble-table td:nth-child(3) {
+  width: 112px;
+  text-align: center;
+}
+
+.unscramble-table td:nth-child(4) {
+  width: 150px;
+}
+
+.unscramble-table .line-input {
+  width: 100%;
+  max-width: 380px;
+}
+
+.unscramble-table [data-type="mcq"] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  justify-content: start;
+  align-items: center;
+}
+
+.scene-image {
+  margin: 12px 0 16px;
+}
+
+.scene-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 270px;
+  object-fit: contain;
+  background: #f3f3f3;
+}
+
+.writing-table {
+  border-spacing: 0 8px;
+}
+
+.writing-table td:nth-child(2),
+.writing-table td:nth-child(4) {
+  width: 43%;
+}
+
+.writing-table .line-input {
+  width: 92%;
+  margin-bottom: 14px;
+}
+
+.workbook-page .answer-text {
+  margin-top: 5px;
+  color: #167a31;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.workbook-page .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.workbook-page #result {
+  margin-top: 14px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .workbook-spread {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .container:has(.workbook-page) {
+    padding: 10px;
+  }
+
+  .workbook-page {
+    padding: 18px 14px;
+  }
+
+  .workbook-page .title {
+    font-size: 24px;
+  }
+
+  .alphabet-table th,
+  .alphabet-table td {
+    font-size: 16px;
+    padding: 2px;
+  }
+
+  .exercise-table,
+  .workbook-page input.line-input,
+  .picture-table td:nth-child(3) {
+    font-size: 18px;
+  }
+
+  .picture-table img {
+    width: 88px;
+    height: 88px;
+  }
+
+  .unscramble-table img {
+    width: 82px;
+    height: 82px;
+  }
+}
+
+/* Lesson 3 story workbook */
+.lesson3-page .story-number-table {
+  border-spacing: 0 8px;
+}
+
+.lesson3-page .story-number-table td {
+  width: 50%;
+  vertical-align: top;
+  text-align: center;
+}
+
+.lesson3-page .story-number-table img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 210px;
+  object-fit: cover;
+  background: #f3f3f3;
+}
+
+.lesson3-page .story-caption {
+  min-height: 48px;
+  margin-top: 6px;
+  font-size: 18px;
+  line-height: 1.15;
+  text-align: left;
+}
+
+.lesson3-page .story-number-table .line-input {
+  width: 54px;
+}
+
+.lesson3-page .reading-choice-table {
+  border-spacing: 0 10px;
+}
+
+.lesson3-page .reading-choice-table td:first-child {
+  width: 34px;
+}
+
+.lesson3-page .reading-choice-table td:nth-child(2) {
+  width: 170px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.lesson3-page .reading-choice-table td:nth-child(3) {
+  width: 92px;
+}
+
+.lesson3-page .reading-choice-table img {
+  display: block;
+  object-fit: contain;
+  background: #f3f3f3;
+}
+
+.lesson3-page .reading-choice-table [data-type="mcq"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  gap: 8px 14px;
+  align-items: start;
+}
+
+.lesson3-page .word-bank-table {
+  margin-bottom: 18px;
+}
+
+.lesson3-page .word-bank-table th,
+.lesson3-page .word-bank-table td {
+  font-size: 18px;
+}
+
+.lesson3-page .dialogue-table {
+  border-spacing: 0 14px;
+}
+
+.lesson3-page .dialogue-table td:first-child {
+  width: 34px;
+}
+
+.lesson3-page .dialogue-table td:nth-child(2) {
+  width: 285px;
+  padding: 12px 14px;
+  border: 2px solid #777;
+  border-radius: 14px;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
+.lesson3-page .dialogue-table td:nth-child(3) {
+  width: 210px;
+}
+
+.lesson3-page .dialogue-table td:nth-child(4) {
+  width: 105px;
+  font-size: 21px;
+}
+
+.lesson3-page .dialogue-table img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #f3f3f3;
+}
+
+.lesson3-page .dialogue-table .line-input {
+  width: 100%;
+  padding-top: 5px;
+}
+
+.lesson3-page .dialogue-table td:nth-child(4) .line-input {
+  width: 96px;
+}
+
+.lesson3-page .answer-line-number {
+  display: block;
+  width: 100%;
+  margin: 3px 0 0;
+  font-size: 15px;
+  line-height: 1;
+  text-align: center;
+}
+
+.lesson3-page .dialogue-prompt-line {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 8px;
+  align-items: baseline;
+  margin: 0 0 8px;
+}
+
+.lesson3-page .dialogue-prompt-line:last-child {
+  margin-bottom: 0;
+}
+
+.lesson3-page .prompt-fill {
+  display: block;
+  min-width: 128px;
+  text-align: left;
+}
+
+.lesson3-page .prompt-fill .line-input {
+  border-bottom: 2px solid #8e8e8e;
+  height: 31px;
+}
+
+.lesson3-page .prompt-fixed {
+  color: #555;
+}
+
+.lesson3-page .prompt-word {
+  display: block;
+  min-height: 31px;
+  padding-top: 5px;
+  border-bottom: 2px solid #8e8e8e;
+}
+
+.lesson3-page .example-row td:nth-child(2) {
+  color: #555;
+}
+
+.lesson3-page .personal-table td:first-child {
+  width: 34px;
+}
+
+.lesson3-page .personal-table {
+  table-layout: auto;
+}
+
+.lesson3-page .personal-table td:nth-child(2) {
+  width: auto;
+  font-size: 20px;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.lesson3-page .personal-table .line-input {
+  width: 96%;
+  margin-top: 10px;
+}
+
+/* Lesson 4 countries workbook */
+.lesson4-page .word-search-layout {
+  display: grid;
+  grid-template-columns: 250px 360px;
+  gap: 34px;
+  align-items: start;
+  justify-content: start;
+}
+
+.lesson4-page .country-list-table {
+  width: 100%;
+  border: 1px solid #d0d0d0;
+  border-radius: 10px;
+  font-size: 22px;
+  line-height: 1.2;
+  margin-top: 20px;
+  background: #fff;
+}
+
+.lesson4-page .word-search-table {
+  width: 360px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 24px;
+  line-height: 1;
+  text-align: center;
+  background: #fff;
+  outline: 3px dashed #aaa;
+  outline-offset: -3px;
+}
+
+.lesson4-page .word-search-table td {
+  width: 36px;
+  height: 34px;
+  padding: 0;
+  border-color: #ddd;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.lesson4-page .word-search-table td.selected {
+  background: #fff176;
+  box-shadow: inset 0 0 0 2px #f4c430;
+}
+
+.lesson4-page .country-circle-table {
+  display: block;
+  border-spacing: 0;
+}
+
+.lesson4-page .country-circle-table tbody {
+  display: block;
+}
+
+.lesson4-page .country-circle-table tr {
+  display: grid;
+  grid-template-columns: 28px 210px 78px 112px 72px 48px 66px;
+  column-gap: 8px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.lesson4-page .country-circle-table td {
+  display: block;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.lesson4-page .country-circle-table td:first-child {
+  width: auto;
+}
+
+.lesson4-page .country-circle-table td:nth-child(2) {
+  width: auto;
+}
+
+.lesson4-page .country-circle-table td:nth-child(3),
+.lesson4-page .country-circle-table td:nth-child(5),
+.lesson4-page .country-circle-table td:nth-child(7) {
+  width: auto;
+}
+
+.lesson4-page .country-circle-table td:nth-child(4) {
+  width: auto;
+  text-align: center;
+}
+
+.lesson4-page .country-circle-table td:nth-child(6) {
+  width: auto;
+  text-align: center;
+}
+
+.lesson4-page .country-circle-table img,
+.lesson4-page .country-match-table img {
+  display: block;
+  object-fit: contain;
+  background: #f3f3f3;
+}
+
+.lesson4-page .country-circle-table img {
+  width: 210px;
+  height: 95px;
+}
+
+.lesson4-page .country-circle-table [data-type="mcq"] {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  min-width: 0;
+}
+
+.lesson4-page .country-circle-table [data-type="mcq"] input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lesson4-page .country-circle-table [data-type="mcq"] label {
+  display: inline-block;
+  margin: 0;
+  padding: 3px 6px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  line-height: 1.1;
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.lesson4-page .country-circle-table [data-type="mcq"] label:hover {
+  background: #eef7ff;
+  border-color: #9ccff0;
+}
+
+.lesson4-page .country-circle-table [data-type="mcq"] label:has(input:checked) {
+  background: #fff176;
+  border-color: #f4c430;
+  box-shadow: inset 0 0 0 1px #f4c430;
+}
+
+.lesson4-page .country-match-table {
+  table-layout: auto;
+  border-spacing: 0 12px;
+}
+
+.lesson4-page .country-match-table td:first-child {
+  width: 34px;
+  font-size: 20px;
+  vertical-align: top;
+}
+
+.lesson4-page .country-match-table td:nth-child(2) {
+  width: 118px;
+  vertical-align: top;
+}
+
+.lesson4-page .country-match-table td:nth-child(3) {
+  width: 72px;
+  vertical-align: middle;
+}
+
+.lesson4-page .country-match-table td:nth-child(4) {
+  width: auto;
+  font-size: 20px;
+  line-height: 1.35;
+  vertical-align: top;
+}
+
+.lesson4-page .country-match-table .match-select {
+  width: 46px;
+  height: 34px;
+  margin: 24px 0 0;
+  border: 2px solid #777;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.lesson4-page .country-match-table .line-input {
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  padding: 0 4px 3px;
+  font-size: 22px;
+}
+
+.lesson4-page .country-match-table .match-write-line {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: end;
+  min-height: 42px;
+}
+
+.lesson4-page .country-match-table .blank-line {
+  display: block;
+  height: 30px;
+  border-bottom: 2px solid #8e8e8e;
+}
+
+.lesson4-page .country-match-table .answer-right {
+  text-align: right;
+}
+
+.lesson4-page .country-match-table .answer-left {
+  text-align: left;
+}
+
+.lesson4-page .country-match-table .fixed-answer {
+  color: #a8a8a8;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.lesson4-page .flag-writing-table {
+  table-layout: auto;
+  border-spacing: 0 16px;
+}
+
+.lesson4-page .flag-writing-table td:first-child {
+  width: 34px;
+  vertical-align: top;
+}
+
+.lesson4-page .flag-writing-table td:nth-child(2) {
+  width: 260px;
+  font-size: 20px;
+  line-height: 1.35;
+  vertical-align: top;
+}
+
+.lesson4-page .flag-writing-table td:nth-child(3) {
+  width: 280px;
+}
+
+.lesson4-page .flag-writing-table .line-input {
+  width: 100%;
+}
+
+.lesson4-page .draw-box {
+  display: block;
+  width: 190px;
+  height: 82px;
+  border: 3px solid #d5d5d5;
+  background: #fff;
+  outline: 2px dashed #c4c4c4;
+  outline-offset: -7px;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+@media (max-width: 680px) {
+  .lesson4-page .word-search-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson4-page .word-search-table {
+    font-size: 17px;
+  }
+}

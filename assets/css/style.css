@@ -379,6 +379,12 @@ img {
   width: 43%;
 }
 
+.writing-table .writing-prompt {
+  margin-bottom: 10px;
+  font-size: 21px;
+  line-height: 1.25;
+}
+
 .writing-table .line-input {
   width: 92%;
   margin-bottom: 14px;

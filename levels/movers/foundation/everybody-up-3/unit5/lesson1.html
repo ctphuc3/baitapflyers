@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 - Describing People</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .lesson1-page .word-bank { display:flex; justify-content:space-around; gap:12px; padding:10px 16px; border:1px solid #bbb; border-radius:12px; font-weight:700; }
+    .lesson1-page .picture-slot { display:block; width:100%; height:105px; object-fit:contain; border:1px dashed #aaa; border-radius:10px; background:#fafafa; }
+    .lesson1-page .small-picture { height:82px; }
+    .lesson1-page .section-a-picture { display:block; width:100%; height:250px; margin-top:18px; object-fit:contain; border:1px dashed #aaa; border-radius:12px; background:#fafafa; }
+    .lesson1-page .answer-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 30px; margin-top:18px; }
+    .lesson1-page .answer-item { display:flex; gap:10px; align-items:center; min-width:0; }
+    .lesson1-page .answer-item b { flex:0 0 28px; }
+    .lesson1-page .letter-answer { display:flex; align-items:center; gap:5px; min-width:0; }
+    .lesson1-page input.letter-input { box-sizing:border-box; width:38px; height:44px; padding:2px; border:0; border-bottom:2px solid #777; border-radius:0; background:transparent; text-align:center; font-size:25px; box-shadow:none; }
+    .lesson1-page input.letter-input.circled { width:48px; height:48px; border:2px solid #555; border-radius:18px; }
+    .lesson1-page input.letter-input:focus { outline:2px solid #7aa7d9; outline-offset:2px; }
+    .lesson1-page .letter-answer .answer-text { display:none; }
+    .lesson1-page .scramble-box { margin-top:22px; padding:20px; border:5px solid #eee; text-align:center; }
+    .lesson1-page .scramble-answer { display:flex; align-items:flex-end; justify-content:center; gap:5px; }
+    .lesson1-page .scramble-word { display:flex; gap:5px; }
+    .lesson1-page .scramble-word + .scramble-word { margin-left:22px; }
+    .lesson1-page input.scramble-letter { box-sizing:border-box; width:38px; height:42px; padding:2px; border:0; border-bottom:2px solid #777; border-radius:0; background:transparent; text-align:center; font-size:25px; box-shadow:none; }
+    .lesson1-page input.scramble-letter:focus { outline:2px solid #7aa7d9; outline-offset:2px; }
+    .lesson1-page .scramble-mark { padding-bottom:4px; font-size:30px; line-height:1; }
+    .lesson1-page .scramble-answer .answer-text { display:none; }
+    .lesson1-page .match-layout { display:grid; grid-template-columns:minmax(190px, 42%) 1fr; gap:18px; align-items:center; margin-top:14px; }
+    .lesson1-page .section-c-picture { display:block; width:100%; height:360px; object-fit:contain; border:1px dashed #aaa; border-radius:12px; background:#fafafa; }
+    .lesson1-page .word-match { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:70px; min-height:300px; padding:10px 0; }
+    .lesson1-page .match-column { position:relative; z-index:2; display:flex; flex-direction:column; justify-content:space-around; gap:14px; }
+    .lesson1-page .match-word { display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; padding:10px 6px; border:2px solid transparent; border-radius:10px; background:#fff; color:#222; font:inherit; text-align:left; cursor:pointer; }
+    .lesson1-page .match-word:hover, .lesson1-page .match-word.selected { border-color:#7aa7d9; background:#eef6ff; }
+    .lesson1-page .match-word.correct { border-color:#299447; background:#edf9f0; }
+    .lesson1-page .match-word.wrong { border-color:#c83939; background:#fff0f0; }
+    .lesson1-page .match-dot { flex:0 0 13px; width:13px; height:13px; border-radius:50%; background:#333; }
+    .lesson1-page .match-lines { position:absolute; z-index:1; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+    .lesson1-page .match-lines line { stroke:#5688bd; stroke-width:3; stroke-linecap:round; }
+    .lesson1-page select { min-width:52px; padding:8px; border:2px solid #b8c2cc; border-radius:8px; font-size:17px; }
+    .lesson1-page .choice-row { display:grid; grid-template-columns:25px 145px 1fr; gap:12px; align-items:center; padding:14px 0; border-bottom:1px solid #ddd; }
+    .lesson1-page .sentence-pair { display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:center; }
+    .lesson1-page .section-d-layout { display:grid; grid-template-columns:minmax(150px, 30%) minmax(0, 1fr); gap:12px; align-items:start; }
+    .lesson1-page .section-d-picture { display:block; width:100%; height:440px; object-fit:contain; border:1px dashed #aaa; border-radius:12px; background:#fafafa; }
+    .lesson1-page .section-d-questions { min-width:0; }
+    .lesson1-page .section-d .choice-row { grid-template-columns:22px minmax(0, 1fr); gap:6px; min-height:92px; padding:8px 0; }
+    .lesson1-page .section-d .sentence-pair { grid-template-columns:1fr 1fr; gap:8px; }
+    .lesson1-page .section-d .choice-sentence { gap:3px; font-size:15px; }
+    .lesson1-page .section-d .word-choice { min-width:55px; }
+    .lesson1-page .section-d .word-choice label { padding:3px 4px; }
+    .lesson1-page .choice-sentence { display:flex; align-items:center; justify-content:center; gap:8px; white-space:nowrap; }
+    .lesson1-page .word-choice { display:flex; flex-direction:column; gap:3px; min-width:76px; }
+    .lesson1-page .word-choice label { display:block; padding:5px 8px; border:2px solid transparent; border-radius:16px; text-align:center; cursor:pointer; line-height:1.1; }
+    .lesson1-page .word-choice input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+    .lesson1-page .word-choice label:has(input:checked) { border-color:#555; background:#f2f2f2; }
+    .lesson1-page .word-choice .answer-text { margin-top:3px; font-size:11px; white-space:normal; text-align:center; }
+    .lesson1-page .write-row { display:grid; grid-template-columns:25px 135px 1fr; gap:10px; align-items:center; margin:18px 0; }
+    .lesson1-page .section-e-layout { display:grid; grid-template-columns:minmax(150px, 34%) minmax(0, 1fr); gap:16px; align-items:start; }
+    .lesson1-page .section-e-picture { display:block; width:100%; height:380px; object-fit:contain; border:1px dashed #aaa; border-radius:12px; background:#fafafa; }
+    .lesson1-page .section-e-questions { min-width:0; }
+    .lesson1-page .section-e .write-row { grid-template-columns:25px minmax(0, 1fr); min-height:105px; margin:8px 0; padding-bottom:8px; border-bottom:1px solid #ddd; }
+    .lesson1-page .section-e .write-row:last-child { border-bottom:0; }
+    .lesson1-page .write-lines { display:flex; flex-direction:column; gap:10px; }
+    .lesson1-page .write-lines .line-input { width:100%; }
+    .lesson1-page .write-lines .example-line { box-sizing:border-box; min-height:38px; padding:8px 10px; border-bottom:2px solid #777; color:#777; }
+    .lesson1-page .image-note { margin-top:4px; color:#777; font-size:12px; text-align:center; }
+    @media (max-width: 850px) {
+      .lesson1-page .answer-grid { grid-template-columns:1fr; }
+      .lesson1-page .match-layout { grid-template-columns:1fr; }
+      .lesson1-page .section-c-picture { height:280px; }
+      .lesson1-page .word-match { min-height:280px; gap:34px; }
+      .lesson1-page .choice-row { grid-template-columns:25px 110px 1fr; }
+      .lesson1-page .sentence-pair { grid-template-columns:1fr; gap:12px; }
+      .lesson1-page .write-row { grid-template-columns:25px 100px 1fr; }
+    }
+    @media (max-width: 600px) {
+      .lesson1-page .section-d-layout { grid-template-columns:1fr; }
+      .lesson1-page .section-d-picture { height:360px; }
+      .lesson1-page .section-d .sentence-pair { grid-template-columns:1fr; }
+      .lesson1-page .section-e-layout { grid-template-columns:1fr; }
+      .lesson1-page .section-e-picture { height:300px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page lesson1-page">
+    <div class="title">Lesson 1 - Describing People</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Write.</span></div>
+          <div class="word-bank"><span>short</span><span>tall</span><span>young</span><span>strong</span><span>old</span><span>weak</span></div>
+          <img class="section-a-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l1-a.png" alt="People numbered 1 to 6">
+          <div class="answer-grid">
+            <div class="answer-item"><b>1.</b><div class="letter-answer" aria-label="young"><input class="letter-input" maxlength="1" data-type="text" data-answer="y"><input class="letter-input" maxlength="1" data-type="text" data-answer="o"><input class="letter-input" maxlength="1" data-type="text" data-answer="u"><input class="letter-input" maxlength="1" data-type="text" data-answer="n"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="g"></div></div>
+            <div class="answer-item"><b>2.</b><div class="letter-answer" aria-label="old"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="o"><input class="letter-input" maxlength="1" data-type="text" data-answer="l"><input class="letter-input" maxlength="1" data-type="text" data-answer="d"></div></div>
+            <div class="answer-item"><b>3.</b><div class="letter-answer" aria-label="tall"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="t"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="a"><input class="letter-input" maxlength="1" data-type="text" data-answer="l"><input class="letter-input" maxlength="1" data-type="text" data-answer="l"></div></div>
+            <div class="answer-item"><b>4.</b><div class="letter-answer" aria-label="short"><input class="letter-input" maxlength="1" data-type="text" data-answer="s"><input class="letter-input" maxlength="1" data-type="text" data-answer="h"><input class="letter-input" maxlength="1" data-type="text" data-answer="o"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="r"><input class="letter-input" maxlength="1" data-type="text" data-answer="t"></div></div>
+            <div class="answer-item"><b>5.</b><div class="letter-answer" aria-label="strong"><input class="letter-input" maxlength="1" data-type="text" data-answer="s"><input class="letter-input" maxlength="1" data-type="text" data-answer="t"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="r"><input class="letter-input" maxlength="1" data-type="text" data-answer="o"><input class="letter-input" maxlength="1" data-type="text" data-answer="n"><input class="letter-input" maxlength="1" data-type="text" data-answer="g"></div></div>
+            <div class="answer-item"><b>6.</b><div class="letter-answer" aria-label="weak"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="w"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="e"><input class="letter-input" maxlength="1" data-type="text" data-answer="a"><input class="letter-input circled" maxlength="1" data-type="text" data-answer="k"></div></div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Look at the circles in A. Unscramble.</span></div>
+          <div class="scramble-box">
+            <div class="scramble-answer" aria-label="Great work!">
+              <div class="scramble-word">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="g">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="r">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="e">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="a">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="t">
+              </div>
+              <div class="scramble-word">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="w">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="o">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="r">
+                <input class="scramble-letter" maxlength="1" data-type="text" data-answer="k">
+              </div>
+              <span class="scramble-mark">!</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Match.</span></div>
+          <div class="match-layout">
+            <img class="section-c-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l1-c.png" alt="Four people numbered 1 to 4">
+            <div class="word-match" id="wordMatchC">
+              <svg class="match-lines" aria-hidden="true"></svg>
+              <div class="match-column match-column-left">
+                <button class="match-word" type="button" data-side="left" data-value="a" data-answer="c"><span>a. a tall</span><span class="match-dot"></span></button>
+                <button class="match-word" type="button" data-side="left" data-value="b" data-answer="d"><span>b. a strong</span><span class="match-dot"></span></button>
+                <button class="match-word" type="button" data-side="left" data-value="c" data-answer="a"><span>c. an old</span><span class="match-dot"></span></button>
+                <button class="match-word" type="button" data-side="left" data-value="d" data-answer="b"><span>d. a young</span><span class="match-dot"></span></button>
+              </div>
+              <div class="match-column match-column-right">
+                <button class="match-word" type="button" data-side="right" data-value="a"><span class="match-dot"></span><span>a. woman</span></button>
+                <button class="match-word" type="button" data-side="right" data-value="b"><span class="match-dot"></span><span>b. girl</span></button>
+                <button class="match-word" type="button" data-side="right" data-value="c"><span class="match-dot"></span><span>c. boy</span></button>
+                <button class="match-word" type="button" data-side="right" data-value="d"><span class="match-dot"></span><span>d. man</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Circle.</span></div>
+          <div class="section-d-layout">
+            <img class="section-d-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l1-d.png" alt="Four pairs of people for questions 1 to 4">
+            <div class="section-d-questions">
+          <div class="choice-row">
+            <b>1.</b>
+            <div class="sentence-pair">
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="boy"><label><input type="radio" name="d1a" value="boy">boy</label><label><input type="radio" name="d1a" value="girl">girl</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="tall"><label><input type="radio" name="d1b" value="tall">tall.</label><label><input type="radio" name="d1b" value="taller">taller.</label></div></div>
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="girl"><label><input type="radio" name="d1c" value="boy">boy</label><label><input type="radio" name="d1c" value="girl">girl</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="taller"><label><input type="radio" name="d1d" value="tall">tall.</label><label><input type="radio" name="d1d" value="taller">taller.</label></div></div>
+            </div>
+          </div>
+          <div class="choice-row">
+            <b>2.</b>
+            <div class="sentence-pair">
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="girl"><label><input type="radio" name="d2a" value="boy">boy</label><label><input type="radio" name="d2a" value="girl">girl</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="young"><label><input type="radio" name="d2b" value="young">young.</label><label><input type="radio" name="d2b" value="younger">younger.</label></div></div>
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="boy"><label><input type="radio" name="d2c" value="girl">girl</label><label><input type="radio" name="d2c" value="boy">boy</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="younger"><label><input type="radio" name="d2d" value="young">young.</label><label><input type="radio" name="d2d" value="younger">younger.</label></div></div>
+            </div>
+          </div>
+          <div class="choice-row">
+            <b>3.</b>
+            <div class="sentence-pair">
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="woman"><label><input type="radio" name="d3a" value="woman">woman</label><label><input type="radio" name="d3a" value="man">man</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="weak"><label><input type="radio" name="d3b" value="weaker">weaker.</label><label><input type="radio" name="d3b" value="weak">weak.</label></div></div>
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="man"><label><input type="radio" name="d3c" value="man">man</label><label><input type="radio" name="d3c" value="woman">woman</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="weaker"><label><input type="radio" name="d3d" value="weak">weak.</label><label><input type="radio" name="d3d" value="weaker">weaker.</label></div></div>
+            </div>
+          </div>
+          <div class="choice-row">
+            <b>4.</b>
+            <div class="sentence-pair">
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="man"><label><input type="radio" name="d4a" value="woman">woman</label><label><input type="radio" name="d4a" value="man">man</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="short"><label><input type="radio" name="d4b" value="short">short.</label><label><input type="radio" name="d4b" value="shorter">shorter.</label></div></div>
+              <div class="choice-sentence"><span>The</span><div class="word-choice" data-type="mcq" data-answer="woman"><label><input type="radio" name="d4c" value="man">man</label><label><input type="radio" name="d4c" value="woman">woman</label></div><span>is</span><div class="word-choice" data-type="mcq" data-answer="shorter"><label><input type="radio" name="d4d" value="shorter">shorter.</label><label><input type="radio" name="d4d" value="short">short.</label></div></div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section section-e">
+          <div class="subtitle"><span class="section-label">E</span><span>Write.</span></div>
+          <div class="section-e-layout">
+            <img class="section-e-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l1-e.png" alt="Ella and Keiko, Rob and Sam, and May and Eva">
+            <div class="section-e-questions">
+          <div class="write-row">
+            <b>1.</b>
+            <div class="write-lines"><span><b>strong</b> - Ella / Keiko</span><div class="line-input example-line">Who's stronger, Ella or Keiko?</div><div class="line-input example-line">Ella is stronger.</div></div>
+          </div>
+          <div class="write-row">
+            <b>2.</b>
+            <div class="write-lines"><span><b>old</b> - Rob / Sam</span><input class="line-input" data-type="text" data-answer="Who's older, Rob or Sam?"><input class="line-input" data-type="text" data-answer="Sam is."></div>
+          </div>
+          <div class="write-row">
+            <b>3.</b>
+            <div class="write-lines"><span><b>tall</b> - May / Eva</span><input class="line-input" data-type="text" data-answer="Who's taller, May or Eva?"><input class="line-input" data-type="text" data-answer="Eva is."></div>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions">
+      <button class="btn" type="button" onclick="checkAll()">Check answers</button>
+      <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button>
+    </div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+<script>
+  (() => {
+    const activity = document.getElementById("wordMatchC");
+    const svg = activity.querySelector(".match-lines");
+    const leftButtons = [...activity.querySelectorAll('[data-side="left"]')];
+    const rightButtons = [...activity.querySelectorAll('[data-side="right"]')];
+    const connections = new Map();
+    let activeLeft = null;
+
+    function dotCenter(button) {
+      const dotRect = button.querySelector(".match-dot").getBoundingClientRect();
+      const areaRect = activity.getBoundingClientRect();
+      return {
+        x: dotRect.left + dotRect.width / 2 - areaRect.left,
+        y: dotRect.top + dotRect.height / 2 - areaRect.top
+      };
+    }
+
+    function drawConnections() {
+      const areaRect = activity.getBoundingClientRect();
+      svg.setAttribute("viewBox", `0 0 ${areaRect.width} ${areaRect.height}`);
+      svg.replaceChildren();
+      connections.forEach((rightValue, leftValue) => {
+        const left = activity.querySelector(`[data-side="left"][data-value="${leftValue}"]`);
+        const right = activity.querySelector(`[data-side="right"][data-value="${rightValue}"]`);
+        const start = dotCenter(left);
+        const end = dotCenter(right);
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", start.x);
+        line.setAttribute("y1", start.y);
+        line.setAttribute("x2", end.x);
+        line.setAttribute("y2", end.y);
+        svg.appendChild(line);
+      });
+    }
+
+    leftButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        leftButtons.forEach(item => item.classList.remove("selected"));
+        activeLeft = button;
+        button.classList.add("selected");
+      });
+    });
+
+    rightButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        if (!activeLeft) return;
+
+        connections.forEach((rightValue, leftValue) => {
+          if (rightValue === button.dataset.value && leftValue !== activeLeft.dataset.value) {
+            connections.delete(leftValue);
+          }
+        });
+        connections.set(activeLeft.dataset.value, button.dataset.value);
+        activeLeft.classList.remove("selected");
+        activeLeft = null;
+        drawConnections();
+      });
+    });
+
+    const originalCheckAll = window.checkAll;
+    window.checkAll = function () {
+      originalCheckAll();
+      let matchScore = 0;
+
+      leftButtons.forEach(left => {
+        const selectedValue = connections.get(left.dataset.value);
+        const isCorrect = selectedValue === left.dataset.answer;
+        left.classList.toggle("correct", isCorrect);
+        left.classList.toggle("wrong", !isCorrect);
+        if (isCorrect) matchScore++;
+      });
+      rightButtons.forEach(right => {
+        const linkedLeft = leftButtons.find(left => connections.get(left.dataset.value) === right.dataset.value);
+        const isCorrect = linkedLeft && linkedLeft.dataset.answer === right.dataset.value;
+        right.classList.toggle("correct", Boolean(isCorrect));
+        right.classList.toggle("wrong", Boolean(linkedLeft) && !isCorrect);
+      });
+
+      const result = document.getElementById("result");
+      const baseScore = Number((result.textContent.match(/\d+/) || [0])[0]);
+      result.textContent = `Score: ${baseScore + matchScore}`;
+    };
+
+    const originalResetAll = window.resetAll;
+    window.resetAll = function () {
+      originalResetAll();
+      connections.clear();
+      activeLeft = null;
+      [...leftButtons, ...rightButtons].forEach(button => {
+        button.classList.remove("selected", "correct", "wrong");
+      });
+      drawConnections();
+    };
+
+    window.addEventListener("resize", drawConnections);
+    if (window.ResizeObserver) new ResizeObserver(drawConnections).observe(activity);
+  })();
+</script>
+</body>
+</html>

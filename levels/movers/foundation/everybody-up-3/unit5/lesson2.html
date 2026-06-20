@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 - Comparing Things</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .lesson2-page .word-bank { display:flex; flex-wrap:wrap; justify-content:space-around; gap:10px 22px; padding:12px 18px; border:1px solid #bbb; border-radius:12px; font-weight:700; }
+    .lesson2-page .word-bank .example-word { color:#777; text-decoration:line-through; }
+    .lesson2-page .section-picture { display:block; width:100%; margin:16px 0; border:1px dashed #aaa; border-radius:12px; background:#fafafa; object-fit:contain; }
+    .lesson2-page .look-write-layout { display:grid; grid-template-columns:minmax(210px, 48%) 1fr; gap:20px; align-items:stretch; margin-top:16px; }
+    .lesson2-page .section-a-picture { height:360px; margin:0; }
+    .lesson2-page .look-write-grid { display:flex; flex-direction:column; justify-content:space-around; gap:10px; }
+    .lesson2-page .write-item { display:grid; grid-template-columns:26px 1fr; gap:8px; align-items:center; }
+    .lesson2-page .write-item .line-input { width:100%; }
+    .lesson2-page .write-item .answer-text { grid-column:2; min-width:0; margin:0; white-space:nowrap; font-size:14px; }
+    .lesson2-page .example-line { box-sizing:border-box; min-height:38px; padding:8px 10px; border-bottom:2px solid #777; color:#777; }
+    .lesson2-page .comparison-match { display:grid; grid-template-columns:100px 80px minmax(0, 1fr); height:300px; margin-top:12px; }
+    .lesson2-page .comparison-words, .lesson2-page .comparison-answers { display:flex; flex-direction:column; justify-content:space-around; gap:8px; }
+    .lesson2-page .comparison-word { display:flex; align-items:center; justify-content:space-between; gap:8px; font-weight:700; white-space:nowrap; }
+    .lesson2-page .comparison-answer { display:grid; grid-template-columns:14px minmax(0, 1fr); gap:8px; align-items:center; }
+    .lesson2-page .comparison-answer .line-input { width:100%; }
+    .lesson2-page .comparison-answer .answer-text { grid-column:2; min-width:0; margin:0; white-space:nowrap; font-size:12px; line-height:1.1; }
+    .lesson2-page .comparison-dot { width:12px; height:12px; border-radius:50%; background:#333; }
+    .lesson2-page .comparison-lines { display:block; width:100%; height:300px; overflow:visible; }
+    .lesson2-page .comparison-lines path { fill:none; stroke:#aeb4ba; stroke-width:3; vector-effect:non-scaling-stroke; }
+    .lesson2-page .comparison-lines .dashed { stroke-dasharray:10 8; }
+    .lesson2-page .comparison-lines .dotted { stroke-dasharray:2 8; stroke-linecap:round; }
+    .lesson2-page .pair-card { margin-top:20px; padding-bottom:18px; border-bottom:1px solid #ddd; }
+    .lesson2-page .pair-card:last-child { border-bottom:0; }
+    .lesson2-page .pair-picture { height:190px; margin:8px 0 12px; }
+    .lesson2-page .pair-labels { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:6px; font-weight:700; text-align:center; }
+    .lesson2-page .question-row { display:grid; grid-template-columns:26px minmax(220px, 1fr) auto; gap:8px; align-items:center; margin:10px 0; }
+    .lesson2-page .question-row .line-input { width:100%; }
+    .lesson2-page .sentence-builder { display:flex; align-items:center; gap:5px; min-width:0; padding:4px 7px; border:1px solid #ccc; border-radius:8px; background:#fff; }
+    .lesson2-page .sentence-builder:focus-within { border-color:#2878d0; box-shadow:0 0 0 2px rgba(40, 120, 208, 0.18); }
+    .lesson2-page .sentence-builder .sentence-part { min-width:0; margin:0; padding:5px 2px; border:0; border-bottom:1px solid #999; border-radius:0; background:transparent; box-shadow:none; text-align:left; }
+    .lesson2-page .sentence-builder .sentence-prefix { flex:0 1 70px; }
+    .lesson2-page .sentence-builder .sentence-suffix { flex:1 1 130px; }
+    .lesson2-page .sentence-builder .fixed-words { flex:0 0 auto; color:#555; font-weight:700; white-space:nowrap; }
+    .lesson2-page .sentence-builder .sentence-part.correct { border:0; border-bottom:2px solid green; background:#f1fff3; }
+    .lesson2-page .sentence-builder .sentence-part.wrong { border:0; border-bottom:2px solid red; background:#fff3f3; }
+    .lesson2-page .sentence-builder > .answer-text { display:none; }
+    .lesson2-page .yes-no-choice { display:flex; gap:5px; white-space:nowrap; }
+    .lesson2-page .yes-no-choice label { display:block; padding:6px 9px; border:2px solid transparent; border-radius:18px; cursor:pointer; }
+    .lesson2-page .yes-no-choice input { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+    .lesson2-page .yes-no-choice label:has(input:checked) { border-color:#555; background:#f2f2f2; }
+    .lesson2-page .yes-no-choice .answer-text { display:none; }
+    .lesson2-page .yes-no-choice label.correct-choice { border-color:green; background:#f1fff3; color:#167a31; }
+    .lesson2-page .yes-no-choice label.wrong-choice { border-color:red; background:#fff3f3; color:#b42318; }
+    .lesson2-page .question-row .c-row-answer { grid-column:2 / -1; margin:2px 0 4px; white-space:normal; line-height:1.3; }
+    .lesson2-page .example-choice { display:flex; gap:7px; white-space:nowrap; }
+    .lesson2-page .example-choice span { padding:6px 9px; border:2px solid transparent; border-radius:18px; }
+    .lesson2-page .example-choice .circled { border-color:#777; color:#777; }
+    @media (max-width: 850px) {
+      .lesson2-page .question-row { grid-template-columns:26px 1fr; }
+      .lesson2-page .yes-no-choice, .lesson2-page .example-choice { grid-column:2; }
+    }
+    @media (max-width: 600px) {
+      .lesson2-page .look-write-layout { grid-template-columns:1fr; }
+      .lesson2-page .section-a-picture { height:280px; }
+      .lesson2-page .comparison-match { grid-template-columns:82px 54px minmax(0, 1fr); height:280px; }
+      .lesson2-page .comparison-lines { height:280px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page lesson2-page">
+    <div class="title">Lesson 2 - Comparing Things</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Look and write.</span></div>
+          <div class="word-bank">
+            <span class="example-word">clean</span><span>thin</span><span>dirty</span><span>ugly</span><span>pretty</span><span>thick</span>
+          </div>
+          <div class="look-write-layout">
+            <img class="section-picture section-a-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l2-a.png" alt="A car, bus, cat, dog, book, and magazine numbered 1 to 6">
+            <div class="look-write-grid">
+              <div class="write-item"><b>1.</b><div class="example-line">a clean car</div></div>
+              <div class="write-item"><b>2.</b><input class="line-input" data-type="text" data-answer="a dirty bus" aria-label="Describe the bus"></div>
+              <div class="write-item"><b>3.</b><input class="line-input" data-type="text" data-answer="a pretty cat" aria-label="Describe the cat"></div>
+              <div class="write-item"><b>4.</b><input class="line-input" data-type="text" data-answer="an ugly dog" aria-label="Describe the dog"></div>
+              <div class="write-item"><b>5.</b><input class="line-input" data-type="text" data-answer="a thick book" aria-label="Describe the book"></div>
+              <div class="write-item"><b>6.</b><input class="line-input" data-type="text" data-answer="a thin magazine" aria-label="Describe the magazine"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Look at A. Write.</span></div>
+          <div class="comparison-match">
+            <div class="comparison-words">
+              <div class="comparison-word"><span>1. dirty</span><span class="comparison-dot"></span></div>
+              <div class="comparison-word"><span>2. pretty</span><span class="comparison-dot"></span></div>
+              <div class="comparison-word"><span>3. clean</span><span class="comparison-dot"></span></div>
+              <div class="comparison-word"><span>4. ugly</span><span class="comparison-dot"></span></div>
+              <div class="comparison-word"><span>5. thin</span><span class="comparison-dot"></span></div>
+              <div class="comparison-word"><span>6. thick</span><span class="comparison-dot"></span></div>
+            </div>
+            <svg class="comparison-lines" viewBox="0 0 100 600" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M 0 50 C 42 50, 55 250, 100 250"></path>
+              <path class="dashed" d="M 0 150 C 55 150, 45 450, 100 450"></path>
+              <path class="dotted" d="M 0 250 C 40 250, 58 550, 100 550"></path>
+              <path d="M 0 350 C 52 350, 46 150, 100 150"></path>
+              <path class="dashed" d="M 0 450 C 52 450, 48 350, 100 350"></path>
+              <path d="M 0 550 C 43 550, 57 50, 100 50"></path>
+            </svg>
+            <div class="comparison-answers">
+              <div class="comparison-answer"><span class="comparison-dot"></span><input class="line-input" data-type="text" data-answer="The book is thicker than the magazine." aria-label="Sentence with thicker"></div>
+              <div class="comparison-answer"><span class="comparison-dot"></span><input class="line-input" data-type="text" data-answer="The dog is uglier than the cat." aria-label="Sentence with uglier"></div>
+              <div class="comparison-answer"><span class="comparison-dot"></span><div class="example-line">The bus is dirtier than the car.</div></div>
+              <div class="comparison-answer"><span class="comparison-dot"></span><input class="line-input" data-type="text" data-answer="The magazine is thinner than the book." aria-label="Sentence with thinner"></div>
+              <div class="comparison-answer"><span class="comparison-dot"></span><input class="line-input" data-type="text" data-answer="The cat is prettier than the dog." aria-label="Sentence with prettier"></div>
+              <div class="comparison-answer"><span class="comparison-dot"></span><input class="line-input" data-type="text" data-answer="The car is cleaner than the bus." aria-label="Sentence with cleaner"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Write and circle.</span></div>
+
+          <div class="pair-card">
+            <div class="pair-labels"><span>shirt</span><span>sweater</span></div>
+            <img class="section-picture pair-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l2-c-1.png" alt="A thin shirt and a thick sweater">
+            <div class="question-row">
+              <b>1.</b><div class="example-line">Is the shirt thinner than the sweater?</div>
+              <div class="example-choice"><span class="circled">Yes, it is.</span><span>No, it isn't.</span></div>
+            </div>
+            <div class="question-row">
+              <b>2.</b><div class="sentence-builder" data-full-answer="Is the shirt thicker than the sweater?"><input class="sentence-part sentence-prefix" data-type="text" data-answer="Is the" aria-label="Beginning of question 2"><span class="fixed-words">shirt thicker</span><input class="sentence-part sentence-suffix" data-type="text" data-answer="than the sweater?" aria-label="End of question 2"></div>
+              <div class="yes-no-choice" data-type="mcq" data-answer="no"><label><input type="radio" name="c2" value="yes">Yes, it is.</label><label><input type="radio" name="c2" value="no">No, it isn't.</label></div>
+            </div>
+          </div>
+
+          <div class="pair-card">
+            <div class="pair-labels"><span>hat</span><span>T-shirt</span></div>
+            <img class="section-picture pair-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l2-c-2.png" alt="A clean hat and a dirty T-shirt">
+            <div class="question-row">
+              <b>3.</b><div class="sentence-builder" data-full-answer="Is the hat dirtier than the T-shirt?"><input class="sentence-part sentence-prefix" data-type="text" data-answer="Is the" aria-label="Beginning of question 3"><span class="fixed-words">hat dirtier</span><input class="sentence-part sentence-suffix" data-type="text" data-answer="than the T-shirt?" aria-label="End of question 3"></div>
+              <div class="yes-no-choice" data-type="mcq" data-answer="no"><label><input type="radio" name="c3" value="yes">Yes, it is.</label><label><input type="radio" name="c3" value="no">No, it isn't.</label></div>
+            </div>
+            <div class="question-row">
+              <b>4.</b><div class="sentence-builder" data-full-answer="Is the T-shirt dirtier than the hat?"><input class="sentence-part sentence-prefix" data-type="text" data-answer="Is the" aria-label="Beginning of question 4"><span class="fixed-words">T-shirt dirtier</span><input class="sentence-part sentence-suffix" data-type="text" data-answer="than the hat?" aria-label="End of question 4"></div>
+              <div class="yes-no-choice" data-type="mcq" data-answer="yes"><label><input type="radio" name="c4" value="yes">Yes, it is.</label><label><input type="radio" name="c4" value="no">No, it isn't.</label></div>
+            </div>
+          </div>
+
+          <div class="pair-card">
+            <div class="pair-labels"><span>dress</span><span>skirt</span></div>
+            <img class="section-picture pair-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l2-c-3.png" alt="A pretty dress and an ugly skirt">
+            <div class="question-row">
+              <b>5.</b><div class="sentence-builder" data-full-answer="Is the dress prettier than the skirt?"><input class="sentence-part sentence-prefix" data-type="text" data-answer="Is the" aria-label="Beginning of question 5"><span class="fixed-words">dress prettier</span><input class="sentence-part sentence-suffix" data-type="text" data-answer="than the skirt?" aria-label="End of question 5"></div>
+              <div class="yes-no-choice" data-type="mcq" data-answer="yes"><label><input type="radio" name="c5" value="yes">Yes, it is.</label><label><input type="radio" name="c5" value="no">No, it isn't.</label></div>
+            </div>
+            <div class="question-row">
+              <b>6.</b><div class="sentence-builder" data-full-answer="Is the skirt uglier than the dress?"><input class="sentence-part sentence-prefix" data-type="text" data-answer="Is the" aria-label="Beginning of question 6"><span class="fixed-words">skirt uglier</span><input class="sentence-part sentence-suffix" data-type="text" data-answer="than the dress?" aria-label="End of question 6"></div>
+              <div class="yes-no-choice" data-type="mcq" data-answer="yes"><label><input type="radio" name="c6" value="yes">Yes, it is.</label><label><input type="radio" name="c6" value="no">No, it isn't.</label></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions">
+      <button class="btn" type="button" onclick="checkAll()">Check answers</button>
+      <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button>
+    </div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+<script>
+  (() => {
+    const originalCheckAll = window.checkAll;
+    const originalResetAll = window.resetAll;
+
+    window.checkAll = function () {
+      originalCheckAll();
+      document.querySelectorAll(".section-c .yes-no-choice").forEach(group => {
+        const selected = group.querySelector("input:checked");
+        if (selected) {
+          selected.closest("label").classList.add(
+            selected.value === group.dataset.answer ? "correct-choice" : "wrong-choice"
+          );
+        }
+
+        const row = group.closest(".question-row");
+        const builder = row.querySelector(".sentence-builder");
+        const answer = document.createElement("div");
+        const choiceAnswer = group.dataset.answer === "yes" ? "Yes, it is." : "No, it isn't.";
+        answer.className = "answer-text c-row-answer";
+        answer.textContent = `Answer: ${builder.dataset.fullAnswer} ${choiceAnswer}`;
+        row.appendChild(answer);
+      });
+    };
+
+    window.resetAll = function () {
+      originalResetAll();
+      document.querySelectorAll(".section-c .yes-no-choice label").forEach(label => {
+        label.classList.remove("correct-choice", "wrong-choice");
+      });
+    };
+  })();
+</script>
+</body>
+</html>

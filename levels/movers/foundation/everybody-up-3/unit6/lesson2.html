@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 6 - Lesson 2 - Chores</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .lesson2-page .placeholder-image { display:block; width:100%; border:1px dashed #999; border-radius:12px; background:#f7f7f7; object-fit:contain; }
+    .lesson2-page select { box-sizing:border-box; width:100%; padding:7px; border:1px solid #aaa; border-radius:8px; background:#fff; }
+    .lesson2-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; white-space:nowrap; overflow-x:auto; }
+    .lesson2-page .example-answer { padding:7px 9px; border-bottom:2px solid #888; color:#777; }
+    .lesson2-page .match-layout { display:grid; grid-template-columns:minmax(0, 1fr) 190px; gap:20px; align-items:start; }
+    .lesson2-page .match-pictures { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .lesson2-page .match-card { display:grid; grid-template-columns:24px minmax(100px, 1fr) 52px; gap:7px; align-items:center; min-width:0; }
+    .lesson2-page .match-card img { height:92px; }
+    .lesson2-page .match-card .answer-text { grid-column:2 / -1; }
+    .lesson2-page .chores-list { margin:0; padding:8px 8px 8px 30px; font-size:18px; line-height:2.15; }
+    .lesson2-page .frequency-key { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin-bottom:16px; padding:10px; border:1px solid #aaa; border-radius:12px; }
+    .lesson2-page .frequency-key span { text-align:center; font-weight:700; }
+    .lesson2-page .blocks { display:flex; justify-content:center; margin-bottom:4px; }
+    .lesson2-page .blocks i { width:17px; height:15px; border:1px solid #555; background:#fff; }
+    .lesson2-page .blocks i.on { background:#888; }
+    .lesson2-page .frequency-row { display:grid; grid-template-columns:28px 170px minmax(0, 1fr) 85px; gap:9px; align-items:center; margin:14px 0; }
+    .lesson2-page .frequency-row img { height:82px; }
+    .lesson2-page .frequency-answer { min-width:0; }
+    .lesson2-page .frequency-answer .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .lesson2-page .frequency-answer .answer-text { width:100%; }
+    .lesson2-page .scramble-item { margin:17px 0 24px; }
+    .lesson2-page .scramble-answer { display:grid; grid-template-columns:28px 1fr; gap:8px; align-items:center; }
+    .lesson2-page .scramble-answer .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .lesson2-page .scramble-answer .answer-text { grid-column:2; }
+    .lesson2-page .scramble-words { margin:7px 0 0 36px; text-align:center; font-size:18px; font-weight:600; }
+    .lesson2-page .charts { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .lesson2-page .chart-card { min-width:0; }
+    .lesson2-page .chart-card > img { height:250px; margin-bottom:12px; }
+    .lesson2-page .chart-title { margin-bottom:8px; font-size:18px; font-weight:700; }
+    .lesson2-page .chart-row { display:grid; grid-template-columns:28px 1fr; gap:8px; align-items:center; margin:10px 0; }
+    .lesson2-page .chart-row .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .lesson2-page .chart-row .answer-text { grid-column:2; }
+    @media (max-width:700px) {
+      .lesson2-page .match-layout, .lesson2-page .charts { grid-template-columns:1fr; }
+      .lesson2-page .chores-list { columns:2; }
+      .lesson2-page .frequency-row { grid-template-columns:28px 130px minmax(0, 1fr); }
+      .lesson2-page .frequency-row .blocks { grid-column:3; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page lesson2-page">
+    <div class="title">Unit 6 - Helping Out · Lesson 2 - Chores</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Match.</span></div>
+          <!-- Replace YOUR_IMAGE_URL... with your links. CSS keeps all pictures at a readable size. -->
+          <div class="match-layout">
+            <div class="match-pictures">
+              <div class="match-card"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-a-1.png" alt="Wash the car"><select data-type="select" data-answer="f" aria-label="Match picture 1"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="match-card"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-a-2.png" alt="Vacuum the carpet"><select data-type="select" data-answer="a" aria-label="Match picture 2"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="match-card"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-a-3.png" alt="Water the plants"><select data-type="select" data-answer="c" aria-label="Match picture 3"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="match-card"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-a-4.png" alt="Sweep the floor"><select data-type="select" data-answer="e" aria-label="Match picture 4"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="match-card"><b>5.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-a-5.png" alt="Clean the bathroom"><select data-type="select" data-answer="d" aria-label="Match picture 5"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="match-card"><b>6.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-a-6.png" alt="Take out the garbage"><select data-type="select" data-answer="b" aria-label="Match picture 6"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+            </div>
+            <ol class="chores-list" type="a"><li>vacuum the carpet</li><li>take out the garbage</li><li>water the plants</li><li>clean the bathroom</li><li>sweep the floor</li><li>wash the car</li></ol>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Write.</span></div>
+          <div class="frequency-key">
+            <span><span class="blocks"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>always</span>
+            <span><span class="blocks"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>usually</span>
+            <span><span class="blocks"><i class="on"></i><i class="on"></i><i></i><i></i></span>sometimes</span>
+            <span><span class="blocks"><i></i><i></i><i></i><i></i></span>never</span>
+          </div>
+          <div class="frequency-row"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-b-1.png" alt="A broom"><div class="frequency-answer"><div class="example-answer">I usually sweep the floor.</div></div><span class="blocks"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+          <div class="frequency-row"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-b-2.png" alt="Garbage"><div class="frequency-answer"><input class="line-input" data-type="text" data-answer="I sometimes take out the garbage." aria-label="Write sentence 2"></div><span class="blocks"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+          <div class="frequency-row"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-b-3.png" alt="A plant and watering can"><div class="frequency-answer"><input class="line-input" data-type="text" data-answer="I always water the plants." aria-label="Write sentence 3"></div><span class="blocks"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+          <div class="frequency-row"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-b-4.png" alt="A bathroom"><div class="frequency-answer"><input class="line-input" data-type="text" data-answer="I usually clean the bathroom." aria-label="Write sentence 4"></div><span class="blocks"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Unscramble.</span></div>
+          <div class="scramble-item"><div class="scramble-answer"><b>1.</b><input class="line-input" data-type="text" data-answer="What are his chores?" aria-label="Unscramble 1"></div><div class="scramble-words">are / what / his / chores / ?</div></div>
+          <div class="scramble-item"><div class="scramble-answer"><b>2.</b><input class="line-input" data-type="text" data-answer="She usually waters the plants." aria-label="Unscramble 2"></div><div class="scramble-words">usually / she / plants / waters / the / .</div></div>
+          <div class="scramble-item"><div class="scramble-answer"><b>3.</b><input class="line-input" data-type="text" data-answer="What are her chores?" aria-label="Unscramble 3"></div><div class="scramble-words">her / are / chores / what / ?</div></div>
+          <div class="scramble-item"><div class="scramble-answer"><b>4.</b><input class="line-input" data-type="text" data-answer="He sometimes cleans the bathroom." aria-label="Unscramble 4"></div><div class="scramble-words">the / he / bathroom / cleans / sometimes / .</div></div>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Look at the chart. Write.</span></div>
+          <div class="charts">
+            <div class="chart-card">
+              <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-d-1.png" alt="A boy's chores frequency chart">
+              <div class="chart-title">What are his chores?</div>
+              <div class="chart-row"><b>1.</b><div class="example-answer">He always vacuums the carpet.</div></div>
+              <div class="chart-row"><b>2.</b><input class="line-input" data-type="text" data-answer="He usually sweeps the floor." aria-label="His chore 2"></div>
+              <div class="chart-row"><b>3.</b><input class="line-input" data-type="text" data-answer="He never washes the car." aria-label="His chore 3"></div>
+            </div>
+            <div class="chart-card">
+              <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l2-d-2.png" alt="A girl's chores frequency chart">
+              <div class="chart-title">What are her chores?</div>
+              <div class="chart-row"><b>4.</b><input class="line-input" data-type="text" data-answer="She usually takes out the garbage." aria-label="Her chore 4"></div>
+              <div class="chart-row"><b>5.</b><input class="line-input" data-type="text" data-answer="She sometimes waters the plants." aria-label="Her chore 5"></div>
+              <div class="chart-row"><b>6.</b><input class="line-input" data-type="text" data-answer="She never cleans the bathroom." aria-label="Her chore 6"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+</body>
+</html>

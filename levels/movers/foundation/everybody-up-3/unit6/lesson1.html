@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 6 - Lesson 1 - Chores</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .lesson1-page .placeholder-image { display:block; width:100%; border:1px dashed #999; border-radius:12px; background:#f7f7f7; object-fit:contain; }
+    .lesson1-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; white-space:nowrap; overflow-x:auto; }
+    .lesson1-page .example-answer { padding:7px 9px; border-bottom:2px solid #888; color:#777; }
+    .lesson1-page .unscramble-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 24px; }
+    .lesson1-page .unscramble-item { display:grid; grid-template-columns:28px 1fr; gap:5px 8px; align-items:center; min-width:0; }
+    .lesson1-page .unscramble-item .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .lesson1-page .scrambled { grid-column:2; text-align:center; font-weight:600; }
+    .lesson1-page .unscramble-item .answer-text { grid-column:2; }
+    .lesson1-page .chores-picture { height:390px; margin-bottom:15px; }
+    .lesson1-page .chores-grid { display:grid; grid-template-columns:1fr 1fr; gap:11px 20px; }
+    .lesson1-page .chore-row { display:grid; grid-template-columns:28px 1fr; gap:8px; align-items:center; }
+    .lesson1-page .chore-row .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .lesson1-page .chore-row .answer-text { grid-column:2; }
+    .lesson1-page .schedule-table { width:100%; margin-bottom:18px; border-collapse:collapse; text-align:center; }
+    .lesson1-page .schedule-table th, .lesson1-page .schedule-table td { padding:7px 5px; border:1px solid #777; }
+    .lesson1-page .schedule-table th { background:#eee; }
+    .lesson1-page .day-row { display:grid; grid-template-columns:135px minmax(0, 1fr); gap:12px; align-items:start; margin:18px 0 24px; }
+    .lesson1-page .day-label { padding-top:6px; white-space:nowrap; }
+    .lesson1-page .day-answers { display:grid; gap:12px; min-width:0; }
+    .lesson1-page .day-line { min-width:0; }
+    .lesson1-page .day-line > input.line-input, .lesson1-page .day-line > .example-answer { box-sizing:border-box; display:block; width:100%; min-width:0; margin:0; text-align:left; }
+    .lesson1-page .day-line > input.line-input { height:34px; }
+    .lesson1-page .day-line > .answer-text { width:100%; margin-top:6px; }
+    .lesson1-page .question-card { display:grid; grid-template-columns:28px 175px 1fr; gap:10px; align-items:center; margin:16px 0; }
+    .lesson1-page .question-card img { height:105px; }
+    .lesson1-page .question-writing { min-width:0; }
+    .lesson1-page .question-writing .line-input { box-sizing:border-box; width:100%; margin:0 0 8px; text-align:left; }
+    .lesson1-page .fixed-response { text-align:center; font-weight:600; line-height:1.35; }
+    @media (max-width:700px) {
+      .lesson1-page .unscramble-grid, .lesson1-page .chores-grid { grid-template-columns:1fr; }
+      .lesson1-page .chores-picture { height:280px; }
+      .lesson1-page .question-card { grid-template-columns:28px 1fr; }
+      .lesson1-page .question-card img, .lesson1-page .question-writing { grid-column:2; }
+      .lesson1-page .schedule-wrap { overflow-x:auto; }
+      .lesson1-page .schedule-table { min-width:600px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page lesson1-page">
+    <div class="title">Unit 6 - Helping Out · Lesson 1 - Chores</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Unscramble.</span></div>
+          <div class="unscramble-grid">
+            <div class="unscramble-item"><b>1.</b><div class="example-answer">Wash the dishes.</div><div class="scrambled">swah het dhiess</div></div>
+            <div class="unscramble-item"><b>2.</b><input class="line-input" data-type="text" data-answer="Walk the dog." aria-label="Unscramble sentence 2"><div class="scrambled">lakw eth god</div></div>
+            <div class="unscramble-item"><b>3.</b><input class="line-input" data-type="text" data-answer="Clean my room." aria-label="Unscramble sentence 3"><div class="scrambled">lnced ym oorm</div></div>
+            <div class="unscramble-item"><b>4.</b><input class="line-input" data-type="text" data-answer="Do laundry." aria-label="Unscramble sentence 4"><div class="scrambled">od anulydr</div></div>
+            <div class="unscramble-item"><b>5.</b><input class="line-input" data-type="text" data-answer="Set the table." aria-label="Unscramble sentence 5"><div class="scrambled">ets teh batle</div></div>
+            <div class="unscramble-item"><b>6.</b><input class="line-input" data-type="text" data-answer="Make my bed." aria-label="Unscramble sentence 6"><div class="scrambled">akem ym edb</div></div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Look and write.</span></div>
+          <!-- Replace YOUR_IMAGE_URL_B with your image link. CSS keeps it at a readable size. -->
+          <img class="placeholder-image chores-picture" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l1-a.png" alt="A house showing six numbered chores">
+          <div class="chores-grid">
+            <div class="chore-row"><b>1.</b><div class="example-answer">Make my bed.</div></div>
+            <div class="chore-row"><b>2.</b><input class="line-input" data-type="text" data-answer="Clean my room." aria-label="Chore 2"></div>
+            <div class="chore-row"><b>3.</b><input class="line-input" data-type="text" data-answer="Do laundry." aria-label="Chore 3"></div>
+            <div class="chore-row"><b>4.</b><input class="line-input" data-type="text" data-answer="Set the table." aria-label="Chore 4"></div>
+            <div class="chore-row"><b>5.</b><input class="line-input" data-type="text" data-answer="Wash the dishes." aria-label="Chore 5"></div>
+            <div class="chore-row"><b>6.</b><input class="line-input" data-type="text" data-answer="Walk the dog." aria-label="Chore 6"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Read and write.</span></div>
+          <div class="schedule-wrap">
+            <table class="schedule-table">
+              <thead><tr><th>MONDAY</th><th>TUESDAY</th><th>WEDNESDAY</th><th>THURSDAY</th></tr></thead>
+              <tbody>
+                <tr><td>make my bed</td><td>wash the dishes</td><td>make my bed</td><td>walk the dog</td></tr>
+                <tr><td>go to school</td><td>go to school</td><td>go to school</td><td>go to school</td></tr>
+                <tr><td>clean my room</td><td>set the table</td><td>walk the dog</td><td>do laundry</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="day-row"><b class="day-label">1. Monday:</b><div class="day-answers"><div class="day-line"><div class="example-answer">I make my bed before school.</div></div><div class="day-line"><input class="line-input" data-type="text" data-answer="I clean my room after school." aria-label="Monday after school"></div></div></div>
+          <div class="day-row"><b class="day-label">2. Tuesday:</b><div class="day-answers"><div class="day-line"><input class="line-input" data-type="text" data-answer="I wash the dishes before school." aria-label="Tuesday before school"></div><div class="day-line"><input class="line-input" data-type="text" data-answer="I set the table after school." aria-label="Tuesday after school"></div></div></div>
+          <div class="day-row"><b class="day-label">3. Wednesday:</b><div class="day-answers"><div class="day-line"><input class="line-input" data-type="text" data-answer="I make my bed before school." aria-label="Wednesday before school"></div><div class="day-line"><input class="line-input" data-type="text" data-answer="I walk the dog after school." aria-label="Wednesday after school"></div></div></div>
+          <div class="day-row"><b class="day-label">4. Thursday:</b><div class="day-answers"><div class="day-line"><input class="line-input" data-type="text" data-answer="I walk the dog before school." aria-label="Thursday before school"></div><div class="day-line"><input class="line-input" data-type="text" data-answer="I do laundry after school." aria-label="Thursday after school"></div></div></div>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Write.</span></div>
+          <!-- Replace the three YOUR_IMAGE_URL... values below with your image links. -->
+          <div class="question-card"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l1-d-1.png" alt="A boy cleans his room after school"><div class="question-writing"><div class="example-answer">When does he clean his room?</div><div class="fixed-response">He cleans his room after school.</div></div></div>
+          <div class="question-card"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l1-d-2.png" alt="A girl washes the dishes before school"><div class="question-writing"><input class="line-input" data-type="text" data-answer="When does she wash the dishes?" aria-label="Write question 2"><div class="fixed-response">She washes the dishes before school.</div></div></div>
+          <div class="question-card"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l1-d-3.png" alt="A boy sets the table after school"><div class="question-writing"><input class="line-input" data-type="text" data-answer="When does he set the table?" aria-label="Write question 3"><div class="fixed-response">He sets the table after school.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+</body>
+</html>

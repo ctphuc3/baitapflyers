@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 4 - Adjectives</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .lesson4-page .placeholder-image { display:block; width:100%; border:1px dashed #999; border-radius:12px; background:#f7f7f7; object-fit:contain; }
+    .lesson4-page select { box-sizing:border-box; width:100%; padding:8px; border:1px solid #aaa; border-radius:8px; background:#fff; }
+    .lesson4-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; white-space:nowrap; overflow-x:auto; }
+    .lesson4-page .example-answer { padding:8px 10px; border-bottom:2px solid #888; color:#777; }
+    .lesson4-page .match-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .lesson4-page .match-card { display:grid; grid-template-columns:26px minmax(120px, 1fr) 105px; gap:9px; align-items:center; min-width:0; }
+    .lesson4-page .match-card img { height:150px; }
+    .lesson4-page .match-card .answer-text { grid-column:2 / -1; }
+    .lesson4-page .pair-box { margin:15px 0; padding:14px; border:1px solid #aaa; border-radius:16px; }
+    .lesson4-page .pair-box img { height:150px; }
+    .lesson4-page .comparison-row { display:grid; grid-template-columns:28px 1fr; gap:8px; align-items:start; margin:12px 0; }
+    .lesson4-page .comparison-row .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .lesson4-page .comparison-row .answer-text { grid-column:2; }
+    .lesson4-page .comparison-content { min-width:0; }
+    .lesson4-page .comparison-cue-line { display:flex; justify-content:flex-end; min-height:30px; border-bottom:2px solid #aaa; }
+    .lesson4-page .comparison-cue { padding:3px 8px; color:#777; font-size:20px; line-height:1.2; white-space:nowrap; user-select:none; }
+    .lesson4-page .comparison-content .line-input { margin-top:8px; }
+    .lesson4-page .comparison-content .answer-text { width:100%; }
+    .lesson4-page .scale-card { margin:14px 0 22px; }
+    .lesson4-page .scale-card > img { height:145px; margin-bottom:12px; }
+    .lesson4-page .word-heading { margin:12px 0 5px; font-size:18px; font-weight:800; }
+    .lesson4-page .scale-row { display:grid; grid-template-columns:28px 1fr; gap:8px; align-items:center; margin:7px 0; }
+    .lesson4-page .scale-row .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .lesson4-page .scale-row .answer-text { grid-column:2; }
+    .lesson4-page .d-layout { display:grid; grid-template-columns:minmax(0, 1fr) 190px; gap:16px; align-items:start; }
+    .lesson4-page .d-questions { min-width:0; }
+    .lesson4-page .d-composite-image { height:355px; margin-top:8px; }
+    .lesson4-page .circle-question { display:grid; grid-template-columns:28px minmax(0, 1fr); gap:5px 8px; align-items:start; margin:12px 0 18px; }
+    .lesson4-page .circle-question p { margin:0; line-height:1.35; }
+    .lesson4-page .choice-options { grid-column:2; display:flex; flex-wrap:wrap; gap:7px; }
+    .lesson4-page .text-choice { display:flex; align-items:center; gap:4px; padding:5px 9px; border:2px solid transparent; border-radius:18px; cursor:pointer; white-space:nowrap; }
+    .lesson4-page .text-choice:has(input:checked) { border-color:#555; background:#f1f1f1; }
+    .lesson4-page .text-choice input { margin:0; }
+    .lesson4-page .circle-question .answer-text { grid-column:2; }
+    @media (max-width:700px) {
+      .lesson4-page .match-grid { grid-template-columns:1fr; }
+      .lesson4-page .d-layout { grid-template-columns:1fr; }
+      .lesson4-page .d-composite-image { grid-row:1; height:260px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page lesson4-page">
+    <div class="title">Lesson 4 - Adjectives</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Match.</span></div>
+          <!-- Replace https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-a-1.png with your links. Image sizes are controlled by CSS. -->
+          <div class="match-grid">
+            <div class="match-card"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-a-1.png" alt="A heavy truck"><select data-type="select" data-answer="heavy" aria-label="Match picture 1"><option value="">Choose...</option><option>heavy</option><option>light</option><option>hard</option><option>soft</option></select></div>
+            <div class="match-card"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-a-2.png" alt="A light teddy bear"><select data-type="select" data-answer="light" aria-label="Match picture 2"><option value="">Choose...</option><option>heavy</option><option>light</option><option>hard</option><option>soft</option></select></div>
+            <div class="match-card"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-a-3.png" alt="A soft sofa"><select data-type="select" data-answer="soft" aria-label="Match picture 3"><option value="">Choose...</option><option>heavy</option><option>light</option><option>hard</option><option>soft</option></select></div>
+            <div class="match-card"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-a-4.png" alt="A hard pencil"><select data-type="select" data-answer="hard" aria-label="Match picture 4"><option value="">Choose...</option><option>heavy</option><option>light</option><option>hard</option><option>soft</option></select></div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Look and write.</span></div>
+          <div class="pair-box">
+            <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-b-1.png" alt="A book and a banana">
+            <div class="comparison-row"><b>1.</b><div class="example-answer">Which one is harder, the book or the banana?<br>The book is harder.</div></div>
+            <div class="comparison-row"><b>2.</b><div class="comparison-content"><div class="comparison-cue-line"><span class="comparison-cue">softer.</span></div><input class="line-input" data-type="text" data-answer="Which one is softer, the book or the banana? The banana is softer." aria-label="Write comparison 2"></div></div>
+          </div>
+          <div class="pair-box">
+            <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-b-2.png" alt="Potatoes and carrots">
+            <div class="comparison-row"><b>3.</b><div class="comparison-content"><div class="comparison-cue-line"><span class="comparison-cue">heavier.</span></div><input class="line-input" data-type="text" data-answer="Which one is heavier, the potatoes or the carrots? The potatoes are heavier." aria-label="Write comparison 3"></div></div>
+            <div class="comparison-row"><b>4.</b><div class="comparison-content"><div class="comparison-cue-line"><span class="comparison-cue">lighter.</span></div><input class="line-input" data-type="text" data-answer="Which one is lighter, the potatoes or the carrots? The carrots are lighter." aria-label="Write comparison 4"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Look and write.</span></div>
+          <div class="scale-card">
+            <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-c-1.png" alt="Hard to soft scale: marble, orange, sweater">
+            <div class="word-heading">hard</div>
+            <div class="scale-row"><b>1.</b><div class="example-answer">The orange is harder than the sweater.</div></div>
+            <div class="scale-row"><b>2.</b><input class="line-input" data-type="text" data-answer="The marble is harder than the orange." aria-label="Hard sentence 2"></div>
+            <div class="word-heading">soft</div>
+            <div class="scale-row"><b>3.</b><input class="line-input" data-type="text" data-answer="The sweater is softer than the orange." aria-label="Soft sentence 3"></div>
+            <div class="scale-row"><b>4.</b><input class="line-input" data-type="text" data-answer="The orange is softer than the marble." aria-label="Soft sentence 4"></div>
+          </div>
+          <div class="scale-card">
+            <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-c-2.png" alt="Heavy to light scale: truck, backpack, potato chips">
+            <div class="word-heading">heavy</div>
+            <div class="scale-row"><b>1.</b><input class="line-input" data-type="text" data-answer="The truck is heavier than the backpack." aria-label="Heavy sentence 1"></div>
+            <div class="scale-row"><b>2.</b><input class="line-input" data-type="text" data-answer="The backpack is heavier than the potato chips." aria-label="Heavy sentence 2"></div>
+            <div class="word-heading">light</div>
+            <div class="scale-row"><b>3.</b><input class="line-input" data-type="text" data-answer="The potato chips are lighter than the backpack." aria-label="Light sentence 3"></div>
+            <div class="scale-row"><b>4.</b><input class="line-input" data-type="text" data-answer="The backpack is lighter than the truck." aria-label="Light sentence 4"></div>
+          </div>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Read. Then circle.</span></div>
+          <div class="d-layout">
+            <div class="d-questions">
+              <div class="circle-question" data-type="mcq" data-answer="backpack"><b>1.</b><p>Which one is heavier, the backpack or the potato chips?</p><div class="choice-options"><label class="text-choice"><input type="radio" name="d1" value="backpack">backpack</label><label class="text-choice"><input type="radio" name="d1" value="potato chips">potato chips</label></div></div>
+              <div class="circle-question" data-type="mcq" data-answer="backpack"><b>2.</b><p>Which one is lighter, the truck or the backpack?</p><div class="choice-options"><label class="text-choice"><input type="radio" name="d2" value="truck">truck</label><label class="text-choice"><input type="radio" name="d2" value="backpack">backpack</label></div></div>
+              <div class="circle-question" data-type="mcq" data-answer="marble"><b>3.</b><p>Which one is harder, the marble or the orange?</p><div class="choice-options"><label class="text-choice"><input type="radio" name="d3" value="marble">marble</label><label class="text-choice"><input type="radio" name="d3" value="orange">orange</label></div></div>
+              <div class="circle-question" data-type="mcq" data-answer="sweater"><b>4.</b><p>Which one is softer, the orange or the sweater?</p><div class="choice-options"><label class="text-choice"><input type="radio" name="d4" value="orange">orange</label><label class="text-choice"><input type="radio" name="d4" value="sweater">sweater</label></div></div>
+            </div>
+            <img class="placeholder-image d-composite-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-d.png
+            "All eight answer pictures for questions 1 to 4">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+</body>
+</html>

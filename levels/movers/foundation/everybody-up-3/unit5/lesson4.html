@@ -20,9 +20,10 @@
     .lesson4-page .comparison-row .line-input { box-sizing:border-box; width:100%; text-align:left; }
     .lesson4-page .comparison-row .answer-text { grid-column:2; }
     .lesson4-page .comparison-content { min-width:0; }
-    .lesson4-page .comparison-cue-line { display:flex; justify-content:flex-end; min-height:30px; border-bottom:2px solid #aaa; }
-    .lesson4-page .comparison-cue { padding:3px 8px; color:#777; font-size:20px; line-height:1.2; white-space:nowrap; user-select:none; }
-    .lesson4-page .comparison-content .line-input { margin-top:8px; }
+    .lesson4-page .comparison-sentence { display:grid; grid-template-columns:minmax(120px, .7fr) auto minmax(210px, 1.3fr); align-items:end; min-width:0; border-bottom:2px solid #aaa; }
+    .lesson4-page .comparison-part { box-sizing:border-box; width:100%; min-width:0; height:32px; margin:0; padding:0 4px; border:0; border-radius:0; outline-offset:1px; background:transparent; color:#222; font-family:inherit; font-size:20px; line-height:30px; }
+    .lesson4-page .comparison-cue { padding:0 4px; color:#777; font-size:20px; line-height:30px; white-space:nowrap; user-select:none; }
+    .lesson4-page .comparison-answer { box-sizing:border-box; display:block; width:100%; height:34px; margin:0; padding:0 4px; border:0; border-bottom:2px solid #aaa; border-radius:0; outline-offset:1px; background:transparent; color:#222; font-family:inherit; font-size:20px; line-height:32px; }
     .lesson4-page .comparison-content .answer-text { width:100%; }
     .lesson4-page .scale-card { margin:14px 0 22px; }
     .lesson4-page .scale-card > img { height:145px; margin-bottom:12px; }
@@ -70,12 +71,12 @@
           <div class="pair-box">
             <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-b-1.png" alt="A book and a banana">
             <div class="comparison-row"><b>1.</b><div class="example-answer">Which one is harder, the book or the banana?<br>The book is harder.</div></div>
-            <div class="comparison-row"><b>2.</b><div class="comparison-content"><div class="comparison-cue-line"><span class="comparison-cue">softer.</span></div><input class="line-input" data-type="text" data-answer="Which one is softer, the book or the banana? The banana is softer." aria-label="Write comparison 2"></div></div>
+            <div class="comparison-row"><b>2.</b><div class="comparison-content" data-type="split-text" data-answer="Which one is softer, the book or the banana? The banana is softer."><div class="comparison-sentence"><input class="comparison-part" data-answer="Which one is" aria-label="Beginning of comparison question 2"><span class="comparison-cue">softer,</span><input class="comparison-part" data-answer="the book or the banana?" aria-label="End of comparison question 2"></div><input class="comparison-answer" data-answer="The banana is softer." aria-label="Answer to comparison question 2"></div></div>
           </div>
           <div class="pair-box">
             <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u5-l4-b-2.png" alt="Potatoes and carrots">
-            <div class="comparison-row"><b>3.</b><div class="comparison-content"><div class="comparison-cue-line"><span class="comparison-cue">heavier.</span></div><input class="line-input" data-type="text" data-answer="Which one is heavier, the potatoes or the carrots? The potatoes are heavier." aria-label="Write comparison 3"></div></div>
-            <div class="comparison-row"><b>4.</b><div class="comparison-content"><div class="comparison-cue-line"><span class="comparison-cue">lighter.</span></div><input class="line-input" data-type="text" data-answer="Which one is lighter, the potatoes or the carrots? The carrots are lighter." aria-label="Write comparison 4"></div></div>
+            <div class="comparison-row"><b>3.</b><div class="comparison-content" data-type="split-text" data-answer="Which one is heavier, the potatoes or the carrots? The potatoes are heavier."><div class="comparison-sentence"><input class="comparison-part" data-answer="Which one is" aria-label="Beginning of comparison question 3"><span class="comparison-cue">heavier,</span><input class="comparison-part" data-answer="the potatoes or the carrots?" aria-label="End of comparison question 3"></div><input class="comparison-answer" data-answer="The potatoes are heavier." aria-label="Answer to comparison question 3"></div></div>
+            <div class="comparison-row"><b>4.</b><div class="comparison-content" data-type="split-text" data-answer="Which one is lighter, the potatoes or the carrots? The carrots are lighter."><div class="comparison-sentence"><input class="comparison-part" data-answer="Which one is" aria-label="Beginning of comparison question 4"><span class="comparison-cue">lighter,</span><input class="comparison-part" data-answer="the potatoes or the carrots?" aria-label="End of comparison question 4"></div><input class="comparison-answer" data-answer="The carrots are lighter." aria-label="Answer to comparison question 4"></div></div>
           </div>
         </div>
       </div>

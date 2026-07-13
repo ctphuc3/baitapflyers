@@ -1,5 +1,5 @@
 function normalize(str){
-  return str.toLowerCase().replace(/[^\w\s]/g,'').trim();
+  return str.toLowerCase().replace(/[^\w\s]/g,'').replace(/\s+/g, ' ').trim();
 }
 
 // TEXT INPUT
@@ -63,6 +63,66 @@ function checkText(){
 
       el.disabled = true;
     }
+  });
+
+  return score;
+}
+
+// SENTENCE WITH A FIXED WORD BETWEEN TWO INPUTS
+function checkSplitText(){
+  let score = 0;
+
+  document.querySelectorAll("[data-type='split-text']").forEach(group=>{
+    const inputs = [...group.querySelectorAll("input[data-answer]")];
+    const isCorrect = inputs.length > 0 && inputs.every(input=>
+      normalize(input.value) === normalize(input.dataset.answer)
+    );
+
+    inputs.forEach(input=>{
+      input.classList.toggle("correct", isCorrect);
+      input.classList.toggle("wrong", !isCorrect);
+      input.disabled = true;
+    });
+
+    if(!group.querySelector(".answer-text")){
+      const ans = document.createElement("div");
+      ans.className = "answer-text";
+      ans.innerText = "Answer: " + group.dataset.answer;
+      group.appendChild(ans);
+    }
+
+    if(isCorrect) score++;
+  });
+
+  return score;
+}
+
+// BUILD A SENTENCE BY SELECTING WORDS IN ORDER
+function updateWordConnect(group){
+  const selected = [...group.querySelectorAll(".word-choice.selected")]
+    .sort((a, b) => Number(a.dataset.order) - Number(b.dataset.order));
+  const output = group.querySelector(".constructed-sentence");
+  if(output) output.textContent = selected.map(button => button.dataset.word).join(" ");
+}
+
+function checkWordConnect(){
+  let score = 0;
+
+  document.querySelectorAll("[data-type='word-connect']").forEach(group=>{
+    const output = group.querySelector(".constructed-sentence");
+    const isCorrect = output && normalize(output.textContent) === normalize(group.dataset.answer);
+    group.classList.toggle("correct", isCorrect);
+    group.classList.toggle("wrong", !isCorrect);
+    group.querySelectorAll(".word-choice").forEach(button => { button.disabled = true; });
+
+    if(!group.querySelector(".answer-text")){
+      const ans = document.createElement("div");
+      ans.className = "answer-text";
+      ans.innerText = "Answer: " + group.dataset.answer;
+      group.appendChild(ans);
+    }
+
+    if(isCorrect) score++;
   });
 
   return score;
@@ -156,7 +216,7 @@ function checkAll(){
   let score = 0;
 
   // Reset visual feedback before checking
-  document.querySelectorAll("input, select").forEach(el=>{
+  document.querySelectorAll("input, textarea, select").forEach(el=>{
     el.classList.remove("correct","wrong");
   });
 
@@ -164,6 +224,8 @@ function checkAll(){
   document.querySelectorAll(".answer-text").forEach(el=> el.remove());
 
   score += checkText();
+  score += checkSplitText();
+  score += checkWordConnect();
   score += checkMCQ();
   score += checkSelect();
 
@@ -177,7 +239,7 @@ function checkAll(){
 }
 
 function resetAll(){
-  document.querySelectorAll("input").forEach(el=>{
+  document.querySelectorAll("input, textarea").forEach(el=>{
     if(el.type === "radio" || el.type === "checkbox"){
       el.checked = false;
     } else {
@@ -202,6 +264,15 @@ function resetAll(){
   document.querySelectorAll('.answer-line').forEach(el=>{
     el.style.display = 'none';
   });
+  document.querySelectorAll("[data-type='word-connect']").forEach(group=>{
+    group.classList.remove("correct", "wrong");
+    group.querySelectorAll(".word-choice").forEach(button=>{
+      button.disabled = false;
+      button.classList.remove("selected");
+      delete button.dataset.order;
+    });
+    updateWordConnect(group);
+  });
 
   const result = document.getElementById("result");
   if(result){
@@ -213,6 +284,27 @@ let currentQuestion = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   let isSelectingWordSearch = false;
+
+  document.querySelectorAll("[data-type='word-connect']").forEach(group=>{
+    group.querySelectorAll(".word-choice").forEach(button=>{
+      button.addEventListener("click", ()=>{
+        if(button.classList.contains("selected")){
+          const removedOrder = Number(button.dataset.order);
+          button.classList.remove("selected");
+          delete button.dataset.order;
+          group.querySelectorAll(".word-choice.selected").forEach(selected=>{
+            if(Number(selected.dataset.order) > removedOrder){
+              selected.dataset.order = String(Number(selected.dataset.order) - 1);
+            }
+          });
+        } else {
+          button.classList.add("selected");
+          button.dataset.order = String(group.querySelectorAll(".word-choice.selected").length);
+        }
+        updateWordConnect(group);
+      });
+    });
+  });
 
   document.querySelectorAll(".word-search-table td").forEach(cell=>{
     cell.addEventListener("mousedown", event=>{

@@ -971,6 +971,40 @@ function buildSearchIndex() {
       }
     });
   });
+
+  // ===== MOVERS – FOUNDATION (Everybody Up 3 - Unit 6 - New lessons) =====
+  [
+    { label: "Lesson 3", file: "lesson3.html" },
+    { label: "Lesson 4", file: "lesson4.html" },
+    { label: "Check Up 3", file: "check-up-3.html" }
+  ].forEach(item => {
+    const url = `levels/movers/foundation/everybody-up-3/unit6/${item.file}`;
+
+    SEARCH_INDEX.push({
+      title: `${item.label} Everybody Up 3`,
+      meta: `Everybody Up 3 Unit 6 Movers`,
+      level: "Movers",
+      keywords: `everybody up 3 eu3 unit 6 ${item.label.toLowerCase()} movers`,
+      url,
+      render: () => {
+        const c = document.createElement("div");
+        c.className = "card";
+        c.style.cursor = "pointer";
+
+        const t = document.createElement("div");
+        t.textContent = `${item.label} - Everybody Up 3`;
+
+        const s = document.createElement("div");
+        s.className = "subtext";
+        s.textContent = `(Everybody Up 3 · Unit 6 · Movers)`;
+
+        c.appendChild(t);
+        c.appendChild(s);
+        c.onclick = () => window.open(url, "_blank");
+        return c;
+      }
+    });
+  });
 }
 const startersMenu = document.getElementById("menu-starters");
 
@@ -1326,7 +1360,7 @@ const MOVERS_DATA = {
       "Unit 3": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"],
       "Unit 4": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"],
       "Unit 5": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"],
-      "Unit 6": ["Lesson 1", "Lesson 2"]
+      "Unit 6": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Check Up 3"]
     },
     "Everybody Up 4": []
   },
@@ -1379,7 +1413,7 @@ moversMenu.addEventListener("click", () => {
       // If has lessons → render lessons WITH LINK (no deeper UI)
       clearContent();
 
-      lessons.forEach((lesson, index) => {
+      lessons.forEach(lesson => {
 
         const card = document.createElement("div");
         card.className = "card";
@@ -1394,13 +1428,17 @@ moversMenu.addEventListener("click", () => {
         card.appendChild(title);
         card.appendChild(sub);
 
-        // 🔥 CREATE LINK (auto based on structure)
-        const lessonNumber = index + 1;
-        // Compose correct folder path: "Unit 2" → "unit2"
-        const url = `levels/movers/foundation/everybody-up-3/${unit.toLowerCase().replace(' ', '')}/lesson${lessonNumber}.html`;
+        // Compose the correct lesson/check-up filename.
+        const lessonMatch = lesson.match(/^Lesson\s+(\d+)$/i);
+        const fileName = lessonMatch
+          ? `lesson${lessonMatch[1]}.html`
+          : lesson === "Check Up 3"
+            ? "check-up-3.html"
+            : "";
+        const url = `levels/movers/foundation/everybody-up-3/${unit.toLowerCase().replace(' ', '')}/${fileName}`;
 
         card.onclick = () => {
-          window.open(url, "_blank");
+          if (fileName) window.open(url, "_blank");
         };
 
         contentArea.appendChild(card);

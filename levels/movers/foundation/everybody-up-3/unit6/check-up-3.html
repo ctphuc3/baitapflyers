@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Up 3 - Units 5 and 6</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .checkup-page { max-width:920px; margin:auto; }
+    .checkup-page .checkup-content { display:flex; flex-direction:column; gap:30px; }
+    .checkup-page .placeholder-image { display:block; width:100%; border:1px dashed #999; border-radius:12px; background:#f7f7f7; object-fit:contain; }
+    .checkup-page select { box-sizing:border-box; width:100%; padding:8px; border:1px solid #aaa; border-radius:8px; background:#fff; }
+    .checkup-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; white-space:nowrap; overflow-x:auto; }
+    .checkup-page .number-bank { display:grid; grid-template-columns:repeat(5, 1fr); gap:20px 0; min-width:680px; margin-bottom:22px; }
+    .checkup-page .bank-word { padding:7px 4px; border-top:1px solid #aaa; border-bottom:1px solid #aaa; text-align:center; }
+    .checkup-page .bank-word:nth-child(5n + 1) { border-left:1px solid #aaa; }
+    .checkup-page .bank-word:nth-child(5n) { border-right:1px solid #aaa; }
+    .checkup-page .bank-word b { display:block; margin-top:3px; }
+    .checkup-page .vertical-items { display:flex; flex-direction:column; gap:14px; }
+    .checkup-page .number-grid { display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:18px 12px; }
+    .checkup-page .number-item { display:flex; flex-direction:column; align-items:center; gap:8px; min-width:0; }
+    .checkup-page .number-item > b { display:none; }
+    .checkup-page .number-item img { width:100%; height:115px; }
+    .checkup-page .number-item .line-input { box-sizing:border-box; width:70px; text-align:center; }
+    .checkup-page .number-item .answer-text { width:100%; padding:6px; font-size:14px; text-align:left; }
+    .checkup-page .b-question-grid { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:16px; align-items:stretch; }
+    .checkup-page .b-question-card { display:flex; flex-direction:column; min-width:0; padding:10px; border:1px solid #bbb; border-radius:12px; }
+    .checkup-page .question-sentence { min-height:58px; margin:8px 0; font-size:17px; line-height:1.45; }
+    .checkup-page .chosen-word { display:inline-block; min-width:72px; padding:0 4px; border-bottom:2px solid #888; color:#2878d0; font-weight:700; text-align:center; }
+    .checkup-page .b-option-list { display:grid; gap:5px; margin-bottom:9px; }
+    .checkup-page .b-option-list label { padding:4px 6px; border:2px solid transparent; border-radius:16px; cursor:pointer; font-size:15px; line-height:1.25; }
+    .checkup-page .b-option-list label:has(input:checked) { border-color:#555; background:#f1f1f1; }
+    .checkup-page .b-match-control { margin-top:auto; padding-top:9px; border-top:1px dashed #999; }
+    .checkup-page .b-match-control label { display:block; margin-bottom:4px; font-size:14px; font-weight:700; }
+    .checkup-page .b-match-control .answer-text { padding:5px; font-size:13px; }
+    .checkup-page .b-image-bank { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:16px; margin-top:18px; }
+    .checkup-page .b-image-card { min-width:0; }
+    .checkup-page .b-image-label { margin-bottom:5px; font-size:18px; font-weight:800; }
+    .checkup-page .b-image-card img { height:115px; }
+    .checkup-page .write-card { display:grid; grid-template-columns:32px 190px minmax(0, 1fr); gap:10px; align-items:center; padding:12px 0; border-bottom:1px solid #ddd; }
+    .checkup-page .write-card img { height:110px; }
+    .checkup-page .write-field { min-width:0; }
+    .checkup-page .write-field .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .checkup-page .fragment-lines { display:grid; gap:9px; min-width:0; }
+    .checkup-page .fragment-line { display:flex; align-items:flex-start; gap:6px; min-width:0; min-height:34px; line-height:32px; }
+    .checkup-page .fixed-fragment { flex:0 0 auto; color:#666; font-size:17px; font-weight:600; white-space:nowrap; user-select:none; }
+    .checkup-page .fragment-input { flex:1 1 100px; min-width:70px; }
+    .checkup-page .fragment-input.short { flex:0 1 115px; }
+    .checkup-page .fragment-input.medium { flex:0 1 180px; }
+    .checkup-page .fragment-input .line-input { box-sizing:border-box; width:100%; height:32px; text-align:center; }
+    .checkup-page .fragment-input .answer-text { width:100%; line-height:1.35; text-align:left; }
+    .checkup-page .dialogue-hints { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-bottom:18px; padding:10px 16px; border:1px solid #aaa; border-radius:12px; font-weight:700; }
+    .checkup-page .dialogue-hint { padding:5px 12px; border-radius:16px; background:#f1f1f1; }
+    .checkup-page .dialogue-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .checkup-page .dialogue-card { min-width:0; padding:12px; border:1px solid #bbb; border-radius:14px; }
+    .checkup-page .dialogue-card-number { display:block; margin-bottom:7px; font-size:19px; }
+    .checkup-page .dialogue-card img { height:230px; margin-bottom:12px; }
+    .checkup-page .dialogue-content { display:grid; gap:9px; }
+    .checkup-page .dialogue-input-wrap { min-width:0; }
+    .checkup-page .dialogue-input-wrap .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .checkup-page .dialogue-input-wrap .answer-text { width:100%; }
+    .checkup-page .fixed-dialogue { padding:7px 10px; border:1px solid #aaa; border-radius:12px; color:#555; }
+    .checkup-page .personal-question .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .checkup-page .crossword-layout { display:grid; grid-template-columns:180px minmax(0, 1fr); gap:22px; align-items:start; }
+    .checkup-page .puzzle-heading { margin-bottom:10px; font-size:20px; font-weight:800; }
+    .checkup-page .clue-list { display:grid; gap:12px; }
+    .checkup-page .clue-card { display:grid; grid-template-columns:36px minmax(0, 1fr); gap:7px; align-items:start; }
+    .checkup-page .clue-card img { height:90px; }
+    .checkup-page .crossword-scroll { overflow-x:auto; padding:8px; border:1px solid #bbb; border-radius:12px; background:#fafafa; }
+    .checkup-page .crossword-board { position:relative; display:grid; grid-template-columns:repeat(19, 30px); grid-template-rows:repeat(18, 30px); width:max-content; min-width:570px; min-height:540px; margin:auto; padding:30px 42px 0; }
+    .checkup-page .crossword-square { position:relative; width:30px; height:30px; }
+    .checkup-page .crossword-square.blocked { box-sizing:border-box; border:1px solid #555; background:#555; }
+    .checkup-page .crossword-cell { box-sizing:border-box; width:30px; height:30px; margin:0; padding:3px 0 0; border:1px solid #666; border-radius:0; background:#fff; color:#111; font-size:17px; font-weight:700; text-align:center; text-transform:uppercase; }
+    .checkup-page .crossword-cell.correct { border:1px solid #16803b; background:#eaffef; }
+    .checkup-page .crossword-cell.wrong { border:1px solid #c62828; background:#fff0f0; }
+    .checkup-page .crossword-cell.active { position:relative; z-index:2; border-color:#1565c0; background:#fff4a8; box-shadow:inset 0 0 0 2px #64a8f5; }
+    .checkup-page .crossword-start-marker { position:absolute; z-index:3; margin:0; padding:1px 3px; border:0; border-radius:4px; background:transparent; color:#111; font:inherit; font-size:15px; font-weight:800; line-height:1; white-space:nowrap; cursor:pointer; }
+    .checkup-page .crossword-start-marker:hover, .checkup-page .crossword-start-marker:focus-visible { outline:2px solid #64a8f5; background:#eef6ff; }
+    .checkup-page .crossword-start-marker.active { background:#1565c0; color:#fff; }
+    .checkup-page .crossword-start-marker:disabled { cursor:default; opacity:.65; }
+    .checkup-page .crossword-start-marker.down { transform:translate(-1px, -22px); }
+    .checkup-page .crossword-start-marker.across { transform:translate(-39px, 7px); }
+    .checkup-page .across-clues { margin-top:22px; }
+    .checkup-page .across-clue-grid { display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
+    .checkup-page .across-clue-grid .clue-card img { height:105px; }
+    .checkup-page .crossword-result { margin-top:12px; padding:9px 12px; border-radius:8px; background:#eef5ff; font-weight:700; }
+    .checkup-page .skills-bonus { padding:20px; border:2px solid #aaa; border-radius:18px; background:linear-gradient(145deg, #fafafa, #f1f1f1); }
+    .checkup-page .skills-banner { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin:-20px -20px 22px; padding:18px 24px; border-radius:16px 16px 0 0; background:#777; color:#fff; }
+    .checkup-page .skills-banner small { font-size:18px; font-weight:800; letter-spacing:.5px; }
+    .checkup-page .skills-banner strong { font-size:34px; line-height:1; }
+    .checkup-page .skills-reading-card { display:grid; grid-template-columns:minmax(0, .9fr) minmax(300px, 1.25fr); gap:22px; align-items:stretch; margin:14px 0 18px; padding:18px; border:1px solid #bbb; border-radius:14px; background:#fff; }
+    .checkup-page .skills-passage h3 { margin:0 0 10px; font-size:23px; }
+    .checkup-page .skills-passage p { margin:0; font-size:17px; line-height:1.65; }
+    .checkup-page .skills-reading-card img { min-height:310px; height:100%; }
+    .checkup-page .skills-question-list { display:grid; gap:7px; }
+    .checkup-page .skills-question { display:grid; grid-template-columns:30px minmax(0, 1fr) auto; gap:8px; align-items:center; padding:8px 0; border-bottom:1px solid #ddd; font-size:17px; }
+    .checkup-page .skills-yes-no { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; }
+    .checkup-page .skills-yes-no label { display:flex; align-items:center; gap:4px; padding:5px 10px; border:2px solid transparent; border-radius:16px; cursor:pointer; }
+    .checkup-page .skills-yes-no label:has(input:checked) { border-color:#555; background:#eee; }
+    .checkup-page .skills-yes-no .answer-text { flex:1 0 100%; width:auto; margin-top:2px; padding:5px 8px; font-size:14px; }
+    .checkup-page .skills-notebook { margin-top:14px; padding:18px; border:1px solid #aaa; border-radius:14px; background:#fff; }
+    .checkup-page .skills-notebook h3 { margin:0 0 10px; font-size:23px; }
+    .checkup-page .skills-fill-lines { display:grid; gap:4px; }
+    .checkup-page .skills-fill-line { display:flex; align-items:flex-end; gap:7px; min-width:0; min-height:48px; padding:0 5px; border-bottom:2px solid #888; font-size:18px; line-height:36px; }
+    .checkup-page .skills-fixed-text { flex:0 0 auto; color:#555; font-weight:600; white-space:nowrap; user-select:none; }
+    .checkup-page .skills-fill-input { box-sizing:border-box; flex:1 1 120px; min-width:80px; height:38px; margin:0; padding:2px 7px; border:0; border-bottom:2px solid #bbb; border-radius:0; outline:none; background:#fffbea; color:#174f8a; font-size:18px; text-align:center; }
+    .checkup-page .skills-fill-input.short { flex:0 1 120px; }
+    .checkup-page .skills-fill-input.medium { flex:1 1 180px; }
+    .checkup-page .skills-fill-input:focus { border-bottom-color:#1565c0; background:#eef6ff; box-shadow:none; }
+    @media (max-width:700px) {
+      .checkup-page .number-grid { grid-template-columns:1fr 1fr; }
+      .checkup-page .b-question-grid, .checkup-page .b-image-bank { grid-template-columns:1fr 1fr; }
+      .checkup-page .write-card { grid-template-columns:32px 145px minmax(0, 1fr); }
+      .checkup-page .dialogue-grid { grid-template-columns:1fr; }
+      .checkup-page .crossword-layout { grid-template-columns:1fr; }
+      .checkup-page .clue-list { grid-template-columns:1fr 1fr; }
+      .checkup-page .across-clue-grid { grid-template-columns:1fr 1fr; }
+      .checkup-page .skills-reading-card { grid-template-columns:1fr; }
+      .checkup-page .skills-question { grid-template-columns:26px minmax(0, 1fr); }
+      .checkup-page .skills-yes-no { grid-column:2; }
+      .checkup-page .skills-fill-line { flex-wrap:wrap; padding:7px 5px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page checkup-page">
+    <div class="title">Check Up 3 - Units 5 and 6</div>
+    <div class="checkup-content">
+
+      <div class="section section-a">
+        <div class="subtitle"><span class="section-label">A</span><span>Number.</span></div>
+        <div class="number-bank">
+          <span class="bank-word">clean<b>1</b></span><span class="bank-word">do laundry<b>2</b></span><span class="bank-word">soft<b>3</b></span><span class="bank-word">wash the dishes<b>4</b></span><span class="bank-word">milk the cows<b>5</b></span>
+          <span class="bank-word">wash the car<b>6</b></span><span class="bank-word">weak<b>7</b></span><span class="bank-word">strong<b>8</b></span><span class="bank-word">dirty<b>9</b></span><span class="bank-word">water the plants<b>10</b></span>
+        </div>
+        <!-- Replace all YOUR_IMAGE_URL... values with your image links. -->
+        <div class="number-grid">
+          <div class="number-item"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-1.png" alt="Strong person"><input class="line-input" data-type="text" data-answer="8" aria-label="Number picture 1"></div>
+          <div class="number-item"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-2.png" alt="Weak person"><input class="line-input" data-type="text" data-answer="7" aria-label="Number picture 2"></div>
+          <div class="number-item"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-3.png" alt="Wash the car"><input class="line-input" data-type="text" data-answer="6" aria-label="Number picture 3"></div>
+          <div class="number-item"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-4.png" alt="Do laundry"><input class="line-input" data-type="text" data-answer="2" aria-label="Number picture 4"></div>
+          <div class="number-item"><b>5.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-5.png" alt="Wash the dishes"><input class="line-input" data-type="text" data-answer="4" aria-label="Number picture 5"></div>
+          <div class="number-item"><b>6.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-6.png" alt="A clean shirt"><input class="line-input" data-type="text" data-answer="1" aria-label="Number picture 6"></div>
+          <div class="number-item"><b>7.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-7.png" alt="A soft pillow"><input class="line-input" data-type="text" data-answer="3" aria-label="Number picture 7"></div>
+          <div class="number-item"><b>8.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-8.png" alt="A dirty shirt"><input class="line-input" data-type="text" data-answer="9" aria-label="Number picture 8"></div>
+          <div class="number-item"><b>9.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-9.png" alt="Milk the cows"><input class="line-input" data-type="text" data-answer="5" aria-label="Number picture 9"></div>
+          <div class="number-item"><b>10.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-a-10.png0" alt="Water the plants"><input class="line-input" data-type="text" data-answer="10" aria-label="Number picture 10"></div>
+        </div>
+      </div>
+
+      <div class="section section-b">
+        <div class="subtitle"><span class="section-label">B</span><span>Read, check, and match.</span></div>
+        <div class="b-question-grid">
+          <div class="b-question-card"><b>1.</b><div class="question-sentence">The bus is <span class="chosen-word" aria-live="polite">_____</span> than the car.</div><div class="b-option-list" data-type="mcq" data-answer="dirtier"><label><input type="radio" name="b1" value="dirty">dirty</label><label><input type="radio" name="b1" value="dirtier">dirtier</label></div><div class="b-match-control"><label>Match with picture</label><select data-type="select" data-answer="c" aria-label="Match question 1"><option value="">Choose...</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option></select></div></div>
+          <div class="b-question-card"><b>2.</b><div class="question-sentence">I always feed the chickens <span class="chosen-word" aria-live="polite">_____</span>.</div><div class="b-option-list" data-type="mcq" data-answer="before school"><label><input type="radio" name="b2" value="before school">before school</label><label><input type="radio" name="b2" value="in the afternoon">in the afternoon</label></div><div class="b-match-control"><label>Match with picture</label><select data-type="select" data-answer="a" aria-label="Match question 2"><option value="">Choose...</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option></select></div></div>
+          <div class="b-question-card"><b>3.</b><div class="question-sentence">The girl is <span class="chosen-word" aria-live="polite">_____</span>.</div><div class="b-option-list" data-type="mcq" data-answer="younger"><label><input type="radio" name="b3" value="older">older</label><label><input type="radio" name="b3" value="younger">younger</label></div><div class="b-match-control"><label>Match with picture</label><select data-type="select" data-answer="d" aria-label="Match question 3"><option value="">Choose...</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option></select></div></div>
+          <div class="b-question-card"><b>4.</b><div class="question-sentence">I always <span class="chosen-word" aria-live="polite">_____</span>.</div><div class="b-option-list" data-type="mcq" data-answer="take out the garbage"><label><input type="radio" name="b4" value="vacuum the carpet">vacuum the carpet</label><label><input type="radio" name="b4" value="take out the garbage">take out the garbage</label></div><div class="b-match-control"><label>Match with picture</label><select data-type="select" data-answer="b" aria-label="Match question 4"><option value="">Choose...</option><option value="a">a</option><option value="b">b</option><option value="c">c</option><option value="d">d</option></select></div></div>
+        </div>
+        <div class="b-image-bank">
+          <div class="b-image-card"><div class="b-image-label">a.</div><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-b-1.png" alt="Feeding chickens before school"></div>
+          <div class="b-image-card"><div class="b-image-label">b.</div><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-b-2.png" alt="Taking out the garbage"></div>
+          <div class="b-image-card"><div class="b-image-label">c.</div><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-b-3.png" alt="A dirty bus and a car"></div>
+          <div class="b-image-card"><div class="b-image-label">d.</div><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-b-4.png" alt="A younger child at a birthday"></div>
+        </div>
+      </div>
+
+      <div class="section section-c">
+        <div class="subtitle"><span class="section-label">C</span><span>Write.</span></div>
+        <div class="vertical-items">
+          <div class="write-card"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-c-1.png" alt="Potato chips and a backpack"><div class="fragment-lines"><div class="fragment-line"><span class="fixed-fragment">Which one is lighter, the</span></div><div class="fragment-line"><span class="fragment-input medium"><input class="line-input" data-type="text" data-answer="backpack" aria-label="Complete item C1"></span><span class="fixed-fragment">or the potato chips?</span></div></div></div>
+          <div class="write-card"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-c-2.png" alt="A boy sets the table after school"><div class="fragment-lines"><div class="fragment-line"><span class="fixed-fragment">When</span><span class="fragment-input short"><input class="line-input" data-type="text" data-answer="does he" aria-label="Complete the question in C2"></span><span class="fixed-fragment">set the table?</span></div><div class="fragment-line"><span class="fragment-input"><input class="line-input" data-type="text" data-answer="He sets the table" aria-label="Complete the answer beginning in C2"></span><span class="fixed-fragment">after</span><span class="fragment-input short"><input class="line-input" data-type="text" data-answer="school." aria-label="Complete the answer ending in C2"></span></div></div></div>
+          <div class="write-card"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-c-3.png" alt="A shirt and a sweater"><div class="fragment-lines"><div class="fragment-line"><span class="fixed-fragment">Is the sweater thinner</span><span class="fragment-input"><input class="line-input" data-type="text" data-answer="than the shirt?" aria-label="Complete the question in C3"></span></div><div class="fragment-line"><span class="fragment-input"><input class="line-input" data-type="text" data-answer="No, it isn't." aria-label="Write the answer in C3"></span></div></div></div>
+          <div class="write-card"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-c-4.png" alt="A boy cleans the bathroom"><div class="fragment-lines"><div class="fragment-line"><span class="fragment-input short"><input class="line-input" data-type="text" data-answer="What" aria-label="Complete the question in C4"></span><span class="fixed-fragment">are his chores?</span></div><div class="fragment-line"><span class="fragment-input"><input class="line-input" data-type="text" data-answer="He cleans the bathroom." aria-label="Write the answer in C4"></span></div></div></div>
+        </div>
+      </div>
+
+      <div class="section section-d">
+        <div class="subtitle"><span class="section-label">D</span><span>Look at the pictures. Write.</span></div>
+        <div class="dialogue-hints"><span class="dialogue-hint">Nice shirt!</span><span class="dialogue-hint">Do you want to come over?</span></div>
+        <div class="dialogue-grid">
+          <div class="dialogue-card"><b class="dialogue-card-number">1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-d-1.png" alt="A girl compliments another girl's shirt"><div class="dialogue-content"><div class="dialogue-input-wrap"><input class="line-input" data-type="text" data-answer="Nice shirt!" placeholder="Write the matching hint..." aria-label="Dialogue D1"></div><div class="fixed-dialogue">Thank you.</div></div></div>
+          <div class="dialogue-card"><b class="dialogue-card-number">2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-d-2.png" alt="Two children arranging a visit"><div class="dialogue-content"><div class="dialogue-input-wrap"><input class="line-input" data-type="text" data-answer="Do you want to come over?" placeholder="Write the matching hint..." aria-label="Dialogue D2"></div><div class="fixed-dialogue">Sure. When?</div><div class="fixed-dialogue">After school.</div></div></div>
+        </div>
+      </div>
+
+      <div class="section section-e">
+        <div class="subtitle"><span class="section-label">E</span><span>Write.</span></div>
+        <div class="personal-question"><label for="e1">What are your chores?</label><input id="e1" class="line-input personal-answer" data-type="text" data-answer="your own answer" placeholder="I ..."></div>
+      </div>
+
+      <div class="section section-f">
+        <div class="subtitle"><span class="section-label">F</span><span>Look at the pictures. Do the puzzle.</span></div>
+        <div class="crossword-layout">
+          <div><div class="puzzle-heading">Down ↓</div><div class="clue-list">
+            <div class="clue-card"><b>1. ↓</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-down-1.png" alt="Vacuum the carpet"></div>
+            <div class="clue-card"><b>4. ↓</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-down-4.png" alt="A young boy"></div>
+            <div class="clue-card"><b>6. ↓</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-down-6.png" alt="An old man"></div>
+            <div class="clue-card"><b>8. ↓</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-down-8.png" alt="A strong man lifting a box"></div>
+          </div></div>
+          <div class="crossword-scroll"><div id="crossword-board" class="crossword-board" aria-label="Interactive crossword puzzle"></div></div>
+        </div>
+        <div class="across-clues"><div class="puzzle-heading">Across →</div><div class="across-clue-grid">
+          <div class="clue-card"><b>2. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-across-2.png" alt="A tall person beside a chair"></div>
+          <div class="clue-card"><b>3. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-across-3.png" alt="A short person beside a chair"></div>
+          <div class="clue-card"><b>5. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-across-5.png" alt="Collect eggs"></div>
+          <div class="clue-card"><b>7. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-across-7.png" alt="Make my bed"></div>
+          <div class="clue-card"><b>8. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-across-8.png" alt="A hard rock"></div>
+          <div class="clue-card"><b>9. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-f-across-9.png" alt="Walk the dog"></div>
+        </div></div>
+        <div id="crossword-result" class="crossword-result" hidden></div>
+        </div>
+
+      <div class="section skills-bonus">
+        <div class="skills-banner"><small>Reading and Writing</small><strong>Bonus Skills</strong></div>
+
+        <div class="subtitle"><span class="section-label">A</span><span>Circle.</span></div>
+        <div class="skills-reading-card">
+          <div class="skills-passage">
+            <h3>Saturday Chores</h3>
+            <p>I’m Will. My family and I always clean the house on Saturdays. I always vacuum the carpet. My brother sometimes waters the plants. He sometimes sweeps the floor. My sister always takes out the garbage. My father usually washes the car. My mother usually washes the dishes.</p>
+          </div>
+          <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-cu3-skillbonus.png" alt="Will and his family">
+        </div>
+        <div class="skills-question-list">
+          <div class="skills-question"><b>1.</b><span>Will always vacuums the carpet.</span><div class="skills-yes-no" data-type="mcq" data-answer="Yes"><label><input type="radio" name="skills-a1" value="Yes">Yes</label><label><input type="radio" name="skills-a1" value="No">No</label></div></div>
+          <div class="skills-question"><b>2.</b><span>His brother always washes the car.</span><div class="skills-yes-no" data-type="mcq" data-answer="No"><label><input type="radio" name="skills-a2" value="Yes">Yes</label><label><input type="radio" name="skills-a2" value="No">No</label></div></div>
+          <div class="skills-question"><b>3.</b><span>Will’s sister never takes out the garbage.</span><div class="skills-yes-no" data-type="mcq" data-answer="No"><label><input type="radio" name="skills-a3" value="Yes">Yes</label><label><input type="radio" name="skills-a3" value="No">No</label></div></div>
+          <div class="skills-question"><b>4.</b><span>His father usually washes the car.</span><div class="skills-yes-no" data-type="mcq" data-answer="Yes"><label><input type="radio" name="skills-a4" value="Yes">Yes</label><label><input type="radio" name="skills-a4" value="No">No</label></div></div>
+        </div>
+
+        <div class="subtitle" style="margin-top:24px"><span class="section-label">B</span><span>What about you? Look at A. Write.</span></div>
+        <div class="skills-notebook">
+          <h3>My Chores</h3>
+          <div class="skills-fill-lines">
+            <div class="skills-fill-line">
+              <span class="skills-fixed-text">I’m</span><input id="skills-b1" class="skills-fill-input short" type="text" aria-label="Write your name">
+              <span class="skills-fixed-text">. We</span><input class="skills-fill-input medium" type="text" aria-label="Write what your family does">
+              <span class="skills-fixed-text">on</span><input class="skills-fill-input short" type="text" aria-label="Write a day"><span class="skills-fixed-text">.</span>
+            </div>
+            <div class="skills-fill-line">
+              <span class="skills-fixed-text">My</span><input class="skills-fill-input medium" type="text" aria-label="Write a family member">
+              <span class="skills-fixed-text">always</span><input class="skills-fill-input medium" type="text" aria-label="Write a chore"><span class="skills-fixed-text">.</span>
+            </div>
+            <div class="skills-fill-line">
+              <span class="skills-fixed-text">My</span><input class="skills-fill-input medium" type="text" aria-label="Write a family member who takes out the garbage">
+              <span class="skills-fixed-text">takes out the garbage. My</span><input class="skills-fill-input medium" type="text" aria-label="Write another family member">
+            </div>
+            <div class="skills-fill-line">
+              <span class="skills-fixed-text">cleans the bathroom, and I</span><input class="skills-fill-input medium" type="text" aria-label="Write your chore"><span class="skills-fixed-text">.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+<script>
+  (() => {
+    const originalCheckAll = window.checkAll;
+    const originalResetAll = window.resetAll;
+    const crosswordWords = [
+      { id:'d1', number:'1', word:'VACUUM THE CARPET', row:1, col:10, direction:'down' },
+      { id:'a2', number:'2', word:'TALL', row:2, col:9, direction:'across' },
+      { id:'a3', number:'3', word:'SHORT', row:8, col:6, direction:'across' },
+      { id:'d4', number:'4', word:'YOUNG', row:9, col:3, direction:'down' },
+      { id:'a5', number:'5', word:'COLLECT EGGS', row:10, col:2, direction:'across' },
+      { id:'d6', number:'6', word:'OLD', row:12, col:7, direction:'down' },
+      { id:'a7', number:'7', word:'MAKE MY BED', row:13, col:9, direction:'across' },
+      { id:'d8', number:'8', word:'HEAVY', row:14, col:4, direction:'down' },
+      { id:'a8', number:'8', word:'HARD', row:14, col:4, direction:'across' },
+      { id:'a9', number:'9', word:'WALK THE DOG', row:16, col:3, direction:'across' }
+    ];
+    const crosswordCells = new Map();
+    let activeWordId = null;
+
+    function cellKey(row, col) { return `${row}-${col}`; }
+
+    function selectCrosswordWord(entry, focusCell = true, preferredKey = '') {
+      const board = document.getElementById('crossword-board');
+      if (!board || !entry) return;
+      activeWordId = entry.id;
+      board.querySelectorAll('.crossword-cell.active').forEach(input => input.classList.remove('active'));
+      entry.cells.forEach(key => board.querySelector(`[data-key="${key}"]`)?.classList.add('active'));
+      board.querySelectorAll('.crossword-start-marker').forEach(marker => {
+        const selected = marker.dataset.wordId === entry.id;
+        marker.classList.toggle('active', selected);
+        marker.setAttribute('aria-pressed', String(selected));
+      });
+      if (!focusCell) return;
+      const targetKey = entry.cells.includes(preferredKey)
+        ? preferredKey
+        : entry.cells.find(key => !board.querySelector(`[data-key="${key}"]`)?.value) || entry.cells[0];
+      board.querySelector(`[data-key="${targetKey}"]`)?.focus();
+    }
+
+    function activeEntryForCell(data, key) {
+      let entry = crosswordWords.find(item => item.id === activeWordId && data.words.includes(item.id));
+      if (!entry) {
+        entry = crosswordWords.find(item => data.words.includes(item.id));
+        selectCrosswordWord(entry, false, key);
+      }
+      return entry;
+    }
+
+    function buildCrossword() {
+      const board = document.getElementById('crossword-board');
+      if (!board || board.children.length) return;
+
+      crosswordWords.forEach(entry => {
+        entry.cells = [];
+        [...entry.word].forEach((letter, index) => {
+          const row = entry.row + (entry.direction === 'down' ? index : 0);
+          const col = entry.col + (entry.direction === 'across' ? index : 0);
+          const key = cellKey(row, col);
+          let cellData = crosswordCells.get(key);
+          const blocked = letter === ' ';
+          if (!cellData) {
+            cellData = { row, col, letter, blocked, words:[] };
+            crosswordCells.set(key, cellData);
+          }
+          if (!blocked) {
+            cellData.words.push(entry.id);
+            entry.cells.push(key);
+          }
+        });
+      });
+
+      [...crosswordCells.entries()].forEach(([key, data]) => {
+        const square = document.createElement('span');
+        square.className = 'crossword-square';
+        square.style.gridRow = data.row;
+        square.style.gridColumn = data.col;
+
+        if (data.blocked) {
+          square.classList.add('blocked');
+          square.setAttribute('aria-hidden', 'true');
+          board.appendChild(square);
+          return;
+        }
+
+        const input = document.createElement('input');
+        input.className = 'crossword-cell';
+        input.maxLength = 1;
+        input.autocomplete = 'off';
+        input.dataset.key = key;
+        input.dataset.letter = data.letter;
+        input.setAttribute('aria-label', `Crossword row ${data.row}, column ${data.col}`);
+        input.addEventListener('click', () => {
+          const entry = activeEntryForCell(data, key);
+          selectCrosswordWord(entry, false, key);
+        });
+        input.addEventListener('input', () => {
+          input.value = input.value.replace(/[^a-z]/gi, '').slice(0, 1).toUpperCase();
+          if (!input.value) return;
+          const word = activeEntryForCell(data, key);
+          const index = word?.cells.indexOf(key) ?? -1;
+          if (word && index > -1 && index < word.cells.length - 1) {
+            const nextKey = word.cells[index + 1];
+            board.querySelector(`[data-key="${nextKey}"]`)?.focus();
+          }
+        });
+        input.addEventListener('keydown', event => {
+          const word = activeEntryForCell(data, key);
+          if (!word) return;
+          const index = word.cells.indexOf(key);
+          if (event.key === 'Backspace' && !input.value && index > 0) {
+            event.preventDefault();
+            const previous = board.querySelector(`[data-key="${word.cells[index - 1]}"]`);
+            previous.value = '';
+            previous.classList.remove('correct', 'wrong');
+            previous.focus();
+            return;
+          }
+          if (event.key === 'Delete') {
+            event.preventDefault();
+            input.value = '';
+            input.classList.remove('correct', 'wrong');
+            return;
+          }
+          const moveForward = event.key === 'Tab' && !event.shiftKey
+            || word.direction === 'across' && event.key === 'ArrowRight'
+            || word.direction === 'down' && event.key === 'ArrowDown';
+          const moveBackward = event.key === 'Tab' && event.shiftKey
+            || word.direction === 'across' && event.key === 'ArrowLeft'
+            || word.direction === 'down' && event.key === 'ArrowUp';
+          if (!moveForward && !moveBackward) return;
+          event.preventDefault();
+          const nextIndex = index + (moveForward ? 1 : -1);
+          if (nextIndex >= 0 && nextIndex < word.cells.length) {
+            board.querySelector(`[data-key="${word.cells[nextIndex]}"]`)?.focus();
+          }
+        });
+        square.appendChild(input);
+        board.appendChild(square);
+      });
+
+      crosswordWords.forEach(entry => {
+        const marker = document.createElement('button');
+        marker.type = 'button';
+        marker.className = `crossword-start-marker ${entry.direction}`;
+        marker.textContent = `${entry.number}.${entry.direction === 'down' ? '↓' : '→'}`;
+        marker.dataset.wordId = entry.id;
+        marker.setAttribute('aria-label', `Select word ${entry.number} ${entry.direction}`);
+        marker.setAttribute('aria-pressed', 'false');
+        marker.style.left = `${42 + (entry.col - 1) * 30}px`;
+        marker.style.top = `${30 + (entry.row - 1) * 30}px`;
+        marker.addEventListener('click', () => selectCrosswordWord(entry));
+        board.appendChild(marker);
+      });
+    }
+
+    function checkCrossword() {
+      const board = document.getElementById('crossword-board');
+      let correctWords = 0;
+      crosswordWords.forEach(entry => {
+        const isCorrect = entry.cells.every(key => board.querySelector(`[data-key="${key}"]`)?.value.toUpperCase() === crosswordCells.get(key).letter);
+        if (isCorrect) correctWords++;
+      });
+      board.querySelectorAll('.crossword-cell').forEach(input => {
+        const isCorrect = input.value.toUpperCase() === input.dataset.letter;
+        input.classList.remove('active');
+        input.classList.toggle('correct', isCorrect);
+        input.classList.toggle('wrong', !isCorrect);
+        input.disabled = true;
+      });
+      activeWordId = null;
+      board.querySelectorAll('.crossword-start-marker').forEach(marker => {
+        marker.classList.remove('active');
+        marker.setAttribute('aria-pressed', 'false');
+        marker.disabled = true;
+      });
+      const result = document.getElementById('crossword-result');
+      result.hidden = false;
+      result.textContent = `Crossword: ${correctWords}/${crosswordWords.length} correct words`;
+      return correctWords;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      buildCrossword();
+      document.querySelectorAll('.b-question-card .b-option-list input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          radio.closest('.b-question-card').querySelector('.chosen-word').textContent = radio.value;
+        });
+      });
+    });
+
+    window.checkAll = function () {
+      document.querySelectorAll('.personal-answer').forEach(input => {
+        input.dataset.answer = input.value.trim() || 'your own answer';
+      });
+      originalCheckAll();
+      const crosswordScore = checkCrossword();
+      const result = document.getElementById('result');
+      const baseScore = Number(result.textContent.match(/\d+/)?.[0] || 0);
+      result.textContent = `Score: ${baseScore + crosswordScore}`;
+    };
+
+    window.resetAll = function () {
+      originalResetAll();
+      document.querySelectorAll('.b-question-card .chosen-word').forEach(blank => {
+        blank.textContent = '_____';
+      });
+      document.querySelectorAll('.crossword-cell').forEach(input => {
+        input.value = '';
+        input.disabled = false;
+        input.classList.remove('correct', 'wrong', 'active');
+      });
+      activeWordId = null;
+      document.querySelectorAll('.crossword-start-marker').forEach(marker => {
+        marker.classList.remove('active');
+        marker.setAttribute('aria-pressed', 'false');
+        marker.disabled = false;
+      });
+      const crosswordResult = document.getElementById('crossword-result');
+      crosswordResult.hidden = true;
+      crosswordResult.textContent = '';
+    };
+  })();
+</script>
+</body>
+</html>

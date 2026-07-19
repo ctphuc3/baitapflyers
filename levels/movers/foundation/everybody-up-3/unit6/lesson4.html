@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 6 - Lesson 4 - Farm Chores</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .lesson4-page .placeholder-image { display:block; width:100%; border:1px dashed #999; border-radius:12px; background:#f7f7f7; object-fit:contain; }
+    .lesson4-page select { box-sizing:border-box; width:100%; padding:7px; border:1px solid #aaa; border-radius:8px; background:#fff; }
+    .lesson4-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; white-space:nowrap; overflow-x:auto; }
+    .lesson4-page .circle-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px 14px; }
+    .lesson4-page .circle-card { display:grid; grid-template-columns:22px 128px minmax(145px, 1fr); gap:6px; align-items:center; min-width:0; }
+    .lesson4-page .circle-card img { height:155px; }
+    .lesson4-page .activity-options { display:grid; grid-template-columns:1fr; gap:3px; min-width:0; }
+    .lesson4-page .activity-options label { display:flex; align-items:center; min-width:0; padding:3px 4px; border:2px solid transparent; border-radius:17px; cursor:pointer; font-size:13px; line-height:1.2; white-space:nowrap; }
+    .lesson4-page .activity-options label:has(input:checked) { border-color:#555; background:#f1f1f1; }
+    .lesson4-page .activity-options input { margin:0 5px 0 0; }
+    .lesson4-page .circle-card > .answer-text { grid-column:2 / -1; }
+    .lesson4-page .connect-list { display:flex; flex-direction:column; gap:17px; }
+    .lesson4-page .connect-row { display:grid; grid-template-columns:27px 180px minmax(0, 1fr); gap:10px; align-items:center; }
+    .lesson4-page .connect-row img { height:135px; }
+    .lesson4-page .farm-choice-box { display:grid; grid-template-columns:70px 75px minmax(125px, 1fr) minmax(115px, 1fr); gap:7px; min-width:0; padding:10px; border:1px solid #999; }
+    .lesson4-page .word-choice { position:relative; min-width:0; padding:6px 4px; border:1px solid transparent; border-radius:8px; background:#fff; color:#111; font-size:14px; cursor:pointer; white-space:nowrap; }
+    .lesson4-page .word-choice:hover { border-color:#888; background:#f5f5f5; }
+    .lesson4-page .word-choice.selected { border-color:#2878d0; background:#eaf4ff; }
+    .lesson4-page .word-choice.selected::after { content:attr(data-order); position:absolute; top:-7px; right:-7px; display:grid; place-items:center; width:19px; height:19px; border-radius:50%; background:#2878d0; color:#fff; font-size:12px; font-weight:700; }
+    .lesson4-page .word-choice:disabled { cursor:default; opacity:.8; }
+    .lesson4-page .constructed-sentence { grid-column:1 / -1; min-height:30px; padding:6px 8px 3px; border-bottom:2px solid #888; color:#222; font-size:17px; }
+    .lesson4-page .constructed-sentence:empty::before { content:"Select the words in order"; color:#999; }
+    .lesson4-page .farm-choice-box > .answer-text { grid-column:1 / -1; }
+    .lesson4-page .chart-image { height:330px; margin-bottom:18px; }
+    .lesson4-page .yes-no-row { display:grid; grid-template-columns:28px 72px minmax(0, 1fr) auto; gap:9px; align-items:center; margin:13px 0; }
+    .lesson4-page .yes-no-person { height:68px; }
+    .lesson4-page .yes-no-options { display:flex; gap:5px; }
+    .lesson4-page .yes-no-options label { padding:5px 9px; border:2px solid transparent; border-radius:18px; cursor:pointer; }
+    .lesson4-page .yes-no-options label:has(input:checked) { border-color:#555; background:#f1f1f1; }
+    .lesson4-page .yes-no-options input { margin:0 4px 0 0; }
+    .lesson4-page .yes-no-row > .answer-text { grid-column:3 / -1; }
+    .lesson4-page .write-list { display:flex; flex-direction:column; gap:14px; }
+    .lesson4-page .write-row { display:grid; grid-template-columns:28px 85px minmax(0, 1fr); gap:9px; align-items:center; }
+    .lesson4-page .write-row img { height:75px; }
+    .lesson4-page .guided-sentence { display:grid; grid-template-columns:minmax(110px, .9fr) auto minmax(135px, 1.1fr); gap:7px; align-items:start; min-width:0; font-size:16px; line-height:34px; }
+    .lesson4-page .fixed-activity { padding:0 5px; border-bottom:2px solid #888; color:#777; font-weight:700; white-space:nowrap; user-select:none; }
+    .lesson4-page .d-input-wrap { min-width:0; }
+    .lesson4-page .d-input-wrap .line-input { box-sizing:border-box; width:100%; height:32px; text-align:center; }
+    .lesson4-page .d-input-wrap .answer-text { width:100%; line-height:1.35; text-align:left; }
+    @media (max-width:700px) {
+      .lesson4-page .circle-card { grid-template-columns:20px 105px minmax(130px, 1fr); gap:4px; }
+      .lesson4-page .circle-card img { height:140px; }
+      .lesson4-page .activity-options label { font-size:12px; padding:3px 2px; }
+      .lesson4-page .connect-row { grid-template-columns:27px 145px minmax(0, 1fr); }
+      .lesson4-page .farm-choice-box { grid-template-columns:60px 65px minmax(112px, 1fr) minmax(105px, 1fr); gap:4px; padding:7px; }
+      .lesson4-page .word-choice { font-size:12px; padding:5px 2px; }
+      .lesson4-page .chart-image { height:260px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page lesson4-page">
+    <div class="title">Unit 6 - Helping Out · Lesson 4 - Farm Chores</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Circle.</span></div>
+          <!-- Replace YOUR_IMAGE_URL... with your links. CSS controls image size with object-fit: contain. -->
+          <div class="circle-grid">
+            <div class="circle-card" data-type="mcq" data-answer="collect eggs"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-a-1.png" alt="A child collecting eggs"><div class="activity-options"><label><input type="radio" name="a1" value="milk the cows">milk the cows</label><label><input type="radio" name="a1" value="collect eggs">collect eggs</label><label><input type="radio" name="a1" value="feed the chickens">feed the chickens</label><label><input type="radio" name="a1" value="pick vegetables">pick vegetables</label></div></div>
+            <div class="circle-card" data-type="mcq" data-answer="feed the chickens"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-a-2.png" alt="A child feeding chickens"><div class="activity-options"><label><input type="radio" name="a2" value="feed the chickens">feed the chickens</label><label><input type="radio" name="a2" value="pick vegetables">pick vegetables</label><label><input type="radio" name="a2" value="collect eggs">collect eggs</label><label><input type="radio" name="a2" value="milk the cows">milk the cows</label></div></div>
+            <div class="circle-card" data-type="mcq" data-answer="milk the cows"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-a-3.png" alt="A child milking a cow"><div class="activity-options"><label><input type="radio" name="a3" value="collect eggs">collect eggs</label><label><input type="radio" name="a3" value="milk the cows">milk the cows</label><label><input type="radio" name="a3" value="feed the chickens">feed the chickens</label><label><input type="radio" name="a3" value="pick vegetables">pick vegetables</label></div></div>
+            <div class="circle-card" data-type="mcq" data-answer="pick vegetables"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-a-4.png" alt="A child picking vegetables"><div class="activity-options"><label><input type="radio" name="a4" value="pick vegetables">pick vegetables</label><label><input type="radio" name="a4" value="feed the chickens">feed the chickens</label><label><input type="radio" name="a4" value="milk the cows">milk the cows</label><label><input type="radio" name="a4" value="collect eggs">collect eggs</label></div></div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Connect.</span></div>
+          <div class="connect-list">
+            <div class="connect-row"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-b-1.png" alt="Feeding chickens at 7:00 A.M."><div class="farm-choice-box" data-type="word-connect" data-answer="I always feed the chickens before school."><button class="word-choice" type="button" data-word="I">I</button><button class="word-choice" type="button" data-word="always">always</button><button class="word-choice" type="button" data-word="feed the chickens">feed the chickens</button><button class="word-choice" type="button" data-word="in the evening.">in the evening.</button><button class="word-choice" type="button" data-word="She">She</button><button class="word-choice" type="button" data-word="never">never</button><button class="word-choice" type="button" data-word="picks vegetables">picks vegetables</button><button class="word-choice" type="button" data-word="before school.">before school.</button><div class="constructed-sentence" aria-live="polite"></div></div></div>
+            <div class="connect-row"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-b-2.png" alt="Milking a cow at 6:30 A.M."><div class="farm-choice-box" data-type="word-connect" data-answer="He always milks the cows in the morning."><button class="word-choice" type="button" data-word="He">He</button><button class="word-choice" type="button" data-word="always">always</button><button class="word-choice" type="button" data-word="collects eggs">collects eggs</button><button class="word-choice" type="button" data-word="in the evening.">in the evening.</button><button class="word-choice" type="button" data-word="She">She</button><button class="word-choice" type="button" data-word="never">never</button><button class="word-choice" type="button" data-word="milks the cows">milks the cows</button><button class="word-choice" type="button" data-word="in the morning.">in the morning.</button><div class="constructed-sentence" aria-live="polite"></div></div></div>
+            <div class="connect-row"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-b-3.png" alt="Picking vegetables at 4:30 P.M."><div class="farm-choice-box" data-type="word-connect" data-answer="She always picks vegetables after school."><button class="word-choice" type="button" data-word="She">She</button><button class="word-choice" type="button" data-word="always">always</button><button class="word-choice" type="button" data-word="picks vegetables">picks vegetables</button><button class="word-choice" type="button" data-word="in the morning.">in the morning.</button><button class="word-choice" type="button" data-word="He">He</button><button class="word-choice" type="button" data-word="never">never</button><button class="word-choice" type="button" data-word="collects eggs">collects eggs</button><button class="word-choice" type="button" data-word="after school.">after school.</button><div class="constructed-sentence" aria-live="polite"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Circle.</span></div>
+          <!-- Use one combined chart image containing the people, chores and time symbols. -->
+          <img class="placeholder-image chart-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c.png" alt="Farm chores and times chart">
+          <div class="yes-no-row" data-type="mcq" data-answer="Yes"><b>1.</b><img class="placeholder-image yes-no-person" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-1.png" alt="Girl 1"><span>She always picks vegetables in the morning.</span><div class="yes-no-options"><label><input type="radio" name="c1" value="Yes">Yes</label><label><input type="radio" name="c1" value="No">No</label></div></div>
+          <div class="yes-no-row" data-type="mcq" data-answer="No"><b>2.</b><img class="placeholder-image yes-no-person" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-2.png" alt="Boy 1"><span>He always feeds the chickens in the afternoon.</span><div class="yes-no-options"><label><input type="radio" name="c2" value="Yes">Yes</label><label><input type="radio" name="c2" value="No">No</label></div></div>
+          <div class="yes-no-row" data-type="mcq" data-answer="Yes"><b>3.</b><img class="placeholder-image yes-no-person" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-3.png" alt="Girl 2"><span>She always collects eggs in the morning.</span><div class="yes-no-options"><label><input type="radio" name="c3" value="Yes">Yes</label><label><input type="radio" name="c3" value="No">No</label></div></div>
+          <div class="yes-no-row" data-type="mcq" data-answer="No"><b>4.</b><img class="placeholder-image yes-no-person" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-4.png" alt="Boy 2"><span>He always milks the cows in the evening.</span><div class="yes-no-options"><label><input type="radio" name="c4" value="Yes">Yes</label><label><input type="radio" name="c4" value="No">No</label></div></div>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Look at C. Write.</span></div>
+          <div class="write-list">
+            <div class="write-row"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-1.png" alt="Girl 1"><div class="guided-sentence"><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="She always" aria-label="Complete the beginning of sentence 1"></span><span class="fixed-activity">feeds the chickens</span><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="in the afternoon." aria-label="Complete the end of sentence 1"></span></div></div>
+            <div class="write-row"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-2.png" alt="Boy 1"><div class="guided-sentence"><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="He always" aria-label="Complete the beginning of sentence 2"></span><span class="fixed-activity">milks the cows</span><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="in the morning." aria-label="Complete the end of sentence 2"></span></div></div>
+            <div class="write-row"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-3.png" alt="Girl 2"><div class="guided-sentence"><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="She always" aria-label="Complete the beginning of sentence 3"></span><span class="fixed-activity">picks vegetables</span><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="in the afternoon." aria-label="Complete the end of sentence 3"></span></div></div>
+            <div class="write-row"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u6-l4-c-avatar-4.png" alt="Boy 2"><div class="guided-sentence"><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="He always" aria-label="Complete the beginning of sentence 4"></span><span class="fixed-activity">collects eggs</span><span class="d-input-wrap"><input class="line-input" data-type="text" data-answer="in the morning." aria-label="Complete the end of sentence 4"></span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+</body>
+</html>

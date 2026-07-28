@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 7 - Lesson 1 - Places to Go</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .u7l1-page .placeholder-image { display:block; width:100%; border:1px dashed #999; border-radius:12px; background:#f7f7f7; object-fit:contain; }
+    .u7l1-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; white-space:nowrap; overflow-x:auto; }
+    .u7l1-page .example-answer { padding:7px 9px; border-bottom:2px solid #888; color:#777; }
+    .u7l1-page .puzzle-layout { display:grid; grid-template-columns:230px minmax(0, 1fr); gap:22px; align-items:start; }
+    .u7l1-page .clue-groups { display:grid; gap:18px; }
+    .u7l1-page .clue-heading { margin-bottom:8px; font-size:19px; font-weight:800; }
+    .u7l1-page .clue-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .u7l1-page .clue-card { min-width:0; padding:5px; border:2px solid transparent; border-radius:12px; background:#fff; cursor:pointer; text-align:left; }
+    .u7l1-page .clue-card:hover, .u7l1-page .clue-card.active { border-color:#2878d0; background:#eef6ff; }
+    .u7l1-page .clue-card b { display:block; margin-bottom:4px; }
+    .u7l1-page .clue-card img { height:92px; }
+    .u7l1-page .crossword-scroll { overflow-x:auto; padding:8px; border:1px solid #bbb; border-radius:12px; background:#fafafa; }
+    .u7l1-page .crossword-board { position:relative; display:grid; grid-template-columns:repeat(8, 32px); grid-template-rows:repeat(14, 32px); width:max-content; min-width:256px; min-height:448px; margin:auto; padding:30px 44px 0; }
+    .u7l1-page .crossword-square { width:32px; height:32px; }
+    .u7l1-page .crossword-square.blocked { box-sizing:border-box; border:1px solid #555; background:#555; }
+    .u7l1-page .crossword-cell { box-sizing:border-box; width:32px; height:32px; margin:0; padding:2px 0 0; border:1px solid #666; border-radius:0; background:#fff; font-size:17px; font-weight:700; text-align:center; text-transform:uppercase; }
+    .u7l1-page .crossword-cell.active { position:relative; z-index:2; border-color:#1565c0; background:#fff4a8; box-shadow:inset 0 0 0 2px #64a8f5; }
+    .u7l1-page .crossword-cell.correct { border-color:#16803b; background:#eaffef; }
+    .u7l1-page .crossword-cell.wrong { border-color:#c62828; background:#fff0f0; }
+    .u7l1-page .crossword-marker { position:absolute; z-index:3; margin:0; padding:1px 3px; border:0; border-radius:4px; background:transparent; color:#111; font:inherit; font-size:15px; font-weight:800; line-height:1; cursor:pointer; white-space:nowrap; }
+    .u7l1-page .crossword-marker.across { transform:translate(-39px, 8px); }
+    .u7l1-page .crossword-marker.down { transform:translate(0, -22px); }
+    .u7l1-page .crossword-marker.active { background:#1565c0; color:#fff; }
+    .u7l1-page .crossword-result { margin-top:10px; padding:8px 10px; border-radius:8px; background:#eef5ff; font-weight:700; }
+    .u7l1-page .look-write-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px 20px; }
+    .u7l1-page .look-write-item { min-width:0; }
+    .u7l1-page .look-write-item strong { display:block; margin-bottom:6px; }
+    .u7l1-page .look-write-item .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    .u7l1-page .circle-list { display:grid; gap:12px; }
+    .u7l1-page .circle-row { display:grid; grid-template-columns:28px 135px minmax(0, 1fr); gap:9px; align-items:center; padding-bottom:12px; border-bottom:1px solid #ddd; }
+    .u7l1-page .circle-row img { height:82px; }
+    .u7l1-page .circle-sentence { display:flex; flex-wrap:wrap; align-items:center; gap:6px; min-width:0; }
+    .u7l1-page .circle-sentence select { width:auto; min-width:82px; padding:6px; border:1px solid #999; border-radius:8px; background:#fff; }
+    .u7l1-page .circle-row > .answer-text { grid-column:3; }
+    .u7l1-page .write-picture-list { display:grid; gap:16px; }
+    .u7l1-page .write-picture-card { display:grid; grid-template-columns:28px 180px minmax(0, 1fr); gap:10px; align-items:center; padding-bottom:14px; border-bottom:1px solid #ddd; }
+    .u7l1-page .write-picture-card img { height:110px; }
+    .u7l1-page .writing-lines { display:grid; gap:8px; min-width:0; }
+    .u7l1-page .writing-lines .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    @media (max-width:700px) {
+      .u7l1-page .puzzle-layout, .u7l1-page .look-write-grid { grid-template-columns:1fr; }
+      .u7l1-page .clue-groups { grid-template-columns:1fr 1fr; }
+      .u7l1-page .circle-row, .u7l1-page .write-picture-card { grid-template-columns:28px 1fr; }
+      .u7l1-page .circle-row img, .u7l1-page .circle-sentence, .u7l1-page .circle-row > .answer-text, .u7l1-page .write-picture-card img, .u7l1-page .writing-lines { grid-column:2; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page u7l1-page">
+    <div class="title">Unit 7 - Out and About · Lesson 1 - Places to Go</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Do the puzzle.</span></div>
+          <!-- Replace every YOUR_IMAGE_URL... value with your image link. -->
+          <div class="puzzle-layout">
+            <div class="clue-groups">
+              <div><div class="clue-heading">Across →</div><div class="clue-grid">
+                <button class="clue-card" type="button" data-word-id="a1"><b>1. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-a-1.png" alt="Aquarium"></button>
+                <button class="clue-card" type="button" data-word-id="a2"><b>2. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-a-2.png" alt="Beach"></button>
+                <button class="clue-card" type="button" data-word-id="a3"><b>3. →</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-a-3.png" alt="Pool"></button>
+              </div></div>
+              <div><div class="clue-heading">Down ↓</div><div class="clue-grid">
+                <button class="clue-card" type="button" data-word-id="d4"><b>4. ↓</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-a-4.png" alt="Amusement park"></button>
+                <button class="clue-card" type="button" data-word-id="d5"><b>5. ↓</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-a-5.png" alt="Hotel"></button>
+                <button class="clue-card" type="button" data-word-id="d6"><b>6. ↓</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-a-6.png" alt="Museum"></button>
+              </div></div>
+            </div>
+            <div><div class="crossword-scroll"><div id="places-crossword" class="crossword-board" aria-label="Places crossword"></div></div><div id="crossword-result" class="crossword-result" hidden></div></div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Look at A. Write.</span></div>
+          <div class="look-write-grid">
+            <div class="look-write-item"><strong>1. Is this an aquarium?</strong><div class="example-answer">Yes, it is.</div></div>
+            <div class="look-write-item"><strong>2. Is this a beach?</strong><input class="line-input" data-type="text" data-answer="Yes, it is." aria-label="Answer question 2"></div>
+            <div class="look-write-item"><strong>3. Is this an amusement park?</strong><input class="line-input" data-type="text" data-answer="Yes, it is." aria-label="Answer question 3"></div>
+            <div class="look-write-item"><strong>4. Is this a pool?</strong><input class="line-input" data-type="text" data-answer="Yes, it is." aria-label="Answer question 4"></div>
+            <div class="look-write-item"><strong>5. Is this a hotel?</strong><input class="line-input" data-type="text" data-answer="Yes, it is." aria-label="Answer question 5"></div>
+            <div class="look-write-item"><strong>6. Is this a museum?</strong><input class="line-input" data-type="text" data-answer="Yes, it is." aria-label="Answer question 6"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Circle.</span></div>
+          <div class="circle-list">
+            <div class="circle-row" data-solution="Where was he yesterday? He was at the hotel."><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-1.png" alt="A boy at a hotel yesterday"><div class="circle-sentence">Where <select data-type="select" data-answer="was" aria-label="C1 verb 1"><option value="">is / was</option><option>is</option><option>was</option></select> he yesterday? He <select data-type="select" data-answer="was" aria-label="C1 verb 2"><option value="">is / was</option><option>is</option><option>was</option></select> at the <select data-type="select" data-answer="hotel" aria-label="C1 place"><option value="">place</option><option>hotel</option><option>beach</option></select>.</div></div>
+            <div class="circle-row" data-solution="Where is she today? She is at the amusement park."><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-2.png" alt="A girl at an amusement park today"><div class="circle-sentence">Where <select data-type="select" data-answer="is" aria-label="C2 verb 1"><option value="">is / was</option><option>is</option><option>was</option></select> she today? She <select data-type="select" data-answer="is" aria-label="C2 verb 2"><option value="">is / was</option><option>is</option><option>was</option></select> at the <select data-type="select" data-answer="amusement park" aria-label="C2 place"><option value="">place</option><option>amusement park</option><option>museum</option></select>.</div></div>
+            <div class="circle-row" data-solution="Where is he today? He is at the aquarium."><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-3.png" alt="A boy at an aquarium today"><div class="circle-sentence">Where <select data-type="select" data-answer="is" aria-label="C3 verb 1"><option value="">is / was</option><option>is</option><option>was</option></select> he today? He <select data-type="select" data-answer="is" aria-label="C3 verb 2"><option value="">is / was</option><option>is</option><option>was</option></select> at the <select data-type="select" data-answer="aquarium" aria-label="C3 place"><option value="">place</option><option>aquarium</option><option>hotel</option></select>.</div></div>
+            <div class="circle-row" data-solution="Where was she yesterday? She was at the pool."><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-4.png" alt="A girl at a pool yesterday"><div class="circle-sentence">Where <select data-type="select" data-answer="was" aria-label="C4 verb 1"><option value="">is / was</option><option>is</option><option>was</option></select> she yesterday? She <select data-type="select" data-answer="was" aria-label="C4 verb 2"><option value="">is / was</option><option>is</option><option>was</option></select> at the <select data-type="select" data-answer="pool" aria-label="C4 place"><option value="">place</option><option>beach</option><option>pool</option></select>.</div></div>
+          </div>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Write.</span></div>
+          <div class="write-picture-list">
+            <div class="write-picture-card"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-1.png" alt="A girl at a museum yesterday"><div class="writing-lines"><input class="line-input" data-type="text" data-answer="Was she at the museum yesterday?" aria-label="D1 question"><input class="line-input" data-type="text" data-answer="Yes, she was." aria-label="D1 answer"></div></div>
+            <div class="write-picture-card"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-2.png" alt="A boy at a pool, not a museum"><div class="writing-lines"><input class="line-input" data-type="text" data-answer="Was he at the museum yesterday?" aria-label="D2 question"><input class="line-input" data-type="text" data-answer="No, he wasn't." aria-label="D2 short answer"><input class="line-input" data-type="text" data-answer="He was at the pool." aria-label="D2 full answer"></div></div>
+            <div class="write-picture-card"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-3.png" alt="A girl at a beach, not a pool"><div class="writing-lines"><input class="line-input" data-type="text" data-answer="Was she at the pool yesterday?" aria-label="D3 question"><input class="line-input" data-type="text" data-answer="No, she wasn't." aria-label="D3 short answer"><input class="line-input" data-type="text" data-answer="She was at the beach." aria-label="D3 full answer"></div></div>
+            <div class="write-picture-card"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l1-c-4.png" alt="A boy at an amusement park yesterday"><div class="writing-lines"><input class="line-input" data-type="text" data-answer="Was he at the amusement park yesterday?" aria-label="D4 question"><input class="line-input" data-type="text" data-answer="Yes, he was." aria-label="D4 answer"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+<script>
+  (() => {
+    const originalCheckAll = window.checkAll;
+    const originalResetAll = window.resetAll;
+    const words = [
+      { id:'a1', number:'1', word:'AQUARIUM', row:3, col:1, direction:'across' },
+      { id:'a2', number:'2', word:'BEACH', row:7, col:2, direction:'across' },
+      { id:'a3', number:'3', word:'POOL', row:11, col:3, direction:'across' },
+      { id:'d4', number:'4', word:'AMUSEMENT PARK', row:1, col:3, direction:'down' },
+      { id:'d5', number:'5', word:'HOTEL', row:7, col:6, direction:'down' },
+      { id:'d6', number:'6', word:'MUSEUM', row:3, col:8, direction:'down' }
+    ];
+    const cells = new Map();
+    let activeWordId = '';
+    const keyFor = (row, col) => `${row}-${col}`;
+
+    function selectWord(entry, focus = true) {
+      const board = document.getElementById('places-crossword');
+      activeWordId = entry.id;
+      board.querySelectorAll('.crossword-cell').forEach(input => input.classList.toggle('active', entry.cells.includes(input.dataset.key)));
+      document.querySelectorAll('[data-word-id]').forEach(item => item.classList.toggle('active', item.dataset.wordId === entry.id));
+      board.querySelectorAll('.crossword-marker').forEach(item => item.classList.toggle('active', item.dataset.wordId === entry.id));
+      if (focus) {
+        const target = entry.cells.find(key => !board.querySelector(`[data-key="${key}"]`)?.value) || entry.cells[0];
+        board.querySelector(`[data-key="${target}"]`)?.focus();
+      }
+    }
+
+    function wordForCell(data) {
+      return words.find(entry => entry.id === activeWordId && data.words.includes(entry.id)) || words.find(entry => data.words.includes(entry.id));
+    }
+
+    function buildCrossword() {
+      const board = document.getElementById('places-crossword');
+      words.forEach(entry => {
+        entry.cells = [];
+        [...entry.word].forEach((letter, index) => {
+          const row = entry.row + (entry.direction === 'down' ? index : 0);
+          const col = entry.col + (entry.direction === 'across' ? index : 0);
+          const key = keyFor(row, col);
+          const blocked = letter === ' ';
+          let data = cells.get(key);
+          if (!data) {
+            data = { row, col, letter, blocked, words:[] };
+            cells.set(key, data);
+          }
+          if (!blocked) {
+            data.words.push(entry.id);
+            entry.cells.push(key);
+          }
+        });
+      });
+
+      cells.forEach((data, key) => {
+        const square = document.createElement('span');
+        square.className = `crossword-square${data.blocked ? ' blocked' : ''}`;
+        square.style.gridRow = data.row;
+        square.style.gridColumn = data.col;
+        if (!data.blocked) {
+          const input = document.createElement('input');
+          input.className = 'crossword-cell';
+          input.maxLength = 1;
+          input.autocomplete = 'off';
+          input.dataset.key = key;
+          input.dataset.letter = data.letter;
+          input.setAttribute('aria-label', `Crossword row ${data.row}, column ${data.col}`);
+          input.addEventListener('focus', () => {
+            const entry = wordForCell(data);
+            if (entry) selectWord(entry, false);
+          });
+          input.addEventListener('input', () => {
+            input.value = input.value.replace(/[^a-z]/gi, '').slice(0, 1).toUpperCase();
+            const entry = wordForCell(data);
+            if (!entry || !input.value) return;
+            const index = entry.cells.indexOf(key);
+            board.querySelector(`[data-key="${entry.cells[index + 1]}"]`)?.focus();
+          });
+          input.addEventListener('keydown', event => {
+            const entry = wordForCell(data);
+            if (!entry) return;
+            const index = entry.cells.indexOf(key);
+            if (event.key === 'Backspace' && !input.value && index > 0) {
+              event.preventDefault();
+              const previous = board.querySelector(`[data-key="${entry.cells[index - 1]}"]`);
+              previous.value = '';
+              previous.focus();
+            }
+          });
+          square.appendChild(input);
+        }
+        board.appendChild(square);
+      });
+
+      words.forEach(entry => {
+        const marker = document.createElement('button');
+        marker.type = 'button';
+        marker.className = `crossword-marker ${entry.direction}`;
+        marker.dataset.wordId = entry.id;
+        marker.textContent = `${entry.number}.${entry.direction === 'down' ? '↓' : '→'}`;
+        marker.style.left = `${44 + (entry.col - 1) * 32}px`;
+        marker.style.top = `${30 + (entry.row - 1) * 32}px`;
+        marker.addEventListener('click', () => selectWord(entry));
+        board.appendChild(marker);
+      });
+
+      document.querySelectorAll('.clue-card').forEach(card => card.addEventListener('click', () => selectWord(words.find(entry => entry.id === card.dataset.wordId))));
+    }
+
+    function checkCrossword() {
+      const board = document.getElementById('places-crossword');
+      let score = 0;
+      words.forEach(entry => {
+        if (entry.cells.every(key => board.querySelector(`[data-key="${key}"]`)?.value.toUpperCase() === cells.get(key).letter)) score++;
+      });
+      board.querySelectorAll('.crossword-cell').forEach(input => {
+        const correct = input.value.toUpperCase() === input.dataset.letter;
+        input.classList.remove('active');
+        input.classList.toggle('correct', correct);
+        input.classList.toggle('wrong', !correct);
+        input.disabled = true;
+      });
+      const result = document.getElementById('crossword-result');
+      result.hidden = false;
+      result.textContent = `Crossword: ${score}/${words.length} correct words`;
+      return score;
+    }
+
+    document.addEventListener('DOMContentLoaded', buildCrossword);
+    window.checkAll = function () {
+      originalCheckAll();
+      document.querySelectorAll('.circle-row').forEach(row => {
+        row.querySelectorAll('.answer-text').forEach(item => item.remove());
+        const feedback = document.createElement('div');
+        feedback.className = 'answer-text';
+        feedback.textContent = `Correct answer: ${row.dataset.solution}`;
+        row.appendChild(feedback);
+      });
+      const crosswordScore = checkCrossword();
+      const result = document.getElementById('result');
+      const baseScore = Number(result.textContent.match(/\d+/)?.[0] || 0);
+      result.textContent = `Score: ${baseScore + crosswordScore}`;
+    };
+    window.resetAll = function () {
+      originalResetAll();
+      activeWordId = '';
+      document.querySelectorAll('.crossword-cell').forEach(input => {
+        input.value = '';
+        input.disabled = false;
+        input.classList.remove('active', 'correct', 'wrong');
+      });
+      document.querySelectorAll('[data-word-id]').forEach(item => item.classList.remove('active'));
+      const result = document.getElementById('crossword-result');
+      result.hidden = true;
+      result.textContent = '';
+    };
+  })();
+</script>
+</body>
+</html>

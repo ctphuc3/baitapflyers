@@ -1005,6 +1005,37 @@ function buildSearchIndex() {
       }
     });
   });
+
+  // ===== MOVERS – FOUNDATION (Everybody Up 3 - Unit 7 - Lessons) =====
+  ["Lesson 1", "Lesson 2"].forEach((lesson, index) => {
+    const lessonNumber = index + 1;
+    const url = `levels/movers/foundation/everybody-up-3/unit7/lesson${lessonNumber}.html`;
+
+    SEARCH_INDEX.push({
+      title: `${lesson} Everybody Up 3`,
+      meta: `Everybody Up 3 Unit 7 Movers`,
+      level: "Movers",
+      keywords: `everybody up 3 eu3 unit 7 ${lesson.toLowerCase()} places to go out and about movers`,
+      url,
+      render: () => {
+        const c = document.createElement("div");
+        c.className = "card";
+        c.style.cursor = "pointer";
+
+        const t = document.createElement("div");
+        t.textContent = `${lesson} - Everybody Up 3`;
+
+        const s = document.createElement("div");
+        s.className = "subtext";
+        s.textContent = `(Everybody Up 3 · Unit 7 · Movers)`;
+
+        c.appendChild(t);
+        c.appendChild(s);
+        c.onclick = () => window.open(url, "_blank");
+        return c;
+      }
+    });
+  });
 }
 const startersMenu = document.getElementById("menu-starters");
 
@@ -1360,7 +1391,8 @@ const MOVERS_DATA = {
       "Unit 3": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"],
       "Unit 4": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"],
       "Unit 5": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4"],
-      "Unit 6": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Check Up 3"]
+      "Unit 6": ["Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Check Up 3"],
+      "Unit 7": ["Lesson 1", "Lesson 2"]
     },
     "Everybody Up 4": []
   },

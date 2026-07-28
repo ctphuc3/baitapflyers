@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 7 - Lesson 2 - Places to Go</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .u7l2-page .placeholder-image { display:block; width:100%; border:1px dashed #999; border-radius:12px; background:#f7f7f7; object-fit:contain; }
+    .u7l2-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; white-space:nowrap; overflow-x:auto; }
+    .u7l2-page select { box-sizing:border-box; width:100%; padding:7px; border:1px solid #999; border-radius:8px; background:#fff; }
+    .u7l2-page .place-choice-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 14px; }
+    .u7l2-page .place-choice-card { display:grid; grid-template-columns:24px minmax(90px, 105px) minmax(110px, 1fr); gap:6px; align-items:center; min-width:0; padding:9px 5px 13px 0; border-bottom:1px solid #ddd; }
+    .u7l2-page .place-choice-card > b { align-self:start; padding-top:5px; }
+    .u7l2-page .place-choice-card img { height:118px; }
+    .u7l2-page .place-options { display:grid; gap:3px; min-width:0; }
+    .u7l2-page .place-options label { padding:3px 4px; border:2px solid transparent; border-radius:14px; cursor:pointer; font-size:13px; line-height:1.2; white-space:nowrap; }
+    .u7l2-page .place-options input { margin:0 4px 0 0; padding:0; vertical-align:middle; }
+    .u7l2-page .place-options label:has(input:checked) { border-color:#555; background:#eee; }
+    .u7l2-page .place-options .answer-text { font-size:14px; }
+    .u7l2-page .matching-layout { display:grid; grid-template-columns:minmax(260px, .8fr) minmax(0, 1.2fr); gap:22px; align-items:start; }
+    .u7l2-page .matching-statements { display:grid; gap:12px; }
+    .u7l2-page .matching-row { display:grid; grid-template-columns:28px minmax(0, 1fr) 72px; gap:8px; align-items:center; }
+    .u7l2-page .matching-row .answer-text { grid-column:2 / -1; }
+    .u7l2-page .matching-picture { min-width:0; }
+    .u7l2-page .matching-picture img { width:100%; height:auto; max-height:none; }
+    .u7l2-page .dialogue-list { display:grid; gap:17px; }
+    .u7l2-page .dialogue-card { display:grid; grid-template-columns:28px 170px minmax(0, 1fr); gap:10px; align-items:center; padding-bottom:15px; border-bottom:1px solid #ddd; }
+    .u7l2-page .dialogue-card img { height:145px; }
+    .u7l2-page .dialogue-lines { display:grid; gap:9px; min-width:0; }
+    .u7l2-page .fragment-line { display:flex; flex-wrap:wrap; align-items:flex-end; gap:6px; min-width:0; line-height:32px; }
+    .u7l2-page .fixed-fragment { flex:0 0 auto; color:#666; font-weight:600; white-space:nowrap; }
+    .u7l2-page .fragment-line .line-input { box-sizing:border-box; flex:1 1 120px; min-width:65px; height:33px; text-align:center; }
+    .u7l2-page .fragment-line .line-input.short { flex:0 1 100px; }
+    .u7l2-page .fragment-line > .answer-text { order:99; flex:1 0 100%; }
+    .u7l2-page .personal-list { display:grid; gap:20px; }
+    .u7l2-page .personal-item label { display:block; margin-bottom:7px; font-weight:700; }
+    .u7l2-page .personal-item .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    @media (max-width:700px) {
+      .u7l2-page .place-choice-grid, .u7l2-page .matching-layout { grid-template-columns:1fr; }
+      .u7l2-page .place-choice-card { grid-template-columns:28px 1fr; }
+      .u7l2-page .place-choice-card img, .u7l2-page .place-options { grid-column:2; }
+      .u7l2-page .place-choice-card img { height:155px; }
+      .u7l2-page .place-options { grid-template-columns:1fr 1fr; }
+      .u7l2-page .dialogue-card { grid-template-columns:28px 1fr; }
+      .u7l2-page .dialogue-card img, .u7l2-page .dialogue-lines { grid-column:2; }
+      .u7l2-page .fragment-line { flex-wrap:wrap; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page u7l2-page">
+    <div class="title">Unit 7 - Out and About · Lesson 2 - Places to Go</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Circle.</span></div>
+          <!-- Replace every YOUR_IMAGE_URL... value with your image link. -->
+          <div class="place-choice-grid">
+            <div class="place-choice-card"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-a-1.png" alt="A pharmacy"><div class="place-options" data-type="mcq" data-answer="pharmacy"><label><input type="radio" name="a1" value="hair salon">hair salon</label><label><input type="radio" name="a1" value="pharmacy">pharmacy</label><label><input type="radio" name="a1" value="toy store">toy store</label><label><input type="radio" name="a1" value="bookstore">bookstore</label></div></div>
+            <div class="place-choice-card"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-a-2.png" alt="A flower shop"><div class="place-options" data-type="mcq" data-answer="flower shop"><label><input type="radio" name="a2" value="flower shop">flower shop</label><label><input type="radio" name="a2" value="bookstore">bookstore</label><label><input type="radio" name="a2" value="toy store">toy store</label><label><input type="radio" name="a2" value="hair salon">hair salon</label></div></div>
+            <div class="place-choice-card"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-a-3.png" alt="A hair salon"><div class="place-options" data-type="mcq" data-answer="hair salon"><label><input type="radio" name="a3" value="pharmacy">pharmacy</label><label><input type="radio" name="a3" value="coffee shop">coffee shop</label><label><input type="radio" name="a3" value="hair salon">hair salon</label><label><input type="radio" name="a3" value="flower shop">flower shop</label></div></div>
+            <div class="place-choice-card"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-a-4.png" alt="A bookstore"><div class="place-options" data-type="mcq" data-answer="bookstore"><label><input type="radio" name="a4" value="coffee shop">coffee shop</label><label><input type="radio" name="a4" value="flower shop">flower shop</label><label><input type="radio" name="a4" value="bookstore">bookstore</label><label><input type="radio" name="a4" value="pharmacy">pharmacy</label></div></div>
+            <div class="place-choice-card"><b>5.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-a-5.png" alt="A toy store"><div class="place-options" data-type="mcq" data-answer="toy store"><label><input type="radio" name="a5" value="coffee shop">coffee shop</label><label><input type="radio" name="a5" value="toy store">toy store</label><label><input type="radio" name="a5" value="hair salon">hair salon</label><label><input type="radio" name="a5" value="pharmacy">pharmacy</label></div></div>
+            <div class="place-choice-card"><b>6.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-a-6.png" alt="A coffee shop"><div class="place-options" data-type="mcq" data-answer="coffee shop"><label><input type="radio" name="a6" value="bookstore">bookstore</label><label><input type="radio" name="a6" value="toy store">toy store</label><label><input type="radio" name="a6" value="coffee shop">coffee shop</label><label><input type="radio" name="a6" value="flower shop">flower shop</label></div></div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Where were they? Read and match.</span></div>
+          <div class="matching-layout">
+            <div class="matching-statements">
+              <div class="matching-row"><b>1.</b><span>They were at the toy store.</span><select data-type="select" data-answer="e" aria-label="Match B1"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="matching-row"><b>2.</b><span>They were at the coffee shop.</span><select data-type="select" data-answer="d" aria-label="Match B2"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="matching-row"><b>3.</b><span>They were at the hair salon.</span><select data-type="select" data-answer="b" aria-label="Match B3"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="matching-row"><b>4.</b><span>They were at the flower shop.</span><select data-type="select" data-answer="f" aria-label="Match B4"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="matching-row"><b>5.</b><span>They were at the bookstore.</span><select data-type="select" data-answer="c" aria-label="Match B5"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+              <div class="matching-row"><b>6.</b><span>They were at the pharmacy.</span><select data-type="select" data-answer="a" aria-label="Match B6"><option value="">—</option><option>a</option><option>b</option><option>c</option><option>d</option><option>e</option><option>f</option></select></div>
+            </div>
+            <div class="matching-picture">
+              <img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-b.png" alt="Six scenes labeled a to f: a pharmacy, a hair salon, a bookstore, a coffee shop, a toy store, and a flower shop">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Write.</span></div>
+          <div class="dialogue-list">
+            <div class="dialogue-card"><b>1.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-c-1.png" alt="A flower shop"><div class="dialogue-lines"><div class="fragment-line"><input class="line-input short" data-type="text" data-answer="Were" aria-label="C1 question beginning"><span class="fixed-fragment">they at the toy store yesterday?</span></div><div class="fragment-line"><span class="fixed-fragment">No,</span><input class="line-input short" data-type="text" data-answer="they" aria-label="C1 answer subject"><span class="fixed-fragment">weren’t.</span></div><div class="fragment-line"><span class="fixed-fragment">They</span><input class="line-input" data-type="text" data-answer="were at the flower shop." aria-label="C1 correct place"></div></div></div>
+            <div class="dialogue-card"><b>2.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-c-2.png" alt="A toy store"><div class="dialogue-lines"><div class="fragment-line"><input class="line-input" data-type="text" data-answer="Were they at the" aria-label="C2 question beginning"><span class="fixed-fragment">coffee shop yesterday?</span></div><div class="fragment-line"><span class="fixed-fragment">No,</span><input class="line-input" data-type="text" data-answer="they weren't." aria-label="C2 short answer"></div><div class="fragment-line"><input class="line-input" data-type="text" data-answer="They were at the toy store." aria-label="C2 correct place"></div></div></div>
+            <div class="dialogue-card"><b>3.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-c-3.png" alt="A hair salon"><div class="dialogue-lines"><div class="fragment-line"><input class="line-input" data-type="text" data-answer="Were they at the" aria-label="C3 question beginning"><span class="fixed-fragment">pharmacy yesterday?</span></div><div class="fragment-line"><span class="fixed-fragment">No,</span><input class="line-input" data-type="text" data-answer="they weren't." aria-label="C3 short answer"></div><div class="fragment-line"><input class="line-input" data-type="text" data-answer="They were at the hair salon." aria-label="C3 correct place"></div></div></div>
+            <div class="dialogue-card"><b>4.</b><img class="placeholder-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l2-c-4.png" alt="A bookstore"><div class="dialogue-lines"><div class="fragment-line"><input class="line-input" data-type="text" data-answer="Were they at the" aria-label="C4 question beginning"><span class="fixed-fragment">toy store yesterday?</span></div><div class="fragment-line"><span class="fixed-fragment">No,</span><input class="line-input" data-type="text" data-answer="they weren't." aria-label="C4 short answer"></div><div class="fragment-line"><input class="line-input" data-type="text" data-answer="They were at the bookstore." aria-label="C4 correct place"></div></div></div>
+          </div>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>What about you? Write.</span></div>
+          <div class="personal-list">
+            <div class="personal-item"><label for="d1">1. Where were you yesterday?</label><input id="d1" class="line-input" type="text" placeholder="I was at the ..."></div>
+            <div class="personal-item"><label for="d2">2. Where was your mother yesterday?</label><input id="d2" class="line-input" type="text" placeholder="She was at the ..."></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+</body>
+</html>

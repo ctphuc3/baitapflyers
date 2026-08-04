@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 7 - Lesson 3 - Story</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .u7l3-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; }
+    .u7l3-page select { box-sizing:border-box; width:100%; padding:8px; border:1px solid #aaa; border-radius:8px; background:#fff; }
+    .u7l3-page .story-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .u7l3-page .story-card { min-width:0; }
+    .u7l3-page .story-image { box-sizing:border-box; display:block; width:100%; height:210px; border:1px solid #ccc; border-radius:13px; background:#f7f7f7; object-fit:contain; }
+    .u7l3-page .story-caption { min-height:52px; margin:8px 0; padding:8px; border-radius:10px; background:#f3f3f3; font-weight:600; }
+    .u7l3-page .story-number { display:block; box-sizing:border-box; width:54px; height:42px; margin:8px auto 0; font-size:20px; }
+    .u7l3-page .word-bank { margin-bottom:22px; border:1px solid #d4d4d4; background:#fff; }
+    .u7l3-page .bank-row { display:grid; border-bottom:1px solid #d4d4d4; }
+    .u7l3-page .bank-row:last-child { border-bottom:0; }
+    .u7l3-page .bank-row:first-child { grid-template-columns:repeat(9,minmax(0,1fr)); }
+    .u7l3-page .bank-row:last-child { grid-template-columns:repeat(8,minmax(0,1fr)); }
+    .u7l3-page .bank-word { min-width:0; padding:7px 2px 5px; font-size:16px; line-height:1.15; text-align:center; white-space:nowrap; }
+    .u7l3-page .bank-word small { display:block; margin-top:5px; color:#222; font-size:14px; }
+    .u7l3-page .coded-list { display:grid; gap:19px; }
+    .u7l3-page .coded-item { min-width:0; }
+    .u7l3-page .coded-main { display:grid; grid-template-columns:30px minmax(0,1fr); gap:9px; align-items:end; }
+    .u7l3-page .coded-main > b { align-self:start; padding-top:9px; font-size:17px; }
+    .u7l3-page .writing-line { display:flex; align-items:flex-end; min-width:0; border-bottom:2px solid #999; }
+    .u7l3-page .writing-line .line-input { box-sizing:border-box; flex:1; min-width:0; height:39px; margin:0; padding:4px 7px; border:0; border-radius:0; background:transparent; font-size:17px; text-align:left; }
+    .u7l3-page .writing-line .line-input:focus { outline:2px solid #9acbf0; outline-offset:1px; }
+    .u7l3-page .fixed-prefix { flex:0 0 auto; padding:0 3px 5px 7px; color:#555; font-size:17px; font-weight:600; }
+    .u7l3-page .code-guide { display:grid; grid-template-columns:repeat(var(--code-count),minmax(0,1fr)); margin:6px 0 0 39px; color:#222; font-size:15px; text-align:center; }
+    .u7l3-page .split-writing { display:grid; grid-template-columns:minmax(70px,.65fr) auto minmax(135px,1.1fr); align-items:end; width:100%; }
+    .u7l3-page .split-writing input { box-sizing:border-box; width:100%; height:39px; margin:0; padding:4px 7px; border:0; border-radius:0; background:transparent; font-size:17px; text-align:left; }
+    .u7l3-page .split-writing .fixed-words { padding:0 9px 5px; color:#777; font-size:18px; white-space:nowrap; }
+    .u7l3-page .coded-main > .answer-text { grid-column:2; }
+    .u7l3-page .split-writing > .answer-text { grid-column:1/-1; margin:6px 0 0; }
+    .u7l3-page .time-match { position:relative; min-height:505px; padding:4px 0; }
+    .u7l3-page .time-match-lines { position:absolute; z-index:1; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+    .u7l3-page .time-match-lines path { fill:none; stroke:#4f86b9; stroke-width:3; stroke-linecap:round; }
+    .u7l3-page .time-match-lines path.preview { stroke:#7b9fbe; stroke-dasharray:7 6; }
+    .u7l3-page .time-match-lines path.correct-link { stroke:#299447; }
+    .u7l3-page .time-match-lines path.wrong-link { stroke:#cc3d3d; }
+    .u7l3-page .time-match-grid { position:relative; z-index:2; display:grid; grid-template-columns:minmax(150px,1fr) 150px minmax(120px,.85fr); gap:45px; min-height:505px; }
+    .u7l3-page .time-column { display:grid; grid-template-rows:repeat(4,1fr); align-items:center; }
+    .u7l3-page .time-prompt,.u7l3-page .time-word,.u7l3-page .clock-match-node { display:flex; align-items:center; min-width:0; }
+    .u7l3-page .time-prompt { justify-content:space-between; gap:10px; font-size:16px; line-height:1.45; }
+    .u7l3-page .prompt-copy { display:grid; grid-template-columns:24px 1fr; gap:5px; align-items:start; }
+    .u7l3-page .time-word { justify-content:flex-start; gap:10px; font-size:17px; white-space:nowrap; }
+    .u7l3-page .clock-match-node { justify-content:space-between; gap:7px; }
+    .u7l3-page .match-point { position:relative; z-index:4; flex:0 0 15px; width:15px; height:15px; margin:0; padding:0; border:0; border-radius:50%; background:#161616; box-shadow:0 0 0 4px transparent; cursor:crosshair; touch-action:none; }
+    .u7l3-page .match-point:hover,.u7l3-page .match-point.active { background:#2879bd; box-shadow:0 0 0 5px rgba(40,121,189,.18); }
+    .u7l3-page .match-point.correct { background:#299447; }
+    .u7l3-page .match-point.wrong { background:#cc3d3d; }
+    .u7l3-page .time-match.locked .match-point { cursor:default; pointer-events:none; }
+    .u7l3-page .analog-clock { flex:0 0 94px; width:94px; height:94px; filter:drop-shadow(0 2px 2px rgba(0,0,0,.18)); }
+    .u7l3-page .analog-clock .face { fill:#fff; stroke:#555; stroke-width:4; }
+    .u7l3-page .analog-clock .tick { stroke:#555; stroke-width:1.5; }
+    .u7l3-page .analog-clock text { fill:#444; font:7px Arial,sans-serif; text-anchor:middle; dominant-baseline:middle; }
+    .u7l3-page .analog-clock .minute-hand { stroke:#111; stroke-width:2.4; stroke-linecap:round; }
+    .u7l3-page .analog-clock .hour-hand { stroke:#111; stroke-width:3.4; stroke-linecap:round; }
+    .u7l3-page .analog-clock .pin { fill:#111; }
+    .u7l3-page .digital-clock { position:relative; flex:0 0 132px; box-sizing:border-box; width:132px; height:66px; padding:11px 9px 8px; border:5px solid #666; border-radius:12px; background:#777; box-shadow:0 4px 0 #aaa; }
+    .u7l3-page .digital-clock::before { content:""; position:absolute; top:-10px; right:13px; width:25px; height:6px; border:2px solid #666; border-bottom:0; border-radius:4px 4px 0 0; background:#999; transform:skewX(25deg); }
+    .u7l3-page .digital-display { display:grid; place-items:center; height:100%; border:2px solid #aaa; border-radius:5px; background:#f8fbf6; color:#111; font:700 27px/1 "Courier New",monospace; letter-spacing:-2px; }
+    .u7l3-page .match-help { margin:10px 0 0; color:#666; font-size:13px; text-align:center; }
+    .u7l3-page .dialogue-unscramble { display:grid; gap:30px; }
+    .u7l3-page .dialogue-block { position:relative; padding-left:32px; }
+    .u7l3-page .dialogue-number { position:absolute; top:12px; left:0; font-size:18px; }
+    .u7l3-page .chat-row { display:flex; }
+    .u7l3-page .chat-row.reply { justify-content:flex-end; margin-top:15px; }
+    .u7l3-page .chat-bubble { position:relative; box-sizing:border-box; width:82%; padding:14px 18px 11px; border:2px solid #777; border-radius:18px; background:#fff; }
+    .u7l3-page .chat-bubble::after { content:""; position:absolute; bottom:-14px; left:42px; width:22px; height:22px; border-right:2px solid #777; border-bottom:2px solid #777; background:#fff; transform:skew(22deg) rotate(38deg); }
+    .u7l3-page .chat-row.reply .chat-bubble::after { right:48px; left:auto; transform:skew(-22deg) rotate(52deg); }
+    .u7l3-page .bubble-answer { position:relative; z-index:1; border-bottom:2px solid #aaa; }
+    .u7l3-page .bubble-answer .line-input { box-sizing:border-box; width:100%; height:38px; margin:0; padding:4px 5px; border:0; border-radius:0; background:transparent; font-size:17px; text-align:left; }
+    .u7l3-page .bubble-answer .line-input:focus { outline:2px solid #9acbf0; outline-offset:1px; }
+    .u7l3-page .chat-bubble > .answer-text { position:relative; z-index:2; }
+    .u7l3-page .scramble-cue { position:relative; z-index:1; padding-top:11px; font-size:17px; text-align:center; }
+    .u7l3-page .where-grid { display:grid; grid-template-columns:1fr 1fr; gap:38px; }
+    .u7l3-page .where-card { min-width:0; }
+    .u7l3-page .where-card label { display:block; min-height:44px; margin-bottom:8px; font-size:16px; font-weight:700; line-height:1.4; }
+    .u7l3-page .where-card .line-input { box-sizing:border-box; width:100%; margin:0; padding:7px 3px; border:0; border-bottom:2px solid #999; border-radius:0; background:transparent; text-align:left; }
+    @media (max-width:700px) {
+      .u7l3-page .story-grid { grid-template-columns:1fr 1fr; }
+      .u7l3-page .bank-word { font-size:12px; }
+      .u7l3-page .bank-word small { font-size:12px; }
+      .u7l3-page .time-match-grid { grid-template-columns:minmax(135px,1fr) 140px minmax(112px,.8fr); gap:25px; }
+      .u7l3-page .time-prompt,.u7l3-page .time-word { font-size:14px; }
+      .u7l3-page .split-writing { grid-template-columns:minmax(52px,.5fr) auto minmax(100px,1fr); }
+      .u7l3-page .split-writing .fixed-words { padding-inline:5px; font-size:15px; }
+      .u7l3-page .chat-bubble { width:92%; }
+      .u7l3-page .where-grid { grid-template-columns:1fr; gap:24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page u7l3-page">
+    <div class="title">Unit 7 - Out and About · Lesson 3 - Story</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Number.</span></div>
+          <div class="story-grid">
+            <div class="story-card"><img class="story-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l3-a-1.png" alt="You’re late. Where were you?" loading="lazy"><div class="story-caption">“You’re late. Where were you?”</div><input class="story-number" data-type="text" data-answer="3" aria-label="Story picture 1 order"></div>
+            <div class="story-card"><img class="story-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l3-a-2.png" alt="OK. See you then." loading="lazy"><div class="story-caption">“OK. See you then.”</div><input class="story-number" data-type="text" data-answer="2" aria-label="Story picture 2 order"></div>
+            <div class="story-card"><img class="story-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l3-a-3.png" alt="We’re sorry." loading="lazy"><div class="story-caption">“We’re sorry.”</div><input class="story-number" data-type="text" data-answer="4" aria-label="Story picture 3 order"></div>
+            <div class="story-card"><img class="story-image" src="https://pub-a37ec6594f95498b9f771f725d6c9bd6.r2.dev/audio%26img/movers/foundation/everybody-up-3/u7-l3-a-4.png" alt="Let’s meet here at 3:30. OK?" loading="lazy"><div class="story-caption">“Let’s meet here at 3:30. OK?”</div><input class="story-number" data-type="text" data-answer="1" aria-label="Story picture 4 order"></div>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Write.</span></div>
+          <div class="word-bank">
+            <div class="bank-row"><div class="bank-word">late<small>1</small></div><div class="bank-word">it’s<small>2</small></div><div class="bank-word">meet<small>3</small></div><div class="bank-word">sorry<small>4</small></div><div class="bank-word">watch<small>5</small></div><div class="bank-word">at<small>6</small></div><div class="bank-word">see<small>7</small></div><div class="bank-word">we’re<small>8</small></div><div class="bank-word">new<small>9</small></div></div>
+            <div class="bank-row"><div class="bank-word">where<small>10</small></div><div class="bank-word">you<small>11</small></div><div class="bank-word">were<small>12</small></div><div class="bank-word">let’s<small>13</small></div><div class="bank-word">here<small>14</small></div><div class="bank-word">two o’clock<small>15</small></div><div class="bank-word">then<small>16</small></div><div class="bank-word">you’re<small>17</small></div></div>
+          </div>
+          <div class="coded-list">
+            <div class="coded-item"><div class="coded-main"><b>1.</b><div class="writing-line line-sentence"><input class="line-input" data-type="text" data-answer="Let’s meet here at two o’clock." aria-label="B1"></div></div><div class="code-guide" style="--code-count:5"><span>13</span><span>3</span><span>14</span><span>6</span><span>15</span></div></div>
+            <div class="coded-item"><div class="coded-main"><b>2.</b><div class="writing-line line-sentence"><span class="fixed-prefix">OK.</span><input class="line-input" data-type="text" data-answer="See you then." aria-label="B2"></div></div><div class="code-guide" style="--code-count:3"><span>7</span><span>11</span><span>16</span></div></div>
+            <div class="coded-item"><div class="coded-main"><b>3.</b><div class="writing-line line-sentence"><input class="line-input" data-type="text" data-answer="You’re late." aria-label="B3"></div></div><div class="code-guide" style="--code-count:2"><span>17</span><span>1</span></div></div>
+            <div class="coded-item"><div class="coded-main"><b>4.</b><div class="writing-line line-sentence"><input class="line-input" data-type="text" data-answer="Where were you?" aria-label="B4"></div></div><div class="code-guide" style="--code-count:3"><span>10</span><span>12</span><span>11</span></div></div>
+            <div class="coded-item"><div class="coded-main"><b>5.</b><div class="writing-line line-sentence"><input class="line-input" data-type="text" data-answer="We’re sorry." aria-label="B5"></div></div><div class="code-guide" style="--code-count:2"><span>8</span><span>4</span></div></div>
+            <div class="coded-item"><div class="coded-main"><b>6.</b><div class="writing-line line-sentence"><div class="split-writing" data-type="split-text" data-answer="It’s time for a new watch."><input data-answer="It’s" aria-label="B6 first word"><span class="fixed-words">time for a</span><input data-answer="new watch." aria-label="B6 last words"></div></div></div><div class="code-guide" style="--code-count:3"><span>2</span><span>9</span><span>5</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Match.</span></div>
+          <div class="time-match" id="timeMatchC">
+            <svg class="time-match-lines" aria-hidden="true"></svg>
+            <div class="time-match-grid">
+              <div class="time-column">
+                <div class="time-prompt"><div class="prompt-copy"><b>1.</b><span>Let’s meet here<br>at 2:45.</span></div><button class="match-point" type="button" data-group="clock" data-side="start" data-node="sentence-1" data-answer="clock-245" aria-label="Connect sentence 1 to a clock"></button></div>
+                <div class="time-prompt"><div class="prompt-copy"><b>2.</b><span>Let’s meet here<br>at 7:00.</span></div><button class="match-point" type="button" data-group="clock" data-side="start" data-node="sentence-2" data-answer="clock-700" aria-label="Connect sentence 2 to a clock"></button></div>
+                <div class="time-prompt"><div class="prompt-copy"><b>3.</b><span>Let’s meet here<br>at 11:15.</span></div><button class="match-point" type="button" data-group="clock" data-side="start" data-node="sentence-3" data-answer="clock-1115" aria-label="Connect sentence 3 to a clock"></button></div>
+                <div class="time-prompt"><div class="prompt-copy"><b>4.</b><span>Let’s meet here<br>at 4:30.</span></div><button class="match-point" type="button" data-group="clock" data-side="start" data-node="sentence-4" data-answer="clock-430" aria-label="Connect sentence 4 to a clock"></button></div>
+              </div>
+
+              <div class="time-column">
+                <div class="clock-match-node">
+                  <button class="match-point" type="button" data-group="clock" data-side="end" data-node="clock-1115" aria-label="Analog clock showing eleven fifteen"></button>
+                  <svg class="analog-clock" viewBox="0 0 100 100" role="img" aria-label="11:15 analog clock"><circle class="face" cx="50" cy="50" r="43"/><g class="tick"><line x1="50" y1="8" x2="50" y2="13"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(30 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(60 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(90 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(120 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(150 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(180 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(210 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(240 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(270 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(300 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(330 50 50)"/></g><text x="50" y="18">12</text><text x="80" y="50">3</text><text x="50" y="82">6</text><text x="20" y="50">9</text><line class="hour-hand" x1="50" y1="50" x2="38" y2="29"/><line class="minute-hand" x1="50" y1="50" x2="80" y2="50"/><circle class="pin" cx="50" cy="50" r="4"/></svg>
+                  <button class="match-point" type="button" data-group="words" data-side="start" data-node="clock-1115" data-answer="words-1115" aria-label="Connect eleven fifteen clock to words"></button>
+                </div>
+                <div class="clock-match-node"><button class="match-point" type="button" data-group="clock" data-side="end" data-node="clock-245" aria-label="Digital clock showing two forty-five"></button><div class="digital-clock" role="img" aria-label="2:45 digital clock"><div class="digital-display">2:45</div></div><button class="match-point" type="button" data-group="words" data-side="start" data-node="clock-245" data-answer="words-245" aria-label="Connect two forty-five clock to words"></button></div>
+                <div class="clock-match-node">
+                  <button class="match-point" type="button" data-group="clock" data-side="end" data-node="clock-700" aria-label="Analog clock showing seven o'clock"></button>
+                  <svg class="analog-clock" viewBox="0 0 100 100" role="img" aria-label="7:00 analog clock"><circle class="face" cx="50" cy="50" r="43"/><g class="tick"><line x1="50" y1="8" x2="50" y2="13"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(30 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(60 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(90 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(120 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(150 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(180 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(210 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(240 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(270 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(300 50 50)"/><line x1="50" y1="8" x2="50" y2="13" transform="rotate(330 50 50)"/></g><text x="50" y="18">12</text><text x="80" y="50">3</text><text x="50" y="82">6</text><text x="20" y="50">9</text><line class="hour-hand" x1="50" y1="50" x2="32" y2="70"/><line class="minute-hand" x1="50" y1="50" x2="50" y2="18"/><circle class="pin" cx="50" cy="50" r="4"/></svg>
+                  <button class="match-point" type="button" data-group="words" data-side="start" data-node="clock-700" data-answer="words-700" aria-label="Connect seven o'clock clock to words"></button>
+                </div>
+                <div class="clock-match-node"><button class="match-point" type="button" data-group="clock" data-side="end" data-node="clock-430" aria-label="Digital clock showing four thirty"></button><div class="digital-clock" role="img" aria-label="4:30 digital clock"><div class="digital-display">4:30</div></div><button class="match-point" type="button" data-group="words" data-side="start" data-node="clock-430" data-answer="words-430" aria-label="Connect four thirty clock to words"></button></div>
+              </div>
+
+              <div class="time-column">
+                <div class="time-word"><button class="match-point" type="button" data-group="words" data-side="end" data-node="words-700" aria-label="seven o'clock"></button><span>seven o’clock</span></div>
+                <div class="time-word"><button class="match-point" type="button" data-group="words" data-side="end" data-node="words-430" aria-label="four thirty"></button><span>four thirty</span></div>
+                <div class="time-word"><button class="match-point" type="button" data-group="words" data-side="end" data-node="words-245" aria-label="two forty-five"></button><span>two forty-five</span></div>
+                <div class="time-word"><button class="match-point" type="button" data-group="words" data-side="end" data-node="words-1115" aria-label="eleven fifteen"></button><span>eleven fifteen</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="match-help">Kéo từ một dấu chấm sang dấu chấm tương ứng. Kéo lại để thay đổi đường nối.</p>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Unscramble.</span></div>
+          <div class="dialogue-unscramble">
+            <div class="dialogue-block">
+              <b class="dialogue-number">1.</b>
+              <div class="chat-row"><div class="chat-bubble"><div class="bubble-answer line-sentence"><input class="line-input" data-type="text" data-answer="Let’s meet here at three o’clock." aria-label="D1 first sentence"></div><div class="scramble-cue">here / meet / let’s / three / at / o’clock / .</div></div></div>
+              <div class="chat-row reply"><div class="chat-bubble"><div class="bubble-answer line-sentence"><input class="line-input" data-type="text" data-answer="OK. See you then." aria-label="D1 response"></div><div class="scramble-cue">you / see / then / OK / . / .</div></div></div>
+            </div>
+            <div class="dialogue-block">
+              <b class="dialogue-number">2.</b>
+              <div class="chat-row"><div class="chat-bubble"><div class="bubble-answer line-sentence"><input class="line-input" data-type="text" data-answer="Let’s meet here at one thirty." aria-label="D2 first sentence"></div><div class="scramble-cue">thirty / at / meet / one / let’s / here / .</div></div></div>
+              <div class="chat-row reply"><div class="chat-bubble"><div class="bubble-answer line-sentence"><input class="line-input" data-type="text" data-answer="OK. See you then." aria-label="D2 response"></div><div class="scramble-cue">see / OK / you / then / . / .</div></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section section-e">
+          <div class="subtitle"><span class="section-label">E</span><span>Look at D. Write.</span></div>
+          <div class="where-grid">
+            <div class="where-card"><label for="e1">1. Where were they yesterday?</label><input id="e1" class="line-input" data-type="text" data-answer="They were at the toy store." aria-label="E1"></div>
+            <div class="where-card"><label for="e2">2. Where were they yesterday?</label><input id="e2" class="line-input" data-type="text" data-answer="They were at the coffee shop." aria-label="E2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+<script>
+  (() => {
+    const activity = document.getElementById("timeMatchC");
+    if (!activity) return;
+
+    const svg = activity.querySelector(".time-match-lines");
+    const points = [...activity.querySelectorAll(".match-point")];
+    const connections = {
+      clock: new Map(),
+      words: new Map()
+    };
+    let drag = null;
+    let evaluated = false;
+    let locked = false;
+
+    function pointCenter(point) {
+      const dot = point.getBoundingClientRect();
+      const area = activity.getBoundingClientRect();
+      return {
+        x: dot.left + dot.width / 2 - area.left,
+        y: dot.top + dot.height / 2 - area.top
+      };
+    }
+
+    function makePath(start, end, className) {
+      const bend = Math.max(30, Math.abs(end.x - start.x) * .45);
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", `M ${start.x} ${start.y} C ${start.x + bend} ${start.y}, ${end.x - bend} ${end.y}, ${end.x} ${end.y}`);
+      if (className) path.setAttribute("class", className);
+      svg.appendChild(path);
+    }
+
+    function findPoint(group, side, node) {
+      return points.find(point => point.dataset.group === group && point.dataset.side === side && point.dataset.node === node);
+    }
+
+    function drawConnections() {
+      const area = activity.getBoundingClientRect();
+      svg.setAttribute("viewBox", `0 0 ${area.width} ${area.height}`);
+      svg.replaceChildren();
+
+      Object.entries(connections).forEach(([group, links]) => {
+        links.forEach((endNode, startNode) => {
+          const startPoint = findPoint(group, "start", startNode);
+          const endPoint = findPoint(group, "end", endNode);
+          if (!startPoint || !endPoint) return;
+          const stateClass = evaluated
+            ? (startPoint.dataset.answer === endNode ? "correct-link" : "wrong-link")
+            : "";
+          makePath(pointCenter(startPoint), pointCenter(endPoint), stateClass);
+        });
+      });
+
+      if (drag) makePath(pointCenter(drag.origin), drag.current, "preview");
+    }
+
+    function finishDrag(event) {
+      if (!drag) return;
+      const origin = drag.origin;
+      const targetElement = document.elementFromPoint(event.clientX, event.clientY);
+      const target = targetElement && targetElement.closest(".match-point");
+
+      if (target && activity.contains(target) && target !== origin &&
+          target.dataset.group === origin.dataset.group &&
+          target.dataset.side !== origin.dataset.side) {
+        const startPoint = origin.dataset.side === "start" ? origin : target;
+        const endPoint = origin.dataset.side === "end" ? origin : target;
+        const groupLinks = connections[startPoint.dataset.group];
+
+        groupLinks.forEach((endNode, startNode) => {
+          if (endNode === endPoint.dataset.node && startNode !== startPoint.dataset.node) {
+            groupLinks.delete(startNode);
+          }
+        });
+        groupLinks.set(startPoint.dataset.node, endPoint.dataset.node);
+      }
+
+      origin.classList.remove("active");
+      drag = null;
+      drawConnections();
+    }
+
+    points.forEach(point => {
+      point.addEventListener("pointerdown", event => {
+        if (locked) return;
+        event.preventDefault();
+        points.forEach(item => item.classList.remove("active"));
+        point.classList.add("active");
+        drag = { origin: point, current: pointCenter(point) };
+        drawConnections();
+      });
+    });
+
+    window.addEventListener("pointermove", event => {
+      if (!drag) return;
+      event.preventDefault();
+      const area = activity.getBoundingClientRect();
+      drag.current = { x: event.clientX - area.left, y: event.clientY - area.top };
+      drawConnections();
+    }, { passive:false });
+    window.addEventListener("pointerup", finishDrag);
+    window.addEventListener("pointercancel", finishDrag);
+
+    const originalCheckAll = window.checkAll;
+    window.checkAll = function () {
+      originalCheckAll();
+      evaluated = true;
+      locked = true;
+      activity.classList.add("locked");
+      let matchScore = 0;
+
+      points.forEach(point => point.classList.remove("active", "correct", "wrong"));
+      points.filter(point => point.dataset.side === "start").forEach(startPoint => {
+        const endNode = connections[startPoint.dataset.group].get(startPoint.dataset.node);
+        const isCorrect = endNode === startPoint.dataset.answer;
+        startPoint.classList.add(isCorrect ? "correct" : "wrong");
+        if (isCorrect) matchScore++;
+
+        if (endNode) {
+          const endPoint = findPoint(startPoint.dataset.group, "end", endNode);
+          if (endPoint) endPoint.classList.add(isCorrect ? "correct" : "wrong");
+        }
+      });
+      drawConnections();
+
+      const result = document.getElementById("result");
+      const baseScore = Number((result.textContent.match(/\d+/) || ["0"])[0]);
+      result.textContent = `Score: ${baseScore + matchScore}`;
+    };
+
+    const originalResetAll = window.resetAll;
+    window.resetAll = function () {
+      originalResetAll();
+      connections.clock.clear();
+      connections.words.clear();
+      evaluated = false;
+      locked = false;
+      drag = null;
+      activity.classList.remove("locked");
+      points.forEach(point => point.classList.remove("active", "correct", "wrong"));
+      drawConnections();
+    };
+
+    window.addEventListener("resize", drawConnections);
+    if (window.ResizeObserver) new ResizeObserver(drawConnections).observe(activity);
+    requestAnimationFrame(drawConnections);
+  })();
+</script>
+</body>
+</html>

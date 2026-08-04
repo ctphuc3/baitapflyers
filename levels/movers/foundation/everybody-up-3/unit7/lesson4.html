@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit 7 - Lesson 4 - Weather</title>
+  <link rel="stylesheet" href="../../../../../assets/css/style.css">
+  <style>
+    .u7l4-page .answer-text { box-sizing:border-box; display:block; width:100%; min-width:0; margin-top:7px; padding:7px 10px; border-left:4px solid #2e9d50; border-radius:4px; background:#effaf2; line-height:1.35; }
+    .u7l4-page select { box-sizing:border-box; width:100%; padding:8px; border:1px solid #aaa; border-radius:8px; background:#fff; }
+    .u7l4-page .image-placeholder { box-sizing:border-box; display:grid; place-items:center; width:100%; min-height:95px; padding:10px; border:2px dashed #a4a4a4; border-radius:12px; background:repeating-linear-gradient(135deg,#fafafa,#fafafa 12px,#f2f2f2 12px,#f2f2f2 24px); color:#777; font-size:13px; font-weight:700; text-align:center; }
+    .u7l4-page .search-layout { display:grid; grid-template-columns:145px minmax(0,1fr); gap:18px; align-items:start; }
+    .u7l4-page .weather-checks { display:grid; gap:7px; }
+    .u7l4-page .weather-check { padding:7px 9px; border:1px solid #bbb; border-radius:9px; background:#fff; }
+    .u7l4-page .weather-check label { cursor:pointer; font-weight:600; }
+    .u7l4-page .weather-check input { margin:0 6px 0 0; }
+    .u7l4-page .weather-check.found { border-color:#299447; background:#e8f7ec; color:#176b31; box-shadow:0 0 0 2px rgba(41,148,71,.12); }
+    .u7l4-page .word-search-table { width:100%; max-width:430px; margin:auto; table-layout:fixed; border:3px dashed #999; border-collapse:separate; border-spacing:2px; background:#fff; }
+    .u7l4-page .word-search-table td { height:31px; border-radius:5px; text-align:center; text-transform:lowercase; cursor:pointer; user-select:none; }
+    .u7l4-page .word-search-table td:hover { background:#e8f4ff; }
+    .u7l4-page .word-search-table td.selected { background:#ffe478; box-shadow:inset 0 0 0 1px #c49c00; }
+    .u7l4-page .word-search-table td.found-cell { background:#54b86e; color:#fff; font-weight:800; box-shadow:inset 0 0 0 1px #237d3b; }
+    .u7l4-page .search-note { grid-column:1/-1; margin:4px 0 0; color:#666; font-size:13px; }
+    .u7l4-page .weather-match-board { position:relative; min-height:660px; }
+    .u7l4-page .weather-match-lines { position:absolute; z-index:1; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+    .u7l4-page .weather-match-lines path { fill:none; stroke:#4f86b9; stroke-width:3; stroke-linecap:round; }
+    .u7l4-page .weather-match-lines path.preview { stroke:#7b9fbe; stroke-dasharray:7 6; }
+    .u7l4-page .weather-match-lines path.correct-link { stroke:#299447; }
+    .u7l4-page .weather-match-lines path.wrong-link { stroke:#cc3d3d; }
+    .u7l4-page .weather-match-grid { position:relative; z-index:2; display:grid; grid-template-columns:minmax(185px,1.15fr) 175px minmax(145px,.9fr); gap:32px; min-height:660px; }
+    .u7l4-page .weather-match-column { display:grid; grid-template-rows:repeat(5,1fr); align-items:center; }
+    .u7l4-page .weather-question,.u7l4-page .weather-picture-node,.u7l4-page .weather-phrase { display:flex; align-items:center; min-width:0; }
+    .u7l4-page .weather-question { justify-content:space-between; gap:8px; }
+    .u7l4-page .weather-question-copy { display:grid; grid-template-columns:25px minmax(0,1fr); gap:5px; width:100%; }
+    .u7l4-page .weather-question-copy > b { padding-top:5px; }
+    .u7l4-page .weather-writing { min-width:0; }
+    .u7l4-page .weather-prompt { display:block; margin-bottom:4px; font-size:14px; line-height:1.25; }
+    .u7l4-page .weather-writing .line-input { box-sizing:border-box; width:100%; height:32px; margin:0; padding:3px 5px; border:0; border-bottom:2px solid #999; border-radius:0; background:transparent; text-align:left; }
+    .u7l4-page .weather-picture-node { justify-content:space-between; gap:5px; }
+    .u7l4-page .weather-phrase { justify-content:flex-start; gap:9px; font-size:15px; white-space:nowrap; }
+    .u7l4-page .weather-match-dot { position:relative; z-index:4; flex:0 0 14px; width:14px; height:14px; margin:0; padding:0; border:0; border-radius:50%; background:#171717; box-shadow:0 0 0 4px transparent; cursor:crosshair; touch-action:none; }
+    .u7l4-page .weather-match-dot:hover,.u7l4-page .weather-match-dot.active { background:#2879bd; box-shadow:0 0 0 5px rgba(40,121,189,.18); }
+    .u7l4-page .weather-match-dot.correct { background:#299447; }
+    .u7l4-page .weather-match-dot.wrong { background:#cc3d3d; }
+    .u7l4-page .weather-match-board.locked .weather-match-dot { cursor:default; pointer-events:none; }
+    .u7l4-page .weather-scene { box-sizing:border-box; width:135px; overflow:hidden; border:1px solid #c8c8c8; border-radius:12px; background:#eef6fb; box-shadow:0 3px 8px rgba(0,0,0,.12); }
+    .u7l4-page .weather-scene svg { display:block; width:100%; height:91px; }
+    .u7l4-page .weather-day { display:block; padding:4px 2px 5px; background:#fff; color:#222; font-size:15px; font-weight:800; text-align:center; }
+    .u7l4-page .weather-scene .cloud { fill:#fff; stroke:#aab8c2; stroke-width:1.2; }
+    .u7l4-page .weather-scene .dark-cloud { fill:#667583; stroke:#4e5b66; stroke-width:1.2; }
+    .u7l4-page .weather-scene .wind-line { fill:none; stroke:#7cb4d8; stroke-width:3; stroke-linecap:round; }
+    .u7l4-page .weather-scene .rain-line { stroke:#52a4d6; stroke-width:2.4; stroke-linecap:round; }
+    .u7l4-page .weather-scene .snowflake { fill:#fff; stroke:#98c8e5; stroke-width:.7; }
+    .u7l4-page .weather-match-help { margin:10px 0 0; color:#666; font-size:13px; text-align:center; }
+    .u7l4-page .scrambled { display:block; margin-top:5px; color:#777; font-weight:700; }
+    .u7l4-page .forecast-table { position:relative; display:grid; grid-template-columns:145px 1fr 1fr; border:2px solid #777; background:#fff; }
+    .u7l4-page .forecast-cell { display:grid; place-items:center; min-width:0; min-height:100px; padding:7px; border-right:1.5px solid #888; border-bottom:1.5px solid #888; text-align:center; }
+    .u7l4-page .forecast-cell:nth-child(3n) { border-right:0; }
+    .u7l4-page .forecast-cell:nth-last-child(-n+3) { border-bottom:0; }
+    .u7l4-page .forecast-head { min-height:58px; background:#fafafa; font-size:22px; font-weight:800; letter-spacing:.3px; }
+    .u7l4-page .forecast-day { justify-items:start; padding-left:17px; background:#fcfcfc; font-size:19px; font-weight:800; text-align:left; }
+    .u7l4-page .forecast-icon { display:block; width:100%; max-width:150px; height:82px; overflow:visible; filter:drop-shadow(0 2px 2px rgba(0,0,0,.12)); }
+    .u7l4-page .weather-defs { position:absolute; width:0; height:0; overflow:hidden; }
+    .u7l4-page .yes-no-list { display:grid; gap:11px; margin-top:17px; }
+    .u7l4-page .yes-no-row { display:grid; grid-template-columns:28px minmax(0,1fr) auto; gap:9px; align-items:center; }
+    .u7l4-page .yes-no-options { display:flex; gap:7px; }
+    .u7l4-page .yes-no-options label { padding:5px 9px; border:2px solid transparent; border-radius:17px; cursor:pointer; }
+    .u7l4-page .yes-no-options label:has(input:checked) { border-color:#555; background:#eee; }
+    .u7l4-page .yes-no-options input { margin:0 4px 0 0; }
+    .u7l4-page .question-list { display:grid; gap:18px; }
+    .u7l4-page .question-item label { display:block; margin-bottom:7px; font-weight:700; }
+    .u7l4-page .question-item .line-input { box-sizing:border-box; width:100%; text-align:left; }
+    @media (max-width:700px) {
+      .u7l4-page .search-layout { grid-template-columns:1fr; }
+      .u7l4-page .weather-checks { grid-template-columns:1fr 1fr; }
+      .u7l4-page .weather-match-grid { grid-template-columns:minmax(170px,1fr) 170px minmax(132px,.8fr); gap:20px; }
+      .u7l4-page .weather-phrase { font-size:13px; }
+      .u7l4-page .forecast-table { grid-template-columns:105px 1fr 1fr; }
+      .u7l4-page .forecast-cell { min-height:88px; padding:5px; }
+      .u7l4-page .forecast-head { min-height:52px; font-size:17px; }
+      .u7l4-page .forecast-day { padding-left:9px; font-size:16px; }
+      .u7l4-page .forecast-icon { height:68px; }
+      .u7l4-page .yes-no-row { grid-template-columns:28px 1fr; }
+      .u7l4-page .yes-no-options { grid-column:2; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card workbook-page u7l4-page">
+    <div class="title">Unit 7 - Out and About · Lesson 4 - Weather</div>
+
+    <div class="workbook-spread">
+      <div class="workbook-left">
+        <div class="section section-a">
+          <div class="subtitle"><span class="section-label">A</span><span>Find and circle.</span></div>
+          <div class="search-layout">
+            <div class="weather-checks">
+              <div class="weather-check" data-type="mcq" data-answer="sunny"><label><input type="checkbox" value="sunny">sunny</label></div>
+              <div class="weather-check" data-type="mcq" data-answer="windy"><label><input type="checkbox" value="windy">windy</label></div>
+              <div class="weather-check" data-type="mcq" data-answer="stormy"><label><input type="checkbox" value="stormy">stormy</label></div>
+              <div class="weather-check" data-type="mcq" data-answer="rainy"><label><input type="checkbox" value="rainy">rainy</label></div>
+              <div class="weather-check" data-type="mcq" data-answer="snowy"><label><input type="checkbox" value="snowy">snowy</label></div>
+              <div class="weather-check" data-type="mcq" data-answer="cloudy"><label><input type="checkbox" value="cloudy">cloudy</label></div>
+            </div>
+            <table class="word-search-table" aria-label="Weather word search"><tbody>
+              <tr><td>e</td><td>i</td><td>s</td><td>t</td><td>o</td><td>h</td><td>e</td><td>g</td><td>a</td><td>r</td></tr>
+              <tr><td>y</td><td>t</td><td>u</td><td>s</td><td>u</td><td>n</td><td>n</td><td>y</td><td>b</td><td>o</td></tr>
+              <tr><td>w</td><td>b</td><td>g</td><td>n</td><td>t</td><td>s</td><td>n</td><td>i</td><td>e</td><td>i</td></tr>
+              <tr><td>i</td><td>r</td><td>h</td><td>i</td><td>c</td><td>o</td><td>c</td><td>o</td><td>s</td><td>e</td></tr>
+              <tr><td>n</td><td>r</td><td>a</td><td>e</td><td>r</td><td>y</td><td>r</td><td>m</td><td>o</td><td>y</td></tr>
+              <tr><td>d</td><td>i</td><td>d</td><td>i</td><td>e</td><td>d</td><td>o</td><td>m</td><td>t</td><td>n</td></tr>
+              <tr><td>y</td><td>n</td><td>i</td><td>s</td><td>n</td><td>p</td><td>h</td><td>u</td><td>y</td><td>b</td></tr>
+              <tr><td>c</td><td>l</td><td>o</td><td>u</td><td>d</td><td>y</td><td>k</td><td>y</td><td>x</td><td>e</td></tr>
+              <tr><td>r</td><td>t</td><td>a</td><td>t</td><td>w</td><td>r</td><td>i</td><td>k</td><td>g</td><td>a</td></tr>
+              <tr><td>b</td><td>s</td><td>q</td><td>p</td><td>e</td><td>s</td><td>n</td><td>o</td><td>w</td><td>y</td></tr>
+            </tbody></table>
+            <p class="search-note">Drag across a word. Correct words and their names turn green automatically.</p>
+          </div>
+        </div>
+
+        <div class="section section-b">
+          <div class="subtitle"><span class="section-label">B</span><span>Write and match.</span></div>
+          <!-- Weather illustrations are inline SVG, so this exercise needs no external image files. -->
+          <div class="weather-match-board" id="weatherMatchB">
+            <svg class="weather-match-lines" aria-hidden="true"></svg>
+            <div class="weather-match-grid">
+              <div class="weather-match-column">
+                <div class="weather-question"><div class="weather-question-copy"><b>1.</b><div class="weather-writing"><span class="weather-prompt">How was the weather on</span><input class="line-input" data-type="text" data-answer="Thursday" aria-label="Unscramble huryadts"><span class="scrambled">huryadts</span></div></div><button class="weather-match-dot" type="button" data-group="day" data-side="start" data-node="question-1" data-answer="day-thursday" aria-label="Connect question 1 to a day"></button></div>
+                <div class="weather-question"><div class="weather-question-copy"><b>2.</b><div class="weather-writing"><span class="weather-prompt">How was the weather on</span><input class="line-input" data-type="text" data-answer="Wednesday" aria-label="Unscramble ywdedsena"><span class="scrambled">ywdedsena</span></div></div><button class="weather-match-dot" type="button" data-group="day" data-side="start" data-node="question-2" data-answer="day-wednesday" aria-label="Connect question 2 to a day"></button></div>
+                <div class="weather-question"><div class="weather-question-copy"><b>3.</b><div class="weather-writing"><span class="weather-prompt">How was the weather on</span><input class="line-input" data-type="text" data-answer="Monday" aria-label="Unscramble onamyd"><span class="scrambled">onamyd</span></div></div><button class="weather-match-dot" type="button" data-group="day" data-side="start" data-node="question-3" data-answer="day-monday" aria-label="Connect question 3 to a day"></button></div>
+                <div class="weather-question"><div class="weather-question-copy"><b>4.</b><div class="weather-writing"><span class="weather-prompt">How was the weather on</span><input class="line-input" data-type="text" data-answer="Friday" aria-label="Unscramble fyirad"><span class="scrambled">fyirad</span></div></div><button class="weather-match-dot" type="button" data-group="day" data-side="start" data-node="question-4" data-answer="day-friday" aria-label="Connect question 4 to a day"></button></div>
+                <div class="weather-question"><div class="weather-question-copy"><b>5.</b><div class="weather-writing"><span class="weather-prompt">How was the weather on</span><input class="line-input" data-type="text" data-answer="Tuesday" aria-label="Unscramble udestay"><span class="scrambled">udestay</span></div></div><button class="weather-match-dot" type="button" data-group="day" data-side="start" data-node="question-5" data-answer="day-tuesday" aria-label="Connect question 5 to a day"></button></div>
+              </div>
+
+              <div class="weather-match-column">
+                <div class="weather-picture-node"><button class="weather-match-dot" type="button" data-group="day" data-side="end" data-node="day-monday" aria-label="Monday picture"></button><div class="weather-scene" role="img" aria-label="A snowy Monday"><svg viewBox="0 0 140 96"><rect width="140" height="96" fill="#b9dcf0"/><path d="M0 78 Q32 69 61 78 Q100 66 140 77 V96 H0Z" fill="#fff"/><g class="snowflake"><circle cx="18" cy="17" r="2"/><circle cx="48" cy="30" r="2"/><circle cx="75" cy="13" r="2"/><circle cx="112" cy="24" r="2"/><circle cx="128" cy="48" r="2"/><circle cx="29" cy="53" r="2"/><circle cx="92" cy="40" r="2"/></g><circle cx="70" cy="67" r="20" fill="#fff" stroke="#a8bdca"/><circle cx="70" cy="41" r="14" fill="#fff" stroke="#a8bdca"/><circle cx="65" cy="39" r="1.8" fill="#333"/><circle cx="75" cy="39" r="1.8" fill="#333"/><path d="M70 43 L81 46 L70 48Z" fill="#f38b35"/><path d="M59 31 Q70 18 81 31" fill="#e95c68"/><rect x="58" y="27" width="24" height="5" rx="2" fill="#e95c68"/><circle cx="83" cy="21" r="5" fill="#e95c68"/><path d="M57 52 Q70 58 83 52" fill="none" stroke="#e95c68" stroke-width="5"/></svg><span class="weather-day">Monday</span></div><button class="weather-match-dot" type="button" data-group="forecast" data-side="start" data-node="day-monday" data-answer="weather-snowy" aria-label="Connect Monday to its weather"></button></div>
+                <div class="weather-picture-node"><button class="weather-match-dot" type="button" data-group="day" data-side="end" data-node="day-tuesday" aria-label="Tuesday picture"></button><div class="weather-scene" role="img" aria-label="A sunny Tuesday"><svg viewBox="0 0 140 96"><rect width="140" height="96" fill="#9edcff"/><g stroke="#f6b91f" stroke-width="3" stroke-linecap="round"><line x1="31" y1="7" x2="31" y2="0"/><line x1="31" y1="54" x2="31" y2="63"/><line x1="7" y1="31" x2="0" y2="31"/><line x1="55" y1="31" x2="64" y2="31"/><line x1="14" y1="14" x2="8" y2="8"/><line x1="48" y1="14" x2="54" y2="8"/></g><circle cx="31" cy="31" r="17" fill="#ffd447" stroke="#f6b91f" stroke-width="2"/><path d="M0 78 Q28 61 56 76 Q91 56 140 75 V96 H0Z" fill="#7dc06a"/><circle cx="96" cy="48" r="10" fill="#f0b58d"/><path d="M87 46 Q96 34 106 46" fill="#594b43"/><path d="M84 91 L86 61 Q96 55 106 61 L111 91" fill="#f06f55"/><path d="M87 64 L74 77 M105 64 L119 75" fill="none" stroke="#f06f55" stroke-width="7" stroke-linecap="round"/></svg><span class="weather-day">Tuesday</span></div><button class="weather-match-dot" type="button" data-group="forecast" data-side="start" data-node="day-tuesday" data-answer="weather-sunny" aria-label="Connect Tuesday to its weather"></button></div>
+                <div class="weather-picture-node"><button class="weather-match-dot" type="button" data-group="day" data-side="end" data-node="day-wednesday" aria-label="Wednesday picture"></button><div class="weather-scene" role="img" aria-label="A windy Wednesday"><svg viewBox="0 0 140 96"><rect width="140" height="96" fill="#e8f5fb"/><path d="M0 84 Q35 72 72 82 T140 80 V96 H0Z" fill="#a8cf85"/><path d="M75 92 Q72 63 78 39" fill="none" stroke="#76513c" stroke-width="11" stroke-linecap="round"/><path d="M78 48 Q61 36 55 22 M77 54 Q96 39 106 24 M76 61 Q57 56 43 47 M79 43 Q90 31 91 15" fill="none" stroke="#76513c" stroke-width="4" stroke-linecap="round"/><path class="wind-line" d="M5 25 C25 13 42 15 51 24 C57 31 47 36 39 32"/><path class="wind-line" d="M4 51 C27 40 42 42 50 49"/><path class="wind-line" d="M88 69 C106 57 123 60 136 67"/></svg><span class="weather-day">Wednesday</span></div><button class="weather-match-dot" type="button" data-group="forecast" data-side="start" data-node="day-wednesday" data-answer="weather-windy" aria-label="Connect Wednesday to its weather"></button></div>
+                <div class="weather-picture-node"><button class="weather-match-dot" type="button" data-group="day" data-side="end" data-node="day-thursday" aria-label="Thursday picture"></button><div class="weather-scene" role="img" aria-label="A cloudy Thursday"><svg viewBox="0 0 140 96"><rect width="140" height="96" fill="#dce9ef"/><ellipse class="cloud" cx="30" cy="23" rx="22" ry="10"/><circle class="cloud" cx="40" cy="17" r="13"/><ellipse class="cloud" cx="105" cy="29" rx="28" ry="12"/><circle class="cloud" cx="94" cy="22" r="12"/><ellipse class="cloud" cx="75" cy="46" rx="25" ry="11"/><circle class="cloud" cx="68" cy="39" r="11"/><circle cx="47" cy="69" r="12" fill="#f0b58d"/><path d="M35 68 Q46 53 59 67 Q52 58 40 58" fill="#3f3632"/><path d="M30 96 Q34 79 47 78 Q61 79 65 96" fill="#486f91"/><circle cx="51" cy="68" r="1.5" fill="#333"/><path d="M53 74 Q48 77 44 74" fill="none" stroke="#9c604c" stroke-width="1.5"/></svg><span class="weather-day">Thursday</span></div><button class="weather-match-dot" type="button" data-group="forecast" data-side="start" data-node="day-thursday" data-answer="weather-cloudy" aria-label="Connect Thursday to its weather"></button></div>
+                <div class="weather-picture-node"><button class="weather-match-dot" type="button" data-group="day" data-side="end" data-node="day-friday" aria-label="Friday picture"></button><div class="weather-scene" role="img" aria-label="A stormy Friday"><svg viewBox="0 0 140 96"><rect width="140" height="96" fill="#758697"/><ellipse class="dark-cloud" cx="43" cy="27" rx="32" ry="14"/><circle class="dark-cloud" cx="31" cy="20" r="14"/><circle class="dark-cloud" cx="52" cy="18" r="17"/><ellipse class="dark-cloud" cx="104" cy="32" rx="29" ry="13"/><circle class="dark-cloud" cx="94" cy="25" r="13"/><circle class="dark-cloud" cx="112" cy="23" r="15"/><g class="rain-line"><line x1="20" y1="48" x2="14" y2="63"/><line x1="41" y1="48" x2="35" y2="65"/><line x1="92" y1="50" x2="85" y2="67"/><line x1="113" y1="49" x2="106" y2="66"/><line x1="129" y1="51" x2="122" y2="69"/></g><path d="M72 37 L57 64 H70 L61 89 L91 55 H77 L88 37Z" fill="#ffd83d" stroke="#d79b16" stroke-width="1.2"/><path d="M0 84 Q38 76 71 85 T140 82 V96 H0Z" fill="#62778a"/></svg><span class="weather-day">Friday</span></div><button class="weather-match-dot" type="button" data-group="forecast" data-side="start" data-node="day-friday" data-answer="weather-stormy" aria-label="Connect Friday to its weather"></button></div>
+              </div>
+
+              <div class="weather-match-column">
+                <div class="weather-phrase"><button class="weather-match-dot" type="button" data-group="forecast" data-side="end" data-node="weather-cloudy" aria-label="It was cloudy"></button><span>It was cloudy.</span></div>
+                <div class="weather-phrase"><button class="weather-match-dot" type="button" data-group="forecast" data-side="end" data-node="weather-windy" aria-label="It was windy"></button><span>It was windy.</span></div>
+                <div class="weather-phrase"><button class="weather-match-dot" type="button" data-group="forecast" data-side="end" data-node="weather-snowy" aria-label="It was snowy"></button><span>It was snowy.</span></div>
+                <div class="weather-phrase"><button class="weather-match-dot" type="button" data-group="forecast" data-side="end" data-node="weather-stormy" aria-label="It was stormy"></button><span>It was stormy.</span></div>
+                <div class="weather-phrase"><button class="weather-match-dot" type="button" data-group="forecast" data-side="end" data-node="weather-sunny" aria-label="It was sunny"></button><span>It was sunny.</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="weather-match-help">Unscramble each day, then drag between the matching dots.</p>
+        </div>
+      </div>
+
+      <div class="workbook-right">
+        <div class="section section-c">
+          <div class="subtitle"><span class="section-label">C</span><span>Circle.</span></div>
+          <svg class="weather-defs" aria-hidden="true">
+              <defs>
+                <symbol id="forecast-cloudy" viewBox="0 0 140 80">
+                  <ellipse cx="91" cy="40" rx="36" ry="17" fill="#9aa8b4"/><circle cx="76" cy="31" r="17" fill="#9aa8b4"/><circle cx="101" cy="28" r="21" fill="#9aa8b4"/>
+                  <ellipse cx="52" cy="48" rx="41" ry="19" fill="#e8eef2" stroke="#bac6ce" stroke-width="1.5"/><circle cx="36" cy="37" r="19" fill="#e8eef2" stroke="#bac6ce" stroke-width="1.5"/><circle cx="64" cy="32" r="24" fill="#e8eef2" stroke="#bac6ce" stroke-width="1.5"/><rect x="18" y="44" width="74" height="19" fill="#e8eef2"/>
+                </symbol>
+                <symbol id="forecast-sunny" viewBox="0 0 140 80">
+                  <g stroke="#f2b72c" stroke-width="3.5" stroke-linecap="round"><line x1="70" y1="4" x2="70" y2="14"/><line x1="70" y1="66" x2="70" y2="76"/><line x1="34" y1="40" x2="44" y2="40"/><line x1="96" y1="40" x2="106" y2="40"/><line x1="45" y1="15" x2="52" y2="22"/><line x1="88" y1="58" x2="95" y2="65"/><line x1="45" y1="65" x2="52" y2="58"/><line x1="88" y1="22" x2="95" y2="15"/></g>
+                  <circle cx="70" cy="40" r="23" fill="#ffd54a" stroke="#efb52d" stroke-width="2"/><circle cx="63" cy="36" r="2" fill="#9b7020"/><circle cx="77" cy="36" r="2" fill="#9b7020"/><path d="M61 46 Q70 53 79 46" fill="none" stroke="#9b7020" stroke-width="2" stroke-linecap="round"/>
+                </symbol>
+                <symbol id="forecast-rainy" viewBox="0 0 140 80">
+                  <ellipse cx="70" cy="35" rx="46" ry="20" fill="#71808d" stroke="#576570" stroke-width="1.5"/><circle cx="51" cy="25" r="21" fill="#71808d" stroke="#576570" stroke-width="1.5"/><circle cx="80" cy="20" r="26" fill="#71808d" stroke="#576570" stroke-width="1.5"/><circle cx="101" cy="31" r="18" fill="#71808d"/><rect x="28" y="34" width="84" height="18" fill="#71808d"/>
+                  <g stroke="#4b9ed1" stroke-width="3" stroke-linecap="round"><line x1="42" y1="57" x2="36" y2="70"/><line x1="63" y1="57" x2="57" y2="73"/><line x1="84" y1="57" x2="78" y2="70"/><line x1="105" y1="57" x2="99" y2="73"/></g>
+                </symbol>
+                <symbol id="forecast-windy" viewBox="0 0 140 80">
+                  <g fill="none" stroke="#6ca8ca" stroke-width="4" stroke-linecap="round"><path d="M8 23 C33 8 58 12 67 23 C74 31 63 38 53 32"/><path d="M5 44 C34 32 60 35 78 44 C92 51 110 49 124 40"/><path d="M27 63 C52 53 79 55 97 64 C109 70 126 68 136 61"/></g>
+                  <g fill="#78aa55"><path d="M30 19 Q20 9 12 15 Q19 27 30 19Z"/><path d="M90 43 Q100 31 109 37 Q103 50 90 43Z"/><path d="M77 62 Q67 50 58 57 Q65 70 77 62Z"/></g>
+                </symbol>
+              </defs>
+          </svg>
+          <div class="forecast-table">
+            <div class="forecast-cell forecast-head"></div><div class="forecast-cell forecast-head">BRAZIL</div><div class="forecast-cell forecast-head">SOUTH KOREA</div>
+            <div class="forecast-cell forecast-day">Tuesday</div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Cloudy"><use href="#forecast-cloudy"/></svg></div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Sunny"><use href="#forecast-sunny"/></svg></div>
+            <div class="forecast-cell forecast-day">Wednesday</div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Rainy"><use href="#forecast-rainy"/></svg></div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Sunny"><use href="#forecast-sunny"/></svg></div>
+            <div class="forecast-cell forecast-day">Thursday</div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Windy"><use href="#forecast-windy"/></svg></div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Rainy"><use href="#forecast-rainy"/></svg></div>
+            <div class="forecast-cell forecast-day">Today</div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Sunny"><use href="#forecast-sunny"/></svg></div><div class="forecast-cell"><svg class="forecast-icon" role="img" aria-label="Rainy"><use href="#forecast-rainy"/></svg></div>
+          </div>
+          <div class="yes-no-list">
+            <div class="yes-no-row" data-type="mcq" data-answer="Yes"><b>1.</b><span>It’s sunny today in Brazil.</span><div class="yes-no-options"><label><input type="radio" name="c1" value="Yes">Yes</label><label><input type="radio" name="c1" value="No">No</label></div></div>
+            <div class="yes-no-row" data-type="mcq" data-answer="No"><b>2.</b><span>It was rainy in South Korea on Tuesday.</span><div class="yes-no-options"><label><input type="radio" name="c2" value="Yes">Yes</label><label><input type="radio" name="c2" value="No">No</label></div></div>
+            <div class="yes-no-row" data-type="mcq" data-answer="Yes"><b>3.</b><span>It was windy in Brazil on Thursday.</span><div class="yes-no-options"><label><input type="radio" name="c3" value="Yes">Yes</label><label><input type="radio" name="c3" value="No">No</label></div></div>
+            <div class="yes-no-row" data-type="mcq" data-answer="Yes"><b>4.</b><span>It was rainy in South Korea on Thursday.</span><div class="yes-no-options"><label><input type="radio" name="c4" value="Yes">Yes</label><label><input type="radio" name="c4" value="No">No</label></div></div>
+          </div>
+        </div>
+
+        <div class="section section-d">
+          <div class="subtitle"><span class="section-label">D</span><span>Look at C. Write.</span></div>
+          <div class="question-list">
+            <div class="question-item"><label for="d1">1. How was the weather in South Korea on Wednesday?</label><input id="d1" class="line-input" data-type="text" data-answer="It was sunny." aria-label="D1"></div>
+            <div class="question-item"><label for="d2">2. How was the weather in Brazil on Wednesday?</label><input id="d2" class="line-input" data-type="text" data-answer="It was rainy." aria-label="D2"></div>
+            <div class="question-item"><label for="d3">3. How was the weather in South Korea on Tuesday?</label><input id="d3" class="line-input" data-type="text" data-answer="It was sunny." aria-label="D3"></div>
+            <div class="question-item"><label for="d4">4. How was the weather in Brazil on Thursday?</label><input id="d4" class="line-input" data-type="text" data-answer="It was windy." aria-label="D4"></div>
+          </div>
+        </div>
+
+        <div class="section section-e">
+          <div class="subtitle"><span class="section-label">E</span><span>What about your town? Write.</span></div>
+          <div class="question-list">
+            <div class="question-item"><label for="e1">1. How is the weather today?</label><input id="e1" class="line-input" type="text" placeholder="It’s ... today."></div>
+            <div class="question-item"><label for="e2">2. How was the weather yesterday?</label><input id="e2" class="line-input" type="text" placeholder="It was ... yesterday."></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section actions"><button class="btn" type="button" onclick="checkAll()">Check answers</button> <button class="btn" type="button" onclick="resetAll()">Làm lại bài tập</button></div>
+    <div id="result"></div>
+  </div>
+</div>
+<script src="../../../../../engine/engine.js"></script>
+<script>
+  (() => {
+    const activity = document.getElementById("weatherMatchB");
+    if (!activity) return;
+    const svg = activity.querySelector(".weather-match-lines");
+    const dots = [...activity.querySelectorAll(".weather-match-dot")];
+    const links = { day:new Map(), forecast:new Map() };
+    let drag = null;
+    let evaluated = false;
+    let locked = false;
+
+    function center(dot) {
+      const point = dot.getBoundingClientRect();
+      const area = activity.getBoundingClientRect();
+      return { x:point.left + point.width / 2 - area.left, y:point.top + point.height / 2 - area.top };
+    }
+
+    function findDot(group, side, node) {
+      return dots.find(dot => dot.dataset.group === group && dot.dataset.side === side && dot.dataset.node === node);
+    }
+
+    function addPath(start, end, className="") {
+      const curve = Math.max(28, Math.abs(end.x - start.x) * .45);
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", `M ${start.x} ${start.y} C ${start.x + curve} ${start.y}, ${end.x - curve} ${end.y}, ${end.x} ${end.y}`);
+      if (className) path.setAttribute("class", className);
+      svg.appendChild(path);
+    }
+
+    function draw() {
+      const area = activity.getBoundingClientRect();
+      svg.setAttribute("viewBox", `0 0 ${area.width} ${area.height}`);
+      svg.replaceChildren();
+      Object.entries(links).forEach(([group, groupLinks]) => {
+        groupLinks.forEach((endNode, startNode) => {
+          const start = findDot(group, "start", startNode);
+          const end = findDot(group, "end", endNode);
+          if (!start || !end) return;
+          const state = evaluated ? (start.dataset.answer === endNode ? "correct-link" : "wrong-link") : "";
+          addPath(center(start), center(end), state);
+        });
+      });
+      if (drag) addPath(center(drag.origin), drag.current, "preview");
+    }
+
+    function finish(event) {
+      if (!drag) return;
+      const origin = drag.origin;
+      const element = document.elementFromPoint(event.clientX, event.clientY);
+      const target = element && element.closest(".weather-match-dot");
+      if (target && activity.contains(target) && target !== origin &&
+          target.dataset.group === origin.dataset.group && target.dataset.side !== origin.dataset.side) {
+        const start = origin.dataset.side === "start" ? origin : target;
+        const end = origin.dataset.side === "end" ? origin : target;
+        const groupLinks = links[start.dataset.group];
+        groupLinks.forEach((endNode, startNode) => {
+          if (endNode === end.dataset.node && startNode !== start.dataset.node) groupLinks.delete(startNode);
+        });
+        groupLinks.set(start.dataset.node, end.dataset.node);
+      }
+      origin.classList.remove("active");
+      drag = null;
+      draw();
+    }
+
+    dots.forEach(dot => dot.addEventListener("pointerdown", event => {
+      if (locked) return;
+      event.preventDefault();
+      dots.forEach(item => item.classList.remove("active"));
+      dot.classList.add("active");
+      drag = { origin:dot, current:center(dot) };
+      draw();
+    }));
+    window.addEventListener("pointermove", event => {
+      if (!drag) return;
+      event.preventDefault();
+      const area = activity.getBoundingClientRect();
+      drag.current = { x:event.clientX - area.left, y:event.clientY - area.top };
+      draw();
+    }, { passive:false });
+    window.addEventListener("pointerup", finish);
+    window.addEventListener("pointercancel", finish);
+
+    const originalCheckAll = window.checkAll;
+    window.checkAll = function () {
+      originalCheckAll();
+      evaluated = true;
+      locked = true;
+      activity.classList.add("locked");
+      let matchScore = 0;
+      dots.forEach(dot => dot.classList.remove("active", "correct", "wrong"));
+      dots.filter(dot => dot.dataset.side === "start").forEach(start => {
+        const endNode = links[start.dataset.group].get(start.dataset.node);
+        const correct = endNode === start.dataset.answer;
+        start.classList.add(correct ? "correct" : "wrong");
+        if (correct) matchScore++;
+        if (endNode) {
+          const end = findDot(start.dataset.group, "end", endNode);
+          if (end) end.classList.add(correct ? "correct" : "wrong");
+        }
+      });
+      draw();
+      const result = document.getElementById("result");
+      const baseScore = Number((result.textContent.match(/\d+/) || ["0"])[0]);
+      result.textContent = `Score: ${baseScore + matchScore}`;
+    };
+
+    const originalResetAll = window.resetAll;
+    window.resetAll = function () {
+      originalResetAll();
+      links.day.clear();
+      links.forecast.clear();
+      evaluated = false;
+      locked = false;
+      drag = null;
+      activity.classList.remove("locked");
+      dots.forEach(dot => dot.classList.remove("active", "correct", "wrong"));
+      draw();
+    };
+
+    window.lesson4WeatherMatch = {
+      getState() {
+        return {
+          day:[...links.day.entries()],
+          forecast:[...links.forecast.entries()]
+        };
+      },
+      setState(state={}) {
+        links.day.clear();
+        links.forecast.clear();
+        (Array.isArray(state.day) ? state.day : []).forEach(([start,end]) => links.day.set(start,end));
+        (Array.isArray(state.forecast) ? state.forecast : []).forEach(([start,end]) => links.forecast.set(start,end));
+        evaluated = false;
+        locked = false;
+        drag = null;
+        activity.classList.remove("locked");
+        dots.forEach(dot => dot.classList.remove("active", "correct", "wrong"));
+        draw();
+      }
+    };
+
+    window.addEventListener("resize", draw);
+    if (window.ResizeObserver) new ResizeObserver(draw).observe(activity);
+    requestAnimationFrame(draw);
+  })();
+
+  (() => {
+    const table = document.querySelector(".word-search-table");
+    if (!table) return;
+    const rows = [...table.rows].map(row => [...row.cells]);
+    const targetWords = ["sunny", "windy", "stormy", "rainy", "snowy", "cloudy"];
+    const directions = [
+      [-1,-1],[-1,0],[-1,1],
+      [0,-1],          [0,1],
+      [1,-1], [1,0],  [1,1]
+    ];
+
+    function pathsFor(word) {
+      const paths = [];
+      rows.forEach((row, rowIndex) => row.forEach((cell, columnIndex) => {
+        directions.forEach(([rowStep, columnStep]) => {
+          const path = [];
+          for (let index = 0; index < word.length; index++) {
+            const nextRow = rows[rowIndex + rowStep * index];
+            const nextCell = nextRow && nextRow[columnIndex + columnStep * index];
+            if (!nextCell || nextCell.textContent.trim().toLowerCase() !== word[index]) {
+              path.length = 0;
+              break;
+            }
+            path.push(nextCell);
+          }
+          if (path.length === word.length) paths.push(path);
+        });
+      }));
+      return paths;
+    }
+
+    const wordPaths = new Map(targetWords.map(word => [word, pathsFor(word)]));
+
+    function markFoundWords() {
+      targetWords.forEach(word => {
+        const card = document.querySelector(`.weather-check[data-answer="${word}"]`);
+        if (!card || card.classList.contains("found")) return;
+        const completedPath = wordPaths.get(word).find(path =>
+          path.every(cell => cell.classList.contains("selected") || cell.classList.contains("found-cell"))
+        );
+        if (!completedPath) return;
+
+        completedPath.forEach(cell => {
+          cell.classList.remove("selected");
+          cell.classList.add("found-cell");
+        });
+        card.classList.add("found");
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        if (checkbox) checkbox.checked = true;
+      });
+    }
+
+    window.addEventListener("mouseup", markFoundWords);
+
+    const originalResetAll = window.resetAll;
+    window.resetAll = function () {
+      originalResetAll();
+      table.querySelectorAll("td.found-cell").forEach(cell => cell.classList.remove("found-cell"));
+      document.querySelectorAll(".weather-check.found").forEach(card => card.classList.remove("found"));
+    };
+  })();
+
+  (() => {
+    const storageKey = "everybody-up-3-unit7-lesson4-progress-v1";
+    const controls = [...document.querySelectorAll("input, textarea, select")];
+    const wordCells = [...document.querySelectorAll(".word-search-table td")];
+    const result = document.getElementById("result");
+    let restoring = false;
+
+    function saveProgress() {
+      if (restoring) return;
+      const state = {
+        controls:controls.map(control => ({
+          value:control.value,
+          checked:Boolean(control.checked)
+        })),
+        selectedCells:wordCells.flatMap((cell,index) => cell.classList.contains("selected") ? [index] : []),
+        foundCells:wordCells.flatMap((cell,index) => cell.classList.contains("found-cell") ? [index] : []),
+        foundWords:[...document.querySelectorAll(".weather-check.found")].map(card => card.dataset.answer),
+        weatherMatch:window.lesson4WeatherMatch ? window.lesson4WeatherMatch.getState() : {},
+        checked:Boolean(result && result.textContent.trim()),
+        savedAt:Date.now()
+      };
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(state));
+      } catch (error) {
+        console.warn("Unable to save Lesson 4 progress.", error);
+      }
+    }
+
+    function restoreProgress() {
+      let state;
+      try {
+        state = JSON.parse(localStorage.getItem(storageKey) || "null");
+      } catch (error) {
+        localStorage.removeItem(storageKey);
+        return;
+      }
+      if (!state || !Array.isArray(state.controls)) return;
+
+      restoring = true;
+      state.controls.forEach((saved,index) => {
+        const control = controls[index];
+        if (!control || !saved) return;
+        if (control.type === "checkbox" || control.type === "radio") {
+          control.checked = Boolean(saved.checked);
+        } else {
+          control.value = saved.value == null ? "" : saved.value;
+        }
+      });
+
+      (Array.isArray(state.selectedCells) ? state.selectedCells : []).forEach(index => {
+        if (wordCells[index]) wordCells[index].classList.add("selected");
+      });
+      (Array.isArray(state.foundCells) ? state.foundCells : []).forEach(index => {
+        if (wordCells[index]) {
+          wordCells[index].classList.remove("selected");
+          wordCells[index].classList.add("found-cell");
+        }
+      });
+      (Array.isArray(state.foundWords) ? state.foundWords : []).forEach(word => {
+        const card = document.querySelector(`.weather-check[data-answer="${word}"]`);
+        if (card) card.classList.add("found");
+      });
+      if (window.lesson4WeatherMatch) window.lesson4WeatherMatch.setState(state.weatherMatch);
+
+      if (state.checked) {
+        const originalScroll = result && result.scrollIntoView;
+        if (result) result.scrollIntoView = () => {};
+        window.checkAll();
+        if (result && originalScroll) result.scrollIntoView = originalScroll;
+      }
+      restoring = false;
+    }
+
+    const originalCheckAll = window.checkAll;
+    window.checkAll = function () {
+      originalCheckAll();
+      saveProgress();
+    };
+
+    const originalResetAll = window.resetAll;
+    window.resetAll = function () {
+      restoring = true;
+      originalResetAll();
+      try {
+        localStorage.removeItem(storageKey);
+      } catch (error) {
+        console.warn("Unable to clear Lesson 4 progress.", error);
+      }
+      restoring = false;
+    };
+
+    document.addEventListener("input", saveProgress);
+    document.addEventListener("change", saveProgress);
+    window.addEventListener("mouseup", () => setTimeout(saveProgress, 0));
+    window.addEventListener("pointerup", () => setTimeout(saveProgress, 0));
+    window.addEventListener("beforeunload", saveProgress);
+    restoreProgress();
+  })();
+</script>
+</body>
+</html>
